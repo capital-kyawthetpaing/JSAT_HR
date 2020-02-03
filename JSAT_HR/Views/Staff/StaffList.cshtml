@@ -1,0 +1,153 @@
+﻿@model JH_Model.StaffModel
+@{
+    ViewBag.Title = "Staff List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Staff List</h1>
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>-->
+    <!-- Content Row -->
+    <div id="filter-panel" class="collapse row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Department">Name</label>
+                            @Html.TextBoxFor(sm => sm.Name, new
+                               {
+                                   @class = "form-control input-sm",
+                                   @tabindex = "1",
+                                   @required = "required",
+                                   @id = "txtEmployeeID",
+                                   @autofocus = "autofocus",
+                                   maxlength = "100"
+                               })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Department">Position</label>
+                            <input type="text" class="form-control" id="Position">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-primary mb-2" data-toggle="collapse" data-target="#filter-panel">
+            <i class="fas fa-window-restore"></i> Advanced Search
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tblStaff" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>StaffID</th>
+                                    <th>Name</th>
+                                    <th>JoinDate</th>
+                                    <th>PhoneNo</th>
+                                    <th>EmailAddress</th>
+                                    <th>Department</th>
+                                    <th>SubDivision</th>
+                                    <th>Postion</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tblStaff').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../Staff/GetStaff",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        {
+                            "className": 'details-control',
+                            "orderable": false,
+                            "data": null,
+                            "defaultContent": '',
+                            "width": "3%"
+                        },
+                        {
+                            "data": "StaffID", "render": function (data, type, row) {
+                                return '<a href="../Employee/EmployeeEntry/' + row.StaffID + '">' + row.StaffID + '</a>';
+                            }, orderable: false, "width": "5%"
+                        },
+                        { "data": "Name", orderable: false, "width": "13%" },
+                        { "data": "JoinDate", orderable: false, "width": "13%" },
+                        { "data": "PhoneNo", orderable: false, "width": "3%" },
+                        { "data": "EmailAddress", orderable: false, "width": "10%" },
+                        { "data": "Department", orderable: false, "width": "10%" },
+                        { "data": "SubDivision", orderable: false, "width": "4%" },
+                        { "data": "Position", orderable: false, "width": "4%" }
+                    ],
+                }
+            );
+
+            $('#tblStaff tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+
+        function format(d) {
+            // `d` is the original data object for the row
+            return '<table cellpadding="6" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>Salary:</td>' +
+                '<td style="text-align:right;">' + d.BasicSalary + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Meal Allowance:</td>' +
+                '<td style="text-align:right;">' + d.Currency + '</td>' +
+                '</tr>' +
+                //'<tr>' +
+                //'<td>Housing Allowance:</td>' +
+                //'<td style="text-align:right;">' + d.HousingAllowance + '</td>' +
+                //'</tr>' +
+                '</table>';
+        }
+    </script>
+
+}
+
+
