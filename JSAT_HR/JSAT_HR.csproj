@@ -114,6 +114,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -323,6 +324,7 @@
     <Content Include="Views\Staff\StaffList.cshtml" />
     <Content Include="Views\Staff\StaffEntry.cshtml" />
     <Content Include="Views\Department\DepartmentList.cshtml" />
+    <Content Include="Views\Attendance\AttendanceImport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
