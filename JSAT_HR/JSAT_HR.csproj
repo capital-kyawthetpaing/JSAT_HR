@@ -118,6 +118,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\SubDivisionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -325,6 +326,7 @@
     <Content Include="Views\Staff\StaffEntry.cshtml" />
     <Content Include="Views\Department\DepartmentList.cshtml" />
     <Content Include="Views\Attendance\AttendanceImport.cshtml" />
+    <Content Include="Views\SubDivision\SubDivisionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
