@@ -32,5 +32,19 @@ namespace JH_Model
         public string BasicSalary { get; set; }
         public string Effort { get; set; }
         public string DeleteFlg { get; set; }
+        public bool MD { get; set; }
+        public bool Director { get; set; }
+        public bool Manager { get; set; }
+        public bool N1 { get; set; }
+        public bool N2 { get; set; }
+        public bool N3 { get; set; }
+        public bool JpnUniGradurate { get; set; }
+        public bool Local1stInterviewer { get; set; }
+        public bool Local2ndInterviewer { get; set; }
+        public bool Overseas1stInterviewer { get; set; }
+        public bool Overseas2ndInterviewer { get; set; }
+        public bool MarketingTeamAllowance { get; set; }
+        public bool MentorAllowance { get; set; }
+
     }
 }

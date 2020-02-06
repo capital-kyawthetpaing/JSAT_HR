@@ -23,9 +23,9 @@ namespace JSAT_HR
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/fontawesome-all.min.css",
-                      "~/Content/sb-admin-2.min.css",
+                    "~/Content/fontawesome-all.min.css",
+                    "~/Content/sb-admin-2.min.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/Common.css",
                       "~/Content/cdnDatatables.css"
                       ));

@@ -1,6 +1,25 @@
-.hrtable thead th{
-color:black;
-background:cornsilk;
+
+.text-custom1{
+    color:chocolate;
+}
+
+.border-left-custom1 {
+    border-left: .25rem solid chocolate !important;
+}
+
+
+.text-custom2 {
+    color: darkorchid;
+}
+
+.border-left-custom2 {
+    border-left: .25rem solid darkorchid !important;
+}
+
+
+.hrtable thead th {
+    color: black;
+    background: cornsilk;
 }
 .hrtable tr:nth-child(even){
 background:azure;

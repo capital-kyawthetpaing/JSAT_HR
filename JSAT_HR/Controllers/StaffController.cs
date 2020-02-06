@@ -13,6 +13,11 @@ namespace JSAT_HR.Controllers
             return View();
         }
 
+        public ActionResult StaffEntry()
+        {
+            return View();
+        }
+
         [HttpGet]
         public string GetStaff()
         {
