@@ -99,6 +99,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Department</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">SubDivision:</h6>
+                        <a class="collapse-item" href='@Url.Action("StaffEntry", "Staff")'>Department Entry</a>
+                        <a class="collapse-item" href='@Url.Action("SubDivisionList", "SubDivision")'>SubDivision List</a>
+                    </div>
+                </div>
+            </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
@@ -136,13 +149,13 @@
                         <div class="input-group">
                             @*<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">   
+                                    <button class="btn btn-primary" type="button">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                 </div>*@
                             <h2 style="color:#4e73df">@ViewBag.Title</h2>
                         </div>
-                    </form> 
+                    </form>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -348,6 +361,7 @@
     <!-- Custom scripts for all pages-->
     <script src="../Scripts/sb-admin-2.min.js"></script>
     <script src="../Scripts/cdnDatatables.js"></script>
+    <script src="../Scripts/Common.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 

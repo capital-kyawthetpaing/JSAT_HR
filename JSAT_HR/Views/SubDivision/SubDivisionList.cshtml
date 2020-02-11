@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "SubDivisionList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tbSubDivision" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>SubDivisionCD</th>
+                                    <th>SubDivision</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tbSubDivision').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../SubDivision/GETSubDivision",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "SubDivisionCD", orderable: false, "width": "3%" },
+                        { "data": "SubDivision", orderable: false, "width": "13%" }
+                    ],
+                }
+            );
+        });
+    </script>
+}
+
