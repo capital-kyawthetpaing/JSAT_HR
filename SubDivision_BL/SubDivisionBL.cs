@@ -11,7 +11,7 @@ namespace SubDivision_BL
 {
     public class SubDivisionBL
     {
-        public DataTable GETSubDivision()
+        public DataTable GETSubDivision()     
         {
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[0];
