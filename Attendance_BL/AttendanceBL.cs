@@ -13,7 +13,7 @@ namespace Attendance_BL
 {
     public class AttendanceBL
     {
-        public void Insert_Attendance_Data(DataTable dttest,JH_Model.M_AttandenceModel attmodel)
+        public void Insert_Attendance_Data(DataTable dttest, JH_Model.M_AttandenceModel attmodel)
         {
             DataTable dt = new DataTable();
             BaseDL bdl = new BaseDL();

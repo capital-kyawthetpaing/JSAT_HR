@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonFunction", "CommonFun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubDivision_BL", "SubDivision_BL\SubDivision_BL.csproj", "{B2979145-1052-4321-9D00-B0496E82EF70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance_BL", "Attendance_BL\Attendance_BL.csproj", "{39D38240-3B04-42B8-A80A-4DD5FD0FB80B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{B2979145-1052-4321-9D00-B0496E82EF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2979145-1052-4321-9D00-B0496E82EF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2979145-1052-4321-9D00-B0496E82EF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D38240-3B04-42B8-A80A-4DD5FD0FB80B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D38240-3B04-42B8-A80A-4DD5FD0FB80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D38240-3B04-42B8-A80A-4DD5FD0FB80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D38240-3B04-42B8-A80A-4DD5FD0FB80B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
