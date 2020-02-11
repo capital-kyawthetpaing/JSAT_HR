@@ -357,6 +357,10 @@
       <Project>{4cf39fb7-dc54-42ad-b2dc-b0ac6381a9f3}</Project>
       <Name>Staff_BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SubDivision_BL\SubDivision_BL.csproj">
+      <Project>{b2979145-1052-4321-9d00-b0496e82ef70}</Project>
+      <Name>SubDivision_BL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

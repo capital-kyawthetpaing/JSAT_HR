@@ -522,7 +522,7 @@
 
     function SelectSubDivision() {
         $.ajax({
-            url: "../SubDivision/GetSubDivision",
+            url: "../SubDivision/GETSubDivision",
             type: "GET",
             dataType: "JSON",
             dataSrc: '',
@@ -531,8 +531,6 @@
                     $("#ddlSubDivision").append(
                         $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
                 });
-
-
             }
         });
 </script>

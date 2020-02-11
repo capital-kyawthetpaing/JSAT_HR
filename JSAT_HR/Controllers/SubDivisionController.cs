@@ -17,8 +17,8 @@ namespace JSAT_HR.Controllers
         {
             return View();
         }
-        [HttpGet]
 
+        [HttpGet]
         public string GETSubDivision()
         {
             Function fun = new Function();
