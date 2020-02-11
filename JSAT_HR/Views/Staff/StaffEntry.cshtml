@@ -500,10 +500,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         SelectDepartment();
-
+        SelectSubDivision();
         });
 
-        function SelectPosition() {
+    function SelectDepartment() {
             $.ajax({
                 url: "../Department/GetDepartment",
                 type: "GET",
@@ -513,9 +513,7 @@
                     $.each(items, function (i, item) {
                         $("#ddlDepartment").append(
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
-                    });
-                    
-                    
+                    });                    
                 }
             });
     } // data bind in Program dropdownlist.
@@ -533,5 +531,6 @@
                 });
             }
         });
+    }
 </script>
 }
