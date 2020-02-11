@@ -16,8 +16,8 @@ namespace JSAT_HR.Controllers
         {
             return View();
         }
-        [HttpGet]
 
+        [HttpGet]
         public string GetDepartment()
         {
             Function fun = new Function();

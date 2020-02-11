@@ -1,3 +1,7 @@
+#radioBtn .notActive {
+    color: #17a2b8;
+    background-color: #fff;
+}
 
 .text-custom1{
     color:chocolate;
