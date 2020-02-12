@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Department_BL;
 using CommonFunction;
+using JH_Model;
 
 namespace JSAT_HR.Controllers
 {
@@ -24,8 +25,13 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
         }
 
-        public ActionResult Department_Save()
+        public ActionResult Department_Save(DempartmentModel model)
         {
+            DepartmentBL dbl = new DepartmentBL();
+            if(model !=null)
+            {
+                dbl.Department_Save(model);
+            }
             return RedirectToAction("DepartmentList");
         }
     }
