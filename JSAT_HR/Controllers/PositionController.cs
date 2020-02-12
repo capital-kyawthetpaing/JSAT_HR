@@ -9,7 +9,7 @@ namespace JSAT_HR.Controllers
     public class PositionController : Controller
     {
         // GET: Position
-        public ActionResult Index()
+        public ActionResult PositionList()
         {
             return View();
         }
