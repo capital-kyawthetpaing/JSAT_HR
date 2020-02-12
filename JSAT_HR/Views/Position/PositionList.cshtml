@@ -1,47 +1,47 @@
-﻿@model JH_Model.SubDivisionModel
+﻿@model JH_Model.PositionModel
 @{
-    ViewBag.Title = "SubDivisionList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "PositionList";
 }
+
 <div class="container-fluid">
-    <!-- Page Heading -->
+    <!-- Page Heading-->
     <div class="row">
         <div class="col-xl-12 mb-2">
             <div class="card border-left-custom2 shadow">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <label for="SubDivisionCD">SubDivision CD</label>
+                            <label for="PositionCD">Position CD</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
                                 </div>
-                                @Html.TextBoxFor(sm => sm.SubDivisionCD, new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtSubDivisionCD",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
+                                @Html.TextBoxFor(pm => pm.PostitionCD, new
+                                {
+                                    @class = "form-control input-sm",
+                                    @tabindex = "1",
+                                    @required = "required",
+                                    @id = "txtPositionCD",
+                                    @autofocus = "autofocus",
+                                    maxlength = "100"
+                                })
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="SubDivisionName">SubDivision Name</label>
+                            <label for="PositionName">Position Name</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
                                 </div>
-                                @Html.TextBoxFor(sm => sm.SubDivisionName, new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtSubDivisionName",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
+                                @Html.TextBoxFor(pm =>pm.PositionName , new
+                                {
+                                    @class = "form-control input-sm",
+                                    @tabindex = "1",
+                                    @required = "required",
+                                    @id = "txtPositionName",
+                                    @autofocus = "autofocus",
+                                    maxlength = "100"
+                                })
                             </div>
                         </div>
                         <div class="form-group col-md-3">
@@ -55,21 +55,18 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="tbSubDivision" class="hrtable col-sm-12 col-md-12">
+                        <table id="tbPosition" class="hrtable col-sm-12 col-md-12">
                             <thead>
                                 <tr>
-                                    <th>SubDivisionCD</th>
-                                    <th>SubDivision</th>
+                                    <th>PositionCD</th>
+                                    <th>Position</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -77,32 +74,30 @@
         </div>
     </div>
 </div>
-
-
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#tbSubDivision').DataTable(
+            var table = $('#tbPosition').DataTable(
                 {
                     "language": {
-                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                        "info": "Display_START_to_END_of_TOTAL_records",
                     },
                     "oLanguage": {
-                        "sLengthMenu": "Display _MENU_ records",
+                        "sLengthMenu": "Display_MENU_records",
                     },
                     "ajax": {
-                        "url": "../SubDivision/GETSubDivision",
+                        "url": "../Position/GETPosition",
                         "type": "GET",
                         "datatype": "json",
                         "dataSrc": ""
                     },
                     "columns": [
-                        { "data": "SubDivisionCD", orderable: false, "width": "3%" },
-                        { "data": "SubDivision", orderable: false, "width": "13%" }
+                        { "data": "PositionCD", orderable: false, "width": "3%" },
+                        { "data": "Position", orderable: false, "width": "13%" }
                     ],
                 }
             );
         });
     </script>
-}
+    }
 

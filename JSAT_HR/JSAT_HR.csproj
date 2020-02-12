@@ -65,16 +65,16 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\kosaiyannaing\Downloads\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\kosaiyannaing\Downloads\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\kosaiyannaing\Downloads\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\kosaiyannaing\Downloads\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\SubDivisionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -351,6 +352,7 @@
     <Content Include="Views\Attendance\AttendanceImport.cshtml" />
     <Content Include="Views\SubDivision\SubDivisionList.cshtml" />
     <Content Include="Views\Attendance\Import_Log_List.cshtml" />
+    <Content Include="Views\Position\PositionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -379,6 +381,10 @@
     <ProjectReference Include="..\JH_Model\JH_Model.csproj">
       <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
       <Name>JH_Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Position_BL\Position_BL.csproj">
+      <Project>{0158354f-ed22-46ab-b9ce-d74489086181}</Project>
+      <Name>Position_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Staff_BL\Staff_BL.csproj">
       <Project>{4cf39fb7-dc54-42ad-b2dc-b0ac6381a9f3}</Project>

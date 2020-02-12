@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JH_DL;
 using System.Data;
+using JH_DL;
 using System.Data.SqlClient;
 
-namespace Staff_BL
+namespace Position_BL
 {
-   public  class DepartmentBL
+    public class PositionBL
     {
-        public DataTable GetDeparment()
+        public DataTable GETPosition()
         {
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[0];
-            return bdl.SelectData("M_Department_SelectAll", prms);
-        }     
-        
+            return bdl.SelectData("M_Position_SelectAll", prms);
+        }
     }
 }
