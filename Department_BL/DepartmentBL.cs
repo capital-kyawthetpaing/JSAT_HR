@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JH_DL;
+using JH_Model;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Staff_BL
+namespace Department_BL
 {
     public class DepartmentBL
     {
@@ -18,5 +19,6 @@ namespace Staff_BL
             return bdl.SelectData("M_Department_SelectAll", prms);
         }
 
+      
     }
 }
