@@ -23,5 +23,10 @@ namespace JSAT_HR.Controllers
             Function fun = new Function();
             return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
         }
+
+        public ActionResult Department_Save()
+        {
+            return RedirectToAction("DepartmentList");
+        }
     }
 }
