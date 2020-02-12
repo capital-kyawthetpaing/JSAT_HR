@@ -3,5 +3,51 @@
     ViewBag.Title = "PositionList";
 }
 
-<h2>PositionList</h2>
+<div class="container-fluid">
+    <!-- Page Heading-->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tbPosition" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>PositionCD</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                        </table> 
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tbPosition').DataTable(
+                {
+                    "language": {
+                        "info": "Display_START_to_END_of_TOTAL_records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display_MENU_records",
+                    },
+                    "ajax": {
+                        "url": "../Position/GETPosition",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "PositionCD", orderable: false, "width": "3%" },
+                        { "data": "Position", orderable: false, "width": "13%" }
+                    ],
+                }
+            );
+        });
+    </script>
+    }
 
