@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using CommonFunction;
 using Staff_BL;
+using JH_Model;
 
 namespace JSAT_HR.Controllers
 {
@@ -23,6 +24,13 @@ namespace JSAT_HR.Controllers
         {
             Function fun = new Function();
             return fun.DataTableToJSONWithJSONNet(sbl.GetAllStaff());
+        }
+
+        [HttpPost]
+        public void Staff_Save(StaffModel model)
+        {
+            sbl.Staff_Save(model);
+
         }
     }
 }

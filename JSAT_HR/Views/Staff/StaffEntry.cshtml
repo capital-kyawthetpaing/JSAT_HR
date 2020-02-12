@@ -6,503 +6,529 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-xl-8 col-md-8 mb-2">
-        <div class="card border-left-info shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="StaffID">StaffID</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-id-card-alt"></i></span>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xl-8 col-md-8 mb-2">
+            <div class="card border-left-info shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="StaffID">StaffID</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-id-card-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.StaffID, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "1",
+                               @required = "required",
+                               @id = "txtStaffID",
+                               @autofocus = "autofocus",
+                               maxlength = "4",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(sm => sm.StaffID, new
-                            {
-                                @class = "form-control input-sm",
-                                @tabindex = "1",
-                                @required = "required",
-                                @id = "txtEmployeeID",
-                                @autofocus = "autofocus",
-                                maxlength = "100"
-                            })
                         </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Department">Name</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-signature"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.Name, new
+                        <div class="form-group col-md-3">
+                            <label for="Department">Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-signature"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.Name, new
                            {
                                @class = "form-control input-sm",
                                @tabindex = "2",
                                @required = "required",
-                               @id = "txt",
+                               @id = "txtName",
                                @autofocus = "autofocus",
                                maxlength = "100"
                            })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="NRC">NRC</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
                             </div>
-                            @Html.TextBoxFor(sm => sm.NRC, new
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="NRC">NRC</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.NRC, new
                            {
                                @class = "form-control input-sm",
                                @tabindex = "3",
                                @required = "required",
-                               @id = "txt",
+                               @id = "txtNRC",
                                @autofocus = "autofocus",
-                               maxlength = "100"
+                               maxlength = "30"
                            })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Department">Gender</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-venus-mars"></i></span>
+                                </div>
+                                @{
+                                    var lstGender = new List<SelectListItem>();
+                                    lstGender.Add(new SelectListItem { Text = "Male", Value = "1" });
+                                    lstGender.Add(new SelectListItem { Text = "Female", Value = "2" });
+                                    }
+                                @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "4", @id = "ddlGender" })
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="Department">Gender</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-venus-mars"></i></span>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="JoinDate">Join Date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd-MM-yyyy}", new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "date",
+                               placeHolder = "dd/MM/yyyy",
+                               @required = "required",
+                               @tabindex = "5",
+                               @id = "txtJoinDate",
+                               max = "12-12-2100"
+                               //@Value = Model.JoinDate
+                           })
                             </div>
-                            @{
-                                var lstGender = new List<SelectListItem>();
-                                lstGender.Add(new SelectListItem { Text = "Male", Value = "1" });
-                                lstGender.Add(new SelectListItem { Text = "Female", Value = "2" });
-                            }
-                            @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "13", @id = "ddlGender" })
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="JoinDate">Join Date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                        <div class="form-group col-md-3">
+                            <label for="JoinDate">Permanent Date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.PermanentDate, "{0:dd-MM-yyyy}", new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "date",
+                               placeHolder = "dd/MM/yyyy",
+                               @required = "required",
+                               @tabindex = "6",
+                               @id = "txtPermanentDate",
+                               max = "12-12-2100"
+                               //@Value = Model.PermanentDate
+                           })
                             </div>
-                            @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd-MM-yyyy}", new
-                            {
-                                @class = "form-control input-sm",
-                                @type = "date",
-                                placeHolder = "dd/MM/yyyy",
-                                @required = "required",
-                                @tabindex = "4",
-                                @id = "JoinDate",
-                                max = "12-12-2100"
-                                //@Value = Model.JoinDate
-                            })
                         </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="JoinDate">Permanent Date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.PermanentDate, "{0:dd-MM-yyyy}", new
-                            {
-                                @class = "form-control input-sm",
-                                @type = "date",
-                                placeHolder = "dd/MM/yyyy",
-                                @required = "required",
-                                @tabindex = "5",
-                                @id = "PermanentDate",
-                                max = "12-12-2100"
-                                //@Value = Model.PermanentDate
-                            })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="BankInformation">Bank Information</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.BankInformation, new
-                            {
-                                @class = "form-control input-sm",
-                                @tabindex = "6",
-                                @required = "required",
-                                @id = "BankInformation",
-                                @autofocus = "autofocus",
-                                maxlength = "10"
-                            })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Department">Currency</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
-                            </div>
-                            @{
-                                var listItem = new List<SelectListItem>();
-                                listItem.Add(new SelectListItem { Text = "MMK", Value = "1" });
-                                listItem.Add(new SelectListItem { Text = "USD", Value = "2" });
-                            }
-                            @Html.DropDownListFor(sm => sm.Currency, listItem, new { @class = "form-control", @tabindex = "13", @id = "ddlCurrency" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-md-12 mb-2">
-        <div class="card border-left-custom2 shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Responsibility</div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Department">Department</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
-                            </div>
-                            @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlDepartment", @tabindex = "12" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="SubDivision">SubDivision</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-store"></i></span>
-                            </div>
-                            @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlSubDivision", @tabindex = "13" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Position">Position</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-map-pin"></i></span>
-                            </div>
-                            @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlPosition", @tabindex = "14" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-2 col-md-12 mb-2">
-        <div class="card border-left-custom1 shadow h-100 py-2">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Attandence</div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="FingerprintID">Fingerprint ID</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-fingerprint"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.FingerPrintID, new
-                            {
-                                @class = "form-control input-sm",
-                                @type = "email",
-                                @tabindex = "10",
-                                @required = "required",
-                                @id = "FingerprintID",
-                                @autofocus = "autofocus",
-                                maxlength = "100"
-                            })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="StaffType">Staff Type</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-hiking"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.StaffType, new
-                            {
-                                @class = "form-control input-sm",
-                                @tabindex = "11",
-                                @required = "required",
-                                @id = "StaffType",
-                                @autofocus = "autofocus",
-                                maxlength = "100"
-                            })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-10 col-md-4 mb-2">
-        <div class="card border-left-success shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-success text-uppercase mb-1">Contact</div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="PhoneNo">Phone No</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
-                            </div>
-                            @Html.TextBoxFor(sm => sm.PhoneNo, new
+                        <div class="form-group col-md-3">
+                            <label for="BankInformation">Bank Information</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.BankInformation, new
                            {
                                @class = "form-control input-sm",
                                @tabindex = "7",
                                @required = "required",
-                               @id = "BankInformation",
+                               @id = "txtBankInformation",
+                               @autofocus = "autofocus",
+                               maxlength = "10"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Department">Currency</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
+                                </div>
+                                @{
+                                    var listItem = new List<SelectListItem>();
+                                    listItem.Add(new SelectListItem { Text = "MMK", Value = "1" });
+                                    listItem.Add(new SelectListItem { Text = "USD", Value = "2" });
+                                    }
+                                @Html.DropDownListFor(sm => sm.Currency, listItem, new { @class = "form-control", @tabindex = "8", @id = "ddlCurrency" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-12 mb-2">
+            <div class="card border-left-custom2 shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Responsibility</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Department">Department</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                </div>
+                                @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                           {
+                               @class = "select2 form-control input-sm",
+                               @required = "required",
+                               @id = "ddlDepartment",
+                               @tabindex = "9"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="SubDivision">SubDivision</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-store"></i></span>
+                                </div>
+                                @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                           {
+                               @class = "select2 form-control input-sm",
+                               @required = "required",
+                               @id = "ddlSubDivision",
+                               @tabindex = "10"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Position">Position</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-map-pin"></i></span>
+                                </div>
+                                @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                           {
+                               @class = "select2 form-control input-sm",
+                               //@required = "required",
+                               @id = "ddlPosition",
+                               @tabindex = "11"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-12 mb-2">
+            <div class="card border-left-custom1 shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Attandence</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="FingerprintID">Fingerprint ID</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-fingerprint"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.FingerPrintID, new
+                           {
+                               @class = "form-control input-sm",
+                               //@type = "email",
+                               @tabindex = "12",
+                               @required = "required",
+                               @id = "txtFingerprintID",
+                               @autofocus = "autofocus",
+                               maxlength = "4",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="StaffType">Staff Type</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-hiking"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.StaffType, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "13",
+                               @required = "required",
+                               @id = "txtStaffType",
+                               @autofocus = "autofocus",
+                               maxlength = "1"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-10 col-md-4 mb-2">
+            <div class="card border-left-success shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-success text-uppercase mb-1">Contact</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="PhoneNo">Phone No</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.PhoneNo, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "14",
+                               @required = "required",
+                               @id = "txtPhoneNo",
                                @autofocus = "autofocus",
                                maxlength = "100"
                            })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="EmergencyPhoneNo">Emergency PhoneNo</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-phone"></i></span>
                             </div>
-                            @Html.TextBoxFor(sm => sm.EmergencyPhoneNo, new
-                            {
-                                @class = "form-control input-sm",
-                                @tabindex = "8",
-                                @required = "required",
-                                @id = "EmergencyPhoneNo",
-                                @autofocus = "autofocus",
-                                maxlength = "100"
-                            })
                         </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="EmailAddress">Email</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                        <div class="form-group col-md-3">
+                            <label for="EmergencyPhoneNo">Emergency PhoneNo</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.EmergencyPhoneNo, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "15",
+                               @required = "required",
+                               @id = "txtEmergencyPhoneNo",
+                               @autofocus = "autofocus",
+                               maxlength = "100"
+                           })
                             </div>
-                            @Html.TextBoxFor(sm => sm.EmailAddress, new
-                            {
-                                @class = "form-control input-sm",
-                                @type = "email",
-                                @tabindex = "9",
-                                @required = "required",
-                                @id = "EmailAddress",
-                                @autofocus = "autofocus",
-                                maxlength = "100"
-                            })
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Address">Address</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-home"></i></span>
+                        <div class="form-group col-md-3">
+                            <label for="EmailAddress">Email</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.EmailAddress, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "email",
+                               @tabindex = "16",
+                               @required = "required",
+                               @id = "txtEmailAddress",
+                               @autofocus = "autofocus",
+                               maxlength = "50"
+                           })
                             </div>
-                            @Html.TextAreaFor(sm => sm.Address, new
-                            {
-                                @class = "form-control input-sm",
-                                @type = "email",
-                                @tabindex = "9",
-                                @required = "required",
-                                @id = "Address",
-                                @autofocus = "autofocus",
-                                maxlength = "400"
-                            })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Address">Address</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-home"></i></span>
+                                </div>
+                                @Html.TextAreaFor(sm => sm.Address, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "email",
+                               @tabindex = "17",
+                               @required = "required",
+                               @id = "txtAddress",
+                               @autofocus = "autofocus",
+                               maxlength = "400"
+                           })
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xl-12 col-md-12 mb-2">
-        <div class="card border-left-danger shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Allowance</div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="Department">Transportation</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-subway"></i></span>
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-danger shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Allowance</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Department">Transportation</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-subway"></i></span>
+                                </div>
+                                @{
+                                    var listItemParent = new List<SelectListItem>();
+                                    listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                    listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
+                                    listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
+                                    }
+                                @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
+                           {
+                               @class = "form-control",
+                               @tabindex = "18",
+                               @id = "ddlTransportation"
+                           })
                             </div>
-                            @{
-                                var listItemParent = new List<SelectListItem>();
-                                listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
-                                listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
-                            }
-                            @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new { @class = "form-control", @tabindex = "13", @id = "ddlTransportation" })
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12" style="margin-bottom:0px;">
-                        <label for="Department">Management</label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.MD)
-                                </div>
-                            </div>
-                            <label class="form-control" for="MD">MD</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-12" style="margin-bottom:0px;">
+                            <label for="Department">Management</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Director)
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.MD)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="MD">MD</label>
                             </div>
-                            <label class="form-control" for="Director">Director</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Director)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="Director">Director</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Manager)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="Manager">Manager</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Manager)
-                                </div>
-                            </div>
-                            <label class="form-control" for="Manager">Manager</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-12" style="margin-bottom:0px;">
+                            <label for="LanguageLevel">Language Level</label>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12" style="margin-bottom:0px;">
-                        <label for="LanguageLevel">Language Level</label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.N1)
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.N1)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="N1">N1</label>
                             </div>
-                            <label class="form-control" for="N1">N1</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.N2)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="N2">N2</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.N3)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="N3">N3</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.JpnUniGradurate)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="JpnUniGradurate">JpnUniGradurate</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.N2)
-                                </div>
-                            </div>
-                            <label class="form-control" for="N2">N2</label>
-                        </div>
+                    <div class="form-row">
+                        <label for="Position">Professional Skill</label>
                     </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.N3)
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Local1stInterviewer)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="Local1stInterviewer">Local 1st Interviewer</label>
                             </div>
-                            <label class="form-control" for="N3">N3</label>
                         </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.JpnUniGradurate)
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Local2ndInterviewer)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="Local2ndInterviewer">Local 2nd Interviewer</label>
                             </div>
-                            <label class="form-control" for="JpnUniGradurate">JpnUniGradurate</label>
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <label for="Position">Professional Skill</label>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Local1stInterviewer)
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Overseas1stInterviewer)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="Overseas1stInterviewer">Overseas 1st Interviewer</label>
                             </div>
-                            <label class="form-control" for="Local1stInterviewer">Local 1st Interviewer</label>
                         </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Local2ndInterviewer)
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.Overseas2ndInterviewer)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="Overseas2ndInterviewer">Overseas 2nd Interviewer</label>
                             </div>
-                            <label class="form-control" for="Local2ndInterviewer">Local 2nd Interviewer</label>
                         </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Overseas1stInterviewer)
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.MarketingTeamAllowance)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="MarketingTeamAllowance">Marketing Team Allowance</label>
                             </div>
-                            <label class="form-control" for="Overseas1stInterviewer">Overseas 1st Interviewer</label>
                         </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Overseas2ndInterviewer)
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.MentorAllowance)
+                                    </div>
                                 </div>
+                                <label class="form-control" for="MentorAllowance">Mentor Allowance</label>
                             </div>
-                            <label class="form-control" for="Overseas2ndInterviewer">Overseas 2nd Interviewer</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.MarketingTeamAllowance)
-                                </div>
-                            </div>
-                            <label class="form-control" for="MarketingTeamAllowance">Marketing Team Allowance</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.MentorAllowance)
-                                </div>
-                            </div>
-                            <label class="form-control" for="MentorAllowance">Mentor Allowance</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xl-12 text-center">
-        <div class="card border-bottom-success shadow h-100">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1"><button class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button></div>
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 @section Scripts{
 <script type="text/javascript">
     $(document).ready(function () {
         SelectDepartment();
-        SelectSubDivision();
-        });
-
+        SelectSubDivision();       
+        });   
     function SelectDepartment() {
             $.ajax({
                 url: "../Department/GetDepartment",
@@ -531,6 +557,16 @@
                 });
             }
         });
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+            return false;
+        return true;
     }
 </script>
 }
