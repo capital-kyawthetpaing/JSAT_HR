@@ -18,7 +18,6 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpGet]
-
         public string GETPosition()
         {
             Function fun = new Function();
