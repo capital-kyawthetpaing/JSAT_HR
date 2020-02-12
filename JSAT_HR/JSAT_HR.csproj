@@ -58,16 +58,16 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.dll</HintPath>
+      <HintPath>C:\Users\Pann Nu Zan\Downloads\Microsoft.SkypeApp_kzf8qxf38zg5c!App\All\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OOXML.dll</HintPath>
+      <HintPath>C:\Users\Pann Nu Zan\Downloads\Microsoft.SkypeApp_kzf8qxf38zg5c!App\All\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>C:\Users\Pann Nu Zan\Downloads\Microsoft.SkypeApp_kzf8qxf38zg5c!App\All\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\..\..\..\Users\Yin Mon Oo\Downloads\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>C:\Users\Pann Nu Zan\Downloads\Microsoft.SkypeApp_kzf8qxf38zg5c!App\All\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
