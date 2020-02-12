@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Staff_BL;
+using Position_BL;
 using CommonFunction;
 
 namespace JSAT_HR.Controllers
 {
-    public class DepartmentController : Controller
+    public class PositionController : Controller
     {
-        DepartmentBL dp_bl = new DepartmentBL();
-        // GET: Department
-        public ActionResult DepartmentList()
+        PositionBL pbl = new PositionBL();
+        // GET: Position
+        public ActionResult PositionList()
         {
             return View();
         }
 
         [HttpGet]
-        public string GetDepartment()
+
+        public string GETPosition()
         {
             Function fun = new Function();
-            return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
+            return fun.DataTableToJSONWithJSONNet(pbl.GETPosition());
         }
     }
 }

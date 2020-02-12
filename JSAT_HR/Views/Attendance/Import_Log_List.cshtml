@@ -1,0 +1,73 @@
+﻿
+@{
+    /**/
+    ViewBag.Title = "Import List";
+}
+<style>
+    .textalign{
+        text-align:center;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tblogview" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>FileName</th>
+                                    <th>ImportType</th>
+                                    <th>ImportedDate</th>
+                                    <th>ImportedBy</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        ImportListViewTable();
+    });
+
+    function ImportListViewTable() {
+        var table = $('#tblogview').DataTable(
+            {
+                columnDefs: [
+                    {
+                        targets: [2],
+                        className: 'textalign'
+                    }],
+                "language": {
+                    "info": "Display _START_ to _END_ of _TOTAL_ records",
+                },
+                "oLanguage": {
+                    "sLengthMenu": "Display _MENU_ records",
+                },
+                "ajax": {
+                    "url": "../Attendance/Bind_Import_List",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "No", orderable: false },
+                    { "data": "FileName", orderable: false },
+                    { "data": "ImportType", orderable: false },
+                    { "data": "ImportedDate", orderable: false },
+                    { "data": "ImportedBy", ordertable: false }
+                ],
+            }
+        );
+    }
+    </script>
+    }

@@ -1,17 +1,18 @@
 ﻿@model JH_Model.StaffModel
 @{
-    ViewBag.Title = "StaffEntry";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "StaffEntry";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-12 col-md-12 mb-2">
+    <div class="col-xl-8 col-md-8 mb-2">
         <div class="card border-left-info shadow">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
                 <div class="form-row">
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label for="StaffID">StaffID</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -28,7 +29,7 @@
                             })
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label for="Department">Name</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -45,7 +46,7 @@
                            })
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label for="NRC">NRC</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -62,7 +63,23 @@
                            })
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
+                        <label for="Department">Gender</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-venus-mars"></i></span>
+                            </div>
+                            @{
+                                var lstGender = new List<SelectListItem>();
+                                lstGender.Add(new SelectListItem { Text = "Male", Value = "1" });
+                                lstGender.Add(new SelectListItem { Text = "Female", Value = "2" });
+                            }
+                            @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "13", @id = "ddlGender" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
                         <label for="JoinDate">Join Date</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -81,7 +98,7 @@
                             })
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label for="JoinDate">Permanent Date</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -100,7 +117,7 @@
                             })
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <label for="BankInformation">Bank Information</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -117,17 +134,69 @@
                             })
                         </div>
                     </div>
-
+                    <div class="form-group col-md-3">
+                        <label for="Department">Currency</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
+                            </div>
+                            @{
+                                var listItem = new List<SelectListItem>();
+                                listItem.Add(new SelectListItem { Text = "MMK", Value = "1" });
+                                listItem.Add(new SelectListItem { Text = "USD", Value = "2" });
+                            }
+                            @Html.DropDownListFor(sm => sm.Currency, listItem, new { @class = "form-control", @tabindex = "13", @id = "ddlCurrency" })
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-3 mb-2">
+    <div class="col-xl-4 col-md-12 mb-2">
+        <div class="card border-left-custom2 shadow">
+            <div class="card-body">
+                <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Responsibility</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Department">Department</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                            </div>
+                            @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
+                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlDepartment", @tabindex = "12" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="SubDivision">SubDivision</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-store"></i></span>
+                            </div>
+                            @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
+                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlSubDivision", @tabindex = "13" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Position">Position</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-map-pin"></i></span>
+                            </div>
+                            @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
+                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlPosition", @tabindex = "14" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-12 mb-2">
         <div class="card border-left-custom1 shadow h-100 py-2">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Attandence</div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
                         <label for="FingerprintID">Fingerprint ID</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -145,7 +214,7 @@
                             })
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
                         <label for="StaffType">Staff Type</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -166,7 +235,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-9 col-md-9 mb-2">
+    <div class="col-xl-10 col-md-4 mb-2">
         <div class="card border-left-success shadow">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-success text-uppercase mb-1">Contact</div>
@@ -175,7 +244,7 @@
                         <label for="PhoneNo">Phone No</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-mobile"></i></span>
+                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
                             </div>
                             @Html.TextBoxFor(sm => sm.PhoneNo, new
                            {
@@ -223,69 +292,56 @@
                             })
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="Address">Address</label>
-                        @Html.TextAreaFor(sm => sm.Address, new
-                        {
-                            @class = "form-control input-sm",
-                            @type = "email",
-                            @tabindex = "9",
-                            @required = "required",
-                            @id = "Address",
-                            @autofocus = "autofocus",
-                            maxlength = "400"
-                        })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-md-6 mb-2">
-        <div class="card border-left-custom2 shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Responsibility</div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="Department">Department</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-home"></i></span>
                             </div>
-                            @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlDepartment", @tabindex = "12" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="SubDivision">SubDivision</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-store"></i></span>
-                            </div>
-                            @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlSubDivision", @tabindex = "13" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Position">Position</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-map-pin"></i></span>
-                            </div>
-                            @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",
-                            new { @class = "select2 form-control input-sm", @required = "required",@id = "ddlPosition", @tabindex = "14" })
+                            @Html.TextAreaFor(sm => sm.Address, new
+                            {
+                                @class = "form-control input-sm",
+                                @type = "email",
+                                @tabindex = "9",
+                                @required = "required",
+                                @id = "Address",
+                                @autofocus = "autofocus",
+                                maxlength = "400"
+                            })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xl-6 col-md-6 mb-2">
+    <div class="col-xl-12 col-md-12 mb-2">
         <div class="card border-left-danger shadow">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Allowance</div>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="Department">Department</label>
+                    <div class="form-group col-md-2">
+                        <label for="Department">Transportation</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-subway"></i></span>
+                            </div>
+                            @{
+                                var listItemParent = new List<SelectListItem>();
+                                listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
+                                listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
+                            }
+                            @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new { @class = "form-control", @tabindex = "13", @id = "ddlTransportation" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12" style="margin-bottom:0px;">
+                        <label for="Department">Management</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -295,29 +351,7 @@
                             <label class="form-control" for="MD">MD</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="SubDivision">Language Level</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.N1)
-                                </div>
-                            </div>
-                            <label class="form-control" for="N">N1</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="Position">Professional Skill</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Local1stInterviewer)
-                                </div>
-                            </div>
-                            <label class="form-control" for="Local1stInterviewer">Local 1st Interviewer</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -327,27 +361,7 @@
                             <label class="form-control" for="Director">Director</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.N2)
-                                </div>
-                            </div>
-                            <label class="form-control" for="N">N2</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.Overseas1stInterviewer)
-                                </div>
-                            </div>
-                            <label class="form-control" for="Overseas1stInterviewer">Overseas 1st Interviewer</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -357,17 +371,89 @@
                             <label class="form-control" for="Manager">Manager</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12" style="margin-bottom:0px;">
+                        <label for="LanguageLevel">Language Level</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.N1)
+                                </div>
+                            </div>
+                            <label class="form-control" for="N1">N1</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.N2)
+                                </div>
+                            </div>
+                            <label class="form-control" for="N2">N2</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     @Html.CheckBoxFor(sm => sm.N3)
                                 </div>
                             </div>
-                            <label class="form-control" for="N">N3</label>
+                            <label class="form-control" for="N3">N3</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.JpnUniGradurate)
+                                </div>
+                            </div>
+                            <label class="form-control" for="JpnUniGradurate">JpnUniGradurate</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="Position">Professional Skill</label>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.Local1stInterviewer)
+                                </div>
+                            </div>
+                            <label class="form-control" for="Local1stInterviewer">Local 1st Interviewer</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.Local2ndInterviewer)
+                                </div>
+                            </div>
+                            <label class="form-control" for="Local2ndInterviewer">Local 2nd Interviewer</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    @Html.CheckBoxFor(sm => sm.Overseas1stInterviewer)
+                                </div>
+                            </div>
+                            <label class="form-control" for="Overseas1stInterviewer">Overseas 1st Interviewer</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -377,20 +463,7 @@
                             <label class="form-control" for="Overseas2ndInterviewer">Overseas 2nd Interviewer</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
-
-                    </div>
-                    <div class="form-group col-md-4">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    @Html.CheckBoxFor(sm => sm.JpnUniGradurate)
-                                </div>
-                            </div>
-                            <label class="form-control" for="N">JpnUniGradurate</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -400,13 +473,7 @@
                             <label class="form-control" for="MarketingTeamAllowance">Marketing Team Allowance</label>
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
-
-                    </div>
-                    <div class="form-group col-md-4">
-
-                    </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -420,5 +487,50 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-12 text-center">
+        <div class="card border-bottom-success shadow h-100">
+            <div class="card-body">
+                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1"><button class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button></div>
+            </div>
+        </div>
+    </div>
 </div>
 
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        SelectDepartment();
+        SelectSubDivision();
+        });
+
+    function SelectDepartment() {
+            $.ajax({
+                url: "../Department/GetDepartment",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlDepartment").append(
+                            $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
+                    });                    
+                }
+            });
+    } // data bind in Program dropdownlist.
+
+    function SelectSubDivision() {
+        $.ajax({
+            url: "../SubDivision/GETSubDivision",
+            type: "GET",
+            dataType: "JSON",
+            dataSrc: '',
+            success: function (items) {
+                $.each(items, function (i, item) {
+                    $("#ddlSubDivision").append(
+                        $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
+                });
+            }
+        });
+    }
+</script>
+}
