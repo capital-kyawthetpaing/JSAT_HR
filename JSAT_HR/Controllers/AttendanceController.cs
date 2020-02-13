@@ -101,6 +101,8 @@ namespace JSAT_HR.Controllers
                     string attdate = string.Empty;
                     string newattdate = string.Empty;
                     string yyymm = string.Empty;
+                  
+
                     for (int j = sheet.FirstRowNum + 2; j <= 2; j++)
                     {
                         var row = sheet.GetRow(j);
@@ -108,6 +110,8 @@ namespace JSAT_HR.Controllers
                         string[] lines = Regex.Split(attdate, "-");
                         newattdate = lines[0] + "-" + lines[1];
                         yyymm = lines[0] + lines[1];
+
+                       
                     }
                     for (int j = sheet.FirstRowNum + 4; j <= Convert.ToUInt32(rowCount); j = j + 2)
                     {
