@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JH_Model;
 using JH_DL;
 using System.Data.Entity;
+using System.Web;
 
 namespace Allowance_BL
 {
@@ -35,7 +36,7 @@ namespace Allowance_BL
             tb.Overseas1stInterviewer = am.Oversea1stInterviewer;
             tb.Overseas2ndInterviewer = am.Oversea2ndInterviewer;
             tb.InsertedDate = DateTime.Now;
-            tb.InsertedBy = "1";
+            tb.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
 
             db.M_Allowance.Add(tb);

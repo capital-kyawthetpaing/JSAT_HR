@@ -11,7 +11,14 @@ namespace JSAT_HR.Controllers
         // GET: Staff
         public ActionResult StaffList()
         {
-            return View();
+            if(Session["UserID"]!=null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
 
         public ActionResult StaffEntry()
