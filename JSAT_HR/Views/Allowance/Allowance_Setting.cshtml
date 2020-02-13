@@ -4,6 +4,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts{
+    <script type="text/javascript">
+
+        function FormatCurrency(ctrl) {
+            //Check if arrow keys are pressed - we want to allow navigation around textbox using arrow keys
+            if (event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 || event.keyCode == 40) {
+                return;
+            }
+
+            var val = ctrl.value;
+
+            val = val.replace(/,/g, "")
+            ctrl.value = "";
+            val += '';
+            x = val.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+
+            var rgx = /(\d+)(\d{3})/;
+
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+
+            ctrl.value = x1 + x2;
+        }
+
+        function CheckNumeric() {
+            return event.keyCode >= 48 && event.keyCode <= 57;
+        }
+    </script>
+    }
+
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -27,7 +60,8 @@
                                @id = "txtMD",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -44,7 +78,8 @@
                                //@required = "required",
                                @id = "txtdirector",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -62,7 +97,8 @@
                                @id = "txtManager",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -90,7 +126,8 @@
                                @id = "txtN1",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -108,7 +145,8 @@
                                @id = "txtN2",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -126,7 +164,8 @@
                                @id = "txtN3",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -144,7 +183,8 @@
                                @id = "txtJpnunigrande",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -172,7 +212,8 @@
                                @id = "txtlocal1stinterviewer",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -190,7 +231,8 @@
                                @id = "txtlocal2ndinterviewer",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -208,7 +250,8 @@
                                @id = "txtoversea1stinterviewer",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -226,7 +269,8 @@
                                @id = "txtoversea1stinterviewer",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -257,7 +301,8 @@
                                @id = "txtmarketingteam",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -275,7 +320,8 @@
                                @id = "txtmentor",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -304,7 +350,8 @@
                                @id = "txtbus",
                                @autofocus = "autofocus",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -321,7 +368,8 @@
                                //@required = "required",
                                @id = "txttrain",
                                maxlength = "8",
-                               @onkeypress = "return isNumberKey(event)"
+                               @onkeypress = "return CheckNumeric();",
+                               @onkeyup = "FormatCurrency(this)"
                            })
                             </div>
                         </div>
@@ -345,4 +393,5 @@
         </div>
     </div>
 }
+
 
