@@ -105,7 +105,13 @@
                             "dataSrc": ""
                         },
                         "columns": [
-                            { "data": "DepartmentCD", orderable: false, "width": "3%" },
+                            {
+                                "data": "DepartmentCD", orderable: false, "width": "3%",
+                                "render": function (data, type, row) {
+                                    return '<h6><a onclick="edit(\'' + row.DepartmentCD + '\')"></a></h6>';
+                                },
+                            },
+
                             { "data": "DepartmentName", orderable: false, "width": "13%" }
                         ],
                     }

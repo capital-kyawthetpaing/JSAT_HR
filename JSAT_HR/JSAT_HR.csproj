@@ -382,6 +382,10 @@
       <Project>{5f635155-a56c-4f22-a71a-35e4066cf5d6}</Project>
       <Name>Department_BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JH_DL\JH_DL.csproj">
+      <Project>{C4FC2B8F-45E5-44F4-A6FB-DF20087F2DB6}</Project>
+      <Name>JH_DL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JH_Model\JH_Model.csproj">
       <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
       <Name>JH_Model</Name>
