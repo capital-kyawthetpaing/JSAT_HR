@@ -25,32 +25,18 @@
                         </thead>
                         <tbody>
                             @{
-                                DataTable dt = Model.Tables[1];
+                                //DataTable dt = Model.Tables[1];
 
                                 foreach (DataRow row in Model.Tables[0].Rows)
                                 {
                                     
-                                    DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM =" + row["YYYYMM"] + "and DD = " + row["DD"]);
+                                    //DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM =" + row["YYYYMM"] + "and DD = " + row["DD"]);
                                     
                                     <tr>
                                         <td>
                                             @row["StaffID"]
                                         </td>
-                                        <td>
-                                            Time In : &nbsp;
-                                            if(@dr.Count()>0)
-                                            {
-                                            @dr[0]["TimeIn"]
-                                            }
-                                            <br />
-                                            Time Out : &nbsp;
-                                            if(@dr.Count()>0)
-                                            {
-                                            @dr[0]["TimeOut"]
-                                            }
-                                            <br />
-                                            <input type="checkbox" /> Unpaid Leave
-                                        </td>
+                                        
                                     </tr>
                                 }
                             }
