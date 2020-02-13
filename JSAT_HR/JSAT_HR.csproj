@@ -178,6 +178,12 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\details_close.png" />
+    <Content Include="Images\details_open.png" />
+    <Content Include="Images\JSAT.jpg" />
+    <Content Include="Images\Login1.jpg" />
+    <Content Include="Images\Login2.jpg" />
+    <Content Include="Images\Login3.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
