@@ -16,7 +16,7 @@ namespace JSAT_HR.Controllers
     {
         DepartmentBL dp_bl = new DepartmentBL();
         // GET: Department
-        public ActionResult DepartmentList(String id)
+        public ActionResult DepartmentList()
         {
             return View();
         }
@@ -38,16 +38,7 @@ namespace JSAT_HR.Controllers
             return RedirectToAction("DepartmentList");
         }
 
+       
 
-        //public async Task<ActionResult> Smart_Template_New_Edit(string id)
-        //{
-        //    JSAT_HREntities context = new JSAT_HREntities();
-        //    DempartmentModel model = new DempartmentModel();
-        //    DepartmentBL dbl = new DepartmentBL();
-        //    model = await dbl.DepartmentEdit(id);
-        //    //return View(model);
-        //    return RedirectToAction("DepartmentList",model);
-        //}
-        
     }
 }
