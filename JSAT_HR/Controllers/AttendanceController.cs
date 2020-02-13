@@ -88,6 +88,7 @@ namespace JSAT_HR.Controllers
                 DataTable table = sampleDataSet.Tables.Add("SampleData");
 
                 table.Columns.Add("YYYYMM", typeof(string));
+                table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
                 table.Columns.Add("StaffType", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
@@ -117,6 +118,8 @@ namespace JSAT_HR.Controllers
                             sampleDataRow = table.NewRow();
 
                             sampleDataRow["AttandenceDate"] = newattdate + "-" + i;
+
+                            sampleDataRow["DD"] = i;
 
                             sampleDataRow["YYYYMM"] = yyymm;
 
@@ -185,6 +188,7 @@ namespace JSAT_HR.Controllers
                 DataTable table = sampleDataSet.Tables.Add("SampleData");
 
                 table.Columns.Add("YYYYMM", typeof(string));
+                table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
                 table.Columns.Add("StaffType", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
