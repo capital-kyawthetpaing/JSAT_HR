@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AllowanceController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -353,6 +354,7 @@
     <Content Include="Views\SubDivision\SubDivisionList.cshtml" />
     <Content Include="Views\Attendance\Import_Log_List.cshtml" />
     <Content Include="Views\Position\PositionList.cshtml" />
+    <Content Include="Views\Allowance\Allowance_Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
