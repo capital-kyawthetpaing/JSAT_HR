@@ -26,7 +26,6 @@ namespace JH_DL
         }
     
         public virtual DbSet<L_Import> L_Import { get; set; }
-        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
         public virtual DbSet<M_Attandence> M_Attandence { get; set; }
         public virtual DbSet<M_Department> M_Department { get; set; }
         public virtual DbSet<M_Position> M_Position { get; set; }
@@ -34,5 +33,6 @@ namespace JH_DL
         public virtual DbSet<M_SubDivision> M_SubDivision { get; set; }
         public virtual DbSet<M_Transportation> M_Transportation { get; set; }
         public virtual DbSet<Staff_Allowance> Staff_Allowance { get; set; }
+        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
     }
 }

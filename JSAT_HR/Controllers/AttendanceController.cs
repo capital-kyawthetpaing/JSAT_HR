@@ -16,6 +16,7 @@ using NPOI.SS.Util;
 using Attendance_BL;
 using System.Configuration;
 using Newtonsoft.Json;
+using JH_Model;
 
 namespace JSAT_HR.Controllers
 {
@@ -88,6 +89,7 @@ namespace JSAT_HR.Controllers
                 DataTable table = sampleDataSet.Tables.Add("SampleData");
 
                 table.Columns.Add("YYYYMM", typeof(string));
+                table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
                 table.Columns.Add("StaffType", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
@@ -117,6 +119,8 @@ namespace JSAT_HR.Controllers
                             sampleDataRow = table.NewRow();
 
                             sampleDataRow["AttandenceDate"] = newattdate + "-" + i;
+
+                            sampleDataRow["DD"] = i;
 
                             sampleDataRow["YYYYMM"] = yyymm;
 
@@ -185,6 +189,7 @@ namespace JSAT_HR.Controllers
                 DataTable table = sampleDataSet.Tables.Add("SampleData");
 
                 table.Columns.Add("YYYYMM", typeof(string));
+                table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
                 table.Columns.Add("StaffType", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
@@ -246,6 +251,15 @@ namespace JSAT_HR.Controllers
             string JSONString = string.Empty;
             JSONString = JsonConvert.SerializeObject(table);
             return JSONString;
+        }
+
+        public ActionResult AttendanceList()
+        {
+            AttendanceBL abl = new AttendanceBL();
+            AttendanceModel am = new AttendanceModel();
+            am.YYYYMM = "201912";
+            DataSet ds = abl.M_Attendance_Select(am);
+            return View(ds);
         }
     }
 }

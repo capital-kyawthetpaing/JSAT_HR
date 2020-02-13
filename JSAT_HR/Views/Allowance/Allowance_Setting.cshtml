@@ -4,335 +4,345 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-xl-8 col-md-8 mb-2">
-        <div class="card border-left-info shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Management</div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="MD">MD</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xl-8 col-md-8 mb-2">
+            <div class="card border-left-info shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Management</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="MD">MD</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.MD, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "1",
+                               //@required = "required",
+                               @id = "txtMD",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.MD, new
-                       {
-                           @class = "form-control input-sm",
-                           @tabindex = "1",
-                           @required = "required",
-                           @id = "txtStaffID",
-                           @autofocus = "autofocus",
-                           maxlength = "4",
-                           @onkeypress = "return isNumberKey(event)"
-                       })
                         </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Director">Director</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                        <div class="form-group col-md-3">
+                            <label for="Director">Director</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Director, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "2",
+                               //@required = "required",
+                               @id = "txtdirector",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Director, new
-                       {
-                           @class = "form-control input-sm",
-                           @tabindex = "2",
-                           @required = "required",
-                           @id = "txtName",
-                           @autofocus = "autofocus",
-                           maxlength = "100"
-                       })
                         </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Manager">Manager</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                        <div class="form-group col-md-3">
+                            <label for="Manager">Manager</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Manager, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "3",
+                               //@required = "required",
+                               @id = "txtManager",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Manager, new
-                       {
-                           @class = "form-control input-sm",
-                           @tabindex = "3",
-                           @required = "required",
-                           @id = "txtNRC",
-                           @autofocus = "autofocus",
-                           maxlength = "30"
-                       })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-4 col-md-12 mb-2">
-        <div class="card border-left-custom2 shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Language Level</div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="N1">N1</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-book-open"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.N1, new
-                      {
-                          @class = "form-control input-sm",
-                          @tabindex = "1",
-                          @required = "required",
-                          @id = "txtStaffID",
-                          @autofocus = "autofocus",
-                          maxlength = "4",
-                          @onkeypress = "return isNumberKey(event)"
-                      })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="N2">N2</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-book-open"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.N2, new
-                      {
-                          @class = "form-control input-sm",
-                          @tabindex = "1",
-                          @required = "required",
-                          @id = "txtStaffID",
-                          @autofocus = "autofocus",
-                          maxlength = "4",
-                          @onkeypress = "return isNumberKey(event)"
-                      })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="N3">N3</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-book-open"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.N3, new
-                     {
-                         @class = "form-control input-sm",
-                         @tabindex = "1",
-                         @required = "required",
-                         @id = "txtStaffID",
-                         @autofocus = "autofocus",
-                         maxlength = "4",
-                         @onkeypress = "return isNumberKey(event)"
-                     })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="JpnUniGrade">Japan Uni Grade</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-university"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.JpnUniGrade, new
-                     {
-                         @class = "form-control input-sm",
-                         @tabindex = "1",
-                         @required = "required",
-                         @id = "txtStaffID",
-                         @autofocus = "autofocus",
-                         maxlength = "4",
-                         @onkeypress = "return isNumberKey(event)"
-                     })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-xl-2 col-md-12 mb-2">
-        <div class="card border-left-custom1 shadow h-100 py-2">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Transportation</div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="Bus">Bus</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-bus-alt"></i></span>
+        <div class="col-xl-4 col-md-12 mb-2">
+            <div class="card border-left-success shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-success text-uppercase mb-1">Language Level</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="N1">N1</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-book-open"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.N1, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "4",
+                               //@required = "required",
+                               @id = "txtN1",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Bus, new
-                       {
-                           @class = "form-control input-sm",
-                           //@type = "email",
-                           @tabindex = "12",
-                           @required = "required",
-                           @id = "txtFingerprintID",
-                           @autofocus = "autofocus",
-                           maxlength = "4",
-                           @onkeypress = "return isNumberKey(event)"
-                       })
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Train">Train</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-train"></i></span>
+                        <div class="form-group col-md-6">
+                            <label for="N2">N2</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-book-open"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.N2, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "5",
+                               //@required = "required",
+                               @id = "txtN2",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Train, new
-                       {
-                           @class = "form-control input-sm",
-                           @tabindex = "13",
-                           @required = "required",
-                           @id = "txtStaffType",
-                           @autofocus = "autofocus",
-                           maxlength = "1"
-                       })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="N3">N3</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-book-open"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.N3, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "6",
+                               //@required = "required",
+                               @id = "txtN3",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="JpnUniGrade">Japan Uni Grade</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fa fa-university"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.JpnUniGrade, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "7",
+                               //@required = "required",
+                               @id = "txtJpnunigrande",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-xl-2 col-md-12 mb-2">
-        <div class="card border-left-custom1 shadow h-100 py-2">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Team</div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="MarketingTeamAllowance">Marketing Team</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fa fa-users"></i></span>
+        <div class="col-xl-4 col-md-12 mb-2">
+            <div class="card border-left-custom2 shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Professional Skill</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Local1stInterviewer">Local 1st Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Local1stInterviewer, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "8",
+                               //@required = "required",
+                               @id = "txtlocal1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.MarketingTeamAllowance, new
-                       {
-                           @class = "form-control input-sm",
-                           //@type = "email",
-                           @tabindex = "12",
-                           @required = "required",
-                           @id = "txtFingerprintID",
-                           @autofocus = "autofocus",
-                           maxlength = "4",
-                           @onkeypress = "return isNumberKey(event)"
-                       })
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="MentorAllowance"> Mentor</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom1" id="basic-addon1"><i class="fa fa-users"></i></span>
+                        <div class="form-group col-md-6">
+                            <label for="Local2ndInterviewer">Local 2nd Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Local2ndInterviewer, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "9",
+                               //@required = "required",
+                               @id = "txtlocal2ndinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.MentorAllowance, new
-                       {
-                           @class = "form-control input-sm",
-                           @tabindex = "13",
-                           @required = "required",
-                           @id = "txtStaffType",
-                           @autofocus = "autofocus",
-                           maxlength = "1"
-                       })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Oversea1stInterviewer">Oversea 1st Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Oversea1stInterviewer, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "10",
+                               //@required = "required",
+                               @id = "txtoversea1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Oversea2ndInterviewer">Oversea 2nd Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Oversea2ndInterviewer, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "11",
+                               //@required = "required",
+                               @id = "txtoversea1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-xl-4 col-md-12 mb-2">
-        <div class="card border-left-custom2 shadow">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Professional Skill</div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Local1stInterviewer">Local 1st Interviewer</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+
+
+        <div class="col-xl-2 col-md-12 mb-2">
+            <div class="card border-left-custom1 shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Others</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="MarketingTeamAllowance">Marketing Team Allowance</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom1" id="basic-addon1"><i class="fa fa-users"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.MarketingTeamAllowance, new
+                           {
+                               @class = "form-control input-sm",
+                               //@type = "email",
+                               @tabindex = "12",
+                               // @required = "required",
+                               @id = "txtmarketingteam",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Local1stInterviewer, new
-                      {
-                          @class = "form-control input-sm",
-                          @tabindex = "1",
-                          @required = "required",
-                          @id = "txtStaffID",
-                          @autofocus = "autofocus",
-                          maxlength = "4",
-                          @onkeypress = "return isNumberKey(event)"
-                      })
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Local2ndInterviewer">Local 2nd Interviewer</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
+                        <div class="form-group">
+                            <label for="MentorAllowance"> Mentor Allowance</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom1" id="basic-addon1"><i class="fa fa-users"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.MentorAllowance, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "13",
+                               //@required = "required",
+                               @id = "txtmentor",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
                             </div>
-                            @Html.TextBoxFor(am => am.Local2ndInterviewer, new
-                      {
-                          @class = "form-control input-sm",
-                          @tabindex = "1",
-                          @required = "required",
-                          @id = "txtStaffID",
-                          @autofocus = "autofocus",
-                          maxlength = "4",
-                          @onkeypress = "return isNumberKey(event)"
-                      })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Oversea1stInterviewer">Oversea 1st Interviewer</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.Oversea1stInterviewer, new
-                     {
-                         @class = "form-control input-sm",
-                         @tabindex = "1",
-                         @required = "required",
-                         @id = "txtStaffID",
-                         @autofocus = "autofocus",
-                         maxlength = "4",
-                         @onkeypress = "return isNumberKey(event)"
-                     })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Oversea2ndInterviewer">Oversea 2nd Interviewer</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-user"></i></span>
-                            </div>
-                            @Html.TextBoxFor(am => am.Oversea2ndInterviewer, new
-                     {
-                         @class = "form-control input-sm",
-                         @tabindex = "1",
-                         @required = "required",
-                         @id = "txtStaffID",
-                         @autofocus = "autofocus",
-                         maxlength = "4",
-                         @onkeypress = "return isNumberKey(event)"
-                     })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-xl-2 col-md-12 mb-2">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Transportation</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="Bus">Bus</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-danger" id="basic-addon1"><i class="fas fa-bus-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Bus, new
+                           {
+                               @class = "form-control input-sm",
+                               //@type = "email",
+                               @tabindex = "14",
+                               //@required = "required",
+                               @id = "txtbus",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Train">Train</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-danger" id="basic-addon1"><i class="fas fa-subway"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Train, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "15",
+                               //@required = "required",
+                               @id = "txttrain",
+                               maxlength = "8",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-    <div class="col-xl-12 text-center">
-        <div class="card border-bottom-success shadow h-100">
-            <div class="card-body">
-                <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
-                    <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+
+
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 

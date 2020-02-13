@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4CF39FB7-DC54-42AD-B2DC-B0AC6381A9F3}</ProjectGuid>
+    <ProjectGuid>{394329F4-5398-4972-9A58-1CFAEC3821C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Staff_BL</RootNamespace>
-    <AssemblyName>Staff_BL</AssemblyName>
+    <RootNamespace>Allowance_BL</RootNamespace>
+    <AssemblyName>Allowance_BL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,7 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StaffBL.cs" />
+    <Compile Include="Allowance_SettingBL.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

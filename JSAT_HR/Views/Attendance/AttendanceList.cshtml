@@ -1,0 +1,64 @@
+﻿@using System.Data;
+@model DataSet
+@{
+    ViewBag.Title = "AttendanceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblAttendance" class="hrtable col-sm-12 col-md-12" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Staff ID</th>
+                                @{
+                                    int maxday = DateTime.DaysInMonth(2019, 12);
+                                    for (int i = 1; i <= maxday; i++)
+                                    {
+                                        <th>@i</th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                DataTable dt = Model.Tables[1];
+
+                                foreach (DataRow row in Model.Tables[0].Rows)
+                                {
+                                    
+                                    DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM =" + row["YYYYMM"] + "and DD = " + row["DD"]);
+                                    
+                                    <tr>
+                                        <td>
+                                            @row["StaffID"]
+                                        </td>
+                                        <td>
+                                            Time In : &nbsp;
+                                            if(@dr.Count()>0)
+                                            {
+                                            @dr[0]["TimeIn"]
+                                            }
+                                            <br />
+                                            Time Out : &nbsp;
+                                            if(@dr.Count()>0)
+                                            {
+                                            @dr[0]["TimeOut"]
+                                            }
+                                            <br />
+                                            <input type="checkbox" /> Unpaid Leave
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

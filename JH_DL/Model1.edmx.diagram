@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2122bddf8530417f95579bbc976fc77e" Name="Diagram1">
         <EntityTypeShape EntityType="JSAT_HRModel.L_Import" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Attandence" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
@@ -14,6 +13,7 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
