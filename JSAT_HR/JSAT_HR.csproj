@@ -372,6 +372,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Allowance_BL\Allowance_BL.csproj">
+      <Project>{394329f4-5398-4972-9a58-1cfaec3821c8}</Project>
+      <Name>Allowance_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Attendance_BL\Attendance_BL.csproj">
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>

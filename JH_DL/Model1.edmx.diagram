@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

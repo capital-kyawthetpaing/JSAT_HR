@@ -14,25 +14,36 @@ namespace Allowance_BL
 
         public string Allowance_Setting_Save(AllowanceModel am)
         {
-            //string msg = string.Empty;
-            //JSAT_HREntities db = new JSAT_HREntities();
-            //M_Allowance tb = new M_Allowance();
+            string msg = string.Empty;
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_Allowance tb = new M_Allowance();
 
-            //tb.MD = am.MD;
-            //tb.Manager = am.Manager;
-            //tb.Director = am.Director;
-            //tb.N1 = am.N1;
-            //tb.N2 = am.N2;
-            //tb.N3 = am.N3;
-            //tb.JpnUniGrade = am.JpnUniGrade;
-            
-           
+            tb.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            tb.MD = am.MD;
+            tb.Manager = am.Manager;
+            tb.Director = am.Director;
+            tb.N1 = am.N1;
+            tb.N2 = am.N2;
+            tb.N3 = am.N3;
+            tb.JpnUniGrade = am.JpnUniGrade;
+            tb.Bus = am.Bus;
+            tb.Train = am.Train;
+            tb.MarketingTeamAllowance = am.MarketingTeamAllowance;
+            tb.MentorAllowance = am.MentorAllowance;
+            tb.Local1stInterviewer = am.Local1stInterviewer;
+            tb.Local2ndInterviewer = am.Local2ndInterviewer;
+            tb.Overseas1stInterviewer = am.Oversea1stInterviewer;
+            tb.Overseas2ndInterviewer = am.Oversea2ndInterviewer;
+            tb.InsertedDate = DateTime.Now;
+            tb.InsertedBy = "1";
 
 
+            db.M_Allowance.Add(tb);
+            db.SaveChanges();
 
+            msg = "OK";
+            return msg;
 
-            //return msg;
-            
 
         }
     }
