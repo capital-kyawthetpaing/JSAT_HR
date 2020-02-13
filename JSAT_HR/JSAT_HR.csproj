@@ -346,6 +346,7 @@
     <Content Include="Views\SubDivision\SubDivisionList.cshtml" />
     <Content Include="Views\Attendance\Import_Log_List.cshtml" />
     <Content Include="Views\Position\PositionList.cshtml" />
+    <Content Include="Views\Attendance\AttendanceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
