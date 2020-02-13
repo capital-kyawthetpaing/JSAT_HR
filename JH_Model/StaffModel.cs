@@ -8,30 +8,30 @@ namespace JH_Model
 {
     public class StaffModel : BaseModel
     {
-        public string StaffID { get; set; }
-        public string ChangeDate { get; set; }
+        public int StaffID { get; set; }
+        public DateTime ChangeDate { get; set; }
         public string Name { get; set; }
-        public string Gender { get; set; }
+        public byte Gender { get; set; }
         public string NRC { get; set; }
-        public string JoinDate { get; set; }
-        public string PermanentDate { get; set; }
+        public DateTime JoinDate { get; set; }
+        public DateTime PermanentDate { get; set; }
         public string BankInformation { get; set; }
         public string Address { get; set; }
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
-        public string UniformCharges { get; set; }
-        public string FingerPrintID { get; set; }
-        public string StaffType { get; set; }
+        public decimal UniformCharges { get; set; }
+        public int FingerPrintID { get; set; }
+        public byte StaffType { get; set; }
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
         public string PositionCD { get; set; }
         public string TransportationCD { get; set; }
-        public string Currency { get; set; }
+        public byte Currency { get; set; }
         public string Photo { get; set; }
-        public string BasicSalary { get; set; }
-        public string Effort { get; set; }
-        public string DeleteFlg { get; set; }
+        public decimal BasicSalary { get; set; }
+        public decimal Effort { get; set; }
+        public bool DeleteFlg { get; set; }
         public bool MD { get; set; }
         public bool Director { get; set; }
         public bool Manager { get; set; }

@@ -65,8 +65,8 @@
                 </div>
             </li>
 
-          
-           
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
@@ -85,6 +85,20 @@
                         <a class="collapse-item" href='@Url.Action("DepartmentList", "Department")'>Department List</a>
                         <a class="collapse-item" href='@Url.Action("SubDivisionList", "SubDivision")'>SubDivision List</a>
                         <a class="collapse-item" href='@Url.Action("PositionList", "Position")'>Position List</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseallowance" aria-expanded="false" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-money-bill-alt"></i>
+                    <span>Allowance</span>
+                </a>
+                <div id="collapseallowance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Allowance:</h6>
+                        <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance")'>Allowance Setting</a>
+                      
                     </div>
                 </div>
             </li>

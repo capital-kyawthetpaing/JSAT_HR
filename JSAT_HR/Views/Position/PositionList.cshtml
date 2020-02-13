@@ -1,10 +1,60 @@
-﻿
+﻿@model JH_Model.PositionModel
 @{
     ViewBag.Title = "PositionList";
 }
 
 <div class="container-fluid">
     <!-- Page Heading-->
+    <div class="row">
+        <div class="col-xl-12 mb-2">
+            <div class="card border-left-custom2 shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="PositionCD">Position CD</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+                                </div>
+                                @Html.TextBoxFor(pm => pm.PostitionCD, new
+                                {
+                                    @class = "form-control input-sm",
+                                    @tabindex = "1",
+                                    @required = "required",
+                                    @id = "txtPositionCD",
+                                    @autofocus = "autofocus",
+                                    maxlength = "100"
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="PositionName">Position Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                </div>
+                                @Html.TextBoxFor(pm =>pm.PositionName , new
+                                {
+                                    @class = "form-control input-sm",
+                                    @tabindex = "1",
+                                    @required = "required",
+                                    @id = "txtPositionName",
+                                    @autofocus = "autofocus",
+                                    maxlength = "100"
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Process" style="color:white;">Process</label>
+                            <div class="input-group">
+                                <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
@@ -17,8 +67,8 @@
                                     <th>Position</th>
                                 </tr>
                             </thead>
-                        </table> 
-                    </div>                
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
