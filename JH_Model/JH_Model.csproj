@@ -46,8 +46,10 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="DempartmentModel.cs" />
     <Compile Include="M_AttandenceModel.cs" />
+    <Compile Include="PositionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaffModel.cs" />
+    <Compile Include="SubDivisionModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
