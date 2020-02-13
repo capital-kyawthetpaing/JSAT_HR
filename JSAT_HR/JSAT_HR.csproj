@@ -389,7 +389,7 @@
       <Name>Department_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\JH_DL\JH_DL.csproj">
-      <Project>{C4FC2B8F-45E5-44F4-A6FB-DF20087F2DB6}</Project>
+      <Project>{c4fc2b8f-45e5-44f4-a6fb-df20087f2db6}</Project>
       <Name>JH_DL</Name>
     </ProjectReference>
     <ProjectReference Include="..\JH_Model\JH_Model.csproj">
