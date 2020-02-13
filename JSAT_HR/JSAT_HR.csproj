@@ -372,6 +372,10 @@
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
       <Name>CommonFunction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Department_BL\Department_BL.csproj">
+      <Project>{5f635155-a56c-4f22-a71a-35e4066cf5d6}</Project>
+      <Name>Department_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JH_Model\JH_Model.csproj">
       <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
       <Name>JH_Model</Name>

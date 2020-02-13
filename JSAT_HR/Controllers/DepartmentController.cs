@@ -9,7 +9,6 @@ using JH_Model;
 using System.Data;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using JH_DL;
 
 namespace JSAT_HR.Controllers
 {
