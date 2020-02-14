@@ -1,8 +1,107 @@
-﻿
+﻿@model JH_Model.CompanyModel
 @{
     ViewBag.Title = "Company_List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Company_List</h2>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-xl-12 mb-2">
+            <div class="card border-left-custom2 shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="CompanyCD">Company CD</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+                                </div>
+                                @Html.TextBoxFor(cm => cm.CompanyCD , new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "1",
+                               @required = "required",
+                               @id = "txtCompanyCD",
+                               @autofocus = "autofocus",
+                               maxlength = "100"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="CompanyName">Company Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                </div>
+                                @Html.TextBoxFor(cm => cm.CompanyName, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "1",
+                               @required = "required",
+                               @id = "txtCompanyName",
+                               @autofocus = "autofocus",
+                               maxlength = "100"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Process" style="color:white;">Process</label>
+                            <div class="input-group">
+                                <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tbCompnay" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>CompanyCD</th>
+                                    <th>CompanyName</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tbCompany').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../Company/GETCompany",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "CompanyCD", orderable: false, "width": "3%" },
+                        { "data": "CompanyName", orderable: false, "width": "13%" }
+                    ],
+                }
+            );
+        });
+    </script>
+   }
