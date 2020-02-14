@@ -114,12 +114,12 @@
             </div>
         </div>
 
-        <div class="col-xl-12 col-md-12 mb-2">
+        <div class="col-xl-8 col-md-8 mb-2">
             <div class="card border-left-success shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-success text-uppercase mb-1">Language Level</div>
                     <div class="form-row">
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="N1">N1</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -138,7 +138,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="N2">N2</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -157,7 +157,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="N3">N3</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -176,7 +176,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="JpnUniGrade">Japan Uni Grade</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -200,96 +200,10 @@
             </div>
         </div>
 
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-custom2 shadow">
-                <div class="card-body">
-                    <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Professional Skill</div>
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="Local1stInterviewer">Local 1st Interviewer</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
-                                </div>
-                                @Html.TextBoxFor(am => am.Local1stInterviewer, new
-                           {
-                               @class = "form-control input-sm input-numeral8",
-                               @tabindex = "8",
-                               //@required = "required",
-                               @id = "txtlocal1stinterviewer",
-                               @autofocus = "autofocus",
-                               maxlength = "8",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
-                           })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="Local2ndInterviewer">Local 2nd Interviewer</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
-                                </div>
-                                @Html.TextBoxFor(am => am.Local2ndInterviewer, new
-                           {
-                               @class = "form-control input-sm input-numeral9",
-                               @tabindex = "9",
-                               //@required = "required",
-                               @id = "txtlocal2ndinterviewer",
-                               @autofocus = "autofocus",
-                               maxlength = "8",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
-                           })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="Oversea1stInterviewer">Oversea 1st Interviewer</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
-                                </div>
-                                @Html.TextBoxFor(am => am.Oversea1stInterviewer, new
-                           {
-                               @class = "form-control input-sm input-numeral10",
-                               @tabindex = "10",
-                               //@required = "required",
-                               @id = "txtoversea1stinterviewer",
-                               @autofocus = "autofocus",
-                               maxlength = "8",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
-                           })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="Oversea2ndInterviewer">Oversea 2nd Interviewer</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
-                                </div>
-                                @Html.TextBoxFor(am => am.Oversea2ndInterviewer, new
-                           {
-                               @class = "form-control input-sm input-numeral11",
-                               @tabindex = "11",
-                               //@required = "required",
-                               @id = "txtoversea1stinterviewer",
-                               @autofocus = "autofocus",
-                               maxlength = "8",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
-                           })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="col-xl-4 col-md-4 mb-2">
-            <div class="card border-left-custom2 shadow">
+            <div class="card border-left-custom1 shadow">
                 <div class="card-body">
-                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Professional Skill</div>
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Other</div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="MarketingTeamAllowance">Marketing Team Allowance</label>
@@ -331,6 +245,92 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8 col-md-8 mb-2">
+            <div class="card border-left-custom2 shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Professional Skill</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="Local1stInterviewer">Local 1st Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Local1stInterviewer, new
+                           {
+                               @class = "form-control input-sm input-numeral8",
+                               @tabindex = "8",
+                               //@required = "required",
+                               @id = "txtlocal1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               //@onkeypress = "return CheckNumeric();",
+                               //@onkeyup = "FormatCurrency(this)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Local2ndInterviewer">Local 2nd Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Local2ndInterviewer, new
+                           {
+                               @class = "form-control input-sm input-numeral9",
+                               @tabindex = "9",
+                               //@required = "required",
+                               @id = "txtlocal2ndinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               //@onkeypress = "return CheckNumeric();",
+                               //@onkeyup = "FormatCurrency(this)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Oversea1stInterviewer">Oversea 1st Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Oversea1stInterviewer, new
+                           {
+                               @class = "form-control input-sm input-numeral10",
+                               @tabindex = "10",
+                               //@required = "required",
+                               @id = "txtoversea1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               //@onkeypress = "return CheckNumeric();",
+                               //@onkeyup = "FormatCurrency(this)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Oversea2ndInterviewer">Oversea 2nd Interviewer</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Oversea2ndInterviewer, new
+                           {
+                               @class = "form-control input-sm input-numeral11",
+                               @tabindex = "11",
+                               //@required = "required",
+                               @id = "txtoversea1stinterviewer",
+                               @autofocus = "autofocus",
+                               maxlength = "8",
+                               //@onkeypress = "return CheckNumeric();",
+                               //@onkeyup = "FormatCurrency(this)"
+                           })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -186,7 +186,7 @@
                                 @{
                                     var SalarylistItem = new List<SelectListItem>();
                                     SalarylistItem.Add(new SelectListItem { Text = "Permanent", Value = "1" });
-                                    SalarylistItem.Add(new SelectListItem { Text = "OJT", Value = "2" });
+                                    SalarylistItem.Add(new SelectListItem { Text = "Probation", Value = "2" });
                                 }
                                 @Html.DropDownListFor(sm => sm.BasicSalary, SalarylistItem, new
                            {
@@ -325,7 +325,9 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-xl-12">
                             <label for="OfficeCD">Office</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
