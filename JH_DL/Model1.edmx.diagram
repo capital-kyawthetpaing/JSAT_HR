@@ -13,9 +13,10 @@
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
 <<<<<<< HEAD
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="7.375" PointY="8.75" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="9.375" PointY="8.75" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="5" PointY="6.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Office" Width="1.5" PointX="2.7185570219152408" PointY="27.255080772216935" />
 =======
         
         

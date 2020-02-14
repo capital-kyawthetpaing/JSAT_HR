@@ -368,11 +368,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Attendance\AttendanceList.cshtml" />
     <Content Include="Views\Company\Company_List.cshtml" />
+    <Content Include="Views\Office\Office_Hours_Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Office\" />
     <Folder Include="Views\Share\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
@@ -399,6 +399,10 @@
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
       <Name>CommonFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company_BL\Company_BL.csproj">
+      <Project>{eab90c11-1946-46b7-a6f2-9187201bb948}</Project>
+      <Name>Company_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Department_BL\Department_BL.csproj">
       <Project>{5f635155-a56c-4f22-a71a-35e4066cf5d6}</Project>

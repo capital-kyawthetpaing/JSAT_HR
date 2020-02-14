@@ -35,10 +35,6 @@
           <Property Name="Overseas2ndInterviewer" Type="money" />
           <Property Name="MarketingTeamAllowance" Type="money" />
           <Property Name="MentorAllowance" Type="money" />
-          <Property Name="OfficeTimeIn" Type="time" Precision="7" />
-          <Property Name="OfficeTimeOut" Type="time" Precision="7" />
-          <Property Name="AcademyTimeIn" Type="time" Precision="7" />
-          <Property Name="AcademyTimeOut" Type="time" Precision="7" />
           <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
           <Property Name="InsertedDate" Type="datetime" />
         </EntityType>
@@ -73,6 +69,15 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <Property Name="InsertedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
           <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Office">
+          <Key>
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="OfficeCD" Type="tinyint" Nullable="false" />
+          <Property Name="OfficeName" Type="varchar" MaxLength="10" />
+          <Property Name="OfficeHourFrom" Type="time" Precision="7" />
+          <Property Name="OfficeHourTo" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="M_Position">
           <Key>
@@ -177,6 +182,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" Schema="dbo" store:Type="Tables" />
@@ -283,38 +289,12 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" />
-          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
           <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
           <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
           <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
+          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
+          <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
         </EntityContainer>
-        <EntityType Name="M_Allowance">
-          <Key>
-            <PropertyRef Name="ChangeDate" />
-          </Key>
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="OfficeTimeIn" Type="Time" Precision="7" />
-          <Property Name="OfficeTimeOut" Type="Time" Precision="7" />
-          <Property Name="AcademyTimeIn" Type="Time" Precision="7" />
-          <Property Name="AcademyTimeOut" Type="Time" Precision="7" />
-        </EntityType>
         <EntityType Name="M_User">
           <Key>
             <PropertyRef Name="UserID" />
@@ -376,6 +356,38 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <Property Name="TimeOut" Type="Time" Precision="0" />
           <Property Name="LeaveType" Type="Byte" />
           <Property Name="LateTime" Type="Time" Precision="0" />
+        </EntityType>
+        <EntityType Name="M_Allowance">
+          <Key>
+            <PropertyRef Name="ChangeDate" />
+          </Key>
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Office">
+          <Key>
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="OfficeCD" Type="Byte" Nullable="false" />
+          <Property Name="OfficeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeHourFrom" Type="Time" Precision="7" />
+          <Property Name="OfficeHourTo" Type="Time" Precision="7" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -461,34 +473,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="M_Allowance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
-              <MappingFragment StoreEntitySet="M_Allowance">
-                <ScalarProperty Name="AcademyTimeOut" ColumnName="AcademyTimeOut" />
-                <ScalarProperty Name="AcademyTimeIn" ColumnName="AcademyTimeIn" />
-                <ScalarProperty Name="OfficeTimeOut" ColumnName="OfficeTimeOut" />
-                <ScalarProperty Name="OfficeTimeIn" ColumnName="OfficeTimeIn" />
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
-                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
-                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
-                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
-                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
-                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
-                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
-                <ScalarProperty Name="N3" ColumnName="N3" />
-                <ScalarProperty Name="N2" ColumnName="N2" />
-                <ScalarProperty Name="N1" ColumnName="N1" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="MD" ColumnName="MD" />
-                <ScalarProperty Name="Train" ColumnName="Train" />
-                <ScalarProperty Name="Bus" ColumnName="Bus" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_User">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_User">
               <MappingFragment StoreEntitySet="M_User">
@@ -547,6 +531,40 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
                 <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
                 <ScalarProperty Name="DD" ColumnName="DD" />
                 <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Allowance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
+              <MappingFragment StoreEntitySet="M_Allowance">
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
+                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
+                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
+                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
+                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
+                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
+                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
+                <ScalarProperty Name="N3" ColumnName="N3" />
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="N1" ColumnName="N1" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MD" ColumnName="MD" />
+                <ScalarProperty Name="Train" ColumnName="Train" />
+                <ScalarProperty Name="Bus" ColumnName="Bus" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Office">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Office">
+              <MappingFragment StoreEntitySet="M_Office">
+                <ScalarProperty Name="OfficeHourTo" ColumnName="OfficeHourTo" />
+                <ScalarProperty Name="OfficeHourFrom" ColumnName="OfficeHourFrom" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

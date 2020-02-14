@@ -12,7 +12,7 @@ namespace JSAT_HR.Controllers
     {
         OfficeBL obl = new OfficeBL();
         // GET: Office
-        public ActionResult Index()
+        public ActionResult Office_Hours_Setting()
         {
             return View();
         }
