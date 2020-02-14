@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using JH_DL;
 using JH_Model;
@@ -94,6 +96,20 @@ namespace Staff_BL
             }
 
             return msg;
+        }
+
+        public async Task<string> Check_StaffCD(StaffModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_Staff md = new M_Staff();
+            string scd;
+            M_Staff staffcd = await db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).SingleOrDefaultAsync();
+            if (staffcd != null)
+                scd = staffcd.StaffID.ToString();
+            else
+                scd ="";
+
+            return scd;
         }
     }
 }

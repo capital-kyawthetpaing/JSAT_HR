@@ -5,19 +5,6 @@
     ViewBag.Title = "StaffEntry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@RenderPage("~/Views/Share/ShareView.cshtml")
-@if (TempData["Smsg"] != null)
-{
-    <script type="text/javascript">
-        Successmessage('I', '1001', 'Message1');
-    </script>
-}
-@if (TempData["Imsg"] != null)
-{
-    <script type="text/javascript">
-        Infomessage('I', '1003', 'Message1');
-    </script>
-}
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -306,6 +293,9 @@
                                @tabindex = "15"
                            })
                             </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <br /><br /><br />
                         </div>
                     </div>
                 </div>
@@ -646,6 +636,7 @@
             SelectDepartment();
             SelectSubDivision();
             SelectPosition();
+            SelectOffice();
         });
         function SelectDepartment() {
             $.ajax({
@@ -687,6 +678,21 @@
                     $.each(items, function (i, item) {
                         $("#ddlPosition").append(
                             $('<option></option>').val(item.PositionCD).html(item.Position));
+                    });
+                }
+            });
+        }
+
+        function SelectOffice() {
+            $.ajax({
+                url: "../Office/GETOffice",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlOffice").append(
+                            $('<option></option>').val(item.OfficeCD).html(item.OfficeName));
                     });
                 }
             });
