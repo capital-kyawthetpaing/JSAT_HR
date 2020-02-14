@@ -5,7 +5,6 @@ using JH_Model;
 using JH_DL;
 using System.Linq;
 using Newtonsoft.Json;
-using Base_BL;
 using System;
 
 namespace JSAT_HR.Controllers
@@ -46,6 +45,7 @@ namespace JSAT_HR.Controllers
                 string msg = string.Empty;
                 JSAT_HREntities db = new JSAT_HREntities();
                 var id = db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).Select(s => s.StaffID).FirstOrDefault();
+               
                 if (id == 0)
                 {
                     msg = sbl.Staff_Save(model);
