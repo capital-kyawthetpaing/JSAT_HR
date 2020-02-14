@@ -379,6 +379,95 @@
         </div>
 
 
+        <div class="col-xl-2 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Office</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="Time-In">Time-In</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-clock"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.OfficeTimeIn, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "Time",
+                               @tabindex = "16",
+                               //@required = "required",
+                               @id = "txtofficetimein",
+                               @autofocus = "autofocus",
+
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Timeout">Time-Out</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-clock"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.OfficeTimeOut, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "Time",
+                               @tabindex = "17",
+                               //@required = "required",
+                               @id = "txtofficetimeout",
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Academy</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="Time-In">Time-In</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-clock"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.AcademyTimeIn, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "Time",
+                               @tabindex = "16",
+                               //@required = "required",
+                               @id = "txtacademytimein",
+                               @autofocus = "autofocus",
+
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Timeout">Time-Out</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-clock"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.AcademyTimeOut, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "Time",
+                               @tabindex = "17",
+                               //@required = "required",
+                               @id = "txtacademytimeout",
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
 
