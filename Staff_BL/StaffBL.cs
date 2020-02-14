@@ -30,7 +30,7 @@ namespace Staff_BL
             string msg = "";
 
             ms.StaffID = model.StaffID;
-            ms.ChangeDate = model.ChangeDate;
+            ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = model.Gender;
             ms.NRC = model.NRC;
@@ -41,7 +41,10 @@ namespace Staff_BL
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
-            ms.UniformCharges =15000;
+            if (model.UniformCharges == true)
+                ms.UniformCharges = 5000;
+            else
+                ms.UniformCharges = 0;
             ms.FingerPrintID = model.FingerPrintID;
             ms.StaffType = model.StaffType;
             ms.DepartmentCD = model.DepartmentCD;
@@ -50,12 +53,17 @@ namespace Staff_BL
             ms.TransportationCD = model.TransportationCD;
             ms.Currency = model.Currency;
             ms.Photo = model.Photo;
-            ms.BasicSalary = 250000;
-            ms.Effort = 0;
+            if (model.BasicSalary == 1)
+                ms.BasicSalary = 250000;
+            else
+                ms.BasicSalary = 150000;
+            ms.Effort = model.Effort;
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
+            sa.StaffID = model.StaffID;
+            sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
             sa.Manager = model.Manager;
