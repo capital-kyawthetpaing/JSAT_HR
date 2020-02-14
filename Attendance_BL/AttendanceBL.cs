@@ -28,12 +28,12 @@ namespace Attendance_BL
             prms[2] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = 1 };
 
 
-            dttest.TableName = "M_Attandance";
+            dttest.TableName = "M_Attendance";
             System.IO.StringWriter writer = new System.IO.StringWriter();
             dttest.WriteXml(writer, XmlWriteMode.WriteSchema, false);
             string result = writer.ToString();
             prms[3] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
-            bdl.InsertUpdateDeleteData("M_Attandance_Insert", prms);
+            bdl.InsertUpdateDeleteData("M_Attendance_Insert", prms);
         }
         public DataSet M_Attendance_Select(AttendanceModel am)
         {

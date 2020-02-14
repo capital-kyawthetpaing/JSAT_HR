@@ -91,7 +91,7 @@ namespace JSAT_HR.Controllers
                 table.Columns.Add("YYYYMM", typeof(string));
                 table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
-                table.Columns.Add("StaffType", typeof(string));
+                table.Columns.Add("OfficeCD", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
                 table.Columns.Add("TimeIn", typeof(string));
                 table.Columns.Add("TimeOut", typeof(string));
@@ -128,7 +128,7 @@ namespace JSAT_HR.Controllers
 
                             sampleDataRow["YYYYMM"] = yyymm;
 
-                            sampleDataRow["StaffType"] = 1;
+                            sampleDataRow["OfficeCD"] = 1;
 
                             if (j % 2 == 0)
                             {
@@ -195,7 +195,7 @@ namespace JSAT_HR.Controllers
                 table.Columns.Add("YYYYMM", typeof(string));
                 table.Columns.Add("DD", typeof(string));
                 table.Columns.Add("FingerPrintID", typeof(string));
-                table.Columns.Add("StaffType", typeof(string));
+                table.Columns.Add("OfficeCD", typeof(string));
                 table.Columns.Add("AttandenceDate", typeof(string));
                 table.Columns.Add("TimeIn", typeof(string));
                 table.Columns.Add("TimeOut", typeof(string));
