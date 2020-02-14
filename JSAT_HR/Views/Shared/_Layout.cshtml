@@ -1,4 +1,19 @@
 ﻿<!DOCTYPE html>
+@{
+    var ControllerName = ViewContext.RouteData.Values["controller"].ToString();
+    var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
+    var time = Session.Timeout;
+    if (Session["UserID"] != null)
+    {
+
+
+    }
+
+    else
+    {
+        Context.Response.Redirect("~/Login/Login");
+    }
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -98,7 +113,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Allowance:</h6>
                         <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance")'>Allowance Setting</a>
-                      
+
                     </div>
                 </div>
             </li>
