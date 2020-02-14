@@ -32,5 +32,6 @@ namespace JH_DL
         public Nullable<decimal> MentorAllowance { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
+        public Nullable<byte> Currency { get; set; }
     }
 }

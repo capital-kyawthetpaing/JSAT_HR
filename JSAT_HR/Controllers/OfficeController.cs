@@ -25,7 +25,7 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(obl.GETOffice());
         }
 
-        public async Task<ActionResult> Office_Hours_Setting(OfficeModel om)
+        public async Task<ActionResult> Hours_Setting_Save(OfficeModel om)
         {
             string flag = await obl.Hours_Setting_Save(om);
 
