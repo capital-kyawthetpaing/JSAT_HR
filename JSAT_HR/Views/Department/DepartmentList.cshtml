@@ -57,7 +57,7 @@
                             <div class="form-group col-md-3">
                                 <label for="Process" style="color:white;">Process</label>
                                 <div class="input-group">
-                                    <button type="submit" class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                    <button type="submit" id="btnchange" class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
                                 </div>
                             </div>
                         </div>
@@ -129,8 +129,12 @@
                 $('#txtDepartmentCD').val(depCD);
                 $('#txtDepartmentName').val(depName);  
                 $("#txtDepartmentCD").attr('readonly', true);
+
+                return $("#btnchange").text("Update");
+               
                
             }
+            
         </script>
         
 
