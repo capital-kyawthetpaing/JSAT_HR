@@ -26,6 +26,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
                                     </div>
+                                   
                                     @Html.TextBoxFor(dm => dm.DepartmentCD, new
                                {
                                    @class = "form-control input-sm",
@@ -65,7 +66,7 @@
                                 <label for="Process" style="color:white;">Process</label>
                                 <div class="input-group" style="width:450px;">
                                     <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
-                                    <button type="submit" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                                    <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                                 </div>
                             </div>
 
@@ -148,16 +149,20 @@
                 return $("#save").css("display", "none");
             }
 
+            $("#btncancel").click(function () {
+                $("#txtDepartmentCD").attr('readonly', false);
+               
+                $('#txtDepartmentCD').val("");
+                $('#txtDepartmentName').val("");  
 
-            //function DepartmentCancel() {
-            //    $('#txtDepartmentCD').val("");
-            //    $('#txtDepartmentName').val("");
-            //    $("#txtDepartmentCD").attr('readonly', false);
+                $("#update").css("display", "none");
+                $("#cancel").css("display", "none");
+                $("#save").css("display", "block");
 
-            //    $("#update").css("display", "none");
-            //    $("#cancel").css("display", "none");
-            //    $("#save").css("display", "block");
-            //}
+                //$("#txtDepartmentCD").removeAttr("required");​​​​​
+                //$("#txtDepartmentName").removeAttr("required");​​​​​
+            })
+           
             
         </script>
         

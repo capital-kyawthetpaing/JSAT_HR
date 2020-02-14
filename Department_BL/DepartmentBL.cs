@@ -8,6 +8,7 @@ using JH_Model;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.Entity;
+using System.Web;
 
 namespace Department_BL
 {
@@ -27,11 +28,49 @@ namespace Department_BL
 
             md.DepartmentCD = model.DepartmentCD;
             md.Department = model.DepartmentName;
+            md.InsertedDate = DateTime.Now;
+            md.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             db.M_Department.Add(md);
             db.SaveChanges();
 
             string msg = "OK";
+            return msg;
+        }
+
+        public async Task<string> Department_Update(DempartmentModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_Department md = new M_Department();
+            string msg = string.Empty;
+            M_Department update = await db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefaultAsync();
+            update.DepartmentCD = model.DepartmentCD;
+            update.Department = model.DepartmentName;
+            update.UpdatedDate = DateTime.Now;
+            update.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            try
+            {
+                db.SaveChanges();
+                msg = "OK";
+            }
+            catch(Exception ex)
+            {
+                msg = ex.ToString();
+            }
+            return msg;
+        }
+
+        public async Task<string> Check_DeptCD(DempartmentModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_Department md = new M_Department();
+            string msg = string.Empty;
+            M_Department update = await db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefaultAsync();
+            if (update != null)
+                msg = update.DepartmentCD;
+            else
+                msg = "";
+           
             return msg;
         }
 
