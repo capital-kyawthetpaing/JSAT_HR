@@ -38,15 +38,13 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpPost]
-        public ActionResult Staff_Save(StaffModel model)
+        public async System.Threading.Tasks.Task<ActionResult> Staff_SaveAsync(StaffModel model)
         {
             try
             {
                 string msg = string.Empty;
-                JSAT_HREntities db = new JSAT_HREntities();
-                var id = db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).Select(s => s.StaffID).FirstOrDefault();
-               
-                if (id == 0)
+                var id = await sbl.Check_StaffCD(model);
+                if (id == "")
                 {
                     msg = sbl.Staff_Save(model);
                     TempData["Smsg"] = msg;
