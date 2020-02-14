@@ -9,7 +9,7 @@ namespace JSAT_HR.Controllers
     public class OfficeController : Controller
     {
         // GET: Office
-        public ActionResult Index()
+        public ActionResult Office_Hours_Setting()
         {
             return View();
         }

@@ -36,10 +36,6 @@ namespace Allowance_BL
             tb.Local2ndInterviewer = am.Local2ndInterviewer;
             tb.Overseas1stInterviewer = am.Oversea1stInterviewer;
             tb.Overseas2ndInterviewer = am.Oversea2ndInterviewer;
-            tb.OfficeTimeIn = TimeSpan.Parse(am.OfficeTimeIn);
-            tb.OfficeTimeOut = TimeSpan.Parse(am.OfficeTimeOut);
-            tb.AcademyTimeIn = TimeSpan.Parse(am.AcademyTimeIn);
-            tb.AcademyTimeOut = TimeSpan.Parse(am.AcademyTimeOut);
             tb.InsertedDate = DateTime.Now;
             tb.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 

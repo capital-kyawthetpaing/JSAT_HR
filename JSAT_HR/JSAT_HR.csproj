@@ -368,11 +368,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Attendance\AttendanceList.cshtml" />
     <Content Include="Views\Company\Company_List.cshtml" />
+    <Content Include="Views\Office\Office_Hours_Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Office\" />
     <Folder Include="Views\Share\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
