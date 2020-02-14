@@ -33,11 +33,13 @@ namespace Staff_BL
             ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = model.Gender;
+            ms.DOB = model.DOB;
             ms.NRC = model.NRC;
             ms.JoinDate = model.JoinDate;
             ms.PermanentDate = model.PermanentDate;
             ms.BankInformation = model.BankInformation;
-            ms.Address = model.Address;
+            ms.PermanentAddress = model.PermanentAddress;
+            ms.TemporaryAddress = model.TemporaryAddress;
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
@@ -46,7 +48,8 @@ namespace Staff_BL
             else
                 ms.UniformCharges = 0;
             ms.FingerPrintID = model.FingerPrintID;
-            ms.StaffType = model.StaffType;
+            ms.OfficeCD = model.OfficeCD;
+            ms.CompanyCD = model.CompanyCD;
             ms.DepartmentCD = model.DepartmentCD;
             ms.SubDivisionCD = model.SubDivisionCD;
             ms.PositionCD = model.PositionCD;

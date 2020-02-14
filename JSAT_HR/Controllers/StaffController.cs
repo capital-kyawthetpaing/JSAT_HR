@@ -4,6 +4,9 @@ using Staff_BL;
 using JH_Model;
 using JH_DL;
 using System.Linq;
+using Newtonsoft.Json;
+using Base_BL;
+using System;
 
 namespace JSAT_HR.Controllers
 {
@@ -38,20 +41,28 @@ namespace JSAT_HR.Controllers
         [HttpPost]
         public ActionResult Staff_Save(StaffModel model)
         {
-            string msg = string.Empty;
-            JSAT_HREntities db = new JSAT_HREntities();
-            var id = db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).Select(s => s.StaffID).FirstOrDefault();
-            if (id == 0)
+            try
             {
-                msg=sbl.Staff_Save(model);
-                TempData["msg"] = msg;
-                return RedirectToAction("StaffList");
+                string msg = string.Empty;
+                JSAT_HREntities db = new JSAT_HREntities();
+                var id = db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).Select(s => s.StaffID).FirstOrDefault();
+                if (id == 0)
+                {
+                    msg = sbl.Staff_Save(model);
+                    TempData["Smsg"] = msg;
+                    return RedirectToAction("StaffList");
+                }
+                else
+                {
+                    TempData["Imsg"] = "Duplicate";
+                    return RedirectToAction("StaffEntry");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("StaffList");
+                string st = ex.ToString();
+                return RedirectToAction("StaffEntry");
             }
-
-        }
+        }       
     }
 }

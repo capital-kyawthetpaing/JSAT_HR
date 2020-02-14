@@ -35,12 +35,12 @@
           <Property Name="Overseas2ndInterviewer" Type="money" />
           <Property Name="MarketingTeamAllowance" Type="money" />
           <Property Name="MentorAllowance" Type="money" />
-          <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
-          <Property Name="InsertedDate" Type="datetime" />
           <Property Name="OfficeTimeIn" Type="time" Precision="7" />
           <Property Name="OfficeTimeOut" Type="time" Precision="7" />
           <Property Name="AcademyTimeIn" Type="time" Precision="7" />
           <Property Name="AcademyTimeOut" Type="time" Precision="7" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
+          <Property Name="InsertedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="M_Attendance">
           <Key>
@@ -283,19 +283,11 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" />
-          <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
           <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
+          <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
           <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
           <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
         </EntityContainer>
-        <EntityType Name="M_User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="M_Allowance">
           <Key>
             <PropertyRef Name="ChangeDate" />
@@ -322,6 +314,14 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <Property Name="OfficeTimeOut" Type="Time" Precision="7" />
           <Property Name="AcademyTimeIn" Type="Time" Precision="7" />
           <Property Name="AcademyTimeOut" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="M_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="M_Staff">
           <Key>
@@ -461,15 +461,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="M_User">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_User">
-              <MappingFragment StoreEntitySet="M_User">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_Allowance">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
               <MappingFragment StoreEntitySet="M_Allowance">
@@ -495,6 +486,15 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
                 <ScalarProperty Name="Train" ColumnName="Train" />
                 <ScalarProperty Name="Bus" ColumnName="Bus" />
                 <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_User">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_User">
+              <MappingFragment StoreEntitySet="M_User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
