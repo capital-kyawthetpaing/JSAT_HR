@@ -32,9 +32,5 @@ namespace JH_DL
         public Nullable<decimal> MentorAllowance { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
-        public Nullable<System.TimeSpan> OfficeTimeIn { get; set; }
-        public Nullable<System.TimeSpan> OfficeTimeOut { get; set; }
-        public Nullable<System.TimeSpan> AcademyTimeIn { get; set; }
-        public Nullable<System.TimeSpan> AcademyTimeOut { get; set; }
     }
 }

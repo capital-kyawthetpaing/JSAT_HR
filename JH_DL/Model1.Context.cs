@@ -31,9 +31,10 @@ namespace JH_DL
         public virtual DbSet<M_SubDivision> M_SubDivision { get; set; }
         public virtual DbSet<M_Transportation> M_Transportation { get; set; }
         public virtual DbSet<Staff_Allowance> Staff_Allowance { get; set; }
-        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
         public virtual DbSet<M_User> M_User { get; set; }
         public virtual DbSet<M_Staff> M_Staff { get; set; }
         public virtual DbSet<M_Attendance> M_Attendance { get; set; }
+        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
+        public virtual DbSet<M_Office> M_Office { get; set; }
     }
 }
