@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Staff_BL;
+using Department_BL;
 using CommonFunction;
+using JH_Model;
+using System.Data;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace JSAT_HR.Controllers
 {
@@ -24,9 +28,17 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
         }
 
-        public ActionResult Department_Save()
+        public ActionResult Department_Save(DempartmentModel model)
         {
+            DepartmentBL dbl = new DepartmentBL();
+            if(model !=null)
+            {
+                dbl.Department_Save(model);
+            }
             return RedirectToAction("DepartmentList");
         }
+
+       
+
     }
 }

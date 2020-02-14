@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JH_DL;
 using JH_Model;
 
@@ -32,12 +28,20 @@ namespace Attendance_BL
             prms[2] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = 1 };
 
 
-            dttest.TableName = "M_Attandence";
+            dttest.TableName = "M_Attandance";
             System.IO.StringWriter writer = new System.IO.StringWriter();
             dttest.WriteXml(writer, XmlWriteMode.WriteSchema, false);
             string result = writer.ToString();
             prms[3] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
-            bdl.InsertUpdateDeleteData("M_Attandence_Insert", prms);
+            bdl.InsertUpdateDeleteData("M_Attandance_Insert", prms);
+        }
+        public DataSet M_Attendance_Select(AttendanceModel am)
+        {
+            BaseDL bdl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = am.YYYYMM };
+            //prms[1] = new SqlParameter("@StaffName", SqlDbType.VarChar) { Value = sm.StaffName };
+            return bdl.SelectDataSet("M_Attendance_Select", prms);
         }
         public DataTable Get_Import_List_View()
         {

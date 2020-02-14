@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web;
 using JH_DL;
 using JH_Model;
+
 
 namespace Staff_BL
 {
@@ -58,7 +60,7 @@ namespace Staff_BL
             ms.Effort = model.Effort;
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
-            ms.InsertedBy = "1";
+            ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             sa.StaffID = model.StaffID;
             sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));

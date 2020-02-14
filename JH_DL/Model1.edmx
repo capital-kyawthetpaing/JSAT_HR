@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JSAT_HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JSAT_HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="L_Import">
           <Key>
             <PropertyRef Name="ImportSEQ" />
           </Key>
-          <Property Name="ImportSEQ" Type="int" Nullable="false" />
+          <Property Name="ImportSEQ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FileName" Type="varchar" MaxLength="200" />
           <Property Name="ImportType" Type="tinyint" />
           <Property Name="ImportedDate" Type="datetime" />
@@ -20,6 +20,8 @@
             <PropertyRef Name="ChangeDate" />
           </Key>
           <Property Name="ChangeDate" Type="date" Nullable="false" />
+          <Property Name="Bus" Type="money" />
+          <Property Name="Train" Type="money" />
           <Property Name="MD" Type="money" />
           <Property Name="Director" Type="money" />
           <Property Name="Manager" Type="money" />
@@ -33,20 +35,23 @@
           <Property Name="Overseas2ndInterviewer" Type="money" />
           <Property Name="MarketingTeamAllowance" Type="money" />
           <Property Name="MentorAllowance" Type="money" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
+          <Property Name="InsertedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="M_Attandence">
+        <EntityType Name="M_Attendance">
           <Key>
             <PropertyRef Name="YYYYMM" />
+            <PropertyRef Name="DD" />
             <PropertyRef Name="FingerPrintID" />
             <PropertyRef Name="StaffType" />
-            <PropertyRef Name="AttandenceDate" />
           </Key>
           <Property Name="YYYYMM" Type="int" Nullable="false" />
+          <Property Name="DD" Type="tinyint" Nullable="false" />
           <Property Name="FingerPrintID" Type="int" Nullable="false" />
           <Property Name="StaffType" Type="tinyint" Nullable="false" />
           <Property Name="AttandenceDate" Type="date" Nullable="false" />
-          <Property Name="TimeIn" Type="time" Precision="5" />
-          <Property Name="TimeOut" Type="time" Precision="5" />
+          <Property Name="TimeIn" Type="time" Precision="0" />
+          <Property Name="TimeOut" Type="time" Precision="0" />
         </EntityType>
         <EntityType Name="M_Department">
           <Key>
@@ -128,6 +133,14 @@
           <Property Name="Transportation" Type="varchar" MaxLength="20" />
           <Property Name="TransportationCharges" Type="money" />
         </EntityType>
+        <EntityType Name="M_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="Staff_Allowance">
           <Key>
             <PropertyRef Name="StaffID" />
@@ -152,16 +165,16 @@
         <EntityContainer Name="JSAT_HRModelStoreContainer">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="M_Attandence" EntityType="Self.M_Attandence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_User" EntityType="Self.M_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JSAT_HRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -174,39 +187,6 @@
           <Property Name="ImportType" Type="Byte" />
           <Property Name="ImportedDate" Type="DateTime" Precision="3" />
           <Property Name="ImportedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="M_Allowance">
-          <Key>
-            <PropertyRef Name="ChangeDate" />
-          </Key>
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
-        <EntityType Name="M_Attandence">
-          <Key>
-            <PropertyRef Name="YYYYMM" />
-            <PropertyRef Name="FingerPrintID" />
-            <PropertyRef Name="StaffType" />
-            <PropertyRef Name="AttandenceDate" />
-          </Key>
-          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
-          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
-          <Property Name="StaffType" Type="Byte" Nullable="false" />
-          <Property Name="AttandenceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TimeIn" Type="Time" Precision="5" />
-          <Property Name="TimeOut" Type="Time" Precision="5" />
         </EntityType>
         <EntityType Name="M_Department">
           <Key>
@@ -311,15 +291,62 @@
         </EntityType>
         <EntityContainer Name="JSAT_HREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" />
-          <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" />
-          <EntitySet Name="M_Attandence" EntityType="Self.M_Attandence" />
           <EntitySet Name="M_Department" EntityType="Self.M_Department" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" />
+          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
+          <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
+          <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
         </EntityContainer>
+        <EntityType Name="M_Allowance">
+          <Key>
+            <PropertyRef Name="ChangeDate" />
+          </Key>
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Attendance">
+          <Key>
+            <PropertyRef Name="YYYYMM" />
+            <PropertyRef Name="DD" />
+            <PropertyRef Name="FingerPrintID" />
+            <PropertyRef Name="StaffType" />
+          </Key>
+          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
+          <Property Name="DD" Type="Byte" Nullable="false" />
+          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
+          <Property Name="StaffType" Type="Byte" Nullable="false" />
+          <Property Name="AttandenceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeIn" Type="Time" Precision="0" />
+          <Property Name="TimeOut" Type="Time" Precision="0" />
+        </EntityType>
+        <EntityType Name="M_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -334,38 +361,6 @@
                 <ScalarProperty Name="ImportType" ColumnName="ImportType" />
                 <ScalarProperty Name="ImportedDate" ColumnName="ImportedDate" />
                 <ScalarProperty Name="ImportedBy" ColumnName="ImportedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Allowance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
-              <MappingFragment StoreEntitySet="M_Allowance">
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-                <ScalarProperty Name="MD" ColumnName="MD" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="N1" ColumnName="N1" />
-                <ScalarProperty Name="N2" ColumnName="N2" />
-                <ScalarProperty Name="N3" ColumnName="N3" />
-                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
-                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
-                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
-                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
-                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
-                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
-                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Attandence">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attandence">
-              <MappingFragment StoreEntitySet="M_Attandence">
-                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
-                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
-                <ScalarProperty Name="StaffType" ColumnName="StaffType" />
-                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
-                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
-                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -467,6 +462,52 @@
                 <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
                 <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
                 <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Allowance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
+              <MappingFragment StoreEntitySet="M_Allowance">
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
+                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
+                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
+                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
+                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
+                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
+                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
+                <ScalarProperty Name="N3" ColumnName="N3" />
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="N1" ColumnName="N1" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MD" ColumnName="MD" />
+                <ScalarProperty Name="Train" ColumnName="Train" />
+                <ScalarProperty Name="Bus" ColumnName="Bus" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Attendance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attendance">
+              <MappingFragment StoreEntitySet="M_Attendance">
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
+                <ScalarProperty Name="StaffType" ColumnName="StaffType" />
+                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
+                <ScalarProperty Name="DD" ColumnName="DD" />
+                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_User">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_User">
+              <MappingFragment StoreEntitySet="M_User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

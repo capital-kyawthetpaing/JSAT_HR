@@ -1,4 +1,19 @@
 ﻿<!DOCTYPE html>
+@{
+    var ControllerName = ViewContext.RouteData.Values["controller"].ToString();
+    var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
+    var time = Session.Timeout;
+    if (Session["UserID"] != null)
+    {
+
+
+    }
+
+    else
+    {
+        Context.Response.Redirect("~/Login/Login");
+    }
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -58,6 +73,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Attendance:</h6>
+                        <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
                         <a class="collapse-item" href='@Url.Action("AttendanceImport", "Attendance")'>Attendance Import</a>
                         <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
                     </div>
@@ -76,11 +92,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseResponsible" aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Responsibility</span>
+                    <span>Organization</span>
                 </a>
                 <div id="collapseResponsible" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Responsibility:</h6>
+                        <h6 class="collapse-header">Organization:</h6>
                         <a class="collapse-item" href='@Url.Action("DepartmentList", "Department")'>Department List</a>
                         <a class="collapse-item" href='@Url.Action("SubDivisionList", "SubDivision")'>SubDivision List</a>
                         <a class="collapse-item" href='@Url.Action("PositionList", "Position")'>Position List</a>
@@ -96,8 +112,8 @@
                 <div id="collapseallowance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Allowance:</h6>
-                        <a class="collapse-item" href='@Url.Action("DepartmentList", "Department")'>Allowance Setting</a>
-                      
+                        <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance")'>Allowance Setting</a>
+
                     </div>
                 </div>
             </li>

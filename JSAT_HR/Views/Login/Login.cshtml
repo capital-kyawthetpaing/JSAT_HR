@@ -1,0 +1,111 @@
+﻿@model JH_Model.UserModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="../Content/HRLogin.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="login-block">
+    <session id="loginForm">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("Checklogin", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="container">
+                <div class="row" style="height:500px">
+                    <div class="col-md-4 login-sec">
+                        <h2 class="text-center">JSAT HR Management System</h2>
+                        <form class="login-form">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="text-uppercase">User ID</label>
+                                @Html.TextBoxFor(um => um.UserID, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "1",
+                               @required = "required",
+                               @id = "txtUserID",
+                               @autofocus = "autofocus",
+                               maxlength = "4"
+                           })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                                @Html.PasswordFor(um => um.Password, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "2",
+                               @required = "required",
+                               @id = "txtPassword",
+                               maxlength = "20"
+                           })
+                            </div>
+
+
+                            <div class="form-check">
+                                <button type="submit" class="btn btn-login float-right">Login</button>
+                            </div>
+
+
+                            <div class="form-group" style="color:red;text-align:center;">
+                                @ViewBag.ErrorMessage
+                            </div>
+                            <br>
+                            @*<div class="copy-text"><i class="fa fa-copyright"></i>Developed by Capital Knowledge Myanmar Co.,Ltd </i> </div>*@
+                        </form>
+
+                    </div>
+                    <div class="col-md-8 banner-sec">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img class="d-block img-fluid" src="../Images/Login1.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            <h2>Akira Morikawa<br />General Manager</h2>
+                                            <p>Currently there are more than 700 Japanese companies in Myanmar. The general characteristics of Japanese companies are that education and welfare benefits are fulfilling and employees are recruited by looking at personality and motivation. I would definitely recommend it to those who would like to raise their careers over the long term, those who would like to learn techniques.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block img-fluid" src="../Images/Login2.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            <h2>Ei Kay Thwe Khine<br />Director</h2>
+                                            <p>Raise your Dreams”ဆိုတာ ကျွန်မတို့ရဲ့ဆောင်ပုဒ်ဖြစ်ပြီး ကျွန်မတို့ရဲ့ကတိစကားလည်းဖြစ်ပါတယ်။ ကြိုးစားပြီးရည်မှန်းချက်ကြီးတဲ့သူအားလုံးအတွက် သူတို့ရဲ့အိပ်မက်မျိုးစေ့တွေကို စိုက်ပျိုးရာမြေကောင်း၊ ရေကောင်း ၊မြေဩဇာကောင်းဖြစ်ရမယ်လို့ ရိုးသားစွာ ခံယူထားပါတယ် ။ဂျပန်လုပ်ငန်းများနဲ့ အခိုင်အမာ ဆက်နွယ်မှုရှိထားတာကြောင့် ဂျပန်လုပ်ငန်းများမှာ ဝင်ရောက်လုပ်ကိုင်လိုသူ မည်သူမဆို J-SATက လက်ကမ်း ကြိုဆိုပါတယ်။</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block img-fluid" src="../Images/Login3.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            <h2>Mi Mi Kyaw<br />Manager</h2>
+                                            <p>Our agency J-SAT is the No.1 recruitment agency for Japanese companies.More than 80% of Japanese companies in myanmar make inquiry to J-SAT for job recruitment.Every month a lot of candidates are employed by Japanese companies.Please trust us and come for registration with J-SAT.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <script src="../Scripts/jquery-3.4.1.min.js"></script>
+        <script src="../Scripts/bootstrap.min.js"></script>
+</body>
+</html>
