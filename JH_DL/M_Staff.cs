@@ -18,17 +18,20 @@ namespace JH_DL
         public System.DateTime ChangeDate { get; set; }
         public string Name { get; set; }
         public Nullable<byte> Gender { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
         public string NRC { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
         public Nullable<System.DateTime> PermanentDate { get; set; }
         public string BankInformation { get; set; }
-        public string Address { get; set; }
+        public string PermanentAddress { get; set; }
+        public string TemporaryAddress { get; set; }
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
         public Nullable<decimal> UniformCharges { get; set; }
         public Nullable<int> FingerPrintID { get; set; }
-        public Nullable<byte> StaffType { get; set; }
+        public Nullable<byte> OfficeCD { get; set; }
+        public string CompanyCD { get; set; }
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
         public string PositionCD { get; set; }

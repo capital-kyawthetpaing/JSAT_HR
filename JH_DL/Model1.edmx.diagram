@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="JSAT_HRModel.L_Import" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="5.375" PointY="8.75" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,6 +38,14 @@ namespace JH_Model
 
         public decimal MentorAllowance { get; set; }
 
+        public string OfficeTimeIn { get; set;}
+
+        public string OfficeTimeOut { get; set; }
+
+        public string AcademyTimeIn { get; set; }
+
+        public string AcademyTimeOut { get; set; }
+
 
 
     }

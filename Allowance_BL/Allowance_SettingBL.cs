@@ -15,6 +15,7 @@ namespace Allowance_BL
 
         public string Allowance_Setting_Save(AllowanceModel am)
         {
+            
             string msg = string.Empty;
             JSAT_HREntities db = new JSAT_HREntities();
             M_Allowance tb = new M_Allowance();
@@ -35,9 +36,12 @@ namespace Allowance_BL
             tb.Local2ndInterviewer = am.Local2ndInterviewer;
             tb.Overseas1stInterviewer = am.Oversea1stInterviewer;
             tb.Overseas2ndInterviewer = am.Oversea2ndInterviewer;
+            tb.OfficeTimeIn = TimeSpan.Parse(am.OfficeTimeIn);
+            tb.OfficeTimeOut = TimeSpan.Parse(am.OfficeTimeOut);
+            tb.AcademyTimeIn = TimeSpan.Parse(am.AcademyTimeIn);
+            tb.AcademyTimeOut = TimeSpan.Parse(am.AcademyTimeOut);
             tb.InsertedDate = DateTime.Now;
             tb.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
-
 
             db.M_Allowance.Add(tb);
             db.SaveChanges();
