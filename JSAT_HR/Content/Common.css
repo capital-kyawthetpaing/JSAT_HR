@@ -1,3 +1,11 @@
+.input-numeral1, .input-numeral2, .input-numeral3,
+.input-numeral4, .input-numeral5, .input-numeral6,
+.input-numeral7, .input-numeral8, .input-numeral9,
+.input-numeral10, .input-numeral11, .input-numeral12,
+.input-numeral13, .input-numeral14, .input-numeral15 {
+    text-align: right;
+}
+
 #radioBtn .notActive {
     color: #17a2b8;
     background-color: #fff;

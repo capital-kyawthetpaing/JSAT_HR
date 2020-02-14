@@ -206,6 +206,7 @@
     <Content Include="Scripts\chart-area-demo.js" />
     <Content Include="Scripts\chart-bar-demo.js" />
     <Content Include="Scripts\chart-pie-demo.js" />
+    <Content Include="Scripts\Cleave.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\datatables-demo.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
