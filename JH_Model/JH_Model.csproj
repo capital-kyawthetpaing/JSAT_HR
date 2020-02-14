@@ -44,6 +44,7 @@
     <Compile Include="AllowanceModel.cs" />
     <Compile Include="AttendanceModel.cs" />
     <Compile Include="BaseModel.cs" />
+    <Compile Include="CompanyModel.cs" />
     <Compile Include="DempartmentModel.cs" />
     <Compile Include="M_AttandenceModel.cs" />
     <Compile Include="PositionModel.cs" />
