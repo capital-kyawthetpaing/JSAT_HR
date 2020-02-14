@@ -138,9 +138,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AllowanceController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\SubDivisionController.cs" />
@@ -365,10 +367,13 @@
     <Content Include="Views\Allowance\Allowance_Setting.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Attendance\AttendanceList.cshtml" />
+    <Content Include="Views\Company\Company_List.cshtml" />
+    <Content Include="Views\Office\Office_Hours_Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Share\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +412,10 @@
       <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
       <Name>JH_Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Office_BL\Office_BL.csproj">
+      <Project>{9691f025-65d3-4be7-b523-483636f8661d}</Project>
+      <Name>Office_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Position_BL\Position_BL.csproj">
       <Project>{0158354f-ed22-46ab-b9ce-d74489086181}</Project>
       <Name>Position_BL</Name>
@@ -418,6 +427,10 @@
     <ProjectReference Include="..\SubDivision_BL\SubDivision_BL.csproj">
       <Project>{b2979145-1052-4321-9d00-b0496e82ef70}</Project>
       <Name>SubDivision_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\User_BL\User_BL.csproj">
+      <Project>{fdefbfa0-a990-427e-90a1-ec160a82a54d}</Project>
+      <Name>User_BL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

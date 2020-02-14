@@ -5,7 +5,6 @@
     ViewBag.Title = "StaffEntry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -77,12 +76,31 @@
                                     var lstGender = new List<SelectListItem>();
                                     lstGender.Add(new SelectListItem { Text = "Male", Value = "1" });
                                     lstGender.Add(new SelectListItem { Text = "Female", Value = "2" });
-                                    }
+                                }
                                 @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "4", @id = "ddlGender" })
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="DOB">Date Of Birth</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.DOB, "{0:dd-MM-yyyy}", new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "date",
+                               placeHolder = "dd/MM/yyyy",
+                               @required = "required",
+                               @tabindex = "5",
+                               @id = "txtDOB",
+                               max = "12-12-2100"
+                               //@Value = Model.JoinDate
+                           })
+                            </div>
+                        </div>
                         <div class="form-group col-md-3">
                             <label for="JoinDate">Join Date</label>
                             <div class="input-group">
@@ -95,7 +113,7 @@
                                @type = "date",
                                placeHolder = "dd/MM/yyyy",
                                @required = "required",
-                               @tabindex = "5",
+                               @tabindex = "6",
                                @id = "txtJoinDate",
                                max = "12-12-2100"
                                //@Value = Model.JoinDate
@@ -114,7 +132,7 @@
                                @type = "date",
                                placeHolder = "dd/MM/yyyy",
                                @required = "required",
-                               @tabindex = "6",
+                               @tabindex = "7",
                                @id = "txtPermanentDate",
                                max = "12-12-2100"
                                //@Value = Model.PermanentDate
@@ -130,14 +148,16 @@
                                 @Html.TextBoxFor(sm => sm.BankInformation, new
                            {
                                @class = "form-control input-sm",
-                               @tabindex = "7",
+                               @tabindex = "8",
                                @required = "required",
                                @id = "txtBankInformation",
                                @autofocus = "autofocus",
                                maxlength = "10"
                            })
                             </div>
-                        </div>
+                        </div>                      
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="Department">Currency</label>
                             <div class="input-group">
@@ -148,8 +168,61 @@
                                     var listItem = new List<SelectListItem>();
                                     listItem.Add(new SelectListItem { Text = "MMK", Value = "1" });
                                     listItem.Add(new SelectListItem { Text = "USD", Value = "2" });
-                                    }
-                                @Html.DropDownListFor(sm => sm.Currency, listItem, new { @class = "form-control", @tabindex = "8", @id = "ddlCurrency" })
+                                }
+                                @Html.DropDownListFor(sm => sm.Currency, listItem, new
+                           {
+                               @class = "form-control",
+                               @tabindex = "9",
+                               @id = "ddlCurrency"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Basic Salary">Basic Salary</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
+                                </div>
+                                @{
+                                    var SalarylistItem = new List<SelectListItem>();
+                                    SalarylistItem.Add(new SelectListItem { Text = "Permanent", Value = "1" });
+                                    SalarylistItem.Add(new SelectListItem { Text = "OJT", Value = "2" });
+                                }
+                                @Html.DropDownListFor(sm => sm.BasicSalary, SalarylistItem, new
+                           {
+                               @class = "form-control",
+                               @tabindex = "10",
+                               @id = "ddlBasicSalary"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Effort">Effort</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-user icon"></i></span>
+                                </div>
+                                @Html.TextBoxFor(sm => sm.Effort, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "11",
+                               @required = "required",
+                               @id = "txtEffort",
+                               @autofocus = "autofocus",
+                               maxlength = "10",
+                               @onkeypress = "return isNumberKey(event)"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="uniformcharges" style="visibility:hidden;">UniformCharges </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.UniformCharges)
+                                    </div>
+                                </div>
+                                <label class="form-control" for="UniformCharges">UniformCharges</label>
                             </div>
                         </div>
                     </div>
@@ -162,6 +235,21 @@
                     <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Organization</div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label for="Company">Company</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                </div>
+                                @Html.DropDownListFor(sm => sm.CompanyCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                           {
+                               @class = "select2 form-control input-sm",
+                               @required = "required",
+                               @id = "ddlCompany",
+                               @tabindex = "12"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="Department">Department</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -172,7 +260,7 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlDepartment",
-                               @tabindex = "9"
+                               @tabindex = "13"
                            })
                             </div>
                         </div>
@@ -187,7 +275,7 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlSubDivision",
-                               @tabindex = "10"
+                               @tabindex = "14"
                            })
                             </div>
                         </div>
@@ -200,11 +288,14 @@
                                 @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
                                @class = "select2 form-control input-sm",
-                               //@required = "required",
+                               @required = "required",
                                @id = "ddlPosition",
-                               @tabindex = "11"
+                               @tabindex = "15"
                            })
                             </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <br /><br /><br />
                         </div>
                     </div>
                 </div>
@@ -225,7 +316,7 @@
                            {
                                @class = "form-control input-sm",
                                //@type = "email",
-                               @tabindex = "12",
+                               @tabindex = "16",
                                @required = "required",
                                @id = "txtFingerprintID",
                                @autofocus = "autofocus",
@@ -235,19 +326,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="StaffType">Staff Type</label>
+                            <label for="OfficeCD">Office</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-hiking"></i></span>
                                 </div>
-                                @Html.TextBoxFor(sm => sm.StaffType, new
+                                @Html.DropDownListFor(sm => sm.OfficeCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
-                               @class = "form-control input-sm",
-                               @tabindex = "13",
+                               @class = "select2 form-control input-sm",
                                @required = "required",
-                               @id = "txtStaffType",
-                               @autofocus = "autofocus",
-                               maxlength = "1"
+                               @id = "ddlOffice",
+                               @tabindex = "17"
                            })
                             </div>
                         </div>
@@ -269,7 +358,7 @@
                                 @Html.TextBoxFor(sm => sm.PhoneNo, new
                            {
                                @class = "form-control input-sm",
-                               @tabindex = "14",
+                               @tabindex = "18",
                                @required = "required",
                                @id = "txtPhoneNo",
                                @autofocus = "autofocus",
@@ -286,7 +375,7 @@
                                 @Html.TextBoxFor(sm => sm.EmergencyPhoneNo, new
                            {
                                @class = "form-control input-sm",
-                               @tabindex = "15",
+                               @tabindex = "19",
                                @required = "required",
                                @id = "txtEmergencyPhoneNo",
                                @autofocus = "autofocus",
@@ -304,7 +393,7 @@
                            {
                                @class = "form-control input-sm",
                                @type = "email",
-                               @tabindex = "16",
+                               @tabindex = "20",
                                @required = "required",
                                @id = "txtEmailAddress",
                                @autofocus = "autofocus",
@@ -313,18 +402,36 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="Address">Address</label>
+                            <label for="PermanentAddress">Permanent Address</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-home"></i></span>
                                 </div>
-                                @Html.TextAreaFor(sm => sm.Address, new
+                                @Html.TextAreaFor(sm => sm.PermanentAddress, new
                            {
                                @class = "form-control input-sm",
                                @type = "email",
-                               @tabindex = "17",
+                               @tabindex = "21",
                                @required = "required",
-                               @id = "txtAddress",
+                               @id = "txtPermanentAddress",
+                               @autofocus = "autofocus",
+                               maxlength = "400"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="TemporaryAddress">Temporary Address</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-success" id="basic-addon1"><i class="fas fa-home"></i></span>
+                                </div>
+                                @Html.TextAreaFor(sm => sm.TemporaryAddress, new
+                           {
+                               @class = "form-control input-sm",
+                               @type = "email",
+                               @tabindex = "22",
+                               @required = "required",
+                               @id = "txtTemporaryAddress",
                                @autofocus = "autofocus",
                                maxlength = "400"
                            })
@@ -350,11 +457,11 @@
                                     listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
                                     listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
                                     listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
-                                    }
+                                }
                                 @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
                            {
                                @class = "form-control",
-                               @tabindex = "18",
+                               @tabindex = "23",
                                @id = "ddlTransportation"
                            })
                             </div>
@@ -524,12 +631,14 @@
     </div>
 }
 @section Scripts{
-<script type="text/javascript">
-    $(document).ready(function () {
-        SelectDepartment();
-        SelectSubDivision();       
-        });   
-    function SelectDepartment() {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SelectDepartment();
+            SelectSubDivision();
+            SelectPosition();
+            SelectOffice();
+        });
+        function SelectDepartment() {
             $.ajax({
                 url: "../Department/GetDepartment",
                 type: "GET",
@@ -539,34 +648,64 @@
                     $.each(items, function (i, item) {
                         $("#ddlDepartment").append(
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
-                    });                    
+                    });
                 }
             });
-    } // data bind in Program dropdownlist.
+        } // data bind in Program dropdownlist.
 
-    function SelectSubDivision() {
-        $.ajax({
-            url: "../SubDivision/GETSubDivision",
-            type: "GET",
-            dataType: "JSON",
-            dataSrc: '',
-            success: function (items) {
-                $.each(items, function (i, item) {
-                    $("#ddlSubDivision").append(
-                        $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
-                });
-            }
-        });
-    }
+        function SelectSubDivision() {
+            $.ajax({
+                url: "../SubDivision/GETSubDivision",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlSubDivision").append(
+                            $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
+                    });
+                }
+            });
+        }
 
-    function isNumberKey(evt) {
+        function SelectPosition() {
+            $.ajax({
+                url: "../Position/GETPosition",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlPosition").append(
+                            $('<option></option>').val(item.PositionCD).html(item.Position));
+                    });
+                }
+            });
+        }
 
-        var charCode = (evt.which) ? evt.which : event.keyCode
+        function SelectOffice() {
+            $.ajax({
+                url: "../Office/GETOffice",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlOffice").append(
+                            $('<option></option>').val(item.OfficeCD).html(item.OfficeName));
+                    });
+                }
+            });
+        }
 
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        function isNumberKey(evt) {
 
-            return false;
-        return true;
-    }
-</script>
+            var charCode = (evt.which) ? evt.which : event.keyCode
+
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+                return false;
+            return true;
+        }
+    </script>
 }

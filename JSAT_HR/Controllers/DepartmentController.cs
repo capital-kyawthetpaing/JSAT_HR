@@ -16,7 +16,7 @@ namespace JSAT_HR.Controllers
     {
         DepartmentBL dp_bl = new DepartmentBL();
         // GET: Department
-        public ActionResult DepartmentList(String id)
+        public ActionResult DepartmentList()
         {
             return View();
         }
@@ -28,26 +28,26 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
         }
 
-        public ActionResult Department_Save(DempartmentModel model)
+        public async Task<ActionResult> Department_Save(DempartmentModel model)
         {
+            string flag = string.Empty;
             DepartmentBL dbl = new DepartmentBL();
-            if(model !=null)
+            if(model!=null)
             {
-                dbl.Department_Save(model);
+                var deptCD = await dbl.Check_DeptCD(model);
+                if (deptCD == "")
+                {
+                    dbl.Department_Save(model);
+                }
+                else
+                {
+                    flag = await dbl.Department_Update(model);
+                }
             }
             return RedirectToAction("DepartmentList");
         }
 
+       
 
-        //public async Task<ActionResult> Smart_Template_New_Edit(string id)
-        //{
-        //    JSAT_HREntities context = new JSAT_HREntities();
-        //    DempartmentModel model = new DempartmentModel();
-        //    DepartmentBL dbl = new DepartmentBL();
-        //    model = await dbl.DepartmentEdit(id);
-        //    //return View(model);
-        //    return RedirectToAction("DepartmentList",model);
-        //}
-        
     }
 }

@@ -12,13 +12,10 @@ namespace JH_DL
     using System;
     using System.Collections.Generic;
     
-    public partial class M_Attandence
+    public partial class M_User
     {
-        public int YYYYMM { get; set; }
-        public int FingerPrintID { get; set; }
-        public byte StaffType { get; set; }
-        public System.DateTime AttandenceDate { get; set; }
-        public Nullable<System.TimeSpan> TimeIn { get; set; }
-        public Nullable<System.TimeSpan> TimeOut { get; set; }
+        public string UserID { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
     }
 }

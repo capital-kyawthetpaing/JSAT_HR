@@ -38,20 +38,25 @@
           <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
           <Property Name="InsertedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="M_Attandence">
+        <EntityType Name="M_Attendance">
           <Key>
             <PropertyRef Name="YYYYMM" />
+            <PropertyRef Name="DD" />
             <PropertyRef Name="FingerPrintID" />
-            <PropertyRef Name="StaffType" />
-            <PropertyRef Name="AttandenceDate" />
+            <PropertyRef Name="OfficeCD" />
           </Key>
           <Property Name="YYYYMM" Type="int" Nullable="false" />
+          <Property Name="DD" Type="tinyint" Nullable="false" />
           <Property Name="FingerPrintID" Type="int" Nullable="false" />
-          <Property Name="StaffType" Type="tinyint" Nullable="false" />
-          <Property Name="AttandenceDate" Type="date" Nullable="false" />
+          <Property Name="OfficeCD" Type="tinyint" Nullable="false" />
+          <Property Name="AttandenceDate" Type="date" />
           <Property Name="TimeIn" Type="time" Precision="0" />
           <Property Name="TimeOut" Type="time" Precision="0" />
+          <Property Name="LeaveType" Type="tinyint" />
+          <Property Name="LateTime" Type="time" Precision="0" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="M_Department">
           <Key>
             <PropertyRef Name="DepartmentCD" />
@@ -64,6 +69,15 @@
           <Property Name="InsertedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
           <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Office">
+          <Key>
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="OfficeCD" Type="tinyint" Nullable="false" />
+          <Property Name="OfficeName" Type="varchar" MaxLength="10" />
+          <Property Name="OfficeHourFrom" Type="time" Precision="7" />
+          <Property Name="OfficeHourTo" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="M_Position">
           <Key>
@@ -83,17 +97,20 @@
           <Property Name="ChangeDate" Type="date" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Gender" Type="tinyint" />
+          <Property Name="DOB" Type="date" />
           <Property Name="NRC" Type="varchar" MaxLength="30" />
           <Property Name="JoinDate" Type="date" />
           <Property Name="PermanentDate" Type="date" />
           <Property Name="BankInformation" Type="varchar" MaxLength="10" />
-          <Property Name="Address" Type="varchar" MaxLength="400" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="400" />
+          <Property Name="TemporaryAddress" Type="varchar" MaxLength="400" />
           <Property Name="PhoneNo" Type="varchar" MaxLength="100" />
           <Property Name="EmergencyPhoneNo" Type="nchar" MaxLength="10" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
           <Property Name="UniformCharges" Type="money" />
           <Property Name="FingerPrintID" Type="int" />
-          <Property Name="StaffType" Type="tinyint" />
+          <Property Name="OfficeCD" Type="tinyint" />
+          <Property Name="CompanyCD" Type="varchar" MaxLength="2" />
           <Property Name="DepartmentCD" Type="varchar" MaxLength="2" />
           <Property Name="SubDivisionCD" Type="varchar" MaxLength="2" />
           <Property Name="PositionCD" Type="varchar" MaxLength="3" />
@@ -132,6 +149,14 @@
           <Property Name="Transportation" Type="varchar" MaxLength="20" />
           <Property Name="TransportationCharges" Type="money" />
         </EntityType>
+        <EntityType Name="M_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="Staff_Allowance">
           <Key>
             <PropertyRef Name="StaffID" />
@@ -156,13 +181,25 @@
         <EntityContainer Name="JSAT_HRModelStoreContainer">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="M_Attandence" EntityType="Self.M_Attandence" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_User" EntityType="Self.M_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Department" EntityType="Self.M_Department" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_Department].[DepartmentCD] AS [DepartmentCD], 
+    [M_Department].[ChangeDate] AS [ChangeDate], 
+    [M_Department].[Department] AS [Department], 
+    [M_Department].[InsertedBy] AS [InsertedBy], 
+    [M_Department].[InsertedDate] AS [InsertedDate], 
+    [M_Department].[UpdatedBy] AS [UpdatedBy], 
+    [M_Department].[UpdatedDate] AS [UpdatedDate]
+    FROM [dbo].[M_Department] AS [M_Department]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -177,20 +214,6 @@
           <Property Name="ImportType" Type="Byte" />
           <Property Name="ImportedDate" Type="DateTime" Precision="3" />
           <Property Name="ImportedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="M_Attandence">
-          <Key>
-            <PropertyRef Name="YYYYMM" />
-            <PropertyRef Name="FingerPrintID" />
-            <PropertyRef Name="StaffType" />
-            <PropertyRef Name="AttandenceDate" />
-          </Key>
-          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
-          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
-          <Property Name="StaffType" Type="Byte" Nullable="false" />
-          <Property Name="AttandenceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TimeIn" Type="Time" Precision="0" />
-          <Property Name="TimeOut" Type="Time" Precision="0" />
         </EntityType>
         <EntityType Name="M_Department">
           <Key>
@@ -213,40 +236,6 @@
           <Property Name="PositionCD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="M_Staff">
-          <Key>
-            <PropertyRef Name="StaffID" />
-            <PropertyRef Name="ChangeDate" />
-          </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="Byte" />
-          <Property Name="NRC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="JoinDate" Type="DateTime" Precision="0" />
-          <Property Name="PermanentDate" Type="DateTime" Precision="0" />
-          <Property Name="BankInformation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FingerPrintID" Type="Int32" />
-          <Property Name="StaffType" Type="Byte" />
-          <Property Name="DepartmentCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="SubDivisionCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="PositionCD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="TransportationCD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Currency" Type="Byte" />
-          <Property Name="Photo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="DeleteFlg" Type="Boolean" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="M_SubDivision">
           <Key>
@@ -295,15 +284,79 @@
         </EntityType>
         <EntityContainer Name="JSAT_HREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" />
-          <EntitySet Name="M_Attandence" EntityType="Self.M_Attandence" />
           <EntitySet Name="M_Department" EntityType="Self.M_Department" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" />
-          <EntitySet Name="M_Staff" EntityType="Self.M_Staff" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" />
+          <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
+          <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
+          <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
           <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
+          <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
         </EntityContainer>
+        <EntityType Name="M_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+            <PropertyRef Name="ChangeDate" />
+          </Key>
+          <Property Name="StaffID" Type="Int32" Nullable="false" />
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Byte" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="NRC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="DateTime" Precision="0" />
+          <Property Name="PermanentDate" Type="DateTime" Precision="0" />
+          <Property Name="BankInformation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="TemporaryAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FingerPrintID" Type="Int32" />
+          <Property Name="OfficeCD" Type="Byte" />
+          <Property Name="CompanyCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SubDivisionCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PositionCD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TransportationCD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="Byte" />
+          <Property Name="Photo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DeleteFlg" Type="Boolean" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Attendance">
+          <Key>
+            <PropertyRef Name="YYYYMM" />
+            <PropertyRef Name="DD" />
+            <PropertyRef Name="FingerPrintID" />
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
+          <Property Name="DD" Type="Byte" Nullable="false" />
+          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
+          <Property Name="OfficeCD" Type="Byte" Nullable="false" />
+          <Property Name="AttandenceDate" Type="DateTime" Precision="0" />
+          <Property Name="TimeIn" Type="Time" Precision="0" />
+          <Property Name="TimeOut" Type="Time" Precision="0" />
+          <Property Name="LeaveType" Type="Byte" />
+          <Property Name="LateTime" Type="Time" Precision="0" />
+        </EntityType>
         <EntityType Name="M_Allowance">
           <Key>
             <PropertyRef Name="ChangeDate" />
@@ -327,6 +380,15 @@
           <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="InsertedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="M_Office">
+          <Key>
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="OfficeCD" Type="Byte" Nullable="false" />
+          <Property Name="OfficeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeHourFrom" Type="Time" Precision="7" />
+          <Property Name="OfficeHourTo" Type="Time" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -341,18 +403,6 @@
                 <ScalarProperty Name="ImportType" ColumnName="ImportType" />
                 <ScalarProperty Name="ImportedDate" ColumnName="ImportedDate" />
                 <ScalarProperty Name="ImportedBy" ColumnName="ImportedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Attandence">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attandence">
-              <MappingFragment StoreEntitySet="M_Attandence">
-                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
-                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
-                <ScalarProperty Name="StaffType" ColumnName="StaffType" />
-                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
-                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
-                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -375,40 +425,6 @@
                 <ScalarProperty Name="PositionCD" ColumnName="PositionCD" />
                 <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Staff">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Staff">
-              <MappingFragment StoreEntitySet="M_Staff">
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="NRC" ColumnName="NRC" />
-                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
-                <ScalarProperty Name="PermanentDate" ColumnName="PermanentDate" />
-                <ScalarProperty Name="BankInformation" ColumnName="BankInformation" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="EmergencyPhoneNo" ColumnName="EmergencyPhoneNo" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="UniformCharges" ColumnName="UniformCharges" />
-                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
-                <ScalarProperty Name="StaffType" ColumnName="StaffType" />
-                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
-                <ScalarProperty Name="SubDivisionCD" ColumnName="SubDivisionCD" />
-                <ScalarProperty Name="PositionCD" ColumnName="PositionCD" />
-                <ScalarProperty Name="TransportationCD" ColumnName="TransportationCD" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
-                <ScalarProperty Name="Effort" ColumnName="Effort" />
-                <ScalarProperty Name="DeleteFlg" ColumnName="DeleteFlg" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -457,6 +473,67 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="M_User">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_User">
+              <MappingFragment StoreEntitySet="M_User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Staff">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Staff">
+              <MappingFragment StoreEntitySet="M_Staff">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="DeleteFlg" ColumnName="DeleteFlg" />
+                <ScalarProperty Name="Effort" ColumnName="Effort" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TransportationCD" ColumnName="TransportationCD" />
+                <ScalarProperty Name="PositionCD" ColumnName="PositionCD" />
+                <ScalarProperty Name="SubDivisionCD" ColumnName="SubDivisionCD" />
+                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
+                <ScalarProperty Name="CompanyCD" ColumnName="CompanyCD" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
+                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
+                <ScalarProperty Name="UniformCharges" ColumnName="UniformCharges" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmergencyPhoneNo" ColumnName="EmergencyPhoneNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="TemporaryAddress" ColumnName="TemporaryAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="BankInformation" ColumnName="BankInformation" />
+                <ScalarProperty Name="PermanentDate" ColumnName="PermanentDate" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="NRC" ColumnName="NRC" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Attendance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attendance">
+              <MappingFragment StoreEntitySet="M_Attendance">
+                <ScalarProperty Name="LateTime" ColumnName="LateTime" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
+                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
+                <ScalarProperty Name="DD" ColumnName="DD" />
+                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="M_Allowance">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
               <MappingFragment StoreEntitySet="M_Allowance">
@@ -478,6 +555,16 @@
                 <ScalarProperty Name="Train" ColumnName="Train" />
                 <ScalarProperty Name="Bus" ColumnName="Bus" />
                 <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Office">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Office">
+              <MappingFragment StoreEntitySet="M_Office">
+                <ScalarProperty Name="OfficeHourTo" ColumnName="OfficeHourTo" />
+                <ScalarProperty Name="OfficeHourFrom" ColumnName="OfficeHourFrom" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

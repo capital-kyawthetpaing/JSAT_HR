@@ -2,6 +2,10 @@
 using CommonFunction;
 using Staff_BL;
 using JH_Model;
+using JH_DL;
+using System.Linq;
+using Newtonsoft.Json;
+using System;
 
 namespace JSAT_HR.Controllers
 {
@@ -11,7 +15,14 @@ namespace JSAT_HR.Controllers
         // GET: Staff
         public ActionResult StaffList()
         {
-            return View();
+            if(Session["UserID"]!=null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
 
         public ActionResult StaffEntry()
@@ -27,10 +38,29 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpPost]
-        public void Staff_Save(StaffModel model)
+        public async System.Threading.Tasks.Task<ActionResult> Staff_SaveAsync(StaffModel model)
         {
-            sbl.Staff_Save(model);
-
-        }
+            try
+            {
+                string msg = string.Empty;
+                var id = await sbl.Check_StaffCD(model);
+                if (id == "")
+                {
+                    msg = sbl.Staff_Save(model);
+                    TempData["Smsg"] = msg;
+                    return RedirectToAction("StaffList");
+                }
+                else
+                {
+                    TempData["Imsg"] = "Duplicate";
+                    return RedirectToAction("StaffEntry");
+                }
+            }
+            catch (Exception ex)
+            {
+                string st = ex.ToString();
+                return RedirectToAction("StaffEntry");
+            }
+        }       
     }
 }

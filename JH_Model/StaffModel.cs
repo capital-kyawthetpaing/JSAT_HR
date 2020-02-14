@@ -12,17 +12,20 @@ namespace JH_Model
         public DateTime ChangeDate { get; set; }
         public string Name { get; set; }
         public byte Gender { get; set; }
+        public DateTime DOB { get; set; }
         public string NRC { get; set; }
         public DateTime JoinDate { get; set; }
         public DateTime PermanentDate { get; set; }
         public string BankInformation { get; set; }
-        public string Address { get; set; }
+        public string PermanentAddress { get; set; }
+        public string TemporaryAddress { get; set; }
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
-        public decimal UniformCharges { get; set; }
+        public bool UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
-        public byte StaffType { get; set; }
+        public byte OfficeCD { get; set; }
+        public string CompanyCD { get; set; }
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
         public string PositionCD { get; set; }

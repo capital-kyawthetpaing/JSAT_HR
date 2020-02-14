@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using JH_DL;
 using JH_Model;
+
 
 namespace Staff_BL
 {
@@ -28,32 +32,43 @@ namespace Staff_BL
             string msg = "";
 
             ms.StaffID = model.StaffID;
-            ms.ChangeDate = model.ChangeDate;
+            ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = model.Gender;
+            ms.DOB = model.DOB;
             ms.NRC = model.NRC;
             ms.JoinDate = model.JoinDate;
             ms.PermanentDate = model.PermanentDate;
             ms.BankInformation = model.BankInformation;
-            ms.Address = model.Address;
+            ms.PermanentAddress = model.PermanentAddress;
+            ms.TemporaryAddress = model.TemporaryAddress;
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
-            ms.UniformCharges =15000;
+            if (model.UniformCharges == true)
+                ms.UniformCharges = 5000;
+            else
+                ms.UniformCharges = 0;
             ms.FingerPrintID = model.FingerPrintID;
-            ms.StaffType = model.StaffType;
+            ms.OfficeCD = model.OfficeCD;
+            ms.CompanyCD = model.CompanyCD;
             ms.DepartmentCD = model.DepartmentCD;
             ms.SubDivisionCD = model.SubDivisionCD;
             ms.PositionCD = model.PositionCD;
             ms.TransportationCD = model.TransportationCD;
             ms.Currency = model.Currency;
             ms.Photo = model.Photo;
-            ms.BasicSalary = 250000;
-            ms.Effort = 0;
+            if (model.BasicSalary == 1)
+                ms.BasicSalary = 250000;
+            else
+                ms.BasicSalary = 150000;
+            ms.Effort = model.Effort;
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
-            ms.InsertedBy = "1";
+            ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
+            sa.StaffID = model.StaffID;
+            sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
             sa.Manager = model.Manager;
@@ -81,6 +96,20 @@ namespace Staff_BL
             }
 
             return msg;
+        }
+
+        public async Task<string> Check_StaffCD(StaffModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_Staff md = new M_Staff();
+            string scd;
+            M_Staff staffcd = await db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).SingleOrDefaultAsync();
+            if (staffcd != null)
+                scd = staffcd.StaffID.ToString();
+            else
+                scd ="";
+
+            return scd;
         }
     }
 }

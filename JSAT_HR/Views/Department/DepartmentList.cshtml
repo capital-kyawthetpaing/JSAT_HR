@@ -26,12 +26,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
                                     </div>
+                                   
                                     @Html.TextBoxFor(dm => dm.DepartmentCD, new
                                {
                                    @class = "form-control input-sm",
                                    @tabindex = "1",
                                    @required = "required",
-                                   @id = "txtEmployeeID",
+                                   @id = "txtDepartmentCD",
                                    @autofocus = "autofocus",
                                    maxlength = "100"
                                })
@@ -48,18 +49,29 @@
                                    @class = "form-control input-sm",
                                    @tabindex = "1",
                                    @required = "required",
-                                   @id = "txtEmployeeID",
+                                   @id = "txtDepartmentName",
                                    @autofocus = "autofocus",
                                    maxlength = "100"
                                })
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3" id="save">
                                 <label for="Process" style="color:white;">Process</label>
                                 <div class="input-group">
-                                    <button type="submit" class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                    <button type="submit" id="btnsave" class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
                                 </div>
                             </div>
+
+                            <div class="form-group col-md-3" id="update" style="display:none;">
+                                <label for="Process" style="color:white;">Process</label>
+                                <div class="input-group" style="width:450px;">
+                                    <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                                </div>
+                            </div>
+
+                           
+
                         </div>
                     </div>
                 </div>
@@ -112,7 +124,8 @@
                                 "render": function (data, type, row) {
                                     
                                     //return '<a href="../Department/Smart_Template_New_Edit/' + row.DepartmentID + '"></a>';
-                                    return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
+                                    //return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
+                                    return '<a href="#" onclick="DepartmentEdit(&quot;' + row.DepartmentCD + '&quot;,&quot;' + row.DepartmentName +'&quot;);">' + row.DepartmentCD + '</a>';
                                 }
                             },
                            
@@ -123,6 +136,36 @@
                     }
                 );
             });
+
+            function DepartmentEdit(depCD,depName) {
+                $('#txtDepartmentCD').val(depCD);
+                $('#txtDepartmentName').val(depName);  
+                $("#txtDepartmentCD").attr('readonly', true);
+
+                $("#update").css("display", "block");
+                $("#cancel").css("display", "block");
+                
+
+                return $("#save").css("display", "none");
+            }
+
+            $("#btncancel").click(function () {
+                $("#txtDepartmentCD").attr('readonly', false);
+               
+                $('#txtDepartmentCD').val("");
+                $('#txtDepartmentName').val("");  
+
+                $("#update").css("display", "none");
+                $("#cancel").css("display", "none");
+                $("#save").css("display", "block");
+
+                //$("#txtDepartmentCD").removeAttr("required");​​​​​
+                //$("#txtDepartmentName").removeAttr("required");​​​​​
+            })
+           
+            
         </script>
+        
+
     }
 

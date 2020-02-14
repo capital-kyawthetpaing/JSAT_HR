@@ -38,7 +38,6 @@ namespace JH_Model
 
         public decimal MentorAllowance { get; set; }
 
-
-
+     
     }
 }
