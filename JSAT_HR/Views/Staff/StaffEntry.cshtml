@@ -638,6 +638,21 @@
             SelectPosition();
             SelectOffice();
         });
+
+        function SelectCompany() {
+            $.ajax({
+                url: "../Company/GETCompany",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlCompany").append(
+                            $('<option></option>').val(item.CompanyCD).html(item.CompanytName));
+                    });
+                }
+            });
+        }
         function SelectDepartment() {
             $.ajax({
                 url: "../Department/GetDepartment",
