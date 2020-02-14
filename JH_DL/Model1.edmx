@@ -20,6 +20,7 @@
             <PropertyRef Name="ChangeDate" />
           </Key>
           <Property Name="ChangeDate" Type="date" Nullable="false" />
+          <Property Name="Currency" Type="tinyint" />
           <Property Name="Bus" Type="money" />
           <Property Name="Train" Type="money" />
           <Property Name="MD" Type="money" />
@@ -55,20 +56,17 @@
           <Property Name="LeaveType" Type="tinyint" />
           <Property Name="LateTime" Type="time" Precision="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="M_Department">
           <Key>
             <PropertyRef Name="DepartmentCD" />
-            <PropertyRef Name="ChangeDate" />
           </Key>
           <Property Name="DepartmentCD" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="ChangeDate" Type="date" Nullable="false" />
           <Property Name="Department" Type="varchar" MaxLength="50" />
           <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
           <Property Name="InsertedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
           <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="ChangeDate" Type="date" />
         </EntityType>
         <EntityType Name="M_Office">
           <Key>
@@ -76,8 +74,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           </Key>
           <Property Name="OfficeCD" Type="tinyint" Nullable="false" />
           <Property Name="OfficeName" Type="varchar" MaxLength="10" />
-          <Property Name="OfficeHourFrom" Type="time" Precision="7" />
-          <Property Name="OfficeHourTo" Type="time" Precision="7" />
+          <Property Name="OfficeHourFrom" Type="time" Precision="0" />
+          <Property Name="OfficeHourTo" Type="time" Precision="0" />
         </EntityType>
         <EntityType Name="M_Position">
           <Key>
@@ -182,6 +180,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" Schema="dbo" store:Type="Tables" />
@@ -189,17 +188,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_User" EntityType="Self.M_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="M_Department" EntityType="Self.M_Department" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [M_Department].[DepartmentCD] AS [DepartmentCD], 
-    [M_Department].[ChangeDate] AS [ChangeDate], 
-    [M_Department].[Department] AS [Department], 
-    [M_Department].[InsertedBy] AS [InsertedBy], 
-    [M_Department].[InsertedDate] AS [InsertedDate], 
-    [M_Department].[UpdatedBy] AS [UpdatedBy], 
-    [M_Department].[UpdatedDate] AS [UpdatedDate]
-    FROM [dbo].[M_Department] AS [M_Department]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -214,19 +202,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <Property Name="ImportType" Type="Byte" />
           <Property Name="ImportedDate" Type="DateTime" Precision="3" />
           <Property Name="ImportedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="M_Department">
-          <Key>
-            <PropertyRef Name="DepartmentCD" />
-            <PropertyRef Name="ChangeDate" />
-          </Key>
-          <Property Name="DepartmentCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="M_Position">
           <Key>
@@ -284,7 +259,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
         </EntityType>
         <EntityContainer Name="JSAT_HREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" />
-          <EntitySet Name="M_Department" EntityType="Self.M_Department" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
@@ -294,6 +268,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
           <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
           <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
+          <EntitySet Name="M_Department" EntityType="JSAT_HRModel.M_Department" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -379,6 +354,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="Currency" Type="Byte" />
         </EntityType>
         <EntityType Name="M_Office">
           <Key>
@@ -386,8 +362,20 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           </Key>
           <Property Name="OfficeCD" Type="Byte" Nullable="false" />
           <Property Name="OfficeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="OfficeHourFrom" Type="Time" Precision="7" />
-          <Property Name="OfficeHourTo" Type="Time" Precision="7" />
+          <Property Name="OfficeHourFrom" Type="Time" Precision="0" />
+          <Property Name="OfficeHourTo" Type="Time" Precision="0" />
+        </EntityType>
+        <EntityType Name="M_Department">
+          <Key>
+            <PropertyRef Name="DepartmentCD" />
+          </Key>
+          <Property Name="DepartmentCD" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ChangeDate" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -403,19 +391,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
                 <ScalarProperty Name="ImportType" ColumnName="ImportType" />
                 <ScalarProperty Name="ImportedDate" ColumnName="ImportedDate" />
                 <ScalarProperty Name="ImportedBy" ColumnName="ImportedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Department">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Department">
-              <MappingFragment StoreEntitySet="M_Department">
-                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -537,6 +512,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
           <EntitySetMapping Name="M_Allowance">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
               <MappingFragment StoreEntitySet="M_Allowance">
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
                 <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
                 <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
@@ -565,6 +541,19 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Department' does not have a primary 
                 <ScalarProperty Name="OfficeHourFrom" ColumnName="OfficeHourFrom" />
                 <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
                 <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Department">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Department">
+              <MappingFragment StoreEntitySet="M_Department">
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

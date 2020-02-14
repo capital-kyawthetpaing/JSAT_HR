@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Office_BL;
+using JH_Model;
+using System.Threading.Tasks;
 
 namespace JSAT_HR.Controllers
 {
@@ -21,6 +23,13 @@ namespace JSAT_HR.Controllers
         {
             Function fun = new Function();
             return fun.DataTableToJSONWithJSONNet(obl.GETOffice());
+        }
+
+        public async Task<ActionResult> Hours_Setting_Save(OfficeModel om)
+        {
+            string flag = await obl.Hours_Setting_Save(om);
+
+            return RedirectToAction("Office_Hours_Setting");
         }
     }
 }

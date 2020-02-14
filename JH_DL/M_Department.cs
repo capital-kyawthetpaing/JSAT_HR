@@ -15,11 +15,11 @@ namespace JH_DL
     public partial class M_Department
     {
         public string DepartmentCD { get; set; }
-        public System.DateTime ChangeDate { get; set; }
         public string Department { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> ChangeDate { get; set; }
     }
 }
