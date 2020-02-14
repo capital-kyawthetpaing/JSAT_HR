@@ -2,6 +2,8 @@
 using CommonFunction;
 using Staff_BL;
 using JH_Model;
+using JH_DL;
+using System.Linq;
 
 namespace JSAT_HR.Controllers
 {
@@ -27,9 +29,21 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpPost]
-        public void Staff_Save(StaffModel model)
+        public ActionResult Staff_Save(StaffModel model)
         {
-            sbl.Staff_Save(model);
+            string msg = string.Empty;
+            JSAT_HREntities db = new JSAT_HREntities();
+            var id = db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).Select(s => s.StaffID).FirstOrDefault();
+            if (id == 0)
+            {
+                msg=sbl.Staff_Save(model);
+                TempData["msg"] = msg;
+                return RedirectToAction("StaffList");
+            }
+            else
+            {
+                return RedirectToAction("StaffList");
+            }
 
         }
     }
