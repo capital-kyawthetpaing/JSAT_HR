@@ -9,12 +9,12 @@
 @using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="row">
-        <div class="col-xl-8 col-md-8 mb-2">
+        <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="StaffID">StaffID</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -27,12 +27,11 @@
                                @required = "required",
                                @id = "txtStaffID",
                                @autofocus = "autofocus",
-                               maxlength = "4",
-                               @onkeypress = "return isNumberKey(event)"
+                               maxlength = "4"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="Department">Name</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -49,7 +48,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="NRC">NRC</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -66,7 +65,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="Department">Gender</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -80,9 +79,7 @@
                                 @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "4", @id = "ddlGender" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="DOB">Date Of Birth</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -101,7 +98,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="JoinDate">Join Date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -120,7 +117,9 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
                             <label for="JoinDate">Permanent Date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -139,7 +138,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="BankInformation">Bank Information</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -155,10 +154,8 @@
                                maxlength = "10"
                            })
                             </div>
-                        </div>                      
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
+                        </div>
+                        <div class="form-group col-md-2">
                             <label for="Department">Currency</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -177,7 +174,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="Basic Salary">Basic Salary</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -196,7 +193,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="Effort">Effort</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -209,32 +206,37 @@
                                @required = "required",
                                @id = "txtEffort",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               @onkeypress = "return isNumberKey(event)"
+                               maxlength = "8"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="uniformcharges" style="visibility:hidden;">UniformCharges </label>
+                        <div class="form-group col-md-2">
+                            <label for="uniformcharges">Uniform Charges</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        @Html.CheckBoxFor(sm => sm.UniformCharges)
-                                    </div>
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
                                 </div>
-                                <label class="form-control" for="UniformCharges">UniformCharges</label>
+                                @Html.TextBoxFor(sm => sm.UniformCharges, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "12",
+                               @required = "required",
+                               @id = "txtUniformCharges",
+                               @autofocus = "autofocus",
+                               maxlength = "8"
+                           })
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-12 mb-2">
+        <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-custom2 shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Organization</div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2">
                             <label for="Company">Company</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -245,11 +247,11 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlCompany",
-                               @tabindex = "12"
+                               @tabindex = "13"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2">
                             <label for="Department">Department</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -260,11 +262,11 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlDepartment",
-                               @tabindex = "13"
+                               @tabindex = "14"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2">
                             <label for="SubDivision">SubDivision</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -275,11 +277,11 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlSubDivision",
-                               @tabindex = "14"
+                               @tabindex = "15"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2">
                             <label for="Position">Position</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -290,23 +292,11 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlPosition",
-                               @tabindex = "15"
+                               @tabindex = "16"
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <br /><br /><br />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-md-12 mb-2">
-            <div class="card border-left-custom1 shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Attandence</div>
-                    <div class="form-row">
-                        <div class="form-group">
+                        <div class="form-group col-md-2">
                             <label for="FingerprintID">Fingerprint ID</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -315,17 +305,15 @@
                                 @Html.TextBoxFor(sm => sm.FingerPrintID, new
                            {
                                @class = "form-control input-sm",
-                               //@type = "email",
-                               @tabindex = "16",
+                               @tabindex = "17",
                                @required = "required",
                                @id = "txtFingerprintID",
                                @autofocus = "autofocus",
-                               maxlength = "4",
-                               @onkeypress = "return isNumberKey(event)"
+                               maxlength = "4"
                            })
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-2">
                             <label for="OfficeCD">Office</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -336,7 +324,7 @@
                                @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlOffice",
-                               @tabindex = "17"
+                               @tabindex = "18"
                            })
                             </div>
                         </div>
@@ -344,7 +332,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-10 col-md-4 mb-2">
+        <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-success shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-success text-uppercase mb-1">Contact</div>
@@ -358,7 +346,7 @@
                                 @Html.TextBoxFor(sm => sm.PhoneNo, new
                            {
                                @class = "form-control input-sm",
-                               @tabindex = "18",
+                               @tabindex = "19",
                                @required = "required",
                                @id = "txtPhoneNo",
                                @autofocus = "autofocus",
@@ -375,7 +363,7 @@
                                 @Html.TextBoxFor(sm => sm.EmergencyPhoneNo, new
                            {
                                @class = "form-control input-sm",
-                               @tabindex = "19",
+                               @tabindex = "20",
                                @required = "required",
                                @id = "txtEmergencyPhoneNo",
                                @autofocus = "autofocus",
@@ -393,7 +381,7 @@
                            {
                                @class = "form-control input-sm",
                                @type = "email",
-                               @tabindex = "20",
+                               @tabindex = "21",
                                @required = "required",
                                @id = "txtEmailAddress",
                                @autofocus = "autofocus",
@@ -411,7 +399,7 @@
                            {
                                @class = "form-control input-sm",
                                @type = "email",
-                               @tabindex = "21",
+                               @tabindex = "22",
                                @required = "required",
                                @id = "txtPermanentAddress",
                                @autofocus = "autofocus",
@@ -429,7 +417,7 @@
                            {
                                @class = "form-control input-sm",
                                @type = "email",
-                               @tabindex = "22",
+                               @tabindex = "23",
                                @required = "required",
                                @id = "txtTemporaryAddress",
                                @autofocus = "autofocus",
@@ -461,7 +449,7 @@
                                 @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
                            {
                                @class = "form-control",
-                               @tabindex = "23",
+                               @tabindex = "24",
                                @id = "ddlTransportation"
                            })
                             </div>
@@ -637,6 +625,7 @@
             SelectSubDivision();
             SelectPosition();
             SelectOffice();
+            SelectCompany();
         });
 
         function SelectCompany() {
@@ -648,7 +637,7 @@
                 success: function (items) {
                     $.each(items, function (i, item) {
                         $("#ddlCompany").append(
-                            $('<option></option>').val(item.CompanyCD).html(item.CompanytName));
+                            $('<option></option>').val(item.CompanyCD).html(item.CompanyName));
                     });
                 }
             });

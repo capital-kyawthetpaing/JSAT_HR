@@ -45,10 +45,7 @@ namespace Staff_BL
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
-            if (model.UniformCharges == true)
-                ms.UniformCharges = 5000;
-            else
-                ms.UniformCharges = 0;
+            ms.UniformCharges = model.UniformCharges;
             ms.FingerPrintID = model.FingerPrintID;
             ms.OfficeCD = model.OfficeCD;
             ms.CompanyCD = model.CompanyCD;
