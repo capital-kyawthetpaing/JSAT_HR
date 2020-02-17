@@ -1,4 +1,4 @@
-﻿
+﻿@model JH_Model.AttendanceModel
 @{
     ViewBag.Title = "AttendanceSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,8 +31,8 @@
                                 listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
                                 listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
                             }@Html.DropDownList("Year",
-                  listYear,
-                  new { @class="form-control",@id="ddlYear" })
+                listYear,
+                new { @class="form-control",@id="ddlYear" })
                         </div>
                     </div>
                     <div class="form-group col-md-2">
@@ -57,8 +57,23 @@
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
                             }@Html.DropDownList("Month",
-                    listMonth,
-                    new { @class= "form-control", @id="ddkMonth" })
+                  listMonth,
+                  new { @class= "form-control", @id="ddkMonth" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="Year">Staff</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @Html.DropDownListFor(am=>am.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                           {
+                               @class = "select2 form-control input-sm",
+                               @required = "required",
+                               @id = "ddlStaff",
+                               @tabindex = "14"
+                           })
                         </div>
                     </div>
                 </div>
@@ -66,4 +81,26 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SelectStaff();
+        });
+
+        function SelectStaff() {
+            $.ajax({
+                url: "../Staff/GetStaff",
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlStaff").append(
+                            $('<option></option>').val(item.StaffID).html(item.Name));
+                    });
+                }
+            });
+        }
+    </script>
+}
 
