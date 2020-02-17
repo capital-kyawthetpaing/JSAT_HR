@@ -31,8 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +50,10 @@
     <ProjectReference Include="..\JH_DL\JH_DL.csproj">
       <Project>{c4fc2b8f-45e5-44f4-a6fb-df20087f2db6}</Project>
       <Name>JH_DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JH_Model\JH_Model.csproj">
+      <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
+      <Name>JH_Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -74,14 +74,14 @@ namespace Department_BL
             return msg;
         }
 
-        public async Task<DempartmentModel> DepartmentEdit(string deptcd)
-        {
-            JSAT_HREntities context = new JSAT_HREntities();
-            DempartmentModel dm = new DempartmentModel();
-            M_Department dept = await context.M_Department.Where(s => s.DepartmentCD == deptcd).SingleOrDefaultAsync();
-            dm.DepartmentCD = dept.DepartmentCD;
-            dm.DepartmentName = dept.Department;
-            return dm;
-        }
+        //public async Task<DempartmentModel> DepartmentEdit(string deptcd)
+        //{
+        //    JSAT_HREntities context = new JSAT_HREntities();
+        //    DempartmentModel dm = new DempartmentModel();
+        //    M_Department dept = await context.M_Department.Where(s => s.DepartmentCD == deptcd).SingleOrDefaultAsync();
+        //    dm.DepartmentCD = dept.DepartmentCD;
+        //    dm.DepartmentName = dept.Department;
+        //    return dm;
+        //}
     }
 }

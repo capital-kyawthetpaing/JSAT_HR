@@ -3,106 +3,144 @@
     ViewBag.Title = "SubDivisionList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <div class="row">
-        <div class="col-xl-12 mb-2">
-            <div class="card border-left-custom2 shadow">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="SubDivisionCD">SubDivision CD</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+@using (Html.BeginForm("SubDivision_Save", "SubDivision", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
+{
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-xl-12 mb-2">
+                <div class="card border-left-custom2 shadow">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="SubDivisionCD">SubDivision CD</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(sm => sm.SubDivisionCD, new
+                               {
+                                   @class = "form-control input-sm",
+                                   @tabindex = "1",
+                                   @required = "required",
+                                   @id = "txtSubDivisionCD",
+                                   @autofocus = "autofocus",
+                                   maxlength = "100"
+                               })
                                 </div>
-                                @Html.TextBoxFor(sm => sm.SubDivisionCD, new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtSubDivisionCD",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
                             </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="SubDivisionName">SubDivision Name</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                            <div class="form-group col-md-3">
+                                <label for="SubDivisionName">SubDivision Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(sm => sm.SubDivisionName, new
+                               {
+                                   @class = "form-control input-sm",
+                                   @tabindex = "1",
+                                   @required = "required",
+                                   @id = "txtSubDivisionName",
+                                   @autofocus = "autofocus",
+                                   maxlength = "100"
+                               })
                                 </div>
-                                @Html.TextBoxFor(sm => sm.SubDivisionName, new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtSubDivisionName",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
                             </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="Process" style="color:white;">Process</label>
-                            <div class="input-group">
-                                <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <div class="form-group col-md-3" id="save">
+                                <label for="Process" style="color:white;">Process</label>
+                                <div class="input-group">
+                                    <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3" id="update" style="display:none;">
+                                <label for="Process" style="color:white;">Process</label>
+                                <div class="input-group" style="width:450px;">
+                                    <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tbSubDivision" class="hrtable col-sm-12 col-md-12">
-                            <thead>
-                                <tr>
-                                    <th>SubDivisionCD</th>
-                                    <th>SubDivision</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                            </tfoot>
-                        </table>
+        <div class="row">
+            <div class="col-xl-12 col-md-12 mb-2">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tbSubDivision" class="hrtable col-sm-12 col-md-12">
+                                <thead>
+                                    <tr>
+                                        <th>SubDivisionCD</th>
+                                        <th>SubDivision</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var table = $('#tbSubDivision').DataTable(
-                {
-                    "language": {
-                        "info": "Display _START_ to _END_ of _TOTAL_ records",
-                    },
-                    "oLanguage": {
-                        "sLengthMenu": "Display _MENU_ records",
-                    },
-                    "ajax": {
-                        "url": "../SubDivision/GETSubDivision",
-                        "type": "GET",
-                        "datatype": "json",
-                        "dataSrc": ""
-                    },
-                    "columns": [
-                        { "data": "SubDivisionCD", orderable: false, "width": "3%" },
-                        { "data": "SubDivision", orderable: false, "width": "13%" }
-                    ],
-                }
-            );
-        });
-    </script>
 }
+
+    @section Scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var table = $('#tbSubDivision').DataTable(
+                    {
+                        "language": {
+                            "info": "Display _START_ to _END_ of _TOTAL_ records",
+                        },
+                        "oLanguage": {
+                            "sLengthMenu": "Display _MENU_ records",
+                        },
+                        "ajax": {
+                            "url": "../SubDivision/GETSubDivision",
+                            "type": "GET",
+                            "datatype": "json",
+                            "dataSrc": ""
+                        },
+                        "columns": [
+                            {
+                                "data": "SubDivisionCD", orderable: false, "width": "3%",
+                                "render": function (data, type, row) {
+                                    return '<a href="#" onclick="SubDivisionEdit(&quot;' + row.SubDivisionCD + '&quot;,&quot;' + row.SubDivision + '&quot;);">' + row.SubDivisionCD + '</a>';
+                                }
+                            },
+                            { "data": "SubDivision", orderable: false, "width": "13%" }
+                        ],
+                    }
+                );
+            });
+            function SubDivisionEdit(subDivCD, subDivName) {
+                $('#txtSubDivisionCD').val(subDivCD);
+                $('#txtSubDivisionName').val(subDivName);
+                $("#txtSubDivisionCD").attr('readonly', true);
+
+                $("#update").css("display", "block");
+                $("#cancel").css("display", "block");
+
+
+                return $("#save").css("display", "none");
+            }
+
+            $("#btncancel").click(function () {
+                $("#txtSubDivisionCD").attr('readonly', false);
+
+                $('#txtSubDivisionCD').val("");
+                $('#txtSubDivisionName').val("");
+
+                $("#update").css("display", "none");
+                $("#cancel").css("display", "none");
+                $("#save").css("display", "block");
+
+            })
+
+        </script>
+    }
 

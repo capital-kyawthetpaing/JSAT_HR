@@ -231,12 +231,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12 col-md-12 mb-2">
+        <div class="col-xl-8 col-md-12 mb-2">
             <div class="card border-left-custom2 shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-custom2 text-uppercase mb-1">Organization</div>
                     <div class="form-row">
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="Company">Company</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -251,7 +251,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="Department">Department</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -266,7 +266,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="SubDivision">SubDivision</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -281,7 +281,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="Position">Position</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -296,7 +296,16 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-xl-4 col-md-12 mb-2">
+            <div class="card border-left-custom1 shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">Attandence</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="FingerprintID">Fingerprint ID</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -313,7 +322,7 @@
                            })
                             </div>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <label for="OfficeCD">Office</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -445,7 +454,7 @@
                                     listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
                                     listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
                                     listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
-                                }
+                                    }
                                 @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
                            {
                                @class = "form-control",

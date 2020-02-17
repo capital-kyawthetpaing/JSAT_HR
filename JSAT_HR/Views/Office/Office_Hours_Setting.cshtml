@@ -3,7 +3,24 @@
     ViewBag.Title = "Office_Hours_Setting";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '../Office/Get_Office_Hours_Setting/',
+                dataType: 'json',
+                success: function (result) {
+                    $('#txtofficetimein').val(result[0].OfficeHourFrom);
+                    $('#txtofficetimeout').val(result[0].OfficeHourTo);
 
+                    $('#txtacademytimein').val(result[1].OfficeHourFrom);
+                    $('#txtacademytimeout').val(result[1].OfficeHourTo);
+                }
+            })
+        });
+    </script>
+}     
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Hours_Setting_Save", "Office", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -105,7 +122,7 @@
         <div class="card border-bottom-success shadow h-100">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
-                    <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                    <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Update</button>
                 </div>
             </div>
         </div>
