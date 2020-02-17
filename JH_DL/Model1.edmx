@@ -17,10 +17,10 @@
         </EntityType>
         <EntityType Name="M_Allowance">
           <Key>
-            <PropertyRef Name="ChangeDate" />
+            <PropertyRef Name="Currency" />
           </Key>
           <Property Name="ChangeDate" Type="date" Nullable="false" />
-          <Property Name="Currency" Type="tinyint" />
+          <Property Name="Currency" Type="tinyint" Nullable="false" />
           <Property Name="Bus" Type="money" />
           <Property Name="Train" Type="money" />
           <Property Name="MD" Type="money" />
@@ -56,6 +56,17 @@
           <Property Name="LeaveType" Type="tinyint" />
           <Property Name="LateTime" Type="time" Precision="0" />
         </EntityType>
+        <EntityType Name="M_Company">
+          <Key>
+            <PropertyRef Name="CompanyCD" />
+          </Key>
+          <Property Name="CompanyCD" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
+          <Property Name="InsertedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="M_Department">
           <Key>
             <PropertyRef Name="DepartmentCD" />
@@ -67,6 +78,21 @@
           <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="ChangeDate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="M_Message">
+          <Key>
+            <PropertyRef Name="KEY" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="1" />
+          <Property Name="KEY" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Message1" Type="varchar" MaxLength="100" />
+          <Property Name="Message2" Type="varchar" MaxLength="100" />
+          <Property Name="Message3" Type="varchar" MaxLength="100" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="10" />
+          <Property Name="InsertedDate" Type="date" />
+          <Property Name="Remark" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="M_Office">
           <Key>
@@ -103,7 +129,7 @@
           <Property Name="PermanentAddress" Type="varchar" MaxLength="400" />
           <Property Name="TemporaryAddress" Type="varchar" MaxLength="400" />
           <Property Name="PhoneNo" Type="varchar" MaxLength="100" />
-          <Property Name="EmergencyPhoneNo" Type="nchar" MaxLength="10" />
+          <Property Name="EmergencyPhoneNo" Type="varchar" MaxLength="100" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
           <Property Name="UniformCharges" Type="money" />
           <Property Name="FingerPrintID" Type="int" />
@@ -180,6 +206,7 @@
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Company" EntityType="Self.M_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
@@ -188,6 +215,18 @@
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_User" EntityType="Self.M_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Message" EntityType="Self.M_Message" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_Message].[ID] AS [ID], 
+    [M_Message].[KEY] AS [KEY], 
+    [M_Message].[Message1] AS [Message1], 
+    [M_Message].[Message2] AS [Message2], 
+    [M_Message].[Message3] AS [Message3], 
+    [M_Message].[InsertedBy] AS [InsertedBy], 
+    [M_Message].[InsertedDate] AS [InsertedDate], 
+    [M_Message].[Remark] AS [Remark]
+    FROM [dbo].[M_Message] AS [M_Message]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -266,9 +305,11 @@
           <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
           <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
           <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
-          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
           <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
           <EntitySet Name="M_Department" EntityType="JSAT_HRModel.M_Department" />
+          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
+          <EntitySet Name="M_Company" EntityType="JSAT_HRModel.M_Company" />
+          <EntitySet Name="M_Message" EntityType="JSAT_HRModel.M_Message" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -295,7 +336,7 @@
           <Property Name="PermanentAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="TemporaryAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="FingerPrintID" Type="Int32" />
@@ -332,30 +373,6 @@
           <Property Name="LeaveType" Type="Byte" />
           <Property Name="LateTime" Type="Time" Precision="0" />
         </EntityType>
-        <EntityType Name="M_Allowance">
-          <Key>
-            <PropertyRef Name="ChangeDate" />
-          </Key>
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="Currency" Type="Byte" />
-        </EntityType>
         <EntityType Name="M_Office">
           <Key>
             <PropertyRef Name="OfficeCD" />
@@ -376,6 +393,54 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="ChangeDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="M_Allowance">
+          <Key>
+            <PropertyRef Name="Currency" />
+          </Key>
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Currency" Type="Byte" Nullable="false" />
+          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Company">
+          <Key>
+            <PropertyRef Name="CompanyCD" />
+          </Key>
+          <Property Name="CompanyCD" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Message">
+          <Key>
+            <PropertyRef Name="KEY" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="KEY" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Message1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Message2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Message3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="0" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -509,31 +574,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="M_Allowance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
-              <MappingFragment StoreEntitySet="M_Allowance">
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
-                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
-                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
-                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
-                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
-                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
-                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
-                <ScalarProperty Name="N3" ColumnName="N3" />
-                <ScalarProperty Name="N2" ColumnName="N2" />
-                <ScalarProperty Name="N1" ColumnName="N1" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="MD" ColumnName="MD" />
-                <ScalarProperty Name="Train" ColumnName="Train" />
-                <ScalarProperty Name="Bus" ColumnName="Bus" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_Office">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Office">
               <MappingFragment StoreEntitySet="M_Office">
@@ -554,6 +594,57 @@
                 <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Allowance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
+              <MappingFragment StoreEntitySet="M_Allowance">
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
+                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
+                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
+                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
+                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
+                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
+                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
+                <ScalarProperty Name="N3" ColumnName="N3" />
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="N1" ColumnName="N1" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MD" ColumnName="MD" />
+                <ScalarProperty Name="Train" ColumnName="Train" />
+                <ScalarProperty Name="Bus" ColumnName="Bus" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Company">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Company">
+              <MappingFragment StoreEntitySet="M_Company">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyCD" ColumnName="CompanyCD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Message">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Message">
+              <MappingFragment StoreEntitySet="M_Message">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="Message3" ColumnName="Message3" />
+                <ScalarProperty Name="Message2" ColumnName="Message2" />
+                <ScalarProperty Name="Message1" ColumnName="Message1" />
+                <ScalarProperty Name="KEY" ColumnName="KEY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

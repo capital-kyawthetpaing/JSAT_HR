@@ -15,6 +15,7 @@ namespace JH_DL
     public partial class M_Allowance
     {
         public System.DateTime ChangeDate { get; set; }
+        public byte Currency { get; set; }
         public Nullable<decimal> Bus { get; set; }
         public Nullable<decimal> Train { get; set; }
         public Nullable<decimal> MD { get; set; }
@@ -32,6 +33,5 @@ namespace JH_DL
         public Nullable<decimal> MentorAllowance { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
-        public Nullable<byte> Currency { get; set; }
     }
 }

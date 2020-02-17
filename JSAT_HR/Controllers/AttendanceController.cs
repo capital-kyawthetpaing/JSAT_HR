@@ -87,5 +87,10 @@ namespace JSAT_HR.Controllers
             DataSet ds = abl.M_Attendance_Select(am);
             return View(ds);
         }
+
+        public ActionResult AttendanceSetting()
+        {
+            return View();
+        }
     }
 }

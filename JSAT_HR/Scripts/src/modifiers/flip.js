@@ -69,7 +69,7 @@ export default function flip(data, options) {
     const popperOffsets = data.offsets.popper;
     const refOffsets = data.offsets.reference;
 
-    // using floor because the reference offsets may contain decimals we are not going to consider here
+    // using floor because the reference offsets may contain strings we are not going to consider here
     const floor = Math.floor;
     const overlapsRef =
       (placement === 'left' &&
