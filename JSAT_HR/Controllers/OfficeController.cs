@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Office_BL;
 using JH_Model;
 using System.Threading.Tasks;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace JSAT_HR.Controllers
 {
@@ -30,6 +32,23 @@ namespace JSAT_HR.Controllers
             string flag = await obl.Hours_Setting_Save(om);
 
             return RedirectToAction("Office_Hours_Setting");
+        }
+
+        [HttpGet]
+        public string Get_Office_Hours_Setting()
+        {
+            DataTable dtoffice = new DataTable();
+            dtoffice = obl.GETOffice();
+            if (dtoffice.Rows.Count > 0)
+            {
+                string jsonresult;
+                jsonresult = JsonConvert.SerializeObject(dtoffice);
+                return jsonresult;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
