@@ -27,7 +27,8 @@ namespace JSAT_HR
                     "~/Content/sb-admin-2.min.css",
                       "~/Content/bootstrap.min.css",
                       "~/Content/Common.css",
-                      "~/Content/cdnDatatables.css"
+                      "~/Content/cdnDatatables.css",
+                      "~/Content/Select2.css"
                       ));
         }
     }

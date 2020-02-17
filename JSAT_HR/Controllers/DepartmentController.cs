@@ -46,8 +46,5 @@ namespace JSAT_HR.Controllers
             }
             return RedirectToAction("DepartmentList");
         }
-
-       
-
     }
 }
