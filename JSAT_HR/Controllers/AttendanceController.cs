@@ -205,8 +205,6 @@ namespace JSAT_HR.Controllers
 
         private static string GetCellValue(ICell cell)
         {
-
-
             if (cell == null)
                 return string.Empty;
             switch (cell.CellType)
@@ -264,6 +262,11 @@ namespace JSAT_HR.Controllers
             am.YYYYMM = "201912";
             DataSet ds = abl.M_Attendance_Select(am);
             return View(ds);
+        }
+
+        public ActionResult AttendanceSetting()
+        {
+            return View();
         }
     }
 }

@@ -74,14 +74,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Attendance:</h6>
                         <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
+                        <a class="collapse-item" href='@Url.Action("AttendanceSetting", "Attendance")'>Attendance Setting</a>
                         <a class="collapse-item" href='@Url.Action("AttendanceImport", "Attendance")'>Attendance Import</a>
                         <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
                     </div>
                 </div>
             </li>
-
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
@@ -369,7 +367,9 @@
     <script src="../Scripts/sb-admin-2.min.js"></script>
     <script src="../Scripts/cdnDatatables.js"></script>
     <script src="../Scripts/Common.js"></script>
+    <script src="../Scripts/Select2.js"></script>
     <script src="../Scripts/Cleave.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 

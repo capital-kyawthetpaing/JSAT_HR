@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    $('.select2').select2({
+    });
+
     var cleaveNumeral1 = new Cleave('.input-numeral1', {
         numeral: true,
         numeralThousandsGroupStyle: 'thousand'

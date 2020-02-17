@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "AttendanceSetting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="Year">Year</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @{
+                                var listYear = new List<SelectListItem>();
+                                listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
+                                listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
+                                listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
+                                listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
+                                listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
+                                listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
+                                listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
+                                listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
+                                listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
+                                listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
+                                listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
+                                listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
+                            }@Html.DropDownList("Year",
+                  listYear,
+                  new { @class="form-control",@id="ddlYear" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="Year">Month</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @{
+                                var listMonth = new List<SelectListItem>();
+                                listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listMonth.Add(new SelectListItem { Text = "January", Value = "01" });
+                                listMonth.Add(new SelectListItem { Text = "February", Value = "02" });
+                                listMonth.Add(new SelectListItem { Text = "March", Value = "03" });
+                                listMonth.Add(new SelectListItem { Text = "April", Value = "04" });
+                                listMonth.Add(new SelectListItem { Text = "May", Value = "05" });
+                                listMonth.Add(new SelectListItem { Text = "June", Value = "06" });
+                                listMonth.Add(new SelectListItem { Text = "July", Value = "07" });
+                                listMonth.Add(new SelectListItem { Text = "August", Value = "08" });
+                                listMonth.Add(new SelectListItem { Text = "September", Value = "09" });
+                                listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
+                                listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
+                                listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
+                            }@Html.DropDownList("Month",
+                    listMonth,
+                    new { @class= "form-control", @id="ddkMonth" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
