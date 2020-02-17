@@ -30,8 +30,7 @@
     {
         var cleaveNumeral1 = new Cleave('.input-numeral1', {
             numeral: true,
-            numeralThousandsGroupStyle: 'thousand',
-            prefix: '$',
+            numeralThousandsGroupStyle: 'thousand'
         });
     }
 
