@@ -143,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
+    <Compile Include="Controllers\PayRollController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\SubDivisionController.cs" />
@@ -373,6 +374,7 @@
     <Content Include="Views\Company\Company_List.cshtml" />
     <Content Include="Views\Office\Office_Hours_Setting.cshtml" />
     <Content Include="Views\Attendance\AttendanceSetting.cshtml" />
+    <Content Include="Views\PayRoll\PayRoll_Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
