@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using JH_Model;
 using JH_DL;
 using Allowance_BL;
-
-
+using CommonFunction;
+using System.Threading.Tasks;
 
 namespace JSAT_HR.Controllers
 {
@@ -15,16 +15,31 @@ namespace JSAT_HR.Controllers
     {
         Allowance_SettingBL asbl = new Allowance_SettingBL();
         // GET: Allowance
-        public ActionResult Allowance_Setting()
+        public ActionResult Allowance_Setting(int id)
         {
-            return View();
+            if (id == 1)
+            {
+                ViewBag.Data = "MMK";
+            }
+            else
+            {
+                ViewBag.Data = "USD";
+            }
+            AllowanceModel am = new AllowanceModel();
+            am.Currency = Convert.ToByte(id);
+            asbl.GetAllowance(am);
+            return View(am);
+        }
+        public async Task<ActionResult> Allowance_Setting_Save(AllowanceModel model)
+        {
+            string flag = string.Empty;
+            if (model != null)
+            {
+               await asbl.Allowance_Setting_Save(model);
+            }
+            return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency});
         }
 
-        public ActionResult Allowance_Setting_Save(AllowanceModel am)
-        {
-            asbl.Allowance_Setting_Save(am);
 
-            return View("Allowance_Setting");
-        }
     }
 }

@@ -7,16 +7,19 @@
       <Diagram DiagramId="2122bddf8530417f95579bbc976fc77e" Name="Diagram1">
         <EntityTypeShape EntityType="JSAT_HRModel.L_Import" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="0.5" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
 <<<<<<< HEAD
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="4.25" PointY="8.375" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="4.75" PointY="0.875" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="2.375" PointY="9.375" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="6.75" PointY="5.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Office" Width="1.5" PointX="4.75" PointY="10.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.0072155762497408" PointY="31.011498629586537" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="3.875" PointY="15.125" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Company" Width="1.5" PointX="6.4912366431631323" PointY="16.481604583785685" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Message" Width="1.5" PointX="7.125" PointY="5.125" />
+        
         
         
 =======
@@ -25,6 +28,10 @@
         
         
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
       &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
       &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
       &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8cdbeca7f27cf222e109d1ac24ecb60d29e245d3
