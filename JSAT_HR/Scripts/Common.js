@@ -44,7 +44,6 @@
 
     if ($('.input-numeral3')[0])
     {
-        alert('a');
         var cleaveNumeral3 = new Cleave('.input-numeral3', {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
