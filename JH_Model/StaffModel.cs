@@ -22,7 +22,7 @@ namespace JH_Model
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
-        public bool UniformCharges { get; set; }
+        public decimal UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
         public byte OfficeCD { get; set; }
         public string CompanyCD { get; set; }
