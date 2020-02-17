@@ -23,7 +23,7 @@ namespace Allowance_BL
             M_Allowance tb = await db.M_Allowance.Where(s => s.Currency == am.Currency).SingleOrDefaultAsync();
 
             tb.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-            tb.Currency = Convert.ToByte(am.Currency);
+            tb.Currency = am.Currency;
             tb.MD = Convert.ToDecimal(am.MD);
             tb.Manager = Convert.ToDecimal(am.Manager);
             tb.Director = Convert.ToDecimal(am.Director);

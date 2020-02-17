@@ -11,7 +11,7 @@
     }
 
     if ($('.input-integeronly2')[0]) {
-        var cleaveInt1 = new Cleave('.input-integeronly2', {
+        var cleaveInt2 = new Cleave('.input-integeronly2', {
             numeral: true,
             numeralThousandsGroupStyle: 'none',
             stripLeadingZeroes: false
@@ -19,7 +19,7 @@
     }
 
     if ($('.input-integeronly3')[0]) {
-        var cleaveInt1 = new Cleave('.input-integeronly3', {
+        var cleaveInt3 = new Cleave('.input-integeronly3', {
             numeral: true,
             numeralThousandsGroupStyle: 'none',
             stripLeadingZeroes: false
