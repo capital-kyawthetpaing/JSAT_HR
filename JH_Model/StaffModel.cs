@@ -22,7 +22,7 @@ namespace JH_Model
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
-        public decimal UniformCharges { get; set; }
+        public string UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
         public byte OfficeCD { get; set; }
         public string CompanyCD { get; set; }
@@ -33,7 +33,7 @@ namespace JH_Model
         public byte Currency { get; set; }
         public string Photo { get; set; }
         public decimal BasicSalary { get; set; }
-        public decimal Effort { get; set; }
+        public string Effort { get; set; }
         public bool DeleteFlg { get; set; }
         public bool MD { get; set; }
         public bool Director { get; set; }

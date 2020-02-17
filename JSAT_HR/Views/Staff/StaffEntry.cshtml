@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Staff_SaveAsync", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
@@ -27,7 +27,8 @@
                                @required = "required",
                                @id = "txtStaffID",
                                @autofocus = "autofocus",
-                               maxlength = "4"
+                               maxlength = "4",
+                               @onkeypress= "return isNumberKey(this)"
                            })
                             </div>
                         </div>
@@ -201,7 +202,7 @@
                                 </div>
                                 @Html.TextBoxFor(sm => sm.Effort, new
                            {
-                               @class = "form-control input-sm",
+                               @class = "form-control input-sm input-numeral1",
                                @tabindex = "11",
                                @required = "required",
                                @id = "txtEffort",
@@ -218,7 +219,7 @@
                                 </div>
                                 @Html.TextBoxFor(sm => sm.UniformCharges, new
                            {
-                               @class = "form-control input-sm",
+                               @class = "form-control input-sm input-numeral2",
                                @tabindex = "12",
                                @required = "required",
                                @id = "txtUniformCharges",
@@ -449,6 +450,7 @@
                                 @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
                            {
                                @class = "form-control",
+                               @required = "required",
                                @tabindex = "24",
                                @id = "ddlTransportation"
                            })

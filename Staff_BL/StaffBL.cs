@@ -45,7 +45,9 @@ namespace Staff_BL
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
-            ms.UniformCharges = model.UniformCharges;
+            if (model.UniformCharges.Contains(","))
+                model.UniformCharges = model.UniformCharges.Replace(",","");
+            ms.UniformCharges = Convert.ToDecimal(model.UniformCharges);
             ms.FingerPrintID = model.FingerPrintID;
             ms.OfficeCD = model.OfficeCD;
             ms.CompanyCD = model.CompanyCD;
@@ -59,7 +61,9 @@ namespace Staff_BL
                 ms.BasicSalary = 250000;
             else
                 ms.BasicSalary = 150000;
-            ms.Effort = model.Effort;
+            if (model.Effort.Contains(","))
+                model.Effort = model.Effort.Replace(",","");
+            ms.Effort = Convert.ToDecimal(model.Effort);
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
@@ -80,11 +84,11 @@ namespace Staff_BL
             sa.MarketingTeamAllowance = model.MarketingTeamAllowance;
             sa.MentorAllowance = model.MentorAllowance;
 
-            db.M_Staff.Add(ms);
-            db.Staff_Allowance.Add(sa);
+           // db.M_Staff.Add(ms);
+           // db.Staff_Allowance.Add(sa);
             try
             {
-                db.SaveChanges();
+                //db.SaveChanges();
                 msg = "Insert Success";
             }
             catch (Exception ex)
