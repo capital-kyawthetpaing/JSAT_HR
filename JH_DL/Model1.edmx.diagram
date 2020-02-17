@@ -14,9 +14,9 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="4.25" PointY="8.375" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="4.75" PointY="0.875" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="2.375" PointY="9.375" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="6.75" PointY="5.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Office" Width="1.5" PointX="4.75" PointY="10.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.0072155762497408" PointY="31.011498629586537" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="9.125" PointY="1.125" />
         
         
 =======

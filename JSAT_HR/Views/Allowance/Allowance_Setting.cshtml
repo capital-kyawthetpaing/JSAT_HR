@@ -44,7 +44,7 @@
         <div class="col-xl-12 col-md-4 mb-2">
             <div class="card border-left-danger shadow">
                 <div class="card-body">
-                    <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Currency : <label for="Currency">MMK</label></div>
+                    <div class="text-s font-weight-bold text-danger text-uppercase mb-1">Currency : <label for="Currency">@ViewBag.Data</label></div>
                 </div>
             </div>
         </div>
@@ -59,6 +59,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
                                 </div>
+                                @Html.HiddenFor(am => am.Currency, (string)ViewBag.Data)
                                 @Html.TextBoxFor(am => am.MD, new
                            {
                                @class = "form-control input-sm input-numeral1",

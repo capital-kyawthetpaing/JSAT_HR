@@ -8,35 +8,38 @@ namespace JH_Model
 {
     public class AllowanceModel
     {
-        public decimal Bus { get; set; }
+        public string Bus { get; set; }
 
-        public decimal Train { get; set; }
+        public string Train { get; set; }
 
-        public decimal MD { get; set; }
+        public string MD { get; set; }
 
-        public decimal Director { get; set; }
+        public string Director { get; set; }
 
-        public decimal Manager { get; set; }
+        public string Manager { get; set; }
 
-        public decimal N1 { get; set; }
+        public string N1 { get; set; }
 
-        public decimal N2 { get; set; }
+        public string N2 { get; set; }
 
-        public decimal N3 { get; set; }
+        public string N3 { get; set; }
 
-        public decimal JpnUniGrade { get; set; }
+        public string JpnUniGrade { get; set; }
 
-        public decimal Local1stInterviewer { get; set; }
+        public string Local1stInterviewer { get; set; }
 
-        public decimal Local2ndInterviewer { get; set; }
+        public string Local2ndInterviewer { get; set; }
 
-        public decimal Oversea1stInterviewer { get; set; }
+        public string Oversea1stInterviewer { get; set; }
 
-        public decimal Oversea2ndInterviewer { get; set; }
+        public string Oversea2ndInterviewer { get; set; }
 
-        public decimal MarketingTeamAllowance { get; set; }
+        public string MarketingTeamAllowance { get; set; }
 
-        public decimal MentorAllowance { get; set; }
+        public string MentorAllowance { get; set; }
+
+
+        public int Currency { get; set; }
 
      
     }

@@ -33,8 +33,8 @@ namespace JH_DL
         public virtual DbSet<M_User> M_User { get; set; }
         public virtual DbSet<M_Staff> M_Staff { get; set; }
         public virtual DbSet<M_Attendance> M_Attendance { get; set; }
-        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
         public virtual DbSet<M_Office> M_Office { get; set; }
         public virtual DbSet<M_Department> M_Department { get; set; }
+        public virtual DbSet<M_Allowance> M_Allowance { get; set; }
     }
 }
