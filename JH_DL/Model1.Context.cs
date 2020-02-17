@@ -36,5 +36,7 @@ namespace JH_DL
         public virtual DbSet<M_Office> M_Office { get; set; }
         public virtual DbSet<M_Department> M_Department { get; set; }
         public virtual DbSet<M_Allowance> M_Allowance { get; set; }
+        public virtual DbSet<M_Company> M_Company { get; set; }
+        public virtual DbSet<M_Message> M_Message { get; set; }
     }
 }

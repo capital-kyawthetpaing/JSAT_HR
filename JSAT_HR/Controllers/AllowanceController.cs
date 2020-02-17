@@ -17,7 +17,7 @@ namespace JSAT_HR.Controllers
         // GET: Allowance
         public ActionResult Allowance_Setting(int id)
         {
-            if(id==1)
+            if (id == 1)
             {
                 ViewBag.Data = "MMK";
             }
@@ -26,7 +26,7 @@ namespace JSAT_HR.Controllers
                 ViewBag.Data = "USD";
             }
             AllowanceModel am = new AllowanceModel();
-            am.Currency = id;
+            am.Currency = Convert.ToByte(id);
             asbl.GetAllowance(am);
             return View(am);
         }
@@ -35,9 +35,9 @@ namespace JSAT_HR.Controllers
             string flag = string.Empty;
             if (model != null)
             {
-                await asbl.Allowance_Setting_Save(model);
+               await asbl.Allowance_Setting_Save(model);
             }
-            return RedirectToAction("Allowance_Setting");
+            return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency});
         }
 
 

@@ -38,7 +38,7 @@
     }
 
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" ,@id = "MyForm" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-4 mb-2">
@@ -59,7 +59,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
                                 </div>
-                                @Html.HiddenFor(am => am.Currency, (string)ViewBag.Data)
+                                @Html.HiddenFor(am => am.Currency)
                                 @Html.TextBoxFor(am => am.MD, new
                            {
                                @class = "form-control input-sm input-numeral1",
