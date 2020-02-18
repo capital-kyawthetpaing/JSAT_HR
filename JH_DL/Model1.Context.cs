@@ -38,5 +38,8 @@ namespace JH_DL
         public virtual DbSet<M_Allowance> M_Allowance { get; set; }
         public virtual DbSet<M_Company> M_Company { get; set; }
         public virtual DbSet<M_Message> M_Message { get; set; }
+        public virtual DbSet<M_Payroll> M_Payroll { get; set; }
+        public virtual DbSet<Payroll_Allowance> Payroll_Allowance { get; set; }
+        public virtual DbSet<Payroll_Deduction> Payroll_Deduction { get; set; }
     }
 }

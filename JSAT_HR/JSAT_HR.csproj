@@ -426,6 +426,10 @@
       <Project>{9691f025-65d3-4be7-b523-483636f8661d}</Project>
       <Name>Office_BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PayRoll_BL\PayRoll_BL.csproj">
+      <Project>{991d2cec-9fe4-4821-8e5f-a9dfddd39978}</Project>
+      <Name>PayRoll_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Position_BL\Position_BL.csproj">
       <Project>{0158354f-ed22-46ab-b9ce-d74489086181}</Project>
       <Name>Position_BL</Name>
