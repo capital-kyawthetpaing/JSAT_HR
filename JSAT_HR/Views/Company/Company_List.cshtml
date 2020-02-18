@@ -4,80 +4,90 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <div class="row">
-        <div class="col-xl-12 mb-2">
-            <div class="card border-left-custom2 shadow">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="CompanyCD">Company CD</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+@using (Html.BeginForm("Company_Save", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
+{
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-xl-12 mb-2">
+                <div class="card border-left-custom2 shadow">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="CompanyCD">Company CD</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(cm => cm.CompanyCD, new
+                               {
+                                   @class = "form-control input-sm",
+                                   @tabindex = "1",
+                                   @required = "required",
+                                   @id = "txtCompanyCD",
+                                   @autofocus = "autofocus",
+                                   maxlength = "100"
+                               })
                                 </div>
-                                @Html.TextBoxFor(cm => cm.CompanyCD , new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtCompanyCD",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
                             </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="CompanyName">Company Name</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                            <div class="form-group col-md-3">
+                                <label for="CompanyName">Company Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(cm => cm.CompanyName, new
+                               {
+                                   @class = "form-control input-sm",
+                                   @tabindex = "1",
+                                   @required = "required",
+                                   @id = "txtCompanyName",
+                                   @autofocus = "autofocus",
+                                   maxlength = "100"
+                               })
                                 </div>
-                                @Html.TextBoxFor(cm => cm.CompanyName, new
-                           {
-                               @class = "form-control input-sm",
-                               @tabindex = "1",
-                               @required = "required",
-                               @id = "txtCompanyName",
-                               @autofocus = "autofocus",
-                               maxlength = "100"
-                           })
                             </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="Process" style="color:white;">Process</label>
-                            <div class="input-group">
-                                <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <div class="form-group col-md-3">
+                                <label for="Process" style="color:white;">Process</label>
+                                <div class="input-group">
+                                    <button class="btn btn-info col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3" id="update" style="display:none;">
+                                <label for="Process" style="color:white;">Process</label>
+                                <div class="input-group" style="width:450px;">
+                                    <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tbCompany" class="hrtable col-sm-12 col-md-12">
-                            <thead>
-                                <tr>
-                                    <th>CompanyCD</th>
-                                    <th>CompanyName</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                            </tfoot>
-                        </table>
+        <div class="row">
+            <div class="col-xl-12 col-md-12 mb-2">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tbCompany" class="hrtable col-sm-12 col-md-12">
+                                <thead>
+                                    <tr>
+                                        <th>CompanyCD</th>
+                                        <th>CompanyName</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 
 @section Scripts{
     <script type="text/javascript">
@@ -97,11 +107,35 @@
                         "dataSrc": ""
                     },
                     "columns": [
-                        { "data": "CompanyCD", orderable: false, "width": "3%" },
+                        {
+                            "data": "CompanyCD", orderable: false, "width": "3%",
+                            "render": function (data, type, row) {
+                                return '<a href="#" onclick="CompanyEdit(&quot;' + row.CompanyCD + '&quot;,&quot;' + row.CompanyName + '&quot;);">' + row.CompanyCD + '</a>';
+                            }
+                        },
                         { "data": "CompanyName", orderable: false, "width": "13%" }
                     ],
                 }
             );
         });
+
+        function CompanyEdit(companyCD, companyName) {
+            $('#txtCompanyCD').val(companyCD);
+            $('#txtCompanyName').val(companyName);
+            $('#txtCompanyCD').attr('readonly', true);
+            $("#update").css("display", "block");
+            $("#cancel").css("display", "block");
+
+            return $("#save").css("display", "none");
+        }
+
+        $('btncancel').click(function () {
+            $('#txtCompanyCD').val();
+            $('#txtCompanyName').val();
+            $('#txtCompanyCD').attr('readonly', false);
+            $("#update").css("display", "none");
+            $("#cancel").css("display", "none");
+            $("#save").css("display", "block");
+        })
     </script>
-   }
+}
