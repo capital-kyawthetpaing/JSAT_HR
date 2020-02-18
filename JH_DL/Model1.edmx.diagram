@@ -18,7 +18,10 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.0072155762497408" PointY="31.011498629586537" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="3.875" PointY="15.125" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Company" Width="1.5" PointX="6.4912366431631323" PointY="16.481604583785685" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Message" Width="1.5" PointX="7.125" PointY="5.125" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Message" Width="1.5" PointX="9.375" PointY="5" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Payroll" Width="1.5" PointX="0.92526921114198357" PointY="29.11856636270814" />
+        <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Allowance" Width="1.5" PointX="11.14292403084362" PointY="30.94012804280041" />
+        <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Deduction" Width="1.5" PointX="10.484777574653167" PointY="18.279140674639095" />
         
         
         
