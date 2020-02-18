@@ -9,34 +9,51 @@
         function Search() {
             var year = $('#ddlYear').val();
             var month = $('#ddlMonth').val();
-            var yearmonth = year + month; alert(yearmonth);
+            var yearmonth = year + month;
             $.ajax({
                 type: 'GET',
                 url: '../PayRoll/PayRoll_Search/' + yearmonth,
                 dataType: 'json',
                 success: function (data) {
-                    var table = $('#tbPayroll').DataTable(
-                        {
-                            "destroy": true,
-                            "language": {
-                                "info": "Display _START_ to _END_ of _TOTAL_ records",
-                            },
-                            "oLanguage": {
-                                "sLengthMenu": "Display _MENU_ records",
-                            },
-                            "data": data,
-                            "columns": [
-                                { "data": "No", orderable: false, "width": "3%" },
-                                { "data": "Name", orderable: false, "width": "13%" },
-                                { "data": "NRC_No", orderable: false, "width": "13%" },
-                                { "data": "Account_Number", orderable: false, "width": "13%" },
-                                { "data": "Amount", orderable: false, "width": "13%" }
-                            ],
-                        });
+                    if (data == null || data == "") {
+                        window.location.href = '@Url.Action("PayRoll_Setting", "PayRoll")';
+                    }
+                    else {
+                       
+                        var table = $('#tbPayroll').DataTable(
+                            {
+                                "destroy": true,
+                                "language": {
+                                    "info": "Display _START_ to _END_ of _TOTAL_ records",
+                                },
+                                "oLanguage": {
+                                    "sLengthMenu": "Display _MENU_ records",
+                                },
+                                "data": data,
+                                "columns": [
+                                    { "data": "No", orderable: false, "width": "3%" },
+                                    { "data": "Name", orderable: false, "width": "13%" },
+                                    { "data": "NRC_No", orderable: false, "width": "13%" },
+                                    { "data": "Account_Number", orderable: false, "width": "13%" },
+                                    { "data": "Amount", orderable: false, "width": "13%" }
+                                ],
+                            });
+                    }
+                   
                 }
 
             })
         }
+
+
+        function Report() {
+            var year = $('#ddlYear').val();
+            var month = $('#ddlMonth').val();
+            var yearmonth = year + month;
+            window.open('@Url.Action("PayRoll_Report", "PayRoll")?id=' + yearmonth);
+        }
+        
+
                           
     </script>
 
@@ -101,8 +118,8 @@
                     <div class="form-group col-md-3">
                         <label for="Process" style="color:white;">Process</label>
                         <div class="input-group">
-                            <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()" ><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="btnreport" class="btn btn-warning col-xl-3"><i class="fa fa-print"></i>Report</button>
+                            <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
+                            <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>
                         </div>
                     </div>
 
