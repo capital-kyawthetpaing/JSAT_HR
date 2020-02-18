@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -379,6 +382,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Report\" />
     <Folder Include="Views\Share\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
@@ -389,6 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -425,6 +430,10 @@
     <ProjectReference Include="..\Office_BL\Office_BL.csproj">
       <Project>{9691f025-65d3-4be7-b523-483636f8661d}</Project>
       <Name>Office_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayRoll_BL\PayRoll_BL.csproj">
+      <Project>{991d2cec-9fe4-4821-8e5f-a9dfddd39978}</Project>
+      <Name>PayRoll_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Position_BL\Position_BL.csproj">
       <Project>{0158354f-ed22-46ab-b9ce-d74489086181}</Project>
