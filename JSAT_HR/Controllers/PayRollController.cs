@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,5 +36,38 @@ namespace JSAT_HR.Controllers
             }
             return null;
         }
+
+        //public FileStreamResult Staff_Report(string id)
+        //{
+        //    string fullMonthName = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
+
+        //    DataSet ds = new DataSet();
+        //    string savedFileName = "StaffReport_" + (DateTime.Now).ToShortDateString() + ".pdf";
+        //    var staffid = id;
+
+        //    DataTable dtpay = new DataTable();
+        //    dtpay = pbl.PayRoll_Search(id);
+        //    if (dtpay.Rows.Count < 20)
+        //    {
+        //        for (int i = 0; dtpay.Rows.Count < 20; i++)
+        //        {
+        //            dtpay.Rows.Add();
+        //            dtpay.AcceptChanges();
+        //        }
+        //    }
+        //    ds.Tables.Add(dtpay);
+        //    Report pr = new Report.PayRoll_Report();
+        //    srp.Database.Tables["Staff_TB"].SetDataSource(ds.Tables[0]);
+        //    srp.SetParameterValue("Month", fullMonthName);
+        //    srp.SetParameterValue("Date", DateTime.Now.ToString("yyyy-MM-dd"));
+
+        //    Stream str = srp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
+        //    str.Seek(0, SeekOrigin.Begin);
+
+        //    return File(str, "application/pdf");
+        //}
     }
 }
