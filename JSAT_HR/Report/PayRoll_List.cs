@@ -14,8 +14,8 @@ namespace JSAT_HR.Report {
     using CrystalDecisions.Shared;
     using CrystalDecisions.ReportSource;
     using CrystalDecisions.CrystalReports.Engine;
-    
-    
+  
+
     public class PayRoll_List : ReportClass {
         
         public PayRoll_List() {
@@ -63,7 +63,7 @@ namespace JSAT_HR.Report {
                 return this.ReportDefinition.Sections[1];
             }
         }
-        
+
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section3 {
@@ -87,6 +87,8 @@ namespace JSAT_HR.Report {
                 return this.ReportDefinition.Sections[4];
             }
         }
+
+       
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]

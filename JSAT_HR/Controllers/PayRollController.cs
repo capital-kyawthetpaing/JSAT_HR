@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using PayRoll_BL;
 
+
 namespace JSAT_HR.Controllers
 {
     public class PayRollController : Controller
@@ -57,8 +58,9 @@ namespace JSAT_HR.Controllers
 
             Report.PayRoll_List rpt = new Report.PayRoll_List();
             rpt.Database.Tables["Pay_Roll"].SetDataSource(ds.Tables[0]);
-
             Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+           
+
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
