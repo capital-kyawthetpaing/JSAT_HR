@@ -6,15 +6,15 @@
     text-align: right;
 }
 
-.select2{
-    display:block;
-    font-size:1rem;
-    line-height:1.5;
-    color:#495057;
-    background-color:#fff;
-    border:1px solid #ced4da;
-    border-bottom-right-radius:.25rem;
-    border-top-right-radius:.25rem;
+.select2-container {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-bottom-right-radius: .25rem;
+    border-top-right-radius: .25rem;
 }
 
 .select2-container--default .select2-selection--single {

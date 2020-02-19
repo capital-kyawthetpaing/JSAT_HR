@@ -2,6 +2,10 @@
     $('.select2').select2({
     });
 
+    for (var i = 0; i < $('.select2-container').length; i++) {
+        $('.select2-container').addClass('form-control');
+    }
+    
     if ($('.input-integeronly1')[0]) {
         var cleaveInt1 = new Cleave('.input-integeronly1', {
             numeral: true,

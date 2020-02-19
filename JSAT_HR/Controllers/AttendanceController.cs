@@ -19,6 +19,7 @@ namespace JSAT_HR.Controllers
     {
         string AttendanceFile = ConfigurationManager.AppSettings["AttendanceFile"].ToString();
 
+        AttendanceBL abl = new AttendanceBL();
         public ActionResult AttendanceImport()
         {
             return View();
@@ -91,6 +92,27 @@ namespace JSAT_HR.Controllers
         public ActionResult AttendanceSetting()
         {
             return View();
+
+        }
+
+        [HttpPost]
+        public string _AttendanceSearch(string id)
+        {
+            string jsonresult;
+            DataTable dt  = abl.Get_Attendance_List(id);
+            dt.Columns.Add("Total", typeof(System.Int32));
+            if (dt.Rows.Count > 0)
+                {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["Total"] = dt.Rows.Count;
+                }
+                    jsonresult = JsonConvert.SerializeObject(dt);
+                    return jsonresult;
+                }
+            else
+                return JsonConvert.SerializeObject(dt);
+
         }
     }
 }
