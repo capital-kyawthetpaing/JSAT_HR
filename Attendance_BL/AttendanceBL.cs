@@ -19,139 +19,148 @@ namespace Attendance_BL
 {
     public class AttendanceBL
     {
-        public DataTable AttendanceData(string excelfile)
+        public DataTable AttendanceData(string excelfile,string officeid)
         {
-            string filename = excelfile;
-            FileStream excelStream = new FileStream(filename, FileMode.Open);
-            var book = new XSSFWorkbook(excelStream);
-            excelStream.Close();
-
-            var sheetcount = book.NumberOfSheets;
-            if (Convert.ToInt32(sheetcount) >= 3)
+            try
             {
 
-                var sheet = book.GetSheetAt(2);
-                var headerRow = sheet.GetRow(2);
-                var cellCount = headerRow.LastCellNum;
-                var rowCount = sheet.LastRowNum;//LastRowNum = PhysicalNumberOfRows - 1
+                string filename = excelfile;
+                FileStream excelStream = new FileStream(filename, FileMode.Open);
+                var book = new XSSFWorkbook(excelStream);
+                excelStream.Close();
 
-                //header
-                DataSet AttendanceDataSet = new DataSet();
-                AttendanceDataSet.Locale = CultureInfo.InvariantCulture;
-                DataTable table = AttendanceDataSet.Tables.Add("AttendanceData");
-
-                table.Columns.Add("YYYYMM", typeof(string));
-                table.Columns.Add("DD", typeof(string));
-                table.Columns.Add("FingerPrintID", typeof(string));
-                table.Columns.Add("OfficeCD", typeof(string));
-                table.Columns.Add("AttandenceDate", typeof(string));
-                table.Columns.Add("TimeIn", typeof(string));
-                table.Columns.Add("TimeOut", typeof(string));
-                if (sheet.SheetName == "Att.log report")
+                var sheetcount = book.NumberOfSheets;
+                if (Convert.ToInt32(sheetcount) >= 3)
                 {
-                    //body
-                    string attdate = string.Empty;
-                    string newattdate = string.Empty;
-                    string yyymm = string.Empty;
 
+                    var sheet = book.GetSheetAt(2);
+                    var headerRow = sheet.GetRow(2);
+                    var cellCount = headerRow.LastCellNum;
+                    var rowCount = sheet.LastRowNum;//LastRowNum = PhysicalNumberOfRows - 1
 
-                    for (int j = sheet.FirstRowNum + 2; j <= 2; j++)
+                    //header
+                    DataSet AttendanceDataSet = new DataSet();
+                    AttendanceDataSet.Locale = CultureInfo.InvariantCulture;
+                    DataTable table = AttendanceDataSet.Tables.Add("AttendanceData");
+
+                    table.Columns.Add("YYYYMM", typeof(string));
+                    table.Columns.Add("DD", typeof(string));
+                    table.Columns.Add("FingerPrintID", typeof(string));
+                    table.Columns.Add("OfficeCD", typeof(string));
+                    table.Columns.Add("AttandenceDate", typeof(string));
+                    table.Columns.Add("TimeIn", typeof(string));
+                    table.Columns.Add("TimeOut", typeof(string));
+                    if (sheet.SheetName == "Att.log report")
                     {
-                        var row = sheet.GetRow(j);
-                        attdate = GetCellValue(row.GetCell(2));
-                        string[] lines = Regex.Split(attdate, "-");
-                        newattdate = lines[0] + "-" + lines[1];
-                        yyymm = lines[0] + lines[1];
+                        //body
+                        string attdate = string.Empty;
+                        string newattdate = string.Empty;
+                        string yyymm = string.Empty;
 
 
-                    }
-                    for (int j = sheet.FirstRowNum + 4; j <= Convert.ToUInt32(rowCount); j = j + 2)
-                    {
-                        DataRow AttendanceDataRow;
-                        var row = sheet.GetRow(j);
-
-                        for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(cellCount); i++)
+                        for (int j = sheet.FirstRowNum + 2; j <= 2; j++)
                         {
-                            AttendanceDataRow = table.NewRow();
+                            var row = sheet.GetRow(j);
+                            attdate = GetCellValue(row.GetCell(2));
+                            string[] lines = Regex.Split(attdate, "-");
+                            newattdate = lines[0] + "-" + lines[1];
+                            yyymm = lines[0] + lines[1];
 
-                            AttendanceDataRow["AttandenceDate"] = newattdate + "-" + i;
 
-                            AttendanceDataRow["DD"] = i;
-
-                            AttendanceDataRow["YYYYMM"] = yyymm;
-
-                            AttendanceDataRow["OfficeCD"] = 1;
-
-                            if (j % 2 == 0)
-                            {
-                                var row1 = sheet.GetRow(j);
-                                AttendanceDataRow["FingerPrintID"] = GetCellValue(row1.GetCell(2));
-
-                                var row2 = sheet.GetRow(j + 1);
-                                if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
-                                {
-                                    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5);
-                                }
-                                else
-                                {
-                                    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                }
-
-                                if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
-                                {
-                                    AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
-                                }
-                                else
-                                {
-                                    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                }
-                            }
-                            else
-                            {
-                                var row1 = sheet.GetRow(j - 1);
-                                AttendanceDataRow["FingerPrintID"] = GetCellValue(row1.GetCell(2));
-
-                                var row2 = sheet.GetRow(j);
-                                if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
-                                {
-                                    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5); ;
-                                }
-                                else
-                                {
-                                    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                }
-                                if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
-                                {
-                                    AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1));
-                                }
-                                else
-                                {
-                                    AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
-                                }
-                            }
-
-                            table.Rows.Add(AttendanceDataRow);
                         }
+                        for (int j = sheet.FirstRowNum + 4; j <= Convert.ToUInt32(rowCount); j = j + 2)
+                        {
+                            DataRow AttendanceDataRow;
+                            var row = sheet.GetRow(j);
 
+                            for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(cellCount); i++)
+                            {
+                                AttendanceDataRow = table.NewRow();
+
+                                AttendanceDataRow["AttandenceDate"] = newattdate + "-" + i;
+
+                                AttendanceDataRow["DD"] = i;
+
+                                AttendanceDataRow["YYYYMM"] = yyymm;
+
+                                AttendanceDataRow["OfficeCD"] = officeid;
+
+                                if (j % 2 == 0)
+                                {
+                                    var row1 = sheet.GetRow(j);
+                                    AttendanceDataRow["FingerPrintID"] = GetCellValue(row1.GetCell(2));
+
+                                    var row2 = sheet.GetRow(j + 1);
+                                    if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
+                                    {
+                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5);
+                                    }
+                                    else
+                                    {
+                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
+                                    }
+
+                                    if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
+                                    {
+                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
+                                    }
+                                    else
+                                    {
+                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
+                                    }
+                                }
+                                else
+                                {
+                                    var row1 = sheet.GetRow(j - 1);
+                                    AttendanceDataRow["FingerPrintID"] = GetCellValue(row1.GetCell(2));
+
+                                    var row2 = sheet.GetRow(j);
+                                    if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
+                                    {
+                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5); ;
+                                    }
+                                    else
+                                    {
+                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
+                                    }
+                                    if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
+                                    {
+                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1));
+                                    }
+                                    else
+                                    {
+                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
+                                    }
+                                }
+
+                                table.Rows.Add(AttendanceDataRow);
+                            }
+
+                        }
                     }
+
+                    return AttendanceDataSet.Tables[0];
                 }
+                else
+                {
+                    DataSet AttendanceDataSet = new DataSet();
+                    AttendanceDataSet.Locale = CultureInfo.InvariantCulture;
+                    DataTable table = AttendanceDataSet.Tables.Add("AttendanceData");
 
-                return AttendanceDataSet.Tables[0];
+                    table.Columns.Add("YYYYMM", typeof(string));
+                    table.Columns.Add("DD", typeof(string));
+                    table.Columns.Add("FingerPrintID", typeof(string));
+                    table.Columns.Add("OfficeCD", typeof(string));
+                    table.Columns.Add("AttandenceDate", typeof(string));
+                    table.Columns.Add("TimeIn", typeof(string));
+                    table.Columns.Add("TimeOut", typeof(string));
+                    return AttendanceDataSet.Tables[0];
+                }
             }
-            else
+            catch(Exception ex)
             {
-                DataSet AttendanceDataSet = new DataSet();
-                AttendanceDataSet.Locale = CultureInfo.InvariantCulture;
-                DataTable table = AttendanceDataSet.Tables.Add("AttendanceData");
-
-                table.Columns.Add("YYYYMM", typeof(string));
-                table.Columns.Add("DD", typeof(string));
-                table.Columns.Add("FingerPrintID", typeof(string));
-                table.Columns.Add("OfficeCD", typeof(string));
-                table.Columns.Add("AttandenceDate", typeof(string));
-                table.Columns.Add("TimeIn", typeof(string));
-                table.Columns.Add("TimeOut", typeof(string));
-                return AttendanceDataSet.Tables[0];
+                string error = ex.ToString();
+                return null;
             }
         }
 
@@ -189,14 +198,14 @@ namespace Attendance_BL
             }
         }
 
-        public void Insert_Attendance_Data(DataTable dttest, JH_Model.M_AttandenceModel attmodel)
+        public void Insert_Attendance_Data(DataTable dttest, string filename)
         {
             DataTable dt = new DataTable();
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[4];
-            if (!string.IsNullOrWhiteSpace(attmodel.FileName))
+            if (!string.IsNullOrWhiteSpace(filename))
             {
-                prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = attmodel.FileName };
+                prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = filename };
             }
             else
             {

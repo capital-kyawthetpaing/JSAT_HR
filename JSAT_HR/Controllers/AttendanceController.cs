@@ -26,41 +26,52 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpPost]
-        public ActionResult AttendanceDataSave(HttpPostedFileBase uploadFile, JH_Model.M_AttandenceModel model)
+        public string AttendanceDataSave(string id)
         {
             try
             {
-                if (uploadFile != null)
+                if (Request.Files.Count > 0)
                 {
-                    string filename = string.Empty;
-                    AttendanceBL abl = new AttendanceBL();
-                    System.Data.DataTable dt = new System.Data.DataTable();
+                    HttpFileCollectionBase files = Request.Files;
+                    HttpPostedFileBase file=null;
+                    for (int i = 0; i < files.Count; i++)
+                    {
 
-                    filename = uploadFile.FileName;
-                    if (!Directory.Exists(AttendanceFile))
-                    {
-                        Directory.CreateDirectory(AttendanceFile);
+                         file = files[i];
                     }
-                    if (filename.Contains(".xlsx"))
+                    if (file != null)
                     {
-                        filename = filename.Replace(".xlsx", "");
-                        filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
-                    }
-                    uploadFile.SaveAs(AttendanceFile + filename);
+                        string filename = string.Empty;
+                        AttendanceBL abl = new AttendanceBL();
+                        System.Data.DataTable dt = new System.Data.DataTable();
 
-                    dt = abl.AttendanceData(AttendanceFile + filename);
-                    model.FileName = uploadFile.FileName;
-                    if (dt.Rows.Count > 0)
-                    {
-                        abl.Insert_Attendance_Data(dt, model);
+                        filename = file.FileName;
+                        if (!Directory.Exists(AttendanceFile))
+                        {
+                            Directory.CreateDirectory(AttendanceFile);
+                        }
+                        if (filename.Contains(".xlsx"))
+                        {
+                            filename = filename.Replace(".xlsx", "");
+                            filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+                        }
+                        file.SaveAs(AttendanceFile + filename);
+
+                        dt = abl.AttendanceData(AttendanceFile + filename,id);
+                        if (dt.Rows.Count > 0)
+                        {
+                           // abl.Insert_Attendance_Data(dt, file.FileName);
+                        }
                     }
+
                 }
-
             }
+                        
 
             catch (Exception ex) { string error = ex.ToString(); }
 
-            return RedirectToAction("AttendanceImport");
+            //return RedirectToAction("AttendanceImport");
+            return JsonConvert.SerializeObject("OK");
         }
 
         public ActionResult Import_Log_List()

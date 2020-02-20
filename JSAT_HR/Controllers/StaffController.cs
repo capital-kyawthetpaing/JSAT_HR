@@ -25,9 +25,19 @@ namespace JSAT_HR.Controllers
             }
         }
 
-        public ActionResult StaffEntry()
+        public ActionResult StaffEntry(string id)
         {
-            return View();
+            StaffModel sm = new StaffModel();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                sm.StaffID = id;
+                sm = sbl.SearchStaff(sm);
+            }
+            else
+            {
+                sm.DepartmentCD = "0";
+            }
+            return View(sm);
         }
 
         [HttpGet]
