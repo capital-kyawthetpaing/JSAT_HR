@@ -8,10 +8,10 @@ namespace JH_Model
 {
     public class StaffModel : BaseModel
     {
-        public int StaffID { get; set; }
+        public string StaffID { get; set; }
         public DateTime ChangeDate { get; set; }
         public string Name { get; set; }
-        public byte Gender { get; set; }
+        public string Gender { get; set; }
         public DateTime DOB { get; set; }
         public string NRC { get; set; }
         public DateTime JoinDate { get; set; }

@@ -1,7 +1,6 @@
 ﻿@model JH_Model.StaffModel
 @{
     /**/
-
     ViewBag.Title = "StaffEntry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -133,7 +132,7 @@
                                 lstGender.Add(new SelectListItem { Text = "Male", Value = "1" });
                                 lstGender.Add(new SelectListItem { Text = "Female", Value = "2" });
                             }
-                            @Html.DropDownListFor(sm => sm.Currency, lstGender, new { @class = "form-control", @tabindex = "7", @id = "ddlGender" })
+                            @Html.DropDownListFor(sm => sm.Gender, lstGender, new { @class = "form-control", @tabindex = "7", @id = "ddlGender" })
                         </div>
                     </div>
                     <div class="form-group col-xl-2 col-md-4">
@@ -273,7 +272,7 @@
                             </div>
                             @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                        {
-                           @class = "select2 form-control input-sm",
+                           @class = "form-control select2 input-sm",
                            @required = "required",
                            @id = "ddlSubDivision",
                            @tabindex = "15"
@@ -657,7 +656,7 @@
 
         function SelectCompany() {
             $.ajax({
-                url: "../Company/GETCompany",
+                url: '@Url.Action("GETCompany", "Company")',
                 type: "GET",
                 dataType: "JSON",
                 dataSrc: '',
@@ -666,12 +665,14 @@
                         $("#ddlCompany").append(
                             $('<option></option>').val(item.CompanyCD).html(item.CompanyName));
                     });
+
+                    $("#ddlCompany").val(@Model.CompanyCD);
                 }
             });
         }
         function SelectDepartment() {
             $.ajax({
-                url: "../Department/GetDepartment",
+                url: '@Url.Action("GetDepartment","Department")',
                 type: "GET",
                 dataType: "JSON",
                 dataSrc: '',
@@ -680,13 +681,15 @@
                         $("#ddlDepartment").append(
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
                     });
+
+                    $("#ddlDepartment").val(@Model.DepartmentCD);
                 }
             });
         } // data bind in Program dropdownlist.
 
         function SelectSubDivision() {
             $.ajax({
-                url: "../SubDivision/GETSubDivision",
+                url: '@Url.Action("GETSubDivision", "SubDivision")',
                 type: "GET",
                 dataType: "JSON",
                 dataSrc: '',
@@ -701,7 +704,7 @@
 
         function SelectPosition() {
             $.ajax({
-                url: "../Position/GETPosition",
+                url: '@Url.Action("GETPosition", "Position")',
                 type: "GET",
                 dataType: "JSON",
                 dataSrc: '',
@@ -716,7 +719,7 @@
 
         function SelectOffice() {
             $.ajax({
-                url: "../Office/GETOffice",
+                url: '@Url.Action("GETOffice", "Office")',
                 type: "GET",
                 dataType: "JSON",
                 dataSrc: '',

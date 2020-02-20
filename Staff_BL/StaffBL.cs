@@ -23,6 +23,27 @@ namespace Staff_BL
             return bdl.SelectData("M_Staff_SelectAll", prms);
         }
 
+        public StaffModel SearchStaff(StaffModel sm)
+        {
+            BaseDL bdl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = sm.StaffID };
+            //prms[1] = new SqlParameter("@StaffName", SqlDbType.VarChar) { Value = sm.StaffName };
+            DataTable dt = bdl.SelectData("M_Staff_Search", prms);
+            if (dt.Rows.Count > 0)
+            {
+                sm.StaffID =  dt.Rows[0]["StaffID"].ToString();
+                sm.Name = dt.Rows[0]["Name"].ToString();
+                sm.Gender = dt.Rows[0]["Gender"].ToString();
+                sm.DepartmentCD = dt.Rows[0]["DepartmentCD"].ToString();
+                sm.UniformCharges = dt.Rows[0]["UniformCharges"].ToString();
+                sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
+                sm.MD = Convert.ToBoolean(dt.Rows[0]["MD"]);
+            }
+
+            return sm;
+        }
+
         public string Staff_Save(StaffModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
@@ -31,10 +52,10 @@ namespace Staff_BL
             BaseDL dl = new BaseDL();
             string msg = "";
 
-            ms.StaffID = model.StaffID;
+            ms.StaffID = Convert.ToInt32(model.StaffID);
             ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
-            ms.Gender = model.Gender;
+            ms.Gender = Convert.ToByte(model.Gender);
             ms.DOB = model.DOB;
             ms.NRC = model.NRC;
             ms.JoinDate = model.JoinDate;
@@ -68,7 +89,7 @@ namespace Staff_BL
             ms.InsertedDate = DateTime.Now;
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
-            sa.StaffID = model.StaffID;
+            sa.StaffID = Convert.ToInt32(model.StaffID);
             sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
