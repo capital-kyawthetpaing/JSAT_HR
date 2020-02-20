@@ -4,70 +4,163 @@
     ViewBag.Title = "Import List";
 }
 <style>
-    .textalign{
-        text-align:center;
+    .textalign {
+        text-align: center;
+    }
+    .newcustom {
+        border: 1px solid #b5b5b5;
+        background-color: #f2f2f2;
     }
 </style>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tblogview" class="hrtable col-sm-12 col-md-12">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>FileName</th>
-                                    <th>ImportType</th>
-                                    <th>ImportedDate</th>
-                                    <th>ImportedBy</th>
-                                </tr>
-                            </thead>
-                        </table>
+
+@*@using (@Html.BeginForm("AttendanceDataSave", "Attendance", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+
+{*@
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow">
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile1" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile1" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport1" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel1" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile2" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile2" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport2" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel2" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile3" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile3" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport3" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel3" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="clearfix"> </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-    $(document).ready(function () {
-        ImportListViewTable();
-    });
+    @*}*@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-md-12 mb-2">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tblogview" class="hrtable col-sm-12 col-md-12">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>FileName</th>
+                                        <th>ImportType</th>
+                                        <th>ImportedDate</th>
+                                        <th>ImportedBy</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
 
-    function ImportListViewTable() {
-        var table = $('#tblogview').DataTable(
-            {
-                columnDefs: [
-                    {
-                        targets: [2],
-                        className: 'textalign'
-                    }],
-                "language": {
-                    "info": "Display _START_ to _END_ of _TOTAL_ records",
-                },
-                "oLanguage": {
-                    "sLengthMenu": "Display _MENU_ records",
-                },
-                "ajax": {
-                    "url": "../Attendance/Get_Import_List",
-                    "type": "GET",
-                    "datatype": "json",
-                    "dataSrc": ""
-                },
-                "columns": [
-                    { "data": "No", orderable: false },
-                    { "data": "FileName", orderable: false },
-                    { "data": "ImportType", orderable: false },
-                    { "data": "ImportedDate", orderable: false },
-                    { "data": "ImportedBy", ordertable: false }
-                ],
-            }
-        );
-    }
-    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+        $(document).ready(function () {
+            ImportListViewTable();
+        });
+
+        function ImportListViewTable() {
+            var table = $('#tblogview').DataTable(
+                {
+                    columnDefs: [
+                        {
+                            targets: [2],
+                            className: 'textalign'
+                        }],
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../Attendance/Get_Import_List",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "No", orderable: false },
+                        { "data": "FileName", orderable: false },
+                        { "data": "ImportType", orderable: false },
+                        { "data": "ImportedDate", orderable: false },
+                        { "data": "ImportedBy", ordertable: false }
+                    ],
+                }
+            );
+        }
+
+            $("#btncancel1").click(function () {
+                $('#uploadFile1').val("");
+            });
+
+            $("#btncancel2").click(function () {
+                $('#uploadFile2').val("");
+            });
+
+            $("#btncancel3").click(function () {
+                $('#uploadFile3').val("");
+            });
+
+            $('#btnimport1').click(function () {
+                var fileUpload = $("#uploadFile1").get(0);
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                alert(fileData);
+                $.ajax({
+                    url: "../Attendance/AttendanceDataSave/"+1,
+                    type: 'post',
+                    contentType: false, // Not to set any content header  
+                    processData: false, // Not to process data  
+                    dataType: 'json',
+                    data: fileData,
+                    //cache: false,
+                    success: function (result) {
+                        window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("Error");
+                    }
+                });
+            });
+
+            $('#btnimport1').click(function () {
+
+            });
+
+            $('#btnimport1').click(function () {
+
+            });
+
+        </script>
     }
