@@ -96,7 +96,7 @@
                         "sLengthMenu": "Display_MENU_records",
                     },
                     "ajax": {
-                        "url": "../Position/GETPosition",
+                        "url": '@Url.Action("GETPosition", "Position")',
                         "type": "GET",
                         "datatype": "json",
                         "dataSrc": ""
@@ -131,6 +131,7 @@
             $("#update").css("display", "none");
             $("#cancel").css("display", "none");
             $("#save").css("display", "block");
+        });
     </script>
 }
 
