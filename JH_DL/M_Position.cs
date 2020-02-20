@@ -17,5 +17,10 @@ namespace JH_DL
         public string PositionCD { get; set; }
         public System.DateTime ChangeDate { get; set; }
         public string Position { get; set; }
+        public string InsertedBy { get; set; }
+        public Nullable<System.DateTime> InsertedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        
     }
 }
