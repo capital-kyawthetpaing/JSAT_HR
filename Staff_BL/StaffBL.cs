@@ -35,7 +35,11 @@ namespace Staff_BL
                 sm.StaffID =  dt.Rows[0]["StaffID"].ToString();
                 sm.Name = dt.Rows[0]["Name"].ToString();
                 sm.Gender = dt.Rows[0]["Gender"].ToString();
+                sm.CompanyCD = dt.Rows[0]["CompanyCD"].ToString();
                 sm.DepartmentCD = dt.Rows[0]["DepartmentCD"].ToString();
+                sm.SubDivisionCD = dt.Rows[0]["SubDivisionCD"].ToString();
+                sm.PositionCD = dt.Rows[0]["PositionCD"].ToString();
+                sm.OfficeCD = dt.Rows[0]["OfficeCD"].ToString();
                 sm.UniformCharges = dt.Rows[0]["UniformCharges"].ToString();
                 sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
                 sm.MD = Convert.ToBoolean(dt.Rows[0]["MD"]);
@@ -70,7 +74,7 @@ namespace Staff_BL
                 model.UniformCharges = model.UniformCharges.Replace(",","");
             ms.UniformCharges = Convert.ToDecimal(model.UniformCharges);
             ms.FingerPrintID = model.FingerPrintID;
-            ms.OfficeCD = model.OfficeCD;
+            ms.OfficeCD = Convert.ToByte(model.OfficeCD);
             ms.CompanyCD = model.CompanyCD;
             ms.DepartmentCD = model.DepartmentCD;
             ms.SubDivisionCD = model.SubDivisionCD;
