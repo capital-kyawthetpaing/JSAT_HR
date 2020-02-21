@@ -8,10 +8,10 @@ namespace JH_Model
 {
     public class StaffModel : BaseModel
     {
-        public int StaffID { get; set; }
+        public string StaffID { get; set; }
         public DateTime ChangeDate { get; set; }
         public string Name { get; set; }
-        public byte Gender { get; set; }
+        public string Gender { get; set; }
         public DateTime DOB { get; set; }
         public string NRC { get; set; }
         public DateTime JoinDate { get; set; }
@@ -24,7 +24,7 @@ namespace JH_Model
         public string EmailAddress { get; set; }
         public string UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
-        public byte OfficeCD { get; set; }
+        public string OfficeCD { get; set; }
         public string CompanyCD { get; set; }
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
