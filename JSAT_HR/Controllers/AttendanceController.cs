@@ -18,6 +18,7 @@ namespace JSAT_HR.Controllers
     public class AttendanceController : Controller
     {
         string AttendanceFile = ConfigurationManager.AppSettings["AttendanceFile"].ToString();
+        string IncomeTaxFile = ConfigurationManager.AppSettings["IncomeTaxFile"].ToString();
 
         AttendanceBL abl = new AttendanceBL();
         public ActionResult AttendanceImport()
@@ -42,26 +43,60 @@ namespace JSAT_HR.Controllers
                     if (file != null)
                     {
                         string filename = string.Empty;
-                        AttendanceBL abl = new AttendanceBL();
-                        System.Data.DataTable dt = new System.Data.DataTable();
-
                         filename = file.FileName;
-                        if (!Directory.Exists(AttendanceFile))
+                        string[] arr;
+                        string OfficeCD = string.Empty;
+                        if (id != null)
                         {
-                            Directory.CreateDirectory(AttendanceFile);
-                        }
-                        if (filename.Contains(".xlsx"))
-                        {
-                            filename = filename.Replace(".xlsx", "");
-                            filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
-                        }
-                        file.SaveAs(AttendanceFile + filename);
+                            arr = id.Split('_');
+                            OfficeCD = arr[0];
 
-                        dt = abl.AttendanceData(AttendanceFile + filename,id);
-                        if (dt.Rows.Count > 0)
-                        {
-                           // abl.Insert_Attendance_Data(dt, file.FileName);
                         }
+                        if (Convert.ToInt32(OfficeCD) == 1 || Convert.ToInt32(OfficeCD) == 2)
+                        {
+
+                            AttendanceBL abl = new AttendanceBL();
+                            System.Data.DataTable dt = new System.Data.DataTable();
+
+                            if (!Directory.Exists(AttendanceFile))
+                            {
+                                Directory.CreateDirectory(AttendanceFile);
+                            }
+                            if (filename.Contains(".xlsx"))
+                            {
+                                filename = filename.Replace(".xlsx", "");
+                                filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+                            }
+                            file.SaveAs(AttendanceFile + filename);
+
+                            dt = abl.AttendanceData(AttendanceFile + filename, id);
+                            if (dt.Rows.Count > 0)
+                            {
+                                abl.Insert_Attendance_Data(dt, file.FileName,id);
+                            }
+                        }
+                       else
+                        {
+                            AttendanceBL abl = new AttendanceBL();
+                            System.Data.DataTable dt = new System.Data.DataTable();
+
+                            if (!Directory.Exists(IncomeTaxFile))
+                            {
+                                Directory.CreateDirectory(IncomeTaxFile);
+                            }
+                            if (filename.Contains(".xlsx"))
+                            {
+                                filename = filename.Replace(".xlsx", "");
+                                filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+                            }
+                            file.SaveAs(IncomeTaxFile + filename);
+
+                            dt = abl.ExcelToTable(IncomeTaxFile + filename,id);
+                            if (dt.Rows.Count > 0)
+                            {
+                                abl.Insert_IncomeTax_Data(dt, file.FileName);
+                            }
+                        }                      
                     }
 
                 }
@@ -76,7 +111,8 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Import_Log_List()
         {
-            return View();
+            PayrollModel pm = new PayrollModel();
+            return View(pm);
         }
 
         [HttpGet]

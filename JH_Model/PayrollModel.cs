@@ -8,7 +8,7 @@ namespace JH_Model
 {
     public class PayrollModel
     {
-        
+        public string YYYYMM { get; set; }
 
     }
 }

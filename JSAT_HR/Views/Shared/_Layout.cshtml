@@ -75,7 +75,7 @@
                         <h6 class="collapse-header">Attendance:</h6>
                         <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
                         <a class="collapse-item" href='@Url.Action("AttendanceSetting", "Attendance")'>Attendance Setting</a>
-                        <a class="collapse-item" href='@Url.Action("AttendanceImport", "Attendance")'>Attendance Import</a>
+                        @*<a class="collapse-item" href='@Url.Action("AttendanceImport", "Attendance")'>Attendance Import</a>*@
                     </div>
                 </div>
             </li>
@@ -147,12 +147,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseimport" aria-expanded="false" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-file-import"></i>
-                    <span>Import List</span>
+                    <span>Import</span>
                 </a>
                 <div id="collapseimport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Import List</h6>
-                        <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import</a>
+                        <h6 class="collapse-header">Import</h6>
+                        <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
                     </div>
                 </div>
             </li>
