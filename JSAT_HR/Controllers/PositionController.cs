@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Position_BL;
 using CommonFunction;
+using JH_Model;
+using System.Threading.Tasks;
 
 namespace JSAT_HR.Controllers
 {
@@ -22,6 +24,25 @@ namespace JSAT_HR.Controllers
         {
             Function fun = new Function();
             return fun.DataTableToJSONWithJSONNet(pbl.GETPosition());
+        }
+
+        public async Task<ActionResult> Position_Save(PositionModel pm)
+        {
+            string flag = string.Empty;
+            PositionBL pbl = new PositionBL();
+            if (pm != null)
+            {
+                var position_CD = await pbl.Check_Position(pm);
+                if (position_CD == "")
+                {
+                    pbl.Position_Save(pm);
+                }
+                else
+                {
+                    flag = await pbl.Position_Update(pm);
+                }
+            }
+            return RedirectToAction("PositionList");
         }
     }
 }

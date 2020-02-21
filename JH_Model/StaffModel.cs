@@ -24,7 +24,7 @@ namespace JH_Model
         public string EmailAddress { get; set; }
         public string UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
-        public byte OfficeCD { get; set; }
+        public string OfficeCD { get; set; }
         public string CompanyCD { get; set; }
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
