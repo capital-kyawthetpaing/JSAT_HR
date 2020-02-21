@@ -68,5 +68,27 @@ namespace JSAT_HR.Controllers
 
             return File(str, "application/pdf");
         }
+
+        public string PayRoll_Process(string id)
+        {
+            DataTable dtpay = new DataTable();
+
+            if (!String.IsNullOrWhiteSpace(id))
+            {
+                pbl.PayRoll_Allowance_Insert(id);
+
+
+
+
+
+                if (dtpay != null && dtpay.Rows.Count > 0)
+                {
+                    string jsonresult;
+                    jsonresult = JsonConvert.SerializeObject(dtpay);
+                    return jsonresult;
+                }
+            }
+            return JsonConvert.SerializeObject(null);
+        }
     }
 }
