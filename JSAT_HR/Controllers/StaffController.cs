@@ -31,11 +31,10 @@ namespace JSAT_HR.Controllers
             if (!string.IsNullOrWhiteSpace(id))
             {
                 sm.StaffID = id;
-                sm = sbl.SearchStaff(sm);
-                return View(sm);
+                sm = sbl.SearchStaff(sm);                
             }
-            else 
-                return View();
+
+            return View(sm);
         }
 
         [HttpGet]
