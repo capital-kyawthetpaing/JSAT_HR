@@ -27,7 +27,45 @@ namespace PayRoll_BL
                 return null;
         }
 
-      
+        public Boolean PayRoll_Allowance_Insert(string yearmonth)
+        {
+            try
+            {
+                BaseDL bdl = new BaseDL();
+                DataTable dtinfo = new DataTable();
+                SqlParameter[] prms = new SqlParameter[1];
+                prms[0] = new SqlParameter("@YYYYMM", SqlDbType.VarChar) { Value = yearmonth };
+                bdl.InsertUpdateDeleteData("PayRoll_Allowance_InsertUpdate", prms);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+
+        public Boolean PayRoll_Deduction_Insert(string yearmonth)
+        {
+            try
+            {
+                BaseDL bdl = new BaseDL();
+                DataTable dtinfo = new DataTable();
+                SqlParameter[] prms = new SqlParameter[1];
+                prms[0] = new SqlParameter("@YYYYMM", SqlDbType.VarChar) { Value = yearmonth };
+                bdl.InsertUpdateDeleteData("PayRoll_Deduction_InsertUpdate", prms);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+
+
 
     }
 }
