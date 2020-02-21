@@ -12,10 +12,12 @@
             var yearmonth = year + month;
             $.ajax({
                 type: 'GET',
-                url: '../PayRoll/PayRoll_Search/' + yearmonth,
+                url: '@Url.Action("PayRoll_Search", "PayRoll")' + yearmonth,
                 dataType: 'json',
                 success: function (data) {
                     if (data == null || data == "") {
+                        //$('#ddlYear').val(year);
+                        //$('#ddlMonth').val(yearmonth);
                         window.location.href = '@Url.Action("PayRoll_Setting", "PayRoll")';
                     }
                     else {
@@ -60,9 +62,10 @@
             var yearmonth = year + month;
                  $.ajax({
                 type: 'GET',
-                url: '../PayRoll/PayRoll_Process/' + yearmonth,
+                url:  '@Url.Action("PayRoll_Process", "PayRoll")' + yearmonth,
                 dataType: 'json',
-                success: function (data) {
+                     success: function (data) { 
+                         alert("Payroll insert is finished!")
                 }
 
             })
@@ -135,7 +138,7 @@
                         <div class="input-group">
                             <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
                             <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process"><i class="fa fa-calculator"></i>&nbsp; Process</button>
+                            <button type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
                         </div>
                     </div>
 
