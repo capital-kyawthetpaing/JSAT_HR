@@ -32,12 +32,10 @@ namespace JSAT_HR.Controllers
             {
                 sm.StaffID = id;
                 sm = sbl.SearchStaff(sm);
+                return View(sm);
             }
-            else
-            {
-                sm.DepartmentCD = "0";
-            }
-            return View(sm);
+            else 
+                return View();
         }
 
         [HttpGet]
