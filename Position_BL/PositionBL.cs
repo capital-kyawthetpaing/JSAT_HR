@@ -24,25 +24,32 @@ namespace Position_BL
         public string Position_Save(PositionModel pm)
         {
             string msg = string.Empty;
-            JSAT_HREntities db = new JSAT_HREntities();
-
             M_Position position = new M_Position();
-            position.PositionCD = pm.PostitionCD;
-            position.Position = pm.PositionName;
-            position.InsertedDate = DateTime.Now;
-            position.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
-
+            position = setPositionValue(position,pm);
+            JSAT_HREntities db = new JSAT_HREntities();
             db.M_Position.Add(position);
             db.SaveChanges();
             msg = "OK";
             return msg;
         }
 
+        public M_Position setPositionValue(M_Position position,PositionModel pm)
+        {           
+            position.PositionCD = pm.PostitionCD;
+            position.Position = pm.PositionName;
+            position.InsertedDate = DateTime.Now;
+            position.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+
+            return position;
+        }
+
         public async Task<string> Position_Update(PositionModel pm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
+            
             M_Position update = await db.M_Position.Where(p => p.PositionCD.Equals(pm.PostitionCD)).SingleOrDefaultAsync();
+            update = setPositionValue(update, pm);
             update.PositionCD = pm.PostitionCD;
             update.Position = pm.PositionName;
             update.UpdatedDate = DateTime.Now;
