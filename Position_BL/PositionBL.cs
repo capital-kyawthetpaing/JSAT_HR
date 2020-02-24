@@ -43,12 +43,12 @@ namespace Position_BL
             return position;
         }
 
-        public async Task<string> Position_Update(PositionModel pm)
+        public string Position_Update(PositionModel pm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
             
-            M_Position update = await db.M_Position.Where(p => p.PositionCD.Equals(pm.PostitionCD)).SingleOrDefaultAsync();
+            M_Position update = db.M_Position.Where(p => p.PositionCD.Equals(pm.PostitionCD)).SingleOrDefault();
             update = setPositionValue(update, pm);
             update.PositionCD = pm.PostitionCD;
             update.Position = pm.PositionName;
@@ -68,11 +68,11 @@ namespace Position_BL
 
         }
 
-        public async Task<string> Check_Position(PositionModel pm)
+        public string Check_Position(PositionModel pm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
-            M_Position update = await db.M_Position.Where(p => p.PositionCD.Equals(pm.PostitionCD)).SingleOrDefaultAsync();
+            M_Position update = db.M_Position.Where(p => p.PositionCD.Equals(pm.PostitionCD)).SingleOrDefault();
             if (update != null)
                 msg = update.PositionCD;
             else
