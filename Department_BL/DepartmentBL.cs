@@ -38,12 +38,12 @@ namespace Department_BL
             return msg;
         }
 
-        public async Task<string> Department_Update(DempartmentModel model)
+        public string Department_Update(DempartmentModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_Department md = new M_Department();
             string msg = string.Empty;
-            M_Department update = await db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefaultAsync();
+            M_Department update = db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefault();
             update.DepartmentCD = model.DepartmentCD;
             update.Department = model.DepartmentName;
             update.UpdatedDate = DateTime.Now;
@@ -60,12 +60,12 @@ namespace Department_BL
             return msg;
         }
 
-        public async Task<string> Check_DeptCD(DempartmentModel model)
+        public string Check_DeptCD(DempartmentModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_Department md = new M_Department();
             string msg = string.Empty;
-            M_Department update = await db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefaultAsync();
+            M_Department update = db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefault();
             if (update != null)
                 msg = update.DepartmentCD;
             else

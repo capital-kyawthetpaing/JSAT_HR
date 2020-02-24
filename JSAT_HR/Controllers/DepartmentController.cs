@@ -28,20 +28,20 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(dp_bl.GetDeparment());
         }
 
-        public async Task<ActionResult> Department_Save(DempartmentModel model)
+        public ActionResult Department_Save(DempartmentModel model)
         {
             string flag = string.Empty;
             DepartmentBL dbl = new DepartmentBL();
             if(model!=null)
             {
-                var deptCD = await dbl.Check_DeptCD(model);
+                var deptCD = dbl.Check_DeptCD(model);
                 if (deptCD == "")
                 {
                     dbl.Department_Save(model);
                 }
                 else
                 {
-                    flag = await dbl.Department_Update(model);
+                    flag = dbl.Department_Update(model);
                 }
             }
             return RedirectToAction("DepartmentList");

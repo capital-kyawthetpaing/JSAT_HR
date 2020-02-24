@@ -27,19 +27,19 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(sdbl.GETSubDivision());
         }
 
-        public async Task<ActionResult> SubDivision_Save(SubDivisionModel model)
+        public ActionResult SubDivision_Save(SubDivisionModel model)
         {
             string flag = string.Empty;
             if (model != null)
             {
-                var subDivCD = await sdbl.Check_SubDivisionCD(model);
+                var subDivCD = sdbl.Check_SubDivisionCD(model);
                 if (subDivCD == "")
                 {
                     sdbl.SubDivision_Save(model);
                 }
                 else
                 {
-                    flag = await sdbl.SubDivision_Update(model);
+                    flag = sdbl.SubDivision_Update(model);
                 }
             }
             return RedirectToAction("SubDivisionList");
