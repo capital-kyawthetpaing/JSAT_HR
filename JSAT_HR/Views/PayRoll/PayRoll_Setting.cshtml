@@ -6,6 +6,35 @@
 @section Scripts{
     
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        var table = $('#tbPayroll').DataTable(
+            {
+               
+                "language": {
+                    "info": "Display _START_ to _END_ of _TOTAL_ records",
+                },
+                "oLanguage": {
+                    "sLengthMenu": "Display _MENU_ records",
+                },
+                "ajax": {
+                    "url": '@Url.Action("GetPayRoll", "PayRoll")',
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "No", orderable: false, "width": "3%" },
+                    { "data": "Name", orderable: false, "width": "13%" },
+                    { "data": "NRC_No", orderable: false, "width": "13%" },
+                    { "data": "Account_Number", orderable: false, "width": "13%" },
+                    { "data": "Amount", orderable: false, "width": "13%"}
+                ],
+
+            }
+        );
+    });
+
         function Search() {
             var year = $('#ddlYear').val();
             var month = $('#ddlMonth').val();
@@ -63,8 +92,7 @@
                 url:  '@Url.Action("PayRoll_Process", "PayRoll", new { @id = "ID" })'.replace("ID", yearmonth),
                 dataType: 'json',
                      success: function (data) {
-
-                         alert("HI");
+                          window.location.href = '@Url.Action("PayRoll_Setting", "PayRoll")';
                 }
 
             })

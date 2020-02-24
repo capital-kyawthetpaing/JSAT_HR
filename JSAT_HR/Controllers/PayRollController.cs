@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CommonFunction;
 using Newtonsoft.Json;
 using PayRoll_BL;
 
@@ -21,6 +22,14 @@ namespace JSAT_HR.Controllers
             return View();
         }
 
+        [HttpGet]
+        public string GetPayRoll()
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(pbl.PayRoll_Search("",1));
+        }
+
+
 
         [HttpGet]
         public string PayRoll_Search(string id )
@@ -28,7 +37,7 @@ namespace JSAT_HR.Controllers
             DataTable dtpay = new DataTable();
             if (!String.IsNullOrWhiteSpace(id))
             {
-                dtpay = pbl.PayRoll_Search(id);
+                dtpay = pbl.PayRoll_Search(id,0);
                 if(dtpay !=null && dtpay.Rows.Count>0)
                 {
                     string jsonresult;
@@ -45,7 +54,7 @@ namespace JSAT_HR.Controllers
             string savefilename = "PayRoll_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Search(id);
+            dt = pbl.PayRoll_Search(id,1);
             if (dt.Rows.Count < 20)
             {
                 for (int i = 0; dt.Rows.Count < 20; i++)
@@ -72,18 +81,20 @@ namespace JSAT_HR.Controllers
         public string PayRoll_Process(string id)
         {
             DataTable dtpay = new DataTable();
-            string date = id.Substring(0, 4) +"-"+ id.Substring(4)+"-" +"01";
-            
-
-            if (!String.IsNullOrWhiteSpace(id))
+            if (id != "00")
             {
-                dtpay = pbl.PayRoll_Calculate(id,date);
-                if (dtpay != null && dtpay.Rows.Count > 0)
+                string date = id.Substring(0, 4) + "-" + id.Substring(4) + "-" + "01";
+                if (!String.IsNullOrWhiteSpace(id))
                 {
-                    string jsonresult;
-                    jsonresult = JsonConvert.SerializeObject(dtpay);
-                    return jsonresult;
+                    dtpay = pbl.PayRoll_Calculate(id, date);
+                    if (dtpay != null && dtpay.Rows.Count > 0)
+                    {
+                        string jsonresult;
+                        jsonresult = JsonConvert.SerializeObject(dtpay);
+                        return jsonresult;
+                    }
                 }
+                return JsonConvert.SerializeObject(null);
             }
             return JsonConvert.SerializeObject(null);
         }
