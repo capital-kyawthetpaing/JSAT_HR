@@ -48,12 +48,12 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> Staff_SaveAsync(StaffModel model)
+        public ActionResult Staff_Save(StaffModel model)
         {
             try
             {
                 string msg = string.Empty;
-                var id = await sbl.Check_StaffCD(model);
+                var id = sbl.Check_StaffCD(model);
                 if (id == "")
                 {
                     msg = sbl.Staff_Save(model);

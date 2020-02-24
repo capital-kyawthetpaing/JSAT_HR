@@ -6,7 +6,7 @@
 }
 
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Staff_SaveAsync", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-12 col-sm-12 mb-2">
@@ -90,7 +90,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-calendar-alt"></i></span>
                                 </div>
-                                @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd-MM-yyyy}", new
+                                @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd/MM/yyyy}", new
                            {
                                @class = "form-control input-sm",
                                @type = "date",
@@ -692,11 +692,14 @@
             SelectPosition();
             SelectOffice();
             SelectCompany();
+            @Model.Mode = "Save";
 
             if(@Model.StaffID != null)
+            {
+                $("#txtStaffID").attr('readonly',true);
                 $("#btnSave").html("Update");
-
-            
+                @Model.Mode = "Update";
+            }
         });
 
         function SelectCompany() {
