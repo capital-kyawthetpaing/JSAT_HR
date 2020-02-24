@@ -31,12 +31,9 @@ namespace JSAT_HR.Controllers
             if (!string.IsNullOrWhiteSpace(id))
             {
                 sm.StaffID = id;
-                sm = sbl.SearchStaff(sm);
+                sm = sbl.SearchStaff(sm);                
             }
-            else
-            {
-                sm.DepartmentCD = "0";
-            }
+
             return View(sm);
         }
 

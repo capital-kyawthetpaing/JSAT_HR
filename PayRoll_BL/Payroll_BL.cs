@@ -45,25 +45,19 @@ namespace PayRoll_BL
             }
         }
 
-
-        public Boolean PayRoll_Deduction_Insert(string yearmonth)
+        public DataTable PayRoll_Calculate(string yearmonth,string date)
         {
-            try
-            {
-                BaseDL bdl = new BaseDL();
-                DataTable dtinfo = new DataTable();
-                SqlParameter[] prms = new SqlParameter[1];
-                prms[0] = new SqlParameter("@YYYYMM", SqlDbType.VarChar) { Value = yearmonth };
-                bdl.InsertUpdateDeleteData("PayRoll_Deduction_InsertUpdate", prms);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-                return false;
-            }
+            BaseDL bdl = new BaseDL();
+            DataTable dtpay = new DataTable();
+            SqlParameter[] prms = new SqlParameter[2];
+            prms[0] = new SqlParameter("@YYYYMM", SqlDbType.VarChar) { Value = yearmonth };
+            prms[1] = new SqlParameter("@yyyymmdd", SqlDbType.VarChar) { Value = date};
+            dtpay = bdl.SelectData("Payroll_Calculation", prms);
+            if (dtpay.Rows.Count > 0)
+                return dtpay;
+            else
+                return null;
         }
-
 
 
 

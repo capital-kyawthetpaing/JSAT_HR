@@ -4,24 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
-
-    <script type="text/javascript">
+    
+<script type="text/javascript">
         function Search() {
             var year = $('#ddlYear').val();
             var month = $('#ddlMonth').val();
             var yearmonth = year + month;
             $.ajax({
                 type: 'GET',
-                url: '@Url.Action("PayRoll_Search", "PayRoll")' + yearmonth,
+                url: '@Url.Action("PayRoll_Search", "PayRoll",new { @id = "ID" })'.replace("ID", yearmonth),
                 dataType: 'json',
                 success: function (data) {
                     if (data == null || data == "") {
-                        //$('#ddlYear').val(year);
-                        //$('#ddlMonth').val(yearmonth);
                         window.location.href = '@Url.Action("PayRoll_Setting", "PayRoll")';
                     }
                     else {
-                       
+
                         var table = $('#tbPayroll').DataTable(
                             {
                                 "destroy": true,
@@ -41,7 +39,7 @@
                                 ],
                             });
                     }
-                   
+
                 }
 
             })
@@ -62,18 +60,19 @@
             var yearmonth = year + month;
                  $.ajax({
                 type: 'GET',
-                url:  '@Url.Action("PayRoll_Process", "PayRoll")' + yearmonth,
+                url:  '@Url.Action("PayRoll_Process", "PayRoll", new { @id = "ID" })'.replace("ID", yearmonth),
                 dataType: 'json',
-                     success: function (data) { 
-                         alert("Payroll insert is finished!")
+                     success: function (data) {
+
+                         alert("HI");
                 }
 
             })
         }
-        
 
-                          
-    </script>
+
+
+</script>
 
 }
 <div class="row">

@@ -29,7 +29,7 @@ namespace Office_BL
             JSAT_HREntities db = new JSAT_HREntities();
             
 
-            M_Office tb = await db.M_Office.Where(s => s.OfficeCD.Equals(1)).SingleOrDefaultAsync();
+            M_Office tb = await db.M_Office.Where(s => s.OfficeCD.Equals(2)).SingleOrDefaultAsync();
             if (!String.IsNullOrWhiteSpace(am.OfficeTimeIn))
                 tb.OfficeHourFrom = TimeSpan.Parse(am.OfficeTimeIn);
             if (!String.IsNullOrWhiteSpace(am.OfficeTimeOut))
@@ -37,7 +37,7 @@ namespace Office_BL
            
             db.SaveChanges();
 
-            M_Office tb1 = await db.M_Office.Where(s => s.OfficeCD.Equals(2)).SingleOrDefaultAsync();
+            M_Office tb1 = await db.M_Office.Where(s => s.OfficeCD.Equals(1)).SingleOrDefaultAsync();
             if(!String.IsNullOrWhiteSpace(am.AcademyTimeIn))
                 tb1.OfficeHourFrom = TimeSpan.Parse(am.AcademyTimeIn);
             if (!String.IsNullOrWhiteSpace(am.AcademyTimeOut))
