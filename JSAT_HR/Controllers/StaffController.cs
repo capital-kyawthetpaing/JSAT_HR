@@ -51,13 +51,18 @@ namespace JSAT_HR.Controllers
             {
                 string msg = string.Empty;
                 var id = sbl.Check_StaffCD(model);
-                if (id == "")
+                if (id == "" && model.Mode == "save")
                 {
                     msg = sbl.Staff_Save(model);
                     TempData["Smsg"] = msg;
                     return RedirectToAction("StaffList");
                 }
-                else
+                else if(id != "" && model.Mode == "update")
+                {
+                    msg = sbl.Staff_Update(model);
+                    return RedirectToAction("StaffList");
+                }
+                else 
                 {
                     TempData["Imsg"] = "Duplicate";
                     return RedirectToAction("StaffEntry");
