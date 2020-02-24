@@ -72,15 +72,12 @@ namespace JSAT_HR.Controllers
         public string PayRoll_Process(string id)
         {
             DataTable dtpay = new DataTable();
+            string date = id.Substring(0, 4) +"-"+ id.Substring(4)+"-" +"01";
+            
 
             if (!String.IsNullOrWhiteSpace(id))
             {
-                pbl.PayRoll_Allowance_Insert(id);
-
-
-
-
-
+                dtpay = pbl.PayRoll_Calculate(id,date);
                 if (dtpay != null && dtpay.Rows.Count > 0)
                 {
                     string jsonresult;
