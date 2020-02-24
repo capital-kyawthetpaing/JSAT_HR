@@ -70,8 +70,7 @@ namespace Staff_BL
             ms.PhoneNo = model.PhoneNo;
             ms.EmergencyPhoneNo = model.EmergencyPhoneNo;
             ms.EmailAddress = model.EmailAddress;
-            if (model.UniformCharges.Contains(","))
-                model.UniformCharges = model.UniformCharges.Replace(",","");
+            model.UniformCharges = model.UniformCharges.Replace(",","");
             ms.UniformCharges = Convert.ToDecimal(model.UniformCharges);
             ms.FingerPrintID = model.FingerPrintID;
             ms.OfficeCD = Convert.ToByte(model.OfficeCD);

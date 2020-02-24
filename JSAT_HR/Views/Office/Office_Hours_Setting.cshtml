@@ -11,11 +11,11 @@
                 url: '../Office/Get_Office_Hours_Setting/',
                 dataType: 'json',
                 success: function (result) {
-                    $('#txtofficetimein').val(result[0].OfficeHourFrom);
-                    $('#txtofficetimeout').val(result[0].OfficeHourTo);
+                    $('#txtofficetimein').val(result[1].OfficeHourFrom);
+                    $('#txtofficetimeout').val(result[1].OfficeHourTo);
 
-                    $('#txtacademytimein').val(result[1].OfficeHourFrom);
-                    $('#txtacademytimeout').val(result[1].OfficeHourTo);
+                    $('#txtacademytimein').val(result[0].OfficeHourFrom);
+                    $('#txtacademytimeout').val(result[0].OfficeHourTo);
                 }
             })
         });

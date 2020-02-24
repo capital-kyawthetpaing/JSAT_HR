@@ -1,4 +1,4 @@
-﻿
+﻿@model JH_Model.PayrollModel
 @{
     /**/
     ViewBag.Title = "Import List";
@@ -7,41 +7,134 @@
     .textalign {
         text-align: center;
     }
+
     .newcustom {
         border: 1px solid #b5b5b5;
         background-color: #f2f2f2;
+    }
+
+    span::after {
+        padding-left: 5px;
+    }
+
+    input:invalid + span::after {
+        content: '✖';
+    }
+
+    input:valid + span::after {
+        content: '✓';
     }
 </style>
 
 @*@using (@Html.BeginForm("AttendanceDataSave", "Attendance", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
 
-{*@
-    <div class="col-xl-12 col-md-12 mb-2">
-        <div class="card border-left-info shadow">
-            <div class="row" style="height:80px;">
-                <div class="form-inline col-md-12 col-sm-12" role="form">
-                    <div class="form-group col-md-4 col-sm-12">
-                        <input type="file" id="uploadFile1" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile1" class="btn btn-default btn-sm col-md-12" />
-                    </div>
-                    <div class="form-group col-md-4 col-sm-12">
-                        <button type="submit" id="btnimport1" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
-                        <button type="button" id="btncancel1" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
-                    </div>
+    {*@
+<div class="col-xl-12 col-md-12 mb-2">
+    <div class="card border-left-info shadow">
+        <div class="row" style="height:80px;">
+            <div class="form-inline col-md-12 col-sm-12" role="form">
+                <div class="form-group col-md-2 col-sm-12">
+                    <label for="OAI">Office Attendance Import</label>
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <input type="file" id="uploadFile1" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile1" class="btn btn-default btn-sm col-md-12" />
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <button type="submit" id="btnimport1" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                    <button type="button" id="btncancel1" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                 </div>
             </div>
-            <div class="row" style="height:80px;">
-                <div class="form-inline col-md-12 col-sm-12" role="form">
-                    <div class="form-group col-md-4 col-sm-12">
-                        <input type="file" id="uploadFile2" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile2" class="btn btn-default btn-sm col-md-12" />
-                    </div>
-                    <div class="form-group col-md-4 col-sm-12">
-                        <button type="submit" id="btnimport2" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
-                        <button type="button" id="btncancel2" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
-                    </div>
+        </div>
+        <div class="row" style="height:80px;">
+            <div class="form-inline col-md-12 col-sm-12" role="form">
+                <div class="form-group col-md-2 col-sm-12">
+                    <label for="AAI">Academy Attendance Import</label>
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <input type="file" id="uploadFile2" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile2" class="btn btn-default btn-sm col-md-12" />
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <button type="submit" id="btnimport2" class="btn col-md-3 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                    <button type="button" id="btncancel2" class="btn btn-dark col-md-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                 </div>
             </div>
+        </div>
+       
+    </div>
+</div>
+@*}*@
+<div class="col-xl-12 col-md-12 mb-2">
+    <div class="card border-left-info shadow">
             <div class="row" style="height:80px;">
                 <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-2 col-sm-12">
+                        <label for="Year">Year</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @{
+                                var listYear = new List<SelectListItem>();
+                                listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
+                                listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
+                                listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
+                                listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
+                                listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
+                                listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
+                                listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
+                                listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
+                                listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
+                                listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
+                                listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
+                                listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
+                            }
+                            @Html.DropDownList("Year", listYear, new
+                       {
+                           @class = "form-control",
+                           @required = "required",
+                           @id = "ddlYear",
+                           @tabindex = "1"
+                       })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2 col-sm-12">
+                        <label for="Year">Month</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @{
+                                var listMonth = new List<SelectListItem>();
+                                listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listMonth.Add(new SelectListItem { Text = "January", Value = "1" });
+                                listMonth.Add(new SelectListItem { Text = "February", Value = "2" });
+                                listMonth.Add(new SelectListItem { Text = "March", Value = "3" });
+                                listMonth.Add(new SelectListItem { Text = "April", Value = "4" });
+                                listMonth.Add(new SelectListItem { Text = "May", Value = "5" });
+                                listMonth.Add(new SelectListItem { Text = "June", Value = "6" });
+                                listMonth.Add(new SelectListItem { Text = "July", Value = "7" });
+                                listMonth.Add(new SelectListItem { Text = "August", Value = "8" });
+                                listMonth.Add(new SelectListItem { Text = "September", Value = "9" });
+                                listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
+                                listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
+                                listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
+                            }@Html.DropDownList("Month", listMonth, new
+                      {
+                          @class = "form-control",
+                          @required = "required",
+                          @id = "ddkMonth",
+                          @tabindex = "2"
+                      })
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-2 col-sm-12">                     
+                        <label for="ICI">Income Tax Import</label>
+                    </div>
                     <div class="form-group col-md-4 col-sm-12">
                         <input type="file" id="uploadFile3" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile3" class="btn btn-default btn-sm col-md-12" />
                     </div>
@@ -53,35 +146,34 @@
             </div>
         </div>
     </div>
-    @*}*@
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-12 col-md-12 mb-2">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="tblogview" class="hrtable col-sm-12 col-md-12">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>FileName</th>
-                                        <th>ImportType</th>
-                                        <th>ImportedDate</th>
-                                        <th>ImportedBy</th>
-                                    </tr>
-                                </thead>
-                            </table>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 mb-2">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="tblogview" class="hrtable col-sm-12 col-md-12">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>FileName</th>
+                                            <th>ImportType</th>
+                                            <th>ImportedDate</th>
+                                            <th>ImportedBy</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="clearfix"> </div>
+        <div class="clearfix"> </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script type="text/javascript">
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script type="text/javascript">
         $(document).ready(function () {
             ImportListViewTable();
         });
@@ -136,15 +228,13 @@
                 for (var i = 0; i < files.length; i++) {
                     fileData.append(files[i].name, files[i]);
                 }
-                alert(fileData);
                 $.ajax({
-                    url: "../Attendance/AttendanceDataSave/"+1,
+                    url: "../Attendance/AttendanceDataSave/"+2,
                     type: 'post',
-                    contentType: false, // Not to set any content header  
-                    processData: false, // Not to process data  
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
                     dataType: 'json',
                     data: fileData,
-                    //cache: false,
                     success: function (result) {
                         window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
                     },
@@ -154,13 +244,53 @@
                 });
             });
 
-            $('#btnimport1').click(function () {
-
+            $('#btnimport2').click(function () {
+                  var fileUpload = $("#uploadFile2").get(0);
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    url: "../Attendance/AttendanceDataSave/"+1,
+                    type: 'post',
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    dataType: 'json',
+                    data: fileData,
+                    success: function (result) {
+                        window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("Error");
+                    }
+                });
             });
 
-            $('#btnimport1').click(function () {
-
+                $('#btnimport3').click(function () {
+                    var YYY = $("#ddlYear").val();
+                    var MM = $("#ddkMonth").val();
+                  var fileUpload = $("#uploadFile3").get(0);
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    url: "../Attendance/AttendanceDataSave/" + 3 + '_' + YYY + '_' + MM,
+                    type: 'post',
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    dataType: 'json',
+                    data: fileData,
+                    success: function (result) {
+                        window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("Error");
+                    }
+                });
             });
 
-        </script>
-    }
+            </script>
+        }
