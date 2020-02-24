@@ -35,9 +35,9 @@ namespace Staff_BL
                 sm.StaffID =  dt.Rows[0]["StaffID"].ToString();
                 sm.Name = dt.Rows[0]["Name"].ToString();
                 sm.NRC = dt.Rows[0]["NRC"].ToString();
-                sm.DOB = Convert.ToDateTime(dt.Rows[0]["DOB"]);
-                sm.JoinDate = Convert.ToDateTime(dt.Rows[0]["JoinDate"]);
-                sm.PermanentDate = Convert.ToDateTime(dt.Rows[0]["PermanentDate"]);
+                sm.DOB = dt.Rows[0]["DOB"].ToString();
+                sm.JoinDate = dt.Rows[0]["JoinDate"].ToString();
+                sm.PermanentDate = dt.Rows[0]["PermanentDate"].ToString();
                 sm.Gender = dt.Rows[0]["Gender"].ToString();
                 sm.BankInformation = dt.Rows[0]["BankInformation"].ToString();
                 sm.Currency = Convert.ToByte(dt.Rows[0]["Currency"]);
@@ -89,10 +89,10 @@ namespace Staff_BL
             ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = Convert.ToByte(model.Gender);
-            ms.DOB = model.DOB;
+            ms.DOB = Convert.ToDateTime(model.DOB);
             ms.NRC = model.NRC;
-            ms.JoinDate = model.JoinDate;
-            ms.PermanentDate = model.PermanentDate;
+            ms.JoinDate = Convert.ToDateTime(model.JoinDate);
+            ms.PermanentDate = Convert.ToDateTime(model.PermanentDate);
             ms.BankInformation = model.BankInformation;
             ms.PermanentAddress = model.PermanentAddress;
             ms.TemporaryAddress = model.TemporaryAddress;
