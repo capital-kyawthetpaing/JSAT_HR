@@ -34,15 +34,44 @@ namespace Staff_BL
             {
                 sm.StaffID =  dt.Rows[0]["StaffID"].ToString();
                 sm.Name = dt.Rows[0]["Name"].ToString();
+                sm.NRC = dt.Rows[0]["NRC"].ToString();
+                sm.DOB = dt.Rows[0]["DOB"].ToString();
+                sm.JoinDate = dt.Rows[0]["JoinDate"].ToString();
+                sm.PermanentDate = dt.Rows[0]["PermanentDate"].ToString();
                 sm.Gender = dt.Rows[0]["Gender"].ToString();
+                sm.BankInformation = dt.Rows[0]["BankInformation"].ToString();
+                sm.Currency = Convert.ToByte(dt.Rows[0]["Currency"]);
+                sm.BasicSalary = Convert.ToDecimal(dt.Rows[0]["BasicSalary"]);
+                sm.Effort = dt.Rows[0]["Effort"].ToString();
+                sm.UniformCharges = dt.Rows[0]["UniformCharges"].ToString();
                 sm.CompanyCD = dt.Rows[0]["CompanyCD"].ToString();
                 sm.DepartmentCD = dt.Rows[0]["DepartmentCD"].ToString();
                 sm.SubDivisionCD = dt.Rows[0]["SubDivisionCD"].ToString();
                 sm.PositionCD = dt.Rows[0]["PositionCD"].ToString();
+
                 sm.OfficeCD = dt.Rows[0]["OfficeCD"].ToString();
-                sm.UniformCharges = dt.Rows[0]["UniformCharges"].ToString();
+                sm.FingerPrintID = Convert.ToInt32(dt.Rows[0]["FingerPrintID"]);
+
+                sm.PhoneNo = dt.Rows[0]["PhoneNo"].ToString();
+                sm.EmergencyPhoneNo = dt.Rows[0]["EmergencyPhoneNo"].ToString();
+                sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
+                sm.EmailAddress = dt.Rows[0]["EmailAddress"].ToString();
+                sm.PermanentAddress = dt.Rows[0]["PermanentAddress"].ToString();
+                sm.TemporaryAddress = dt.Rows[0]["TemporaryAddress"].ToString();
+
                 sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
                 sm.MD = Convert.ToBoolean(dt.Rows[0]["MD"]);
+                sm.Director = Convert.ToBoolean(dt.Rows[0]["Director"]);
+                sm.Manager = Convert.ToBoolean(dt.Rows[0]["Manager"]);
+                sm.N1 = Convert.ToBoolean(dt.Rows[0]["N1"]);
+                sm.N2 = Convert.ToBoolean(dt.Rows[0]["N2"]);
+                sm.N3 = Convert.ToBoolean(dt.Rows[0]["N3"]);
+                sm.Local1stInterviewer = Convert.ToBoolean(dt.Rows[0]["Local1stInterviewer"]);
+                sm.Local2ndInterviewer = Convert.ToBoolean(dt.Rows[0]["Local2ndInterviewer"]);
+                sm.Overseas1stInterviewer = Convert.ToBoolean(dt.Rows[0]["Overseas1stInterviewer"]);
+                sm.Overseas2ndInterviewer = Convert.ToBoolean(dt.Rows[0]["Overseas2ndInterviewer"]);
+                sm.MarketingTeamAllowance = Convert.ToBoolean(dt.Rows[0]["MarketingTeamAllowance"]);
+                sm.MentorAllowance = Convert.ToBoolean(dt.Rows[0]["MentorAllowance"]);
             }
 
             return sm;
@@ -60,10 +89,10 @@ namespace Staff_BL
             ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = Convert.ToByte(model.Gender);
-            ms.DOB = model.DOB;
+            ms.DOB = Convert.ToDateTime(model.DOB);
             ms.NRC = model.NRC;
-            ms.JoinDate = model.JoinDate;
-            ms.PermanentDate = model.PermanentDate;
+            ms.JoinDate = Convert.ToDateTime(model.JoinDate);
+            ms.PermanentDate = Convert.ToDateTime(model.PermanentDate);
             ms.BankInformation = model.BankInformation;
             ms.PermanentAddress = model.PermanentAddress;
             ms.TemporaryAddress = model.TemporaryAddress;
@@ -123,12 +152,13 @@ namespace Staff_BL
             return msg;
         }
 
-        public async Task<string> Check_StaffCD(StaffModel model)
+        public string Check_StaffCD(StaffModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_Staff md = new M_Staff();
+            int staffID = Convert.ToInt32(model.StaffID);
             string scd;
-            M_Staff staffcd = await db.M_Staff.Where(ms => ms.StaffID.Equals(model.StaffID)).SingleOrDefaultAsync();
+            M_Staff staffcd =  db.M_Staff.Where(ms => ms.StaffID.Equals(staffID)).SingleOrDefault();
             if (staffcd != null)
                 scd = staffcd.StaffID.ToString();
             else

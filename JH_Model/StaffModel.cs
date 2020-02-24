@@ -12,10 +12,10 @@ namespace JH_Model
         public DateTime ChangeDate { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string NRC { get; set; }
-        public DateTime JoinDate { get; set; }
-        public DateTime PermanentDate { get; set; }
+        public string JoinDate { get; set; }
+        public string PermanentDate { get; set; }
         public string BankInformation { get; set; }
         public string PermanentAddress { get; set; }
         public string TemporaryAddress { get; set; }

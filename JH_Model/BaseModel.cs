@@ -5,5 +5,6 @@ namespace JH_Model
     {
         public string InsertUpdateBy { get; set; }
         public string InserteUpdateDate { get; set; }
+        public string Mode { get; set; }
     }
 }
