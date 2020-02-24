@@ -45,7 +45,7 @@ namespace JSAT_HR.Controllers
                     return jsonresult;
                 }
             }
-            return JsonConvert.SerializeObject(null);
+            return JsonConvert.SerializeObject(dtpay);
         }
 
         public FileStreamResult PayRoll_Report(string id)
@@ -67,9 +67,9 @@ namespace JSAT_HR.Controllers
 
             Report.PayRoll_List rpt = new Report.PayRoll_List();
             rpt.Database.Tables["Pay_Roll"].SetDataSource(ds.Tables[0]);
-            Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-           
+            rpt.SetParameterValue("Date", DateTime.Now.ToString("yyyy-MM-dd"));
 
+            Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -94,9 +94,9 @@ namespace JSAT_HR.Controllers
                         return jsonresult;
                     }
                 }
-                return JsonConvert.SerializeObject(null);
+                return JsonConvert.SerializeObject(dtpay);
             }
-            return JsonConvert.SerializeObject(null);
+            return JsonConvert.SerializeObject(dtpay);
         }
     }
 }
