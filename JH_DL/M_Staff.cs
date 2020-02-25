@@ -15,7 +15,6 @@ namespace JH_DL
     public partial class M_Staff
     {
         public int StaffID { get; set; }
-        public System.DateTime ChangeDate { get; set; }
         public string Name { get; set; }
         public Nullable<byte> Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }

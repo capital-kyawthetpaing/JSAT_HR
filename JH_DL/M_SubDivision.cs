@@ -15,9 +15,7 @@ namespace JH_DL
     public partial class M_SubDivision
     {
         public string SubDivisionCD { get; set; }
-        public System.DateTime ChangeDate { get; set; }
         public string SubDivision { get; set; }
-        public string DepartmentCD { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
         public string UpdatedBy { get; set; }
