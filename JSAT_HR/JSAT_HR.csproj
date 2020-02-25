@@ -146,6 +146,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\PayRollController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
@@ -403,10 +404,12 @@
     <Content Include="Views\Attendance\AttendanceSetting.cshtml" />
     <Content Include="Views\PayRoll\PayRoll_Setting.cshtml" />
     <Content Include="Views\CommonView\Common_View.cshtml" />
+    <Content Include="Views\Shared\MessagePartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Message\" />
     <Folder Include="Views\Share\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

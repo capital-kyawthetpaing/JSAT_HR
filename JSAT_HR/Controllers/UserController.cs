@@ -38,13 +38,5 @@ namespace JSAT_HR.Controllers
                 return RedirectToAction("StaffList", "Staff");
             }
         }
-
-        [HttpPost]
-        public string HR_Message(string id)
-        {
-            string msg = bbl._MessageDialog(id);
-
-            return JsonConvert.SerializeObject(msg);
-        }
     }
 }
