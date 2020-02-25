@@ -266,7 +266,7 @@
                                 </div>
                                 @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
-                               @class = "form-control input-sm",
+                               @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlDepartment",
                                @tabindex = "14"
@@ -701,7 +701,8 @@
             SelectOffice();
             SelectCompany();
 
-            if(@Model.StaffID != null)
+
+            if('@Model.Mode' == "update")
             {
                 $("#txtStaffID").attr('readonly',true);
                 $("#btnSave").html("Update");
@@ -720,7 +721,7 @@
                             $('<option></option>').val(item.CompanyCD).html(item.CompanyName));
                     });
 
-                    $("#ddlCompany").val(zeroPad(@Model.CompanyCD,2));
+                    $("#ddlCompany").val('@Model.CompanyCD');
                 }
             });
         }
@@ -736,7 +737,7 @@
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
                     });  
 
-                    $("#ddlDepartment").val(zeroPad(@Model.DepartmentCD,2));
+                    $("#ddlDepartment").val('@Model.DepartmentCD');
                 }
             });
         } // data bind in Program dropdownlist.
@@ -753,7 +754,7 @@
                             $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
                     });
 
-                    $("#ddlSubDivision").val(zeroPad(@Model.SubDivisionCD,2));
+                    $("#ddlSubDivision").val('@Model.SubDivisionCD');
                 }
             });
         }
@@ -770,7 +771,7 @@
                             $('<option></option>').val(item.PositionCD).html(item.Position));
                     });
 
-                    $("#ddlPosition").val(zeroPad(@Model.PositionCD,3));
+                    $("#ddlPosition").val('@Model.PositionCD');
                 }
             });
         }

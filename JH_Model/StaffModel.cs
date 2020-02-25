@@ -24,11 +24,11 @@ namespace JH_Model
         public string EmailAddress { get; set; }
         public string UniformCharges { get; set; }
         public int FingerPrintID { get; set; }
-        public string OfficeCD { get; set; }
-        public string CompanyCD { get; set; }
-        public string DepartmentCD { get; set; }
-        public string SubDivisionCD { get; set; }
-        public string PositionCD { get; set; }
+        public string OfficeCD { get; set; } = "0";
+        public string CompanyCD { get; set; } = "0";
+        public string DepartmentCD { get; set; } = "0";
+        public string SubDivisionCD { get; set; } = "0";
+        public string PositionCD { get; set; } = "0";
         public string TransportationCD { get; set; }
         public byte Currency { get; set; }
         public string Photo { get; set; }

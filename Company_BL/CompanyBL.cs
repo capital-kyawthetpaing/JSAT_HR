@@ -37,11 +37,11 @@ namespace Company_BL
             return msg;
         }
 
-        public async Task<string> Company_Update(CompanyModel cm)
+        public string Company_Update(CompanyModel cm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
-            M_Company update = await db.M_Company.Where(c => c.CompanyCD.Equals(cm.CompanyCD)).SingleOrDefaultAsync();
+            M_Company update = db.M_Company.Where(c => c.CompanyCD.Equals(cm.CompanyCD)).SingleOrDefault();
             update.CompanyCD = cm.CompanyCD;
             update.CompanyName = cm.CompanyName;
             update.UpdatedDate = DateTime.Now;
@@ -59,11 +59,11 @@ namespace Company_BL
             return msg;
         }
 
-        public async Task<string> Check_Company(CompanyModel cm)
+        public string Check_Company(CompanyModel cm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
-            M_Company update = await db.M_Company.Where(c => c.CompanyCD.Equals(cm.CompanyCD)).SingleOrDefaultAsync();
+            M_Company update = db.M_Company.Where(c => c.CompanyCD.Equals(cm.CompanyCD)).SingleOrDefault();
             if (update != null)
                 msg = update.CompanyCD;
             else

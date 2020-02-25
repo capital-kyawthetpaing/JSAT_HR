@@ -6,13 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2122bddf8530417f95579bbc976fc77e" Name="Diagram1">
         <EntityTypeShape EntityType="JSAT_HRModel.L_Import" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="0.5" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="2.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
 <<<<<<< HEAD
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="4.25" PointY="8.375" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="4.75" PointY="0.875" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Attendance" Width="1.5" PointX="2.375" PointY="9.375" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Office" Width="1.5" PointX="4.75" PointY="10.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.0072155762497408" PointY="31.011498629586537" />
@@ -21,7 +18,10 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_Message" Width="1.5" PointX="9.375" PointY="5" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Payroll" Width="1.5" PointX="0.92526921114198357" PointY="29.11856636270814" />
         <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Allowance" Width="1.5" PointX="11.14292403084362" PointY="30.94012804280041" />
-        <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Deduction" Width="1.5" PointX="10.484777574653167" PointY="18.279140674639095" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="7.8842832296547876" PointY="20.883022213765894" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="11.838727768435481" PointY="5.7616296437390284" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="9.4643518968784957" PointY="20.163359412999526" />
+        <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Deduction" Width="1.5" PointX="8.44563190846035" PointY="16.227549336956603" />
         
         
         
