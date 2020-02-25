@@ -98,9 +98,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-md-12 mb-2">
-                        <div class="form-row dynamicAtt">
-                        </div>
+                    <div class="col-xl-12 col-md-12 mb-2 dynamcdiv">
+                        @*<div class="form-row dynamicAtt">
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -141,7 +141,6 @@
             }
 
             function _Search() {
-
                 var YYY = $("#ddlYear").val();
                 var MM = $("#ddkMonth").val();
                 var staffID = $("#ddlStaff").val();
@@ -153,7 +152,7 @@
                         if (json == null || json == "") {
                              window.location.href =  '@Url.Action("AttendanceSetting", "Attendance")'
                         }
-                        else {
+                        else {                   
                             Filltable(json);
                             $("#update").css("display", "block");
                         }
@@ -163,15 +162,16 @@
             }
 
             function Filltable(json) {
+                $(".dynamicAtt").remove();
+
+                var maindiv = $(".dynamcdiv");
+                var newdiv = document.createElement('div');
+                newdiv.className = 'form-row dynamicAtt';
+                $(maindiv).append(newdiv);
+
                 var x;
                 for (x = 1; x <= json[0].Total; x++) {
                     var wrapper = $(".dynamicAtt");
-
-                    //var day = '<label for="Day_'+ (x-1) +'__DD" id="attlistModel_' + (x-1) + '__DD" name="attlistModel[' + (x-1) +'].DD"></label>';
-
-                    //var timein = '<label for="Time_'+ (x-1) +'__TimeIn" id="attlistModel_' + (x-1) + '__TimeIn" name="attlistModel[' + (x-1) + '].TimeIn">';
-
-                    //var timeout = '<label for="Time_'+ (x-1) +'__TimeOut" id="attlistModel_' + (x-1) + '__TimeOut" name="attlistModel[' + (x-1) + '].TimeOut">';                 
 
                     var timein = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x-1) + '__TimeIn" name="attlistModel[' + (x-1) + '].TimeIn">';
 
@@ -189,8 +189,7 @@
                 
 
                     $(wrapper).append('<div class="form-group col-md-2">' +
-                                    ' <label for="Day">' + x + '</label>' +
-                                        // day+
+                                    ' <label for="Day">' + x + '</label>' +     
                                     ' <table style="border: 1px solid #999999;width:80%">' +
                                     '<tbody>' +
 
@@ -227,10 +226,6 @@
                     $('#attlistModel_' + (x - 1) + '__TimeIn').val(json[x - 1].TimeIn);
                     $('#attlistModel_' + (x - 1) + '__TimeOut').val(json[x - 1].TimeOut);
 
-                    //$('label[for=Day_' + (x - 1) + '__DD]').html(json[x - 1].DD); 
-                    //$('label[for=Time_' + (x - 1) + '__TimeIn]').html(json[x - 1].TimeIn); 
-                    //$('label[for=Time_' + (x - 1) + '__TimeOut]').html(json[x - 1].TimeOut); 
-                 
                 }
             }
         </script>
