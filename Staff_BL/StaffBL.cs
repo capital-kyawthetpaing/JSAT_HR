@@ -224,19 +224,15 @@ namespace Staff_BL
             return msg;
         }
 
-        public string Check_StaffCD(StaffModel model)
+        public bool StaffExists(StaffModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_Staff md = new M_Staff();
             int staffID = Convert.ToInt32(model.StaffID);
-            string scd;
             M_Staff staffcd =  db.M_Staff.Where(ms => ms.StaffID.Equals(staffID)).SingleOrDefault();
             if (staffcd != null)
-                scd = staffcd.StaffID.ToString();
-            else
-                scd ="";
-
-            return scd;
+                return true;
+            return false;
         }
     }
 }

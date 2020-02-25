@@ -54,7 +54,7 @@ namespace JSAT_HR.Controllers
             try
             {
                 string msg = string.Empty;
-                var id = sbl.Check_StaffCD(model);
+                bool exists = sbl.StaffExists(model);
                 if (id == "" && model.Mode == "save")
                 {
                     msg = sbl.Staff_Save(model);
