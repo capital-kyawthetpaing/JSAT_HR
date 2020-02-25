@@ -31,9 +31,13 @@ namespace JSAT_HR.Controllers
             if (!string.IsNullOrWhiteSpace(id))
             {
                 sm.StaffID = id;
+                sm.Mode = "update";
                 sm = sbl.SearchStaff(sm);                
             }
-
+            else
+            {
+                sm.Mode = "save";
+            }
             return View(sm);
         }
 
