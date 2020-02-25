@@ -3,10 +3,16 @@
     /**/
     ViewBag.Title = "StaffEntry";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Model.Mode = "save";
+    if (Model.StaffID != null)
+    {
+        Model.Mode = "update";
+    }
 }
 
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Staff_SaveAsync", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-12 col-sm-12 mb-2">
@@ -90,17 +96,19 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fa fa-calendar-alt"></i></span>
                                 </div>
+
                                 @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd-MM-yyyy}", new
-                           {
-                               @class = "form-control input-sm",
-                               @type = "date",
-                               placeHolder = "dd/MM/yyyy",
-                               @required = "required",
-                               @tabindex = "5",
-                               @id = "txtJoinDate",
-                               max = "12-12-2100"
-                               //@Value = Model.JoinDate
-                           })
+                               {
+                                   @class = "form-control input-sm",
+                                   @type = "date",
+                                   placeHolder = "dd/MM/yyyy",
+                                   @required = "required",
+                                   @tabindex = "5",
+                                   @id = "txtJoinDate",
+                                   maxlength = "10",
+                                   max = "12-12-2100",
+                                   @Value = Model.JoinDate
+                               })
                             </div>
                         </div>
                         <div class="form-group col-xl-2 col-md-4">
@@ -258,7 +266,7 @@
                                 </div>
                                 @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
-                               @class = "form-control input-sm",
+                               @class = "select2 form-control input-sm",
                                @required = "required",
                                @id = "ddlDepartment",
                                @tabindex = "14"
@@ -693,10 +701,12 @@
             SelectOffice();
             SelectCompany();
 
-            if(@Model.StaffID != null)
-                $("#btnSave").html("Update");
 
-            
+            if('@Model.Mode' == "update")
+            {
+                $("#txtStaffID").attr('readonly',true);
+                $("#btnSave").html("Update");
+            }
         });
 
         function SelectCompany() {
@@ -711,7 +721,7 @@
                             $('<option></option>').val(item.CompanyCD).html(item.CompanyName));
                     });
 
-                    $("#ddlCompany").val(zeroPad(@Model.CompanyCD,2));
+                    $("#ddlCompany").val('@Model.CompanyCD');
                 }
             });
         }
@@ -727,7 +737,7 @@
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
                     });  
 
-                    $("#ddlDepartment").val(zeroPad(@Model.DepartmentCD,2));
+                    $("#ddlDepartment").val('@Model.DepartmentCD');
                 }
             });
         } // data bind in Program dropdownlist.
@@ -744,7 +754,7 @@
                             $('<option></option>').val(item.SubDivisionCD).html(item.SubDivision));
                     });
 
-                    $("#ddlSubDivision").val(zeroPad(@Model.SubDivisionCD,2));
+                    $("#ddlSubDivision").val('@Model.SubDivisionCD');
                 }
             });
         }
@@ -761,7 +771,7 @@
                             $('<option></option>').val(item.PositionCD).html(item.Position));
                     });
 
-                    $("#ddlPosition").val(zeroPad(@Model.PositionCD,3));
+                    $("#ddlPosition").val('@Model.PositionCD');
                 }
             });
         }

@@ -30,12 +30,12 @@ namespace JSAT_HR.Controllers
             asbl.GetAllowance(am);
             return View(am);
         }
-        public async Task<ActionResult> Allowance_Setting_Save(AllowanceModel model)
+        public ActionResult Allowance_Setting_Save(AllowanceModel model)
         {
             string flag = string.Empty;
             if (model != null)
             {
-               await asbl.Allowance_Setting_Save(model);
+               flag = asbl.Allowance_Setting_Save(model);
             }
             return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency});
         }

@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="display:none">
         <button type="button" class="btn btn-primary mb-2" data-toggle="collapse" data-target="#filter-panel">
             <i class="fas fa-window-restore"></i> Advanced Search
         </button>
@@ -52,14 +52,18 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>StaffID</th>
+                                    <th>ID</th>
                                     <th>Name</th>
+                                    <th>Currency</th>
                                     <th>JoinDate</th>
                                     <th>PhoneNo</th>
                                     <th>EmailAddress</th>
+                                    <th>Office</th>
+                                    <th>FingerID</th>
+                                    @*<th>Company</th>
                                     <th>Department</th>
                                     <th>SubDivision</th>
-                                    <th>Postion</th>
+                                    <th>Postion</th>*@
                                 </tr>
                             </thead>
                             <tfoot>
@@ -76,6 +80,7 @@
         $(document).ready(function () {
             var table = $('#tblStaff').DataTable(
                 {
+                    "order": [[1, "desc"]],
                     "language": {
                         "info": "Display _START_ to _END_ of _TOTAL_ records",
                     },
@@ -94,20 +99,24 @@
                             "orderable": false,
                             "data": null,
                             "defaultContent": '',
-                            "width": "3%"
+                            "width": "2%"
                         },
                         {
                             "data": "StaffID", "render": function (data, type, row) {
                                 return '<a href="../Staff/StaffEntry/' + row.StaffID + '">' + row.StaffID + '</a>';
-                            }, orderable: false, "width": "5%"
+                            }, orderable: false, "width": "1%"
                         },
-                        { "data": "Name", orderable: false, "width": "13%" },
-                        { "data": "JoinDate", orderable: false, "width": "13%" },
+                        { "data": "Name", orderable: false, "width": "6%" },
+                        { "data": "Currency", orderable: false, "width": "3%" },
+                        { "data": "JoinDate", orderable: false, "width": "3%" },
                         { "data": "PhoneNo", orderable: false, "width": "3%" },
-                        { "data": "EmailAddress", orderable: false, "width": "10%" },
-                        { "data": "Department", orderable: false, "width": "10%" },
-                        { "data": "SubDivision", orderable: false, "width": "4%" },
-                        { "data": "Position", orderable: false, "width": "4%" }
+                        { "data": "EmailAddress", orderable: false, "width": "3%" },
+                        { "data": "OfficeName", orderable: false, "width": "3%" },
+                        { "data": "FingerPrintID", orderable: false, "width": "10%" },
+                        //{ "data": "Company", orderable: false, "width": "6%" },
+                        //{ "data": "Department", orderable: false, "width": "6%" },
+                        //{ "data": "SubDivision", orderable: false, "width": "4%" },
+                        //{ "data": "Position", orderable: false, "width": "4%" }
                     ],
                 }
             );

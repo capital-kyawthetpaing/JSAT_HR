@@ -21,12 +21,12 @@ namespace SubDivision_BL
             return bdl.SelectData("M_SubDivision_SelectAll", prms);
         }
 
-        public async Task<string> Check_SubDivisionCD(SubDivisionModel model)
+        public string Check_SubDivisionCD(SubDivisionModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_SubDivision md = new M_SubDivision();
             string msg = string.Empty;
-            M_SubDivision update = await db.M_SubDivision.Where(s => s.SubDivisionCD.Equals(model.SubDivisionCD)).SingleOrDefaultAsync();
+            M_SubDivision update = db.M_SubDivision.Where(s => s.SubDivisionCD.Equals(model.SubDivisionCD)).SingleOrDefault();
             if (update != null)
                 msg = update.SubDivisionCD;
             else
@@ -52,12 +52,12 @@ namespace SubDivision_BL
             return msg;
         }
 
-        public async Task<string> SubDivision_Update(SubDivisionModel model)
+        public string SubDivision_Update(SubDivisionModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_SubDivision md = new M_SubDivision();
             string msg = string.Empty;
-            M_SubDivision update = await db.M_SubDivision.Where(s => s.SubDivisionCD.Equals(model.SubDivisionCD)).SingleOrDefaultAsync();
+            M_SubDivision update = db.M_SubDivision.Where(s => s.SubDivisionCD.Equals(model.SubDivisionCD)).SingleOrDefault();
             update.SubDivisionCD = model.SubDivisionCD;
             update.SubDivision = model.SubDivisionName;
             update.UpdatedDate = DateTime.Now;

@@ -14,12 +14,13 @@ namespace PayRoll_BL
 {
     public class Payroll_BL
     {
-        public DataTable PayRoll_Search(string yearmonth)
+        public DataTable PayRoll_Search(string yearmonth,int option)
         {
             BaseDL bdl = new BaseDL();
             DataTable dtpay = new DataTable();
-            SqlParameter[] prms = new SqlParameter[1];
+            SqlParameter[] prms = new SqlParameter[2];
             prms[0] = new SqlParameter("@yearmonth", SqlDbType.VarChar) { Value = yearmonth };
+            prms[1] = new SqlParameter("@option", SqlDbType.VarChar) { Value =  option};
             dtpay = bdl.SelectData("PayRoll_Search", prms);
             if (dtpay.Rows.Count > 0)
                 return dtpay;
