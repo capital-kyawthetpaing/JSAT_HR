@@ -95,19 +95,19 @@ namespace Attendance_BL
                                     {
                                         AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5);
                                     }
-                                    else
-                                    {
-                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                    }
+                                    //else
+                                    //{
+                                    //    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
+                                    //}
 
                                     if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
                                     {
                                         AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
                                     }
-                                    else
-                                    {
-                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                    }
+                                    //else
+                                    //{
+                                    //    AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1));
+                                    //}
                                 }
                                 else
                                 {
@@ -119,18 +119,18 @@ namespace Attendance_BL
                                     {
                                         AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1)).Substring(0, 5); ;
                                     }
-                                    else
-                                    {
-                                        AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
-                                    }
+                                    //else
+                                    //{
+                                    //    AttendanceDataRow["TimeIn"] = GetCellValue(row2.GetCell(i - 1));
+                                    //}
                                     if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
                                     {
-                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1));
+                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);                        
                                     }
-                                    else
-                                    {
-                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
-                                    }
+                                    //else
+                                    //{
+                                    //    AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1));
+                                    //}
                                 }
 
                                 table.Rows.Add(AttendanceDataRow);
@@ -348,6 +348,44 @@ namespace Attendance_BL
             string result = writer.ToString();
             prms[3] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
             bdl.InsertUpdateDeleteData("Payroll_Deduction_Insert", prms);
+        }
+
+        public void Update_Attendance_Data(DataTable dtattendance, MultiModel mModel)
+        {
+            BaseDL dl = new BaseDL();
+            try
+            {
+                string YYYMM = string.Empty;
+                YYYMM = mModel.attModel.YYYY + mModel.attModel.MM;
+                SqlParameter[] prms = new SqlParameter[3];
+                if (!string.IsNullOrWhiteSpace(mModel.attModel.StaffID))
+                {
+                    prms[0] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = mModel.attModel.StaffID };
+                }
+                else
+                {
+                    prms[0] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = System.DBNull.Value };
+                }
+                if (!string.IsNullOrWhiteSpace(YYYMM))
+                {
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value=Convert.ToInt32(YYYMM) };
+                }
+                else
+                {
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value=System.DBNull.Value };
+                }
+
+                dtattendance.TableName = "attendance";
+                System.IO.StringWriter writer = new System.IO.StringWriter();
+                dtattendance.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                string result = writer.ToString();
+                prms[2] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
+                dl.InsertUpdateDeleteData("M_Attendance_Update", prms);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
