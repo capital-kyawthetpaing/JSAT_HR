@@ -399,6 +399,7 @@
     <Content Include="Views\Office\Office_Hours_Setting.cshtml" />
     <Content Include="Views\Attendance\AttendanceSetting.cshtml" />
     <Content Include="Views\PayRoll\PayRoll_Setting.cshtml" />
+    <Content Include="Views\CommonView\Common_View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -426,6 +427,10 @@
     <ProjectReference Include="..\Attendance_BL\Attendance_BL.csproj">
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Base_BL\Base_BL.csproj">
+      <Project>{F3363966-FA8C-43FD-975D-EFC3C2C2615C}</Project>
+      <Name>Base_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
