@@ -152,6 +152,78 @@ namespace Staff_BL
             return msg;
         }
 
+        public string Staff_Update(StaffModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            string msg = string.Empty;
+
+            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(model.StaffID)).SingleOrDefault();
+            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(model.StaffID)).SingleOrDefault();
+            updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            updatestaff.Name = model.Name;
+            updatestaff.Gender = Convert.ToByte(model.Gender);
+            updatestaff.DOB = Convert.ToDateTime(model.DOB);
+            updatestaff.NRC = model.NRC;
+            updatestaff.JoinDate = Convert.ToDateTime(model.JoinDate);
+            updatestaff.PermanentDate = Convert.ToDateTime(model.PermanentDate);
+            updatestaff.BankInformation = model.BankInformation;
+            updatestaff.PermanentAddress = model.PermanentAddress;
+            updatestaff.TemporaryAddress = model.TemporaryAddress;
+            updatestaff.PhoneNo = model.PhoneNo;
+            updatestaff.EmergencyPhoneNo = model.EmergencyPhoneNo;
+            updatestaff.EmailAddress = model.EmailAddress;
+            model.UniformCharges = model.UniformCharges.Replace(",", "");
+            updatestaff.UniformCharges = Convert.ToDecimal(model.UniformCharges);
+            updatestaff.FingerPrintID = model.FingerPrintID;
+            updatestaff.OfficeCD = Convert.ToByte(model.OfficeCD);
+            updatestaff.CompanyCD = model.CompanyCD;
+            updatestaff.DepartmentCD = model.DepartmentCD;
+            updatestaff.SubDivisionCD = model.SubDivisionCD;
+            updatestaff.PositionCD = model.PositionCD;
+            updatestaff.TransportationCD = model.TransportationCD;
+            updatestaff.Currency = model.Currency;
+            updatestaff.Photo = model.Photo;
+            if (model.BasicSalary == 1)
+                updatestaff.BasicSalary = 250000;
+            else
+                updatestaff.BasicSalary = 150000;
+            if (model.Effort.Contains(","))
+                model.Effort = model.Effort.Replace(",", "");
+            updatestaff.Effort = Convert.ToDecimal(model.Effort);
+            updatestaff.DeleteFlg = model.DeleteFlg;
+            updatestaff.InsertedDate = DateTime.Now;
+            updatestaff.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+
+            updateallow.StaffID = Convert.ToInt32(model.StaffID);
+            updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            updateallow.MD = model.MD;
+            updateallow.Director = model.Director;
+            updateallow.Manager = model.Manager;
+            updateallow.N1 = model.N1;
+            updateallow.N2 = model.N2;
+            updateallow.N3 = model.N3;
+            updateallow.JpnUniGradurate = model.JpnUniGradurate;
+            updateallow.Local1stInterviewer = model.Local1stInterviewer;
+            updateallow.Local2ndInterviewer = model.Local2ndInterviewer;
+            updateallow.Overseas1stInterviewer = model.Overseas1stInterviewer;
+            updateallow.Overseas2ndInterviewer = model.Overseas2ndInterviewer;
+            updateallow.MarketingTeamAllowance = model.MarketingTeamAllowance;
+            updateallow.MentorAllowance = model.MentorAllowance;
+
+            updatestaff.UpdatedDate = DateTime.Now;
+            updatestaff.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            try
+            {
+                db.SaveChanges();
+                msg = "OK";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
+            return msg;
+        }
+
         public string Check_StaffCD(StaffModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
