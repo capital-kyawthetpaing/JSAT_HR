@@ -2,11 +2,17 @@
 @{
     ViewBag.Title = "DepartmentList";
 }
+@RenderPage("~/Views/CommonView/Common_View.cshtml")
+
+@*<link href="~/Scripts/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Scripts/dist/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/dist/js/bootstrap.min.js"></script>*@
 
 @using (Html.BeginForm("Department_Save", "Department", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
 
- 
+
 
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -26,7 +32,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
                                     </div>
-                                   
+
                                     @Html.TextBoxFor(dm => dm.DepartmentCD, new
                                {
                                    @class = "form-control input-sm",
@@ -70,7 +76,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                         </div>
                     </div>
@@ -99,73 +105,78 @@
         </div>
     </div>
 }
-    @section Scripts{
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var table = $('#tbDepartment').DataTable(
-                    {
-                        "language": {
-                            "info": "Display _START_ to _END_ of _TOTAL_ records",
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tbDepartment').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../Department/GetDepartment",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+
+                        {
+
+                            "data": "DepartmentCD", orderable: false, "width": "3%",
+                            "render": function (data, type, row) {
+
+                                //return '<a href="../Department/Smart_Template_New_Edit/' + row.DepartmentID + '"></a>';
+                                //return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
+                                return '<a href="#" onclick="DepartmentEdit(&quot;' + row.DepartmentCD + '&quot;,&quot;' + row.DepartmentName + '&quot;);">' + row.DepartmentCD + '</a>';
+                            }
                         },
-                        "oLanguage": {
-                            "sLengthMenu": "Display _MENU_ records",
-                        },
-                        "ajax": {
-                            "url": "../Department/GetDepartment",
-                            "type": "GET",
-                            "datatype": "json",
-                            "dataSrc": ""
-                        },
-                        "columns": [
-                           
-                            {
-                                
-                                "data": "DepartmentCD", orderable: false, "width": "3%",
-                                "render": function (data, type, row) {
-                                    
-                                    //return '<a href="../Department/Smart_Template_New_Edit/' + row.DepartmentID + '"></a>';
-                                    //return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
-                                    return '<a href="#" onclick="DepartmentEdit(&quot;' + row.DepartmentCD + '&quot;,&quot;' + row.DepartmentName +'&quot;);">' + row.DepartmentCD + '</a>';
-                                }
-                            },
-                           
 
-                            { "data": "DepartmentName", orderable: false, "width": "13%" }
-                        ],
 
-                    }
-                );
-            });
+                        { "data": "DepartmentName", orderable: false, "width": "13%" }
+                    ],
 
-            function DepartmentEdit(depCD,depName) {
-                $('#txtDepartmentCD').val(depCD);
-                $('#txtDepartmentName').val(depName);  
-                $("#txtDepartmentCD").attr('readonly', true);
+                }
+            );
+        });
 
-                $("#update").css("display", "block");
-                $("#cancel").css("display", "block");
-                
+        function DepartmentEdit(depCD, depName) {
+            $('#txtDepartmentCD').val(depCD);
+            $('#txtDepartmentName').val(depName);
+            $("#txtDepartmentCD").attr('readonly', true);
 
-                return $("#save").css("display", "none");
-            }
+            $("#update").css("display", "block");
+            $("#cancel").css("display", "block");
 
-            $("#btncancel").click(function () {
-                $("#txtDepartmentCD").attr('readonly', false);
-               
-                $('#txtDepartmentCD').val("");
-                $('#txtDepartmentName').val("");  
 
-                $("#update").css("display", "none");
-                $("#cancel").css("display", "none");
-                $("#save").css("display", "block");
+            return $("#save").css("display", "none");
+        }
 
-                //$("#txtDepartmentCD").removeAttr("required");​​​​​
-                //$("#txtDepartmentName").removeAttr("required");​​​​​
-            })
-           
-            
-        </script>
-        
+        $("#btncancel").click(function () {
+            $("#txtDepartmentCD").attr('readonly', false);
 
-    }
+            $('#txtDepartmentCD').val("");
+            $('#txtDepartmentName').val("");
+
+            $("#update").css("display", "none");
+            $("#cancel").css("display", "none");
+            $("#save").css("display", "block");
+
+            var T = "I";
+            var K = "1002";
+            var M = "Message1";
+            Infomessage(T, K, M);
+
+            //$("#txtDepartmentCD").removeAttr("required");
+            //$("#txtDepartmentName").removeAttr("required");
+        })
+
+
+    </script>
+
+
+}
 

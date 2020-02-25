@@ -1,0 +1,130 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="myModalSuccess" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+    <div class="modal-header">
+
+<img src="~/Images/SuccessImg.png" style="width:26px;height:26px;" />   <h4 class="modal-title" style="color:forestgreen;"> </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color:white;background-color:forestgreen;">閉じる</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="modal fade" id="myModalInfo" role="dialog">
+    <div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+                <div class="modal-header">
+
+                    <img src="~/Images/info.jpg" style="width:26px;height:26px;" /> <h4 class="modal-title" style="color:#003492;"></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color:white;background-color:#003492;">閉じる</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<div class="modal fade" id="myModalError" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <img src="~/Images/error.png" style="width:26px;height:26px;" /> <h4 class="modal-title" style="color:red;"></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="color:white;background-color:red;">閉じる</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<style>
+    .modal-header img {
+        display: inline-block;
+    }
+
+    .modal-header h4 {
+        display: inline-block
+    }
+</style>
+<script>
+
+    function Successmessage(t, k, m) {
+        //var result = "";
+        $.ajax({
+            type: 'POST',
+
+            url:'@Url.Action("HR_Message", "User")?id=' + t + '_' + k + '_' + m,
+            dataType: 'json',
+            success: function (data) {
+
+                $('.modal-title').text(data);
+
+                
+
+
+            }
+        });
+
+    }
+
+
+    function Infomessage(t, k, m) {
+        $.ajax({
+            type: 'POST',
+            url: "../User/HR_Message/" + t + '_' + k + '_' + m,
+            dataType: 'json',
+            success: function (data) {
+                alert("something");
+               
+                $('.modal-title').text(data);
+
+            }
+        });
+    }
+
+    function Errormessage(t, k, m) {
+        $.ajax({
+            type: 'POST',
+            url: "../User/HR_Message/" + t + '_' + k + '_' + m,
+            dataType: 'json',
+            success: function (data) {
+                $('.modal-title').text(data);
+
+            }
+        });
+    }
+
+
+    function ValidateSpecialOnly(evt) {
+        evt = (evt) ? evt : event;
+        var characterCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+            ((evt.which) ? evt.which : 0));
+        if (characterCode > 31 && (characterCode < 65 || characterCode > 90) && (characterCode < 45 || characterCode > 46) &&
+            (characterCode < 97 || characterCode > 122) && (characterCode < 48 || characterCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+
+</script>
