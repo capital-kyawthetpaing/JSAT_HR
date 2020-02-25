@@ -15,12 +15,12 @@ namespace Allowance_BL
     public class Allowance_SettingBL
     {
 
-        public async Task<string>  Allowance_Setting_Save(AllowanceModel am)
+        public string  Allowance_Setting_Save(AllowanceModel am)
         {
 
             string msg = string.Empty;
             JSAT_HREntities db = new JSAT_HREntities();
-            M_Allowance tb = await db.M_Allowance.Where(s => s.Currency == am.Currency).SingleOrDefaultAsync();
+            M_Allowance tb =  db.M_Allowance.Where(s => s.Currency == am.Currency).SingleOrDefault();
 
             tb.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             tb.Currency = am.Currency;
