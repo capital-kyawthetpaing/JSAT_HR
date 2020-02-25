@@ -137,11 +137,11 @@ namespace Staff_BL
             sa.MarketingTeamAllowance = model.MarketingTeamAllowance;
             sa.MentorAllowance = model.MentorAllowance;
 
-           // db.M_Staff.Add(ms);
-           // db.Staff_Allowance.Add(sa);
+            db.M_Staff.Add(ms);
+            db.Staff_Allowance.Add(sa);
             try
             {
-                //db.SaveChanges();
+                db.SaveChanges();
                 msg = "Insert Success";
             }
             catch (Exception ex)
