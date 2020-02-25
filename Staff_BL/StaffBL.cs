@@ -86,7 +86,7 @@ namespace Staff_BL
             string msg = "";
 
             ms.StaffID = Convert.ToInt32(model.StaffID);
-            ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = Convert.ToByte(model.Gender);
             ms.DOB = Convert.ToDateTime(model.DOB);
@@ -159,7 +159,7 @@ namespace Staff_BL
 
             M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(model.StaffID)).SingleOrDefault();
             Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(model.StaffID)).SingleOrDefault();
-            updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updatestaff.Name = model.Name;
             updatestaff.Gender = Convert.ToByte(model.Gender);
             updatestaff.DOB = Convert.ToDateTime(model.DOB);
