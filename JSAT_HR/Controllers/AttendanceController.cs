@@ -12,6 +12,8 @@ using System.Configuration;
 using Newtonsoft.Json;
 using JH_Model;
 using CommonFunction;
+using FastMember;
+
 
 namespace JSAT_HR.Controllers
 {
@@ -160,6 +162,41 @@ namespace JSAT_HR.Controllers
             else
                 return JsonConvert.SerializeObject(dt);
 
+        }
+
+        public ActionResult Attendance_Setting_Save(MultiModel model)
+        {
+            try {
+
+                DataTable dtattendance= new DataTable();
+                using (var reader = ObjectReader.Create(model.attlistModel, "TimeIn", "TimeOut", "LeaveType", "EarlyOut"))
+                {
+                    dtattendance.Load(reader);
+                }
+                dtattendance.Columns.Add("DD", typeof(System.Int32));
+                if (dtattendance.Rows.Count>0)
+                {
+                    int count = 1;
+                    foreach (DataRow dr in dtattendance.Rows)
+                    {
+                        dr["DD"] = count;
+                        count++;
+                        if (dr["LeaveType"].ToString() == "")
+                            dr["LeaveType"] = 0;
+                        if (dr["EarlyOut"].ToString() == "")
+                            dr["EarlyOut"] = 0;
+                    }
+                    abl.Update_Attendance_Data(dtattendance,model);
+                }
+                TempData["Imsg"] = "success";
+                return RedirectToAction("AttendanceSetting");
+            }
+            catch (Exception ex)
+            {
+                string st = ex.ToString();
+                TempData["Emsg"] = "Unsuccess";
+                return RedirectToAction("AttendanceSetting");
+            }
         }
     }
 }
