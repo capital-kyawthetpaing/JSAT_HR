@@ -15,7 +15,6 @@ namespace JH_DL
     public partial class Staff_Allowance
     {
         public int StaffID { get; set; }
-        public System.DateTime ChangeDate { get; set; }
         public Nullable<bool> MD { get; set; }
         public Nullable<bool> Director { get; set; }
         public Nullable<bool> Manager { get; set; }
