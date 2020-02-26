@@ -1,19 +1,10 @@
 ﻿@model JH_Model.DempartmentModel
 @{
     ViewBag.Title = "DepartmentList";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
-@RenderPage("~/Views/CommonView/Common_View.cshtml")
-
-@*<link href="~/Scripts/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-<link href="~/Scripts/dist/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-<script src="~/Scripts/jquery-1.8.2.min.js"></script>
-<script src="~/Scripts/dist/js/bootstrap.min.js"></script>*@
-
 @using (Html.BeginForm("Department_Save", "Department", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
-
-
-
     <div class="container-fluid">
         <!-- Page Heading -->
         <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -105,6 +96,7 @@
         </div>
     </div>
 }
+
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
@@ -156,6 +148,9 @@
         }
 
         $("#btncancel").click(function () {
+
+            GetMessage("I_1001","Save");
+            
             $("#txtDepartmentCD").attr('readonly', false);
 
             $('#txtDepartmentCD').val("");
@@ -165,18 +160,12 @@
             $("#cancel").css("display", "none");
             $("#save").css("display", "block");
 
-            var T = "I";
-            var K = "1002";
-            var M = "Message1";
-            Infomessage(T, K, M);
+            $("#txtDepartmentCD").removeAttr("required");
+            $("#txtDepartmentName").removeAttr("required");
 
-            //$("#txtDepartmentCD").removeAttr("required");
-            //$("#txtDepartmentName").removeAttr("required");
+            $('#myModal').modal('show');
         })
 
-
     </script>
-
-
 }
 
