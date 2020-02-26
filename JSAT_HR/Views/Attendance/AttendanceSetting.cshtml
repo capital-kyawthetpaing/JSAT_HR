@@ -161,7 +161,8 @@
                 });
             }
 
-            function Filltable(json) {
+            function Filltable(json) 
+            {
                 $(".dynamicAtt").remove();
 
                 var maindiv = $(".dynamcdiv");
@@ -177,15 +178,15 @@
 
                     var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x-1) + '__TimeOut" name="attlistModel[' + (x-1) + '].TimeOut">';
 
-                    var unpaidfull = '<input type="radio" id="attlistModel_' + (x-1) + '__LeaveTypeFull" name="attlistModel[' + (x-1) + '].LeaveType" value="1" >';
+                    var unpaidfull = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeFull" name="attlistModel[' + (x-1) + '].LeaveType" value="1" >';
                 
-                    var unpaidhalf = '<input type="radio" id="attlistModel_' + (x-1) + '__LeaveTypeHalf" name="attlistModel[' + (x-1) + '].LeaveType" value="2">';
+                    var unpaidhalf = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeHalf" name="attlistModel[' + (x-1) + '].LeaveType" value="2">';
 
                     var onehrleave = '<input type="checkbox" id="attlistModel_' + (x-1) + '__LeaveTypeOnehr" name="attlistModel[' + (x-1) +'].LeaveType" value="3">';
 
-                    var onehrearly = '<input type="radio" id="attlistModel_' + (x-1) + '__EarlyOutOnehr" name="attlistModel[' + (x-1) + '].EarlyOut" value="1">';
+                    var onehrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutOnehr" name="attlistModel[' + (x-1) + '].EarlyOut" value="1">';
 
-                    var twohrearly = '<input type="radio" id="attlistModel_' + (x-1) + '__EarlyOutTwohr"  name="attlistModel[' + (x-1) + '].EarlyOut" value="2">';
+                    var twohrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutTwohr"  name="attlistModel[' + (x-1) + '].EarlyOut" value="2">';
                 
 
                     $(wrapper).append('<div class="form-group col-md-2">' +
@@ -225,9 +226,33 @@
                     
                     $('#attlistModel_' + (x - 1) + '__TimeIn').val(json[x - 1].TimeIn);
                     $('#attlistModel_' + (x - 1) + '__TimeOut').val(json[x - 1].TimeOut);
+                    if (json[x - 1].LeaveType == 1) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeFull').prop('checked', true);
+                    }
+                    if (json[x - 1].LeaveType == 2) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeHalf').prop('checked', true);
+                    }
+                    if (json[x - 1].LeaveType == 3) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeOnehr').prop('checked', true);
+                    }
+                    if (json[x - 1].EarlyOut == 1) {
 
+                        $('#attlistModel_' + (x - 1) + '__EarlyOutOnehr').prop('checked', true);
+                    }
+                    if (json[x - 1].EarlyOut == 2) {
+                        $('#attlistModel_' + (x - 1) + '__EarlyOutTwohr').prop('checked', true);
+                    }
                 }
             }
+
+            function Uncheck() {
+                $(document).on('dblclick', '.Uncheckclass', function () {
+                    if (this.checked) {
+                        $(this).prop('checked', false);
+                    }
+                });
+            }
+
         </script>
     }
 
