@@ -435,10 +435,6 @@
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Base_BL\Base_BL.csproj">
-      <Project>{F3363966-FA8C-43FD-975D-EFC3C2C2615C}</Project>
-      <Name>Base_BL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
       <Name>CommonFunction</Name>

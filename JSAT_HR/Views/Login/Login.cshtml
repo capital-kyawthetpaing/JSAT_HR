@@ -13,6 +13,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="../Content/HRLogin.css" rel="stylesheet" type="text/css">
+    @{ 
+        if (Session["UserID"] != null)
+        {
+            Session.Abandon();
+        }
+    }
 </head>
 
 <body class="login-block">

@@ -156,9 +156,10 @@ namespace Staff_BL
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
+            int staffid = Convert.ToInt32(model.StaffID);
 
-            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(model.StaffID)).SingleOrDefault();
-            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(model.StaffID)).SingleOrDefault();
+            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(staffid)).SingleOrDefault();
+            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(staffid)).SingleOrDefault();
             //updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updatestaff.Name = model.Name;
             updatestaff.Gender = Convert.ToByte(model.Gender);
