@@ -122,7 +122,7 @@ namespace Staff_BL
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             sa.StaffID = Convert.ToInt32(model.StaffID);
-            sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
             sa.Manager = model.Manager;
@@ -195,7 +195,7 @@ namespace Staff_BL
             updatestaff.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             updateallow.StaffID = Convert.ToInt32(model.StaffID);
-            updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updateallow.MD = model.MD;
             updateallow.Director = model.Director;
             updateallow.Manager = model.Manager;

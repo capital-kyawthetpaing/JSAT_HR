@@ -136,7 +136,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="NRC" Type="varchar" MaxLength="30" />
           <Property Name="JoinDate" Type="date" />
           <Property Name="PermanentDate" Type="date" />
-          <Property Name="BankInformation" Type="varchar" MaxLength="10" />
+          <Property Name="BankInformation" Type="varchar" MaxLength="20" />
           <Property Name="PermanentAddress" Type="varchar" MaxLength="400" />
           <Property Name="TemporaryAddress" Type="varchar" MaxLength="400" />
           <Property Name="PhoneNo" Type="varchar" MaxLength="100" />
@@ -239,10 +239,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
         <EntityType Name="Staff_Allowance">
           <Key>
             <PropertyRef Name="StaffID" />
-            <PropertyRef Name="ChangeDate" />
           </Key>
           <Property Name="StaffID" Type="int" Nullable="false" />
-          <Property Name="ChangeDate" Type="date" Nullable="false" />
           <Property Name="MD" Type="bit" />
           <Property Name="Director" Type="bit" />
           <Property Name="Manager" Type="bit" />
@@ -313,10 +311,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
         <EntityType Name="Staff_Allowance">
           <Key>
             <PropertyRef Name="StaffID" />
-            <PropertyRef Name="ChangeDate" />
           </Key>
           <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MD" Type="Boolean" />
           <Property Name="Director" Type="Boolean" />
           <Property Name="Manager" Type="Boolean" />
@@ -492,7 +488,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="NRC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="JoinDate" Type="DateTime" Precision="0" />
           <Property Name="PermanentDate" Type="DateTime" Precision="0" />
-          <Property Name="BankInformation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BankInformation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PermanentAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="TemporaryAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -589,7 +585,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
             <EntityTypeMapping TypeName="JSAT_HRModel.Staff_Allowance">
               <MappingFragment StoreEntitySet="Staff_Allowance">
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
                 <ScalarProperty Name="MD" ColumnName="MD" />
                 <ScalarProperty Name="Director" ColumnName="Director" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
