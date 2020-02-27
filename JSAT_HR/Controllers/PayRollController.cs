@@ -17,6 +17,8 @@ namespace JSAT_HR.Controllers
     public class PayRollController : Controller
     {
         Payroll_BL pbl = new Payroll_BL();
+        DataTable AllowanceDt = new DataTable();
+        DataTable DeductionDt = new DataTable();
         // GET: PayRoll
         public ActionResult PayRoll_Setting()
         {
@@ -149,24 +151,33 @@ namespace JSAT_HR.Controllers
         public JsonResult GetPayRollDetail_AllowanceLabel(string id)
         {
             Payroll_BL bl = new Payroll_BL();
+            
+            AllowanceDt = bl.PayRoll_Detail_Allow(id);
+            return Json(PRD_ALabelCol(AllowanceDt), JsonRequestBehavior.AllowGet);
+        }
 
+        public JsonResult GetPayRollDetail_AllowanceData(string id)
+        {
 
-            DataTable dt = bl.PayRoll_Detail_Allow(id);
-            return Json(PRD_ALabelCol(dt), JsonRequestBehavior.AllowGet);
+            Payroll_BL bl = new Payroll_BL();
+
+           AllowanceDt = bl.PayRoll_Detail_Allow(id);
+
+            return Json(PRD_ADataCol(AllowanceDt), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetPayRollDetail_DeductionLabel(string id)
         {
             Payroll_BL bl = new Payroll_BL();
-            DataTable dt = bl.PayRoll_Detail_Deduction(id);
-            return Json(PRD_DLabelCol(dt), JsonRequestBehavior.AllowGet);
+            DeductionDt = bl.PayRoll_Detail_Deduction(id);
+            return Json(PRD_DLabelCol(DeductionDt), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetPayRollDetail_DeductionData(string id)
         {
             Payroll_BL bl = new Payroll_BL();
-            DataTable dt = bl.PayRoll_Detail_Deduction(id);
-            return Json(PRD_DDataCol(dt), JsonRequestBehavior.AllowGet);
+            DeductionDt = bl.PayRoll_Detail_Deduction(id);
+            return Json(PRD_DDataCol(DeductionDt), JsonRequestBehavior.AllowGet);
         }
 
         public string PRD_Row(string id)
@@ -439,16 +450,7 @@ namespace JSAT_HR.Controllers
             return Deduction_Data;
 
         }
-
-        public JsonResult GetPayRollDetail_AllowanceData(string id)
-        {
-
-            Payroll_BL bl = new Payroll_BL();
-
-            DataTable dt = bl.PayRoll_Detail_Allow(id);
-
-            return Json(PRD_ADataCol(dt), JsonRequestBehavior.AllowGet);
-        }
+             
 
         public string PRD_ADataCol(DataTable dt)
         {
