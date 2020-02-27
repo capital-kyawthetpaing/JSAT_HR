@@ -22,14 +22,13 @@ namespace Office_BL
             return bdl.SelectData("M_Office_SelectAll", prms);
         }
 
-        public async Task<string> Hours_Setting_Save(OfficeModel am)
+        public string Hours_Setting_Save(OfficeModel am)
         {
-
             string msg = string.Empty;
             JSAT_HREntities db = new JSAT_HREntities();
             
 
-            M_Office tb = await db.M_Office.Where(s => s.OfficeCD.Equals(2)).SingleOrDefaultAsync();
+            M_Office tb =  db.M_Office.Where(s => s.OfficeCD.Equals(2)).SingleOrDefault();
             if (!String.IsNullOrWhiteSpace(am.OfficeTimeIn))
                 tb.OfficeHourFrom = TimeSpan.Parse(am.OfficeTimeIn);
             if (!String.IsNullOrWhiteSpace(am.OfficeTimeOut))
@@ -37,7 +36,7 @@ namespace Office_BL
            
             db.SaveChanges();
 
-            M_Office tb1 = await db.M_Office.Where(s => s.OfficeCD.Equals(1)).SingleOrDefaultAsync();
+            M_Office tb1 =  db.M_Office.Where(s => s.OfficeCD.Equals(1)).SingleOrDefault();
             if(!String.IsNullOrWhiteSpace(am.AcademyTimeIn))
                 tb1.OfficeHourFrom = TimeSpan.Parse(am.AcademyTimeIn);
             if (!String.IsNullOrWhiteSpace(am.AcademyTimeOut))
