@@ -49,8 +49,13 @@ namespace JSAT_HR.Controllers
                     jsonresult = JsonConvert.SerializeObject(dtpay);
                     return jsonresult;
                 }
+                else
+                {
+                    return JsonConvert.SerializeObject(dtpay);
+                }
             }
-            return JsonConvert.SerializeObject(dtpay);
+            else
+                return JsonConvert.SerializeObject(dtpay);
         }
 
         public FileStreamResult PayRoll_Report(string id)

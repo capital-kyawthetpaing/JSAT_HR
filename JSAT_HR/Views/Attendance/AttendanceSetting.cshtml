@@ -150,6 +150,7 @@
                     dataType: 'json',
                     success: function (json) {
                         if (json == null || json == "") {
+                             $(".dynamicAtt").remove();
                              window.location.href =  '@Url.Action("AttendanceSetting", "Attendance")'
                         }
                         else {                   
