@@ -157,6 +157,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\PayRoll_Detail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayRoll_Detail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\PayRoll_Detail_DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\PayRoll_DS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,6 +263,17 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Report\PayRoll_DS.xsc">
       <DependentUpon>PayRoll_DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\PayRoll_Detail_DS.xsc">
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\PayRoll_Detail_DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PayRoll_Detail_DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\PayRoll_Detail_DS.xss">
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
     </Content>
     <None Include="Report\PayRoll_DS.xsd">
       <SubType>Designer</SubType>
@@ -405,6 +427,7 @@
     <Content Include="Views\PayRoll\PayRoll_Setting.cshtml" />
     <Content Include="Views\CommonView\Common_View.cshtml" />
     <Content Include="Views\Shared\MessagePartialView.cshtml" />
+    <Content Include="Views\PayRoll\PayRoll_Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,10 +456,6 @@
     <ProjectReference Include="..\Attendance_BL\Attendance_BL.csproj">
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Base_BL\Base_BL.csproj">
-      <Project>{F3363966-FA8C-43FD-975D-EFC3C2C2615C}</Project>
-      <Name>Base_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
@@ -484,6 +503,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\PayRoll_Detail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PayRoll_Detail.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\PayRoll_List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PayRoll_List.cs</LastGenOutput>

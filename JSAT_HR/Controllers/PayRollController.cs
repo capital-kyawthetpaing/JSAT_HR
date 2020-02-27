@@ -22,6 +22,11 @@ namespace JSAT_HR.Controllers
             return View();
         }
 
+        public ActionResult PayRoll_Detail()
+        {
+            return View();
+        }
+
         [HttpGet]
         public string GetPayRoll()
         {
@@ -102,6 +107,36 @@ namespace JSAT_HR.Controllers
                 return JsonConvert.SerializeObject(dtpay);
             }
             return JsonConvert.SerializeObject(dtpay);
+        }
+
+        public FileStreamResult PayRoll_Detail_Report(string id)
+        {
+            DataSet ds = new DataSet();
+            string savefilename = "PayRoll_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
+
+            DataTable dt = new DataTable();
+            dt = pbl.PayRoll_Search(id, 1);
+            if (dt.Rows.Count < 20)
+            {
+                for (int i = 0; dt.Rows.Count < 20; i++)
+                {
+                    dt.Rows.Add();
+                    dt.AcceptChanges();
+                }
+            }
+            ds.Tables.Add(dt);
+
+            Report.PayRoll_List rpt = new Report.PayRoll_List();
+            rpt.Database.Tables["Pay_Roll"].SetDataSource(ds.Tables[0]);
+            rpt.SetParameterValue("Date", DateTime.Now.ToString("yyyy-MM-dd"));
+
+            Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            str.Seek(0, SeekOrigin.Begin);
+
+            return File(str, "application/pdf");
         }
     }
 }

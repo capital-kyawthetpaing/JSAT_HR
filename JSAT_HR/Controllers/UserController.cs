@@ -4,7 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Base_BL;
 using JH_Model;
 using Newtonsoft.Json;
 using User_BL;
@@ -16,7 +15,7 @@ namespace JSAT_HR.Controllers
     {
         UserBL ubl = new UserBL();
         DataTable dt = new DataTable();
-        BaseBL bbl = new BaseBL();
+       
         // GET: User
         public ActionResult Index()
         {
@@ -34,6 +33,7 @@ namespace JSAT_HR.Controllers
             else
             {
                 Session["UserID"] = um.UserID.ToString();
+                Session["UserName"] = um.UserName.ToString();
                
                 return RedirectToAction("StaffList", "Staff");
             }
