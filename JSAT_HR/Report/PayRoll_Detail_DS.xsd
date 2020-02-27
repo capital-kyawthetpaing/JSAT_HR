@@ -12,7 +12,7 @@
   <xs:element name="PayRoll_Detail_DS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PayRoll_Detail_DS" msprop:Generator_UserDSName="PayRoll_Detail_DS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PayRoll_Detail_tb" msprop:Generator_TableClassName="PayRoll_Detail_tbDataTable" msprop:Generator_TableVarName="tablePayRoll_Detail_tb" msprop:Generator_RowChangedName="PayRoll_Detail_tbRowChanged" msprop:Generator_TablePropName="PayRoll_Detail_tb" msprop:Generator_RowDeletingName="PayRoll_Detail_tbRowDeleting" msprop:Generator_RowChangingName="PayRoll_Detail_tbRowChanging" msprop:Generator_RowEvHandlerName="PayRoll_Detail_tbRowChangeEventHandler" msprop:Generator_RowDeletedName="PayRoll_Detail_tbRowDeleted" msprop:Generator_RowClassName="PayRoll_Detail_tbRow" msprop:Generator_UserTableName="PayRoll_Detail_tb" msprop:Generator_RowEvArgName="PayRoll_Detail_tbRowChangeEvent">
+        <xs:element name="PayRoll_Detail_tb" msprop:Generator_TableClassName="PayRoll_Detail_tbDataTable" msprop:Generator_TableVarName="tablePayRoll_Detail_tb" msprop:Generator_TablePropName="PayRoll_Detail_tb" msprop:Generator_RowDeletingName="PayRoll_Detail_tbRowDeleting" msprop:Generator_RowChangingName="PayRoll_Detail_tbRowChanging" msprop:Generator_RowEvHandlerName="PayRoll_Detail_tbRowChangeEventHandler" msprop:Generator_RowDeletedName="PayRoll_Detail_tbRowDeleted" msprop:Generator_UserTableName="PayRoll_Detail_tb" msprop:Generator_RowChangedName="PayRoll_Detail_tbRowChanged" msprop:Generator_RowEvArgName="PayRoll_Detail_tbRowChangeEvent" msprop:Generator_RowClassName="PayRoll_Detail_tbRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
@@ -38,6 +38,7 @@
               <xs:element name="IncomeTax" msprop:Generator_ColumnVarNameInTable="columnIncomeTax" msprop:Generator_ColumnPropNameInRow="IncomeTax" msprop:Generator_ColumnPropNameInTable="IncomeTaxColumn" msprop:Generator_UserColumnName="IncomeTax" type="xs:string" minOccurs="0" />
               <xs:element name="SocialSecurity" msprop:Generator_ColumnVarNameInTable="columnSocialSecurity" msprop:Generator_ColumnPropNameInRow="SocialSecurity" msprop:Generator_ColumnPropNameInTable="SocialSecurityColumn" msprop:Generator_UserColumnName="SocialSecurity" type="xs:string" minOccurs="0" />
               <xs:element name="NetSalary" msprop:Generator_ColumnVarNameInTable="columnNetSalary" msprop:Generator_ColumnPropNameInRow="NetSalary" msprop:Generator_ColumnPropNameInTable="NetSalaryColumn" msprop:Generator_UserColumnName="NetSalary" type="xs:string" minOccurs="0" />
+              <xs:element name="Currency" msprop:Generator_ColumnVarNameInTable="columnCurrency" msprop:Generator_ColumnPropNameInRow="Currency" msprop:Generator_ColumnPropNameInTable="CurrencyColumn" msprop:Generator_UserColumnName="Currency" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
