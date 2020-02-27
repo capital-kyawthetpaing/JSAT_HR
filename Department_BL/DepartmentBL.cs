@@ -44,6 +44,10 @@ namespace Department_BL
 
         public string Department_Update(DempartmentModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
+
             JSAT_HREntities db = new JSAT_HREntities();
             M_Department md = new M_Department();
             string msg = string.Empty;
@@ -51,7 +55,7 @@ namespace Department_BL
             update.DepartmentCD = model.DepartmentCD;
             update.Department = model.DepartmentName;
             update.UpdatedDate = DateTime.Now;
-            update.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            update.UpdatedBy = updatedby;
             try
             {
                 db.SaveChanges();
