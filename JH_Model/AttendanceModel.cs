@@ -11,5 +11,6 @@
         public string TimeOut { get; set; }
         public string LeaveType { get; set; }
         public string EarlyOut { get; set; }
+        public bool chk { get; set; }
     }
 }

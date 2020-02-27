@@ -98,21 +98,92 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-12 mb-2">
+                    <div class="col-xl-4 col-md-12 mb-2">
                         <div class="card border-left-info shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="text-s font-weight-bold text-info text-uppercase mb-1">1</div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-xl-6 col-md-12">
                                         <label for="Year">Time In</label>
                                         <div class="input-group">
                                             <input type="time" class="form-control input-sm" id="attlistModel'">
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-xl-6 col-md-12">
                                         <label for="Year">Time Out</label>
                                         <div class="input-group">
                                             <input type="time" class="form-control input-sm" id="attlistModel'">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-12 col-md-12 mb-1">
+                                        <label for="Year">Unpaid Leave</label>
+                                    </div>
+                                    <div class="form-group col-xl-4 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    @Html.RadioButtonFor(mm => mm.attModel.chk, new
+                                               {
+                                                   @tabindex = "36"
+                                               })
+                                                </div>
+                                            </div>
+                                            <label class="form-control" for="MarketingTeamAllowance">Full</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-4 col-lg-12 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    @Html.RadioButtonFor(mm => mm.attModel.chk, new
+                                               {
+                                                   @tabindex = "36"
+                                               })
+                                                </div>
+                                            </div>
+                                            <label class="form-control" for="MarketingTeamAllowance">Half</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-4 col-lg-12 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    @Html.CheckBoxFor(mm => mm.attModel.chk, new
+                                               {
+                                                   @tabindex = "36"
+                                               })
+                                                </div>
+                                            </div>
+                                            <label class="form-control" for="MarketingTeamAllowance">1 Hour</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-12 col-md-12 mb-1">
+                                        <label for="Year">Early Out</label>
+                                    </div>
+                                    <div class="form-group col-xl-4 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    @Html.RadioButtonFor(mm => mm.attModel.chk, new
+                                               {
+                                                   @tabindex = "36"
+                                               })
+                                                </div>
+                                            </div>
+                                            <label class="form-control" for="MarketingTeamAllowance">1 Hour</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-4 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    @Html.RadioButtonFor(mm => mm.attModel.chk, new
+                                               {
+                                                   @tabindex = "36"
+                                               })
+                                                </div>
+                                            </div>
+                                            <label class="form-control" for="MarketingTeamAllowance">2 Hour</label>
                                         </div>
                                     </div>
                                 </div>                                
