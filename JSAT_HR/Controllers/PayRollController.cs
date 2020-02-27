@@ -22,6 +22,11 @@ namespace JSAT_HR.Controllers
             return View();
         }
 
+        public ActionResult PayRoll_Detail()
+        {
+            return View();
+        }
+
         [HttpGet]
         public string GetPayRoll()
         {
@@ -44,8 +49,13 @@ namespace JSAT_HR.Controllers
                     jsonresult = JsonConvert.SerializeObject(dtpay);
                     return jsonresult;
                 }
+                else
+                {
+                    return JsonConvert.SerializeObject(dtpay);
+                }
             }
-            return JsonConvert.SerializeObject(dtpay);
+            else
+                return JsonConvert.SerializeObject(dtpay);
         }
 
         public FileStreamResult PayRoll_Report(string id)
@@ -97,6 +107,36 @@ namespace JSAT_HR.Controllers
                 return JsonConvert.SerializeObject(dtpay);
             }
             return JsonConvert.SerializeObject(dtpay);
+        }
+
+        public FileStreamResult PayRoll_Detail_Report(string yyyymm)
+        {
+            DataSet ds = new DataSet();
+            string savefilename = "PayRoll_Report_Detail" + (DateTime.Now).ToShortDateString() + ".pdf";
+
+            DataTable dt = new DataTable();
+            dt = pbl.PayRoll_Detail_Report(yyyymm.Substring(6,1),yyyymm.Substring(0,6));
+            //if (dt.Rows.Count > 0)
+            //{
+                //for (int i = 0; dt.Rows.Count < 20; i++)
+                //{
+                //    dt.Rows.Add();
+                //    dt.AcceptChanges();
+                //}
+
+                ds.Tables.Add(dt);
+
+                Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
+                rpt.Database.Tables["PayRoll_Detail_tb"].SetDataSource(ds.Tables[0]);
+
+                Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+                str.Seek(0, SeekOrigin.Begin);
+
+                return File(str, "application/pdf");
+            //}
         }
     }
 }

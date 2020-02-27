@@ -122,7 +122,7 @@ namespace Staff_BL
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             sa.StaffID = Convert.ToInt32(model.StaffID);
-            sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
             sa.Manager = model.Manager;
@@ -156,9 +156,10 @@ namespace Staff_BL
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
+            int staffid = Convert.ToInt32(model.StaffID);
 
-            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(model.StaffID)).SingleOrDefault();
-            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(model.StaffID)).SingleOrDefault();
+            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(staffid)).SingleOrDefault();
+            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(staffid)).SingleOrDefault();
             //updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updatestaff.Name = model.Name;
             updatestaff.Gender = Convert.ToByte(model.Gender);
@@ -195,7 +196,7 @@ namespace Staff_BL
             updatestaff.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             updateallow.StaffID = Convert.ToInt32(model.StaffID);
-            updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updateallow.MD = model.MD;
             updateallow.Director = model.Director;
             updateallow.Manager = model.Manager;

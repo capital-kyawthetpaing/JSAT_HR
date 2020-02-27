@@ -347,7 +347,7 @@ namespace Attendance_BL
             dttest.WriteXml(writer, XmlWriteMode.WriteSchema, false);
             string result = writer.ToString();
             prms[3] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
-            bdl.InsertUpdateDeleteData("Payroll_Deduction_Insert", prms);
+            bdl.InsertUpdateDeleteData("Payroll_Deduction_IncomeTax_Insert", prms);
         }
 
         public void Update_Attendance_Data(DataTable dtattendance, MultiModel mModel)
