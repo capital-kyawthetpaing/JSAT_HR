@@ -32,9 +32,7 @@ namespace JSAT_HR.Controllers
             }
             else
             {
-                Session["UserID"] = um.UserID.ToString();
-                Session["UserName"] = um.UserName.ToString();
-               
+                Session["UserID"] = um.UserID.ToString() + "_" + um.UserName.ToString();             
                 return RedirectToAction("StaffList", "Staff");
             }
         }
