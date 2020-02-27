@@ -1,13 +1,10 @@
 ﻿@model JH_Model.DempartmentModel
 @{
     ViewBag.Title = "DepartmentList";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
-
 @using (Html.BeginForm("Department_Save", "Department", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
-
- 
-
     <div class="container-fluid">
         <!-- Page Heading -->
         <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -26,7 +23,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-custom2" id="basic-addon1"><i class="fas fa-list-ol"></i></span>
                                     </div>
-                                   
+
                                     @Html.TextBoxFor(dm => dm.DepartmentCD, new
                                {
                                    @class = "form-control input-sm",
@@ -65,12 +62,12 @@
                             <div class="form-group col-md-3" id="update" style="display:none;">
                                 <label for="Process" style="color:white;">Process</label>
                                 <div class="input-group" style="width:450px;">
-                                    <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="submit" id="btnupdate" onclick="UpdateConfirm();" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                                     <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                                 </div>
                             </div>
 
-                           
+
 
                         </div>
                     </div>
@@ -98,74 +95,102 @@
             </div>
         </div>
     </div>
+
 }
-    @section Scripts{
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var table = $('#tbDepartment').DataTable(
-                    {
-                        "language": {
-                            "info": "Display _START_ to _END_ of _TOTAL_ records",
-                        },
-                        "oLanguage": {
-                            "sLengthMenu": "Display _MENU_ records",
-                        },
-                        "ajax": {
-                            "url": "../Department/GetDepartment",
-                            "type": "GET",
-                            "datatype": "json",
-                            "dataSrc": ""
-                        },
-                        "columns": [
-                           
-                            {
-                                
-                                "data": "DepartmentCD", orderable: false, "width": "3%",
-                                "render": function (data, type, row) {
-                                    
-                                    //return '<a href="../Department/Smart_Template_New_Edit/' + row.DepartmentID + '"></a>';
-                                    //return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
-                                    return '<a href="#" onclick="DepartmentEdit(&quot;' + row.DepartmentCD + '&quot;,&quot;' + row.DepartmentName +'&quot;);">' + row.DepartmentCD + '</a>';
-                                }
-                            },
-                           
 
-                            { "data": "DepartmentName", orderable: false, "width": "13%" }
-                        ],
-
-                    }
-                );
-            });
-
-            function DepartmentEdit(depCD,depName) {
-                $('#txtDepartmentCD').val(depCD);
-                $('#txtDepartmentName').val(depName);  
-                $("#txtDepartmentCD").attr('readonly', true);
-
-                $("#update").css("display", "block");
-                $("#cancel").css("display", "block");
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tt = '@ViewBag.mesg';
+           
+            if (tt == "OK") {
                 
+                GetMessage("I_1002", "Update");
 
-                return $("#save").css("display", "none");
+                $('#myModal').modal('show');
+            }
+            else
+            {
+
             }
 
-            $("#btncancel").click(function () {
-                $("#txtDepartmentCD").attr('readonly', false);
+            var aa = '@ViewBag.mesgsave';
+            if (aa == "OK") {
+                alert("AA");
                
-                $('#txtDepartmentCD').val("");
-                $('#txtDepartmentName').val("");  
+                GetMessage("I_1001", "Insert");
+                $('#myModal').modal('show');
+            }
+            else {
 
-                $("#update").css("display", "none");
-                $("#cancel").css("display", "none");
-                $("#save").css("display", "block");
+            }
+         
+            var table = $('#tbDepartment').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../Department/GetDepartment",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
 
-                //$("#txtDepartmentCD").removeAttr("required");​​​​​
-                //$("#txtDepartmentName").removeAttr("required");​​​​​
-            })
-           
-            
-        </script>
-        
+                        {
 
-    }
+                            "data": "DepartmentCD", orderable: false, "width": "3%",
+                            "render": function (data, type, row) {
+
+                                //return '<a href="../Department/Smart_Template_New_Edit/' + row.DepartmentID + '"></a>';
+                                //return '<a href="../Department/DepartmentList/' + row.DepartmentCD + '">' + row.DepartmentCD + '</a>';
+                                return '<a href="#" onclick="DepartmentEdit(&quot;' + row.DepartmentCD + '&quot;,&quot;' + row.DepartmentName + '&quot;);">' + row.DepartmentCD + '</a>';
+                            }
+                        },
+
+
+                        { "data": "DepartmentName", orderable: false, "width": "13%" }
+                    ],
+
+                }
+            );
+        });
+
+        function DepartmentEdit(depCD, depName) {
+
+            $('#txtDepartmentCD').val(depCD);
+            $('#txtDepartmentName').val(depName);
+            $("#txtDepartmentCD").attr('readonly', true);
+
+            $("#update").css("display", "block");
+            $("#cancel").css("display", "block");
+
+            return $("#save").css("display", "none");
+        }
+
+        $("#btncancel").click(function () {
+
+            //GetMessage("I_1001", "Save");
+
+            $("#txtDepartmentCD").attr('readonly', false);
+
+            $('#txtDepartmentCD').val("");
+            $('#txtDepartmentName').val("");
+
+            $("#update").css("display", "none");
+            $("#cancel").css("display", "none");
+            $("#save").css("display", "block");
+
+            $("#txtDepartmentCD").removeAttr("required");
+            $("#txtDepartmentName").removeAttr("required");
+
+            //$('#myModal').modal('show');
+        })
+
+    </script>
+}
 

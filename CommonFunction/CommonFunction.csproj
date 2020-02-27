@@ -50,5 +50,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JH_DL\JH_DL.csproj">
+      <Project>{c4fc2b8f-45e5-44f4-a6fb-df20087f2db6}</Project>
+      <Name>JH_DL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

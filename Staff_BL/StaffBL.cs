@@ -86,7 +86,7 @@ namespace Staff_BL
             string msg = "";
 
             ms.StaffID = Convert.ToInt32(model.StaffID);
-            ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = Convert.ToByte(model.Gender);
             ms.DOB = Convert.ToDateTime(model.DOB);
@@ -122,7 +122,7 @@ namespace Staff_BL
             ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             sa.StaffID = Convert.ToInt32(model.StaffID);
-            sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             sa.MD = model.MD;
             sa.Director = model.Director;
             sa.Manager = model.Manager;
@@ -137,11 +137,11 @@ namespace Staff_BL
             sa.MarketingTeamAllowance = model.MarketingTeamAllowance;
             sa.MentorAllowance = model.MentorAllowance;
 
-           // db.M_Staff.Add(ms);
-           // db.Staff_Allowance.Add(sa);
+            db.M_Staff.Add(ms);
+            db.Staff_Allowance.Add(sa);
             try
             {
-                //db.SaveChanges();
+                db.SaveChanges();
                 msg = "Insert Success";
             }
             catch (Exception ex)
@@ -156,10 +156,11 @@ namespace Staff_BL
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
+            int staffid = Convert.ToInt32(model.StaffID);
 
-            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(model.StaffID)).SingleOrDefault();
-            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(model.StaffID)).SingleOrDefault();
-            updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            M_Staff updatestaff = db.M_Staff.Where(s => s.StaffID.Equals(staffid)).SingleOrDefault();
+            Staff_Allowance updateallow = db.Staff_Allowance.Where(a => a.StaffID.Equals(staffid)).SingleOrDefault();
+            //updatestaff.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updatestaff.Name = model.Name;
             updatestaff.Gender = Convert.ToByte(model.Gender);
             updatestaff.DOB = Convert.ToDateTime(model.DOB);
@@ -195,7 +196,7 @@ namespace Staff_BL
             updatestaff.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
             updateallow.StaffID = Convert.ToInt32(model.StaffID);
-            updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            //updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             updateallow.MD = model.MD;
             updateallow.Director = model.Director;
             updateallow.Manager = model.Manager;
@@ -224,19 +225,15 @@ namespace Staff_BL
             return msg;
         }
 
-        public string Check_StaffCD(StaffModel model)
+        public bool StaffExists(StaffModel model)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             M_Staff md = new M_Staff();
             int staffID = Convert.ToInt32(model.StaffID);
-            string scd;
             M_Staff staffcd =  db.M_Staff.Where(ms => ms.StaffID.Equals(staffID)).SingleOrDefault();
             if (staffcd != null)
-                scd = staffcd.StaffID.ToString();
-            else
-                scd ="";
-
-            return scd;
+                return true;
+            return false;
         }
     }
 }

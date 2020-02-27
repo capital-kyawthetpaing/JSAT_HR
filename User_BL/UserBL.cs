@@ -20,6 +20,7 @@ namespace User_BL
             else
             {
                 umodel.UserID = um.UserID;
+                umodel.UserName = um.UserName;
                 return umodel;
             }
         }

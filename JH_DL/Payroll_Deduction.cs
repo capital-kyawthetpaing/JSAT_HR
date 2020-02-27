@@ -16,13 +16,17 @@ namespace JH_DL
     {
         public string StaffID { get; set; }
         public int YYYYMM { get; set; }
-        public Nullable<System.TimeSpan> LateTime { get; set; }
-        public Nullable<int> HourlyUnpaidLeave { get; set; }
-        public Nullable<byte> UnpaidLeave { get; set; }
+        public Nullable<int> LateMinutes { get; set; }
+        public Nullable<byte> HourlyLeave { get; set; }
+        public Nullable<byte> EarlyOut { get; set; }
+        public Nullable<decimal> UnpaidLeave { get; set; }
         public Nullable<decimal> LateTimeFees { get; set; }
-        public Nullable<decimal> HourlyUnpaidLeaveFees { get; set; }
+        public Nullable<decimal> HourlyLeaveFees { get; set; }
+        public Nullable<decimal> EarlyOutFees { get; set; }
         public Nullable<decimal> UnpaidLeaveFees { get; set; }
         public Nullable<decimal> SocialWelfare { get; set; }
         public Nullable<decimal> IncomeTax { get; set; }
+        public Nullable<decimal> UniformCharges { get; set; }
+        public Nullable<decimal> TotalDeduction { get; set; }
     }
 }

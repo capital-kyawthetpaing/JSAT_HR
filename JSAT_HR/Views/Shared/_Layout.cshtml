@@ -3,10 +3,12 @@
     var ControllerName = ViewContext.RouteData.Values["controller"].ToString();
     var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
     var time = Session.Timeout;
+    string loginID = string.Empty;
+    string UserName = string.Empty;
     if (Session["UserID"] != null)
     {
-
-
+        loginID = Session["UserID"].ToString().Split('_')[0];
+        UserName = Session["UserID"].ToString().Split('_')[1];
     }
 
     else
@@ -125,7 +127,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Office Hours Setting:</h6>
                         <a class="collapse-item" href='@Url.Action("Office_Hours_Setting", "Office")'>Office Hours Setting</a>
-
                     </div>
                 </div>
             </li>
@@ -137,10 +138,9 @@
                 </a>
                 <div id="collapsepayroll" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">PayRoll:</h6>
+                        <h6 class="collapse-header">PayRoll Setting:</h6>
                         <a class="collapse-item" href='@Url.Action("PayRoll_Setting", "PayRoll")'>PayRoll Setting</a>
                         <a class="collapse-item" href='@Url.Action("PayRoll_Detail", "PayRoll")'>PayRoll Detail</a>
-
                     </div>
                 </div>
             </li>
@@ -317,7 +317,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@UserName</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -382,7 +382,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="~/Login/Login">Logout</a>
                 </div>
             </div>
         </div>

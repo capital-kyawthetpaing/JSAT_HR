@@ -1,9 +1,12 @@
 ﻿@using System.Data;
-@model JH_Model.AttendanceModel
+@model JH_Model.MultiModel
 @{
     ViewBag.Title = "AttendanceSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("Attendance_Setting_Save", "Attendance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
@@ -32,7 +35,7 @@
                                         listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
                                         listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
                                     }
-                                    @Html.DropDownList("Year", listYear, new
+                                    @Html.DropDownListFor(m => m.attModel.YYYY, listYear, new
                                {
                                    @class = "form-control",
                                    @required = "required",
@@ -62,7 +65,8 @@
                                         listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
                                         listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                         listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
-                                    }@Html.DropDownList("Month", listMonth, new
+                                    }
+                                    @Html.DropDownListFor(m => m.attModel.MM, listMonth, new
                                 {
                                     @class = "form-control",
                                     @required = "required",
@@ -77,7 +81,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
                                     </div>
-                                    @Html.DropDownListFor(am => am.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                                    @Html.DropDownListFor(m => m.attModel.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
                                {
                                    @class = "form-control",
                                    @required = "required",
@@ -94,14 +98,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-md-12 mb-2">
-                        <div class="form-row dynamicAtt">
-                        </div>
+                    <div class="col-xl-12 col-md-12 mb-2 dynamcdiv">
+                        @*<div class="form-row dynamicAtt">
+                        </div>*@
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row" id="update" style="display:none;">
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" id="btnSave" class="btn btn-success col-xl-3" tabindex="38"><i class="fa fa-save"></i>&nbsp; Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
     @section Scripts{
         <script type="text/javascript">
             $(document).ready(function () {
@@ -125,61 +141,119 @@
             }
 
             function _Search() {
-               
                 var YYY = $("#ddlYear").val();
                 var MM = $("#ddkMonth").val();
-                var staffID = $("#ddlStaff").val();               
+                var staffID = $("#ddlStaff").val();
                 $.ajax({
                     type: 'POST',
                     url: "../Attendance/_AttendanceSearch/" + YYY + '_' + MM + '_' + staffID,
                     dataType: 'json',
                     success: function (json) {
                         if (json == null || json == "") {
-                             window.location.href =  '@Url.Action("AttendanceSetting", "Attendance")'                          
+                             $(".dynamicAtt").remove();
+                             window.location.href =  '@Url.Action("AttendanceSetting", "Attendance")'
                         }
-                        else {
+                        else {                   
                             Filltable(json);
+                            $("#update").css("display", "block");
                         }
 
                     }
                 });
             }
 
-            function Filltable(json) {
+            function Filltable(json) 
+            {
+                $(".dynamicAtt").remove();
+
+                var maindiv = $(".dynamcdiv");
+                var newdiv = document.createElement('div');
+                newdiv.className = 'form-row dynamicAtt';
+                $(maindiv).append(newdiv);
+
                 var x;
                 for (x = 1; x <= json[0].Total; x++) {
                     var wrapper = $(".dynamicAtt");
-                    //var timein = '<input type="Time" class="form-control input-sm" id="Att_' + (x) + '__TimeIn" >';
-                    //var timeout = '<input type="Time" class="form-control input-sm" id="Att_' + (x) + '__TimeOut" >';
+
+                    var timein = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x-1) + '__TimeIn" name="attlistModel[' + (x-1) + '].TimeIn">';
+
+                    var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x-1) + '__TimeOut" name="attlistModel[' + (x-1) + '].TimeOut">';
+
+                    var unpaidfull = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeFull" name="attlistModel[' + (x-1) + '].LeaveType" value="1" >';
+                
+                    var unpaidhalf = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeHalf" name="attlistModel[' + (x-1) + '].LeaveType" value="2">';
+
+                    var onehrleave = '<input type="checkbox" id="attlistModel_' + (x-1) + '__LeaveTypeOnehr" name="attlistModel[' + (x-1) +'].LeaveType" value="3">';
+
+                    var onehrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutOnehr" name="attlistModel[' + (x-1) + '].EarlyOut" value="1">';
+
+                    var twohrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutTwohr"  name="attlistModel[' + (x-1) + '].EarlyOut" value="2">';
+                
 
                     $(wrapper).append('<div class="form-group col-md-2">' +
-                                    ' <label for="Day">' + x + '</label>' +
+                                    ' <label for="Day">' + x + '</label>' +     
                                     ' <table style="border: 1px solid #999999;width:80%">' +
                                     '<tbody>' +
-                                    '<tr class="form-group_entry">' +
-                                    '<td>Time IN:' + json[x-1].TimeIn + '</td>' +
-                                    '</tr>' +
-                                    '<tr class="form-group_entry">' +
-                                    '<td>Tine Out:' + json[x-1].TimeOut + '</td>' +
-                                    '</tr>' +
-                                    '<tr class="form-group_entry">' +
 
-                                    '<td>' +
-                                    '<select id="change_chart" class="form-control input-sm">' +
-                                    '<option value="0" selected>---Select---</option>' +
-                                    '<option value="1">Full</option>' +
-                                    '<option value="2">Half</option>' +
-                                    '<option value="3">1Hour</option>' +
-                                    '</select>' +
+                                    '<tr class="form-group_entry">' +
+                                    '<td>Time IN:'+ timein + '</td>' +
+                                    '</tr>' +
+
+                                    '<tr class="form-group_entry">' +
+                                     '<td>Tine Out:' + timeout+ '</td>' +
+                                    '</tr>' +
+
+                                    '<tr class="form-group_entry">' +
+                                    '<td>Unpaid:' +
+                                     unpaidfull + '<label for="Full">Full</label>'+
+                                     unpaidhalf + '<label for="Half">Half</label>'+
+                                    '</td>'+
+                                  '</tr>' +
+
+                                    '<tr class="form-group_entry">' +
+                                    '<td>1 Hour Leave:' + onehrleave + '</td > ' +
+                                   '</tr>' +
+
+                                    '<tr class="form-group_entry">' +
+                                    '<td>Early Out:' +
+                                     onehrearly+'<label for="1Hour">1 Hour</label>' +
+                                     twohrearly +'<label for="2Hour">2 Hours</label>' +
                                     '</td > ' +
                                     '</tr>' +
+
                                     '</tbody >' +
                                     '</table >' +
                         '</div>');
-                    //$('#Att_' + (x) + '__TimeIn').val(json[x-1].TimeIn);
-                    //$('#Att_' + (x) + '__TimeOut').val(json[x-1].TimeOut);
+                    
+                    $('#attlistModel_' + (x - 1) + '__TimeIn').val(json[x - 1].TimeIn);
+                    $('#attlistModel_' + (x - 1) + '__TimeOut').val(json[x - 1].TimeOut);
+                    if (json[x - 1].LeaveType == 1) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeFull').prop('checked', true);
+                    }
+                    if (json[x - 1].LeaveType == 2) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeHalf').prop('checked', true);
+                    }
+                    if (json[x - 1].LeaveType == 3) {
+                        $('#attlistModel_' + (x - 1) + '__LeaveTypeOnehr').prop('checked', true);
+                    }
+                    if (json[x - 1].EarlyOut == 1) {
+
+                        $('#attlistModel_' + (x - 1) + '__EarlyOutOnehr').prop('checked', true);
+                    }
+                    if (json[x - 1].EarlyOut == 2) {
+                        $('#attlistModel_' + (x - 1) + '__EarlyOutTwohr').prop('checked', true);
+                    }
                 }
-            }        
+            }
+
+            function Uncheck() {
+                $(document).on('dblclick', '.Uncheckclass', function () {
+                    if (this.checked) {
+                        $(this).prop('checked', false);
+                    }
+                });
+            }
+
         </script>
     }
 
