@@ -34,11 +34,15 @@ namespace Position_BL
         }
 
         public M_Position setPositionValue(M_Position position,PositionModel pm)
-        {           
+        {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
+
             position.PositionCD = pm.PostitionCD;
             position.Position = pm.PositionName;
             position.InsertedDate = DateTime.Now;
-            position.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            position.InsertedBy = updatedby;
 
             return position;
         }

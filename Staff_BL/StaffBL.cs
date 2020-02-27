@@ -197,7 +197,7 @@ namespace Staff_BL
             updatestaff.Effort = Convert.ToDecimal(model.Effort);
             updatestaff.DeleteFlg = model.DeleteFlg;
             updatestaff.InsertedDate = DateTime.Now;
-            updatestaff.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            updatestaff.InsertedBy = updatedby;
 
             updateallow.StaffID = Convert.ToInt32(model.StaffID);
             //updateallow.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
@@ -219,7 +219,6 @@ namespace Staff_BL
             updatestaff.UpdatedBy = updatedby;
             try
             {
-                db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
                 msg = "OK";
             }
