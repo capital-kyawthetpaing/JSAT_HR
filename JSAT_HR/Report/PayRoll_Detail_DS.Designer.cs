@@ -325,6 +325,8 @@ namespace JSAT_HR.Report {
             
             private global::System.Data.DataColumn columnNetSalary;
             
+            private global::System.Data.DataColumn columnCurrency;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public PayRoll_Detail_tbDataTable() {
@@ -544,6 +546,14 @@ namespace JSAT_HR.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CurrencyColumn {
+                get {
+                    return this.columnCurrency;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -602,7 +612,8 @@ namespace JSAT_HR.Report {
                         string TotalSalary, 
                         string IncomeTax, 
                         string SocialSecurity, 
-                        string NetSalary) {
+                        string NetSalary, 
+                        string Currency) {
                 PayRoll_Detail_tbRow rowPayRoll_Detail_tbRow = ((PayRoll_Detail_tbRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
@@ -627,7 +638,8 @@ namespace JSAT_HR.Report {
                         TotalSalary,
                         IncomeTax,
                         SocialSecurity,
-                        NetSalary};
+                        NetSalary,
+                        Currency};
                 rowPayRoll_Detail_tbRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPayRoll_Detail_tbRow);
                 return rowPayRoll_Detail_tbRow;
@@ -673,6 +685,7 @@ namespace JSAT_HR.Report {
                 this.columnIncomeTax = base.Columns["IncomeTax"];
                 this.columnSocialSecurity = base.Columns["SocialSecurity"];
                 this.columnNetSalary = base.Columns["NetSalary"];
+                this.columnCurrency = base.Columns["Currency"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -724,6 +737,8 @@ namespace JSAT_HR.Report {
                 base.Columns.Add(this.columnSocialSecurity);
                 this.columnNetSalary = new global::System.Data.DataColumn("NetSalary", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNetSalary);
+                this.columnCurrency = new global::System.Data.DataColumn("Currency", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrency);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1237,6 +1252,22 @@ namespace JSAT_HR.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Currency {
+                get {
+                    try {
+                        return ((string)(this[this.tablePayRoll_Detail_tb.CurrencyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Currency\' in table \'PayRoll_Detail_tb\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePayRoll_Detail_tb.CurrencyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tablePayRoll_Detail_tb.NameColumn);
             }
@@ -1509,6 +1540,18 @@ namespace JSAT_HR.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetNetSalaryNull() {
                 this[this.tablePayRoll_Detail_tb.NetSalaryColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCurrencyNull() {
+                return this.IsNull(this.tablePayRoll_Detail_tb.CurrencyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCurrencyNull() {
+                this[this.tablePayRoll_Detail_tb.CurrencyColumn] = global::System.Convert.DBNull;
             }
         }
         
