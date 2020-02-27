@@ -24,13 +24,17 @@ namespace Company_BL
 
         public string Company_Save(CompanyModel cm)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
+
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
             M_Company company = new M_Company();
             company.CompanyCD = cm.CompanyCD;
             company.CompanyName = cm.CompanyName;
             company.InsertedDate = DateTime.Now;
-            company.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            company.InsertedBy = updatedby;
 
             //db.M_Company.Add(company);
             //db.SaveChanges();
