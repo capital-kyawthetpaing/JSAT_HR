@@ -48,6 +48,7 @@
     <Compile Include="CompanyModel.cs" />
     <Compile Include="DempartmentModel.cs" />
     <Compile Include="OfficeModel.cs" />
+    <Compile Include="PayRollDetail.cs" />
     <Compile Include="PayrollModel.cs" />
     <Compile Include="PositionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

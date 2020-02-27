@@ -60,6 +60,32 @@ namespace PayRoll_BL
                 return null;
         }
 
+        public DataTable PayRoll_Detail_Allow(string S_ID)
+        {
+            var ID = S_ID.Split('_')[0];
+            var YM = S_ID.Split('_')[1];
+            BaseDL dl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[3];
+            prms[0] = new SqlParameter("@staffID", SqlDbType.VarChar) {Value= ID };
+            prms[1] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = int.Parse(YM) };
+            prms[2] = new SqlParameter("@option", SqlDbType.Int) { Value = 1};
+            DataTable dt = dl.SelectData("PayRoll_Detail",prms);
+            return dt;
+        }
+
+        public DataTable PayRoll_Detail_Deduction(string id)
+        {
+            var ID = id.Split('_')[0];
+            var YM = id.Split('_')[1];
+            BaseDL dl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[3];
+            prms[0] = new SqlParameter("@staffID", SqlDbType.VarChar) { Value = ID };
+            prms[1] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = int.Parse(YM) };
+            prms[2] = new SqlParameter("@option", SqlDbType.Int) { Value = 2 };
+            DataTable dt = dl.SelectData("PayRoll_Detail", prms);
+            return dt;
+
+        }
 
 
     }
