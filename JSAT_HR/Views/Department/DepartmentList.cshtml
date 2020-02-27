@@ -62,7 +62,7 @@
                             <div class="form-group col-md-3" id="update" style="display:none;">
                                 <label for="Process" style="color:white;">Process</label>
                                 <div class="input-group" style="width:450px;">
-                                    <button type="submit" id="btnupdate" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="submit" id="btnupdate" onclick="UpdateConfirm();" class="btn btn-info col-xl-3"><i class="fa fa-edit"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                                     <button type="button" id="btncancel" class="btn btn-dark col-xl-3"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
                                 </div>
                             </div>
@@ -95,11 +95,36 @@
             </div>
         </div>
     </div>
+
 }
 
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            var tt = '@ViewBag.mesg';
+           
+            if (tt == "OK") {
+                
+                GetMessage("I_1002", "Update");
+
+                $('#myModal').modal('show');
+            }
+            else
+            {
+
+            }
+
+            var aa = '@ViewBag.mesgsave';
+            if (aa == "OK") {
+                alert("AA");
+               
+                GetMessage("I_1001", "Insert");
+                $('#myModal').modal('show');
+            }
+            else {
+
+            }
+         
             var table = $('#tbDepartment').DataTable(
                 {
                     "language": {
@@ -136,6 +161,7 @@
         });
 
         function DepartmentEdit(depCD, depName) {
+
             $('#txtDepartmentCD').val(depCD);
             $('#txtDepartmentName').val(depName);
             $("#txtDepartmentCD").attr('readonly', true);
@@ -143,14 +169,13 @@
             $("#update").css("display", "block");
             $("#cancel").css("display", "block");
 
-
             return $("#save").css("display", "none");
         }
 
         $("#btncancel").click(function () {
 
-            GetMessage("I_1001","Save");
-            
+            //GetMessage("I_1001", "Save");
+
             $("#txtDepartmentCD").attr('readonly', false);
 
             $('#txtDepartmentCD').val("");
@@ -163,7 +188,7 @@
             $("#txtDepartmentCD").removeAttr("required");
             $("#txtDepartmentName").removeAttr("required");
 
-            $('#myModal').modal('show');
+            //$('#myModal').modal('show');
         })
 
     </script>

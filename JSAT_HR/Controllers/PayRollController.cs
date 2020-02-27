@@ -127,7 +127,7 @@ namespace JSAT_HR.Controllers
                 ds.Tables.Add(dt);
 
                 Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
-                rpt.Database.Tables["Pay_Roll_Detail_tb"].SetDataSource(ds.Tables[0]);
+                rpt.Database.Tables["PayRoll_Detail_tb"].SetDataSource(ds.Tables[0]);
 
                 Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 Response.Buffer = false;
