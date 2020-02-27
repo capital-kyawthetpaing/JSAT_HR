@@ -17,7 +17,14 @@ namespace JSAT_HR.Controllers
         // GET: SubDivision
         public ActionResult SubDivisionList()
         {
+            String message = Session["Message"] as string;
+            String msgSave = Session["MessageSave"] as string;
+            ViewBag.mesg = message;
+            ViewBag.mesgsave = msgSave;
+            Session["Message"] = "";
+            Session["MessageSave"] = "";
             return View();
+            
         }
 
         [HttpGet]
@@ -35,11 +42,29 @@ namespace JSAT_HR.Controllers
                 var subDivCD = sdbl.Check_SubDivisionCD(model);
                 if (subDivCD == "")
                 {
-                    sdbl.SubDivision_Save(model);
+                    flag = sdbl.SubDivision_Save(model);
+                    if (flag == "OK")
+                    {
+                        Session["MessageSave"] = "OK";
+                    }
+                    else
+                    {
+                        Session["MessageSave"] = "NOT OK";
+                    }
                 }
                 else
                 {
                     flag = sdbl.SubDivision_Update(model);
+                    if (flag == "OK")
+
+                    {
+                        Session["Message"] = "OK";
+
+                    }
+                    else
+                    {
+                        Session["Message"] = "Not OK";
+                    }
                 }
             }
             return RedirectToAction("SubDivisionList");

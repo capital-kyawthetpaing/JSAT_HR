@@ -16,6 +16,13 @@ namespace JSAT_HR.Controllers
         // GET: Company
         public ActionResult Company_List()
         {
+            String message= Session["Message"] as string;
+            String msgSave = Session["MessageSave"] as string;
+            ViewBag.mesg = message;
+            ViewBag.mesgsave = msgSave;
+
+            Session["Message"] = "";
+            Session["MessageSave"] = "";
             return View();
         }
 
@@ -35,11 +42,29 @@ namespace JSAT_HR.Controllers
                 var company_CD = cbl.Check_Company(cm);
                 if(company_CD == "")
                 {
-                    cbl.Company_Save(cm);
+                   flag= cbl.Company_Save(cm);
+                    if (flag == "OK")
+                    {
+                        Session["MessageSave"] = "OK";
+                    }
+                    else
+                    {
+
+                    }
+                    
                 }
                 else
                 {
                     flag = cbl.Company_Update(cm);
+
+                    if (flag == "OK")
+                    {
+                        Session["Message"] = "OK";
+                    }
+                    else
+                    {
+                        Session["Message"] = "NOT OK";
+                    }
                 }              
             }
             return RedirectToAction("Company_List");

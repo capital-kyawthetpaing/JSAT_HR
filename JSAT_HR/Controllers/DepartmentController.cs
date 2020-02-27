@@ -18,6 +18,12 @@ namespace JSAT_HR.Controllers
         // GET: Department
         public ActionResult DepartmentList()
         {
+            String message = Session["Message"] as string;
+            String msgSave = Session["MessageSave"] as string;
+            ViewBag.mesg = message;
+            ViewBag.mesgsave = msgSave;
+            Session["Message"] = "";
+            Session["MessageSave"] = "";
             return View();
         }
 
@@ -37,14 +43,35 @@ namespace JSAT_HR.Controllers
                 var deptCD = dbl.Check_DeptCD(model);
                 if (deptCD == "")
                 {
-                    dbl.Department_Save(model);
+                    flag = dbl.Department_Save(model);
+
+                    if (flag == "OK")
+                    {
+                        Session["MessageSave"] = "OK";
+                    }
+                    else
+                    {
+                        Session["MessageSave"] = "NOT OK";
+                    }
                 }
                 else
                 {
                     flag = dbl.Department_Update(model);
+
+                    if (flag == "OK")
+                        
+                    {
+                        Session["Message"] = "OK";
+
+                    }
+                    else
+                    {
+                        Session["Message"] = "Not OK";
+                    }
                 }
             }
             return RedirectToAction("DepartmentList");
         }
     }
 }
+

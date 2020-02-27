@@ -25,19 +25,34 @@ namespace Company_BL
         public string Company_Save(CompanyModel cm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
+            string msg = string.Empty;
             M_Company company = new M_Company();
             company.CompanyCD = cm.CompanyCD;
             company.CompanyName = cm.CompanyName;
             company.InsertedDate = DateTime.Now;
             company.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
 
-            db.M_Company.Add(company);
-            db.SaveChanges();
-            string msg = "OK";
+            //db.M_Company.Add(company);
+            //db.SaveChanges();
+            //string msg = "OK";
+            //return msg;
+
+            try
+            {
+                db.M_Company.Add(company);
+                db.SaveChanges();
+                msg = "OK";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+            }
             return msg;
         }
 
-        public string Company_Update(CompanyModel cm)
+    //}
+
+    public string Company_Update(CompanyModel cm)
         {
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
