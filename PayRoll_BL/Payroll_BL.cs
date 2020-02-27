@@ -60,7 +60,18 @@ namespace PayRoll_BL
                 return null;
         }
 
-
+        public DataTable PayRoll_Detail_Report(string StaffID, string yyyymm)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dtpaydetail = new DataTable();
+            SqlParameter[] prms = new SqlParameter[2];
+            prms[0] = new SqlParameter("@StaffID", SqlDbType.VarChar) { Value = StaffID };
+            prms[1] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = yyyymm };
+            dtpaydetail = bdl.SelectData("PayRoll_Detail_Report", prms);
+            if (dtpaydetail.Rows.Count > 0)
+                return dtpaydetail;
+            else return null;
+        }
 
     }
 }

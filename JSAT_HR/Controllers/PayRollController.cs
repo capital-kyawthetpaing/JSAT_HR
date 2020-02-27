@@ -109,34 +109,34 @@ namespace JSAT_HR.Controllers
             return JsonConvert.SerializeObject(dtpay);
         }
 
-        public FileStreamResult PayRoll_Detail_Report(string id)
+        public FileStreamResult PayRoll_Detail_Report(string yyyymm)
         {
             DataSet ds = new DataSet();
-            string savefilename = "PayRoll_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
+            string savefilename = "PayRoll_Report_Detail" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Search(id, 1);
-            if (dt.Rows.Count < 20)
-            {
-                for (int i = 0; dt.Rows.Count < 20; i++)
-                {
-                    dt.Rows.Add();
-                    dt.AcceptChanges();
-                }
-            }
-            ds.Tables.Add(dt);
+            dt = pbl.PayRoll_Detail_Report(yyyymm.Substring(3,1),yyyymm.Substring(0,4));
+            //if (dt.Rows.Count > 0)
+            //{
+                //for (int i = 0; dt.Rows.Count < 20; i++)
+                //{
+                //    dt.Rows.Add();
+                //    dt.AcceptChanges();
+                //}
 
-            Report.PayRoll_List rpt = new Report.PayRoll_List();
-            rpt.Database.Tables["Pay_Roll"].SetDataSource(ds.Tables[0]);
-            rpt.SetParameterValue("Date", DateTime.Now.ToString("yyyy-MM-dd"));
+                ds.Tables.Add(dt);
 
-            Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
-            str.Seek(0, SeekOrigin.Begin);
+                Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
+                rpt.Database.Tables["Pay_Roll_Detail_tb"].SetDataSource(ds.Tables[0]);
 
-            return File(str, "application/pdf");
+                Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+                str.Seek(0, SeekOrigin.Begin);
+
+                return File(str, "application/pdf");
+            //}
         }
     }
 }
