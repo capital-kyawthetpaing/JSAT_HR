@@ -1,48 +1,27 @@
-﻿@model JH_Model.PayrollModel
+﻿
 @{
-    ViewBag.Title = "PayRoll Detail";
+    ViewBag.Title = "PayRoll_Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Scripts{
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            SelectStaff();
-
-        });
-
-        function SelectStaff() {
-            $.ajax({
-                url: "../Staff/GetStaff",
-                type: "GET",
-                dataType: "JSON",
-                dataSrc: '',
-                success: function (items) {
-                    $.each(items, function (i, item) {
-                        $("#ddlStaff").append(
-                            $('<option></option>').val(item.StaffID).html(item.Name));
-                    });
-                }
-            });
-        }
-
-          function Report() {
-                var year = $('#ddlYear').val();
-              var month = $('#ddlMonth').val();
-              var staffID = $('#ddlStaff').val();
-              var yearmonth = year + month + staffID;
-              window.open('@Url.Action("PayRoll_Detail_Report", "PayRoll")?yyyymm=' + yearmonth);
-        }
-
-    </script>
-}
-
-<div class="row">
-    <div class="col-xl-12 col-md-12 mb-2">
+<div class="container-fluid">
+    <div>
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="StaffID">Staff Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+
+                            @Html.DropDownList("staffNameList", ViewBag.staffNameList as SelectList, "---Select---", new { @id = "staffNameID", @class = "form-control input-sm" })
+
+                        </div>
+                    </div>
+
                     <div class="form-group col-md-2">
                         <label for="Year">Year</label>
                         <div class="input-group">
@@ -65,10 +44,11 @@
                                 listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
                                 listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
                             }@Html.DropDownList("Year",
-      listYear,
-      new { @class="form-control",@id="ddlYear" })
+               listYear,
+               new { @class="form-control",@id="ddlYear" })
                         </div>
                     </div>
+
                     <div class="form-group col-md-2">
                         <label for="Year">Month</label>
                         <div class="input-group">
@@ -91,33 +71,54 @@
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
                             }@Html.DropDownList("Month",
-        listMonth,
-        new { @class= "form-control", @id="ddlMonth" })
+                 listMonth,
+                 new { @class="form-control",@id="ddlMonth" })
                         </div>
                     </div>
 
-                    <div class="form-group col-md-2">
-                        <label for="Year">Staff</label>
+
+                    <div class="form-group col-md-5">
+                        <label for="StaffID" style="color:white;">Search</label>
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
-                            </div>
-                            @Html.DropDownListFor(m => m.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
-                       {
-                           @class = "form-control",
-                           @required = "required",
-                           @id = "ddlStaff",
-                           @tabindex = "3"
-                       })
+                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData()"><i class="fa fa-search"></i>&nbsp; Search</button>
+
                         </div>
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="Process" style="color:white;">Process</label>
-                        <div class="input-group">
-                            <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>
-                        </div>
+                </div>
+
+
+            </div>
+        </div>
+        <br />
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+
+                <div class="form-group form-row">
+                    <div class="col">
+                        <table class="form-group" id="Allowance">
+                            <tr>
+                                <td id="Allowance_label"></td>
+                                <td id="Allowance_Data"></td>
+
+                            </tr>
+
+                        </table>
                     </div>
+                    <div class="col">
+                        
+                        <table class="form-group" id="Deduction">
+                            <tr>
+                                <td id="Deduction_label"> </td>
+                                <td id="Deduction_Value"> </td>
+
+                            </tr>
+                           
+
+                        </table>
+
+                    </div>
+                  
 
 
                 </div>
@@ -125,3 +126,125 @@
         </div>
     </div>
 </div>
+
+<style>
+    tr:nth-child(even)
+    {
+        background-color:cornsilk;
+    }
+</style>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            GetLabel_PayRollAllowance("1_201912");
+            GetData_PayRollAllowance("1_201912");
+            GetLabel_PayRollDeduction("1_201912");
+            GetData_PayRollDeduction("1_201912");
+        });
+
+        function GetLabel_PayRollAllowance(id)
+        {
+            $.ajax({
+                url: "/PayRoll/GetPayRollDetail_AllowanceLabel/" + id,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+                success: function (data) {
+                   // alert(data);
+                    $("#Allowance_label").html(data);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+        }
+
+        function GetData_PayRollAllowance(id)
+        {
+            $.ajax({
+                url: "/PayRoll/GetPayRollDetail_AllowanceData/" + id,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+                success: function (data) {
+                     //alert("Hello");
+                    $("#Allowance_Data").html(data);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+        }
+
+        function GetLabel_PayRollDeduction(id)
+        {
+            $.ajax({
+                url: "/PayRoll/GetPayRollDetail_DeductionLabel/" + id,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    $("#Deduction_label").html(data);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        }
+
+        function GetData_PayRollDeduction(id)
+        {
+            $.ajax({
+                url: "/PayRoll/GetPayRollDetail_DeductionData/" + id,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+                success: function (data) {
+                    //alert("Hello");
+                    $("#Deduction_Value").html(data);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        }
+
+        function ShowData()
+        {
+
+            var Name = "";
+            var Year = "";
+            var Month = "";
+             Name = document.getElementById("staffNameID").value;
+             Year = document.getElementById("ddlYear").value;
+             Month = document.getElementById("ddlMonth").value;
+
+            if (Name != "" && Year != "0" && Month != "0")
+            {
+              //  alert("Hello " + Name + "_" + Year + Month);
+                var id = Name + "_" + Year + Month;
+                  GetLabel_PayRollAllowance(id);
+                  GetData_PayRollAllowance(id);
+                  GetLabel_PayRollDeduction(id);
+                  GetData_PayRollDeduction(id);
+            }
+            else
+            {
+                alert("Please Select StaffName , Year and Month.");
+              
+            }
+
+            
+          
+        }
+    </script>
+    }
