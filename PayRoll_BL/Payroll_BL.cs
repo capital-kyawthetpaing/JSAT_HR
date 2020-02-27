@@ -84,6 +84,13 @@ namespace PayRoll_BL
             return dt;
 
         }
+
+        public List<staffName> SelectStaff()
+        {
+            JSAT_HREntities context = new JSAT_HREntities();
+            var staffName = context.M_Staff.Select(s => new staffName {StaffID=s.StaffID,Name=s.Name  }).ToList();
+            return staffName;
+        }
         public DataTable PayRoll_Detail_Report(string StaffID, string yyyymm)
         {
             BaseDL bdl = new BaseDL();
@@ -96,6 +103,8 @@ namespace PayRoll_BL
                 return dtpaydetail;
             else return null;
         }
+
+       
 
     }
 }

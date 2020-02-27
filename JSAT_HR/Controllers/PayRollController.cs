@@ -137,8 +137,9 @@ namespace JSAT_HR.Controllers
 
         public ActionResult PayRoll_Detail()
         {
-            JSAT_HREntities context = new JSAT_HREntities();
-            var staffName = context.M_Staff.Select(s => new { s.StaffID, s.Name }).ToList();
+            
+            Payroll_BL bl = new Payroll_BL();
+            var staffName = bl.SelectStaff();
             SelectList list = new SelectList(staffName, "StaffID", "Name");
             ViewBag.staffNameList = list;
 

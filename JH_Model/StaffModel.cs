@@ -50,4 +50,9 @@ namespace JH_Model
         public bool MentorAllowance { get; set; }
 
     }
+    public class staffName
+    {
+        public int StaffID { get; set; }
+        public string Name { get; set; }
+    }
 }
