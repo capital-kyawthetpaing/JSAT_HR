@@ -10,5 +10,7 @@ namespace JH_Model
     {
         public string YYYYMM { get; set; }
 
+        public string StaffID { get; set; }
+
     }
 }
