@@ -49,6 +49,9 @@ namespace Position_BL
 
         public string Position_Update(PositionModel pm)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
             
@@ -57,7 +60,7 @@ namespace Position_BL
             update.PositionCD = pm.PostitionCD;
             update.Position = pm.PositionName;
             update.UpdatedDate = DateTime.Now;
-            update.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            update.UpdatedBy = updatedby;
 
             try
             {

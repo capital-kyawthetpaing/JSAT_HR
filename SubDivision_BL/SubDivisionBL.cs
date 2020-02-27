@@ -58,6 +58,9 @@ namespace SubDivision_BL
 
         public string SubDivision_Update(SubDivisionModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
             JSAT_HREntities db = new JSAT_HREntities();
             M_SubDivision md = new M_SubDivision();
             string msg = string.Empty;
@@ -65,7 +68,7 @@ namespace SubDivision_BL
             update.SubDivisionCD = model.SubDivisionCD;
             update.SubDivision = model.SubDivisionName;
             update.UpdatedDate = DateTime.Now;
-            update.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            update.UpdatedBy = updatedby;
             try
             {
                 db.SaveChanges();
