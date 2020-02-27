@@ -6,9 +6,16 @@
 @section Scripts{
     
 <script type="text/javascript">
-
     $(document).ready(function () {
-        var table = $('#tbPayroll').DataTable(
+        var d = new Date();
+        var month = d.getMonth();
+        var year = d.getFullYear();
+       
+        $('#ddlYear').val(year);
+        $('#ddlMonth').val(month);
+        Search();
+
+        @*var table = $('#tbPayroll').DataTable(
             {
                
                 "language": {
@@ -33,7 +40,7 @@
                 ],
 
             }
-        );
+        );*@
     });
 
         function Search() {
@@ -45,7 +52,16 @@
                 url: '@Url.Action("PayRoll_Search", "PayRoll",new { @id = "ID" })'.replace("ID", yearmonth),
                 dataType: 'json',
                 success: function (data) {
-                     var table = $('#tbPayroll').DataTable(
+                    if (data == null || data == "") {
+                        var table = $('#tbPayroll').DataTable();
+
+                        var rows = table
+                            .rows()
+                            .remove()
+                            .draw();
+                    }
+                    else {
+                        var table = $('#tbPayroll').DataTable(
                             {
                                 "destroy": true,
                                 "language": {
@@ -70,12 +86,11 @@
                                     }
                                 ]
                             });
+                    }
                 }
 
             })
-        }
-
-
+    }
         function Report() {
             var year = $('#ddlYear').val();
             var month = $('#ddlMonth').val();
@@ -144,15 +159,15 @@
                             @{
                                 var listMonth = new List<SelectListItem>();
                                 listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                listMonth.Add(new SelectListItem { Text = "January", Value = "01" });
-                                listMonth.Add(new SelectListItem { Text = "February", Value = "02" });
-                                listMonth.Add(new SelectListItem { Text = "March", Value = "03" });
-                                listMonth.Add(new SelectListItem { Text = "April", Value = "04" });
-                                listMonth.Add(new SelectListItem { Text = "May", Value = "05" });
-                                listMonth.Add(new SelectListItem { Text = "June", Value = "06" });
-                                listMonth.Add(new SelectListItem { Text = "July", Value = "07" });
-                                listMonth.Add(new SelectListItem { Text = "August", Value = "08" });
-                                listMonth.Add(new SelectListItem { Text = "September", Value = "09" });
+                                listMonth.Add(new SelectListItem { Text = "January", Value = "1" });
+                                listMonth.Add(new SelectListItem { Text = "February", Value = "2" });
+                                listMonth.Add(new SelectListItem { Text = "March", Value = "3" });
+                                listMonth.Add(new SelectListItem { Text = "April", Value = "4" });
+                                listMonth.Add(new SelectListItem { Text = "May", Value = "5" });
+                                listMonth.Add(new SelectListItem { Text = "June", Value = "6" });
+                                listMonth.Add(new SelectListItem { Text = "July", Value = "7" });
+                                listMonth.Add(new SelectListItem { Text = "August", Value = "8" });
+                                listMonth.Add(new SelectListItem { Text = "September", Value = "9" });
                                 listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
@@ -161,16 +176,29 @@
             new { @class= "form-control", @id="ddlMonth" })
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="Process" style="color:white;">Process</label>
                         <div class="input-group">
                             <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
                             <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
+                          
                         </div>
                     </div>
+                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
 
-
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="input-group">
+                            <button type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
+                            <label for="Warning" style="color:red;">
+                                <span>&#9888;</span>Import Attendance Office Excel.<br />
+                                <span>&#9888;</span>Import Attendance Acadmey Excel.<br />
+                                <span>&#9888;</span>Import Income Tax Excel.
+                            </label>
+                        </div>                      
+                    </div>                   
                 </div>
             </div>
         </div>

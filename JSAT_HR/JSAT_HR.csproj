@@ -157,6 +157,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\PayRoll_Detail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayRoll_Detail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\PayRoll_Detail_DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\PayRoll_DS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,6 +263,17 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Report\PayRoll_DS.xsc">
       <DependentUpon>PayRoll_DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\PayRoll_Detail_DS.xsc">
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\PayRoll_Detail_DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PayRoll_Detail_DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\PayRoll_Detail_DS.xss">
+      <DependentUpon>PayRoll_Detail_DS.xsd</DependentUpon>
     </Content>
     <None Include="Report\PayRoll_DS.xsd">
       <SubType>Designer</SubType>
@@ -481,6 +503,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\PayRoll_Detail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PayRoll_Detail.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\PayRoll_List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PayRoll_List.cs</LastGenOutput>
