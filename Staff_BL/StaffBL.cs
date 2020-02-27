@@ -154,6 +154,10 @@ namespace Staff_BL
 
         public string Staff_Update(StaffModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
+
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
             int staffid = Convert.ToInt32(model.StaffID);
@@ -212,9 +216,10 @@ namespace Staff_BL
             updateallow.MentorAllowance = model.MentorAllowance;
 
             updatestaff.UpdatedDate = DateTime.Now;
-            updatestaff.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            updatestaff.UpdatedBy = updatedby;
             try
             {
+                db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
                 msg = "OK";
             }
