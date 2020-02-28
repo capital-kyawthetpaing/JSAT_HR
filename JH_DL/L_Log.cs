@@ -14,10 +14,9 @@ namespace JH_DL
     
     public partial class L_Log
     {
-        public int StaffID { get; set; }
+        public string UserID { get; set; }
         public System.DateTime DateTime { get; set; }
         public string FormName { get; set; }
         public string Description { get; set; }
-        public string UserID { get; set; }
     }
 }

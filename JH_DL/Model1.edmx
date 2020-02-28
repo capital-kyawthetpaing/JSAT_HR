@@ -20,8 +20,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
         <EntityType Name="L_Log">
           <Key>
             <PropertyRef Name="UserID" />
-            
-            
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="FormName" />
           </Key>
           <Property Name="UserID" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
@@ -375,8 +375,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Position" EntityType="JSAT_HRModel.M_Position" />
           <EntitySet Name="M_SubDivision" EntityType="JSAT_HRModel.M_SubDivision" />
           <EntitySet Name="Payroll_Deduction" EntityType="JSAT_HRModel.Payroll_Deduction" />
-          <EntitySet Name="L_Log" EntityType="JSAT_HRModel.L_Log" />
           <EntitySet Name="M_Salary" EntityType="JSAT_HRModel.M_Salary" />
+          <EntitySet Name="L_Log" EntityType="JSAT_HRModel.L_Log" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -587,17 +587,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalDeduction" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="L_Log">
-          <Key>
-            <PropertyRef Name="StaffID" />
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="FormName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="M_Salary">
           <Key>
             <PropertyRef Name="Currency" />
@@ -606,6 +595,17 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="Currency" Type="Byte" Nullable="false" />
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="L_Log">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="FormName" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FormName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -870,22 +870,22 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="L_Log">
-            <EntityTypeMapping TypeName="JSAT_HRModel.L_Log">
-              <MappingFragment StoreEntitySet="L_Log">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="FormName" ColumnName="FormName" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_Salary">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Salary">
               <MappingFragment StoreEntitySet="M_Salary">
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_Log">
+            <EntityTypeMapping TypeName="JSAT_HRModel.L_Log">
+              <MappingFragment StoreEntitySet="L_Log">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
