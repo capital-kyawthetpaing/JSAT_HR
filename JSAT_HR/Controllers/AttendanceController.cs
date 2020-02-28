@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using JH_Model;
 using CommonFunction;
 using FastMember;
-
+using Spire.Xls;
 
 namespace JSAT_HR.Controllers
 {
@@ -45,6 +45,7 @@ namespace JSAT_HR.Controllers
                     if (file != null)
                     {
                         string filename = string.Empty;
+                        string newfilename = string.Empty;
                         filename = file.FileName;
                         string[] arr;
                         string OfficeCD = string.Empty;
@@ -66,10 +67,16 @@ namespace JSAT_HR.Controllers
                             }
                             if (filename.Contains(".xlsx"))
                             {
-                                filename = filename.Replace(".xlsx", "");
+                                filename = filename.Replace(" ", "_").Replace(".xls", "");
                                 filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+
                             }
                             file.SaveAs(AttendanceFile + filename);
+                            //Workbook workbook1 = new Workbook();
+                            //workbook1.LoadFromFile(AttendanceFile + filename,ExcelVersion.Version97to2003);
+                            //filename = filename.Replace(".xls", "");
+                            //newfilename = filename + ".xlsx";
+                            //workbook1.SaveToFile(AttendanceFile + newfilename , ExcelVersion.Version2016);
 
                             dt = abl.AttendanceData(AttendanceFile + filename, id);
                             if (dt.Rows.Count > 0)
