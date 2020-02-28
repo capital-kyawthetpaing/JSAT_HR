@@ -12,11 +12,10 @@ namespace JH_DL
     using System;
     using System.Collections.Generic;
     
-    public partial class L_Log
+    public partial class M_Salary
     {
-        public string UserID { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public string FormName { get; set; }
-        public string Description { get; set; }
+        public byte Currency { get; set; }
+        public byte Status { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     }
 }

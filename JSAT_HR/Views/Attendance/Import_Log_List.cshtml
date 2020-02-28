@@ -193,7 +193,7 @@
                         "sLengthMenu": "Display _MENU_ records",
                     },
                     "ajax": {
-                        "url": "../Attendance/Get_Import_List",
+                        "url":"@Url.Action("Get_Import_List", "Attendance")",
                         "type": "GET",
                         "datatype": "json",
                         "dataSrc": ""
@@ -229,7 +229,7 @@
                     fileData.append(files[i].name, files[i]);
                 }
                 $.ajax({
-                    url: "../Attendance/AttendanceDataSave/"+2,
+                    url:'@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID",2),
                     type: 'post',
                     contentType: false, // Not to set any content header
                     processData: false, // Not to process data
@@ -252,7 +252,7 @@
                     fileData.append(files[i].name, files[i]);
                 }
                 $.ajax({
-                    url: "../Attendance/AttendanceDataSave/"+1,
+                    url: '@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID",1),
                     type: 'post',
                     contentType: false, // Not to set any content header
                     processData: false, // Not to process data
@@ -277,7 +277,7 @@
                     fileData.append(files[i].name, files[i]);
                 }
                 $.ajax({
-                    url: "../Attendance/AttendanceDataSave/" + 3 + '_' + YYY + '_' + MM,
+                    url:'@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID", 3+ '_' + YYY + '_' + MM),
                     type: 'post',
                     contentType: false, // Not to set any content header
                     processData: false, // Not to process data

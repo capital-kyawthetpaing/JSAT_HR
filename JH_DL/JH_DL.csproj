@@ -97,6 +97,9 @@
     <Compile Include="M_Position.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_Salary.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="M_Staff.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

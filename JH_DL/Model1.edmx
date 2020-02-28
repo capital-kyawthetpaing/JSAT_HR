@@ -15,13 +15,17 @@
           <Property Name="ImportedDate" Type="datetime" />
           <Property Name="ImportedBy" Type="varchar" MaxLength="4" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="L_Log">
           <Key>
-            <PropertyRef Name="StaffID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="FormName" />
           </Key>
-          <Property Name="StaffID" Type="int" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" />
-          <Property Name="FormName" Type="varchar" MaxLength="100" />
+          <Property Name="UserID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="FormName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="M_Allowance">
@@ -133,6 +137,15 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="InsertedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="4" />
           <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Salary">
+          <Key>
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Currency" Type="tinyint" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="Amount" Type="money" />
         </EntityType>
         <EntityType Name="M_Staff">
           <Key>
@@ -266,7 +279,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
         </EntityType>
         <EntityContainer Name="JSAT_HRModelStoreContainer">
           <EntitySet Name="L_Import" EntityType="Self.L_Import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="L_Log" EntityType="Self.L_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Allowance" EntityType="Self.M_Allowance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Company" EntityType="Self.M_Company" Schema="dbo" store:Type="Tables" />
@@ -274,6 +286,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Payroll" EntityType="Self.M_Payroll" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Position" EntityType="Self.M_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Salary" EntityType="Self.M_Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Staff" EntityType="Self.M_Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_SubDivision" EntityType="Self.M_SubDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" Schema="dbo" store:Type="Tables" />
@@ -281,6 +294,14 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="Payroll_Allowance" EntityType="Self.Payroll_Allowance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payroll_Deduction" EntityType="Self.Payroll_Deduction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_Log" EntityType="Self.L_Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [L_Log].[UserID] AS [UserID], 
+    [L_Log].[DateTime] AS [DateTime], 
+    [L_Log].[FormName] AS [FormName], 
+    [L_Log].[Description] AS [Description]
+    FROM [dbo].[L_Log] AS [L_Log]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="M_Message" EntityType="Self.M_Message" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [M_Message].[ID] AS [ID], 
@@ -354,6 +375,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Position" EntityType="JSAT_HRModel.M_Position" />
           <EntitySet Name="M_SubDivision" EntityType="JSAT_HRModel.M_SubDivision" />
           <EntitySet Name="Payroll_Deduction" EntityType="JSAT_HRModel.Payroll_Deduction" />
+          <EntitySet Name="M_Salary" EntityType="JSAT_HRModel.M_Salary" />
           <EntitySet Name="L_Log" EntityType="JSAT_HRModel.L_Log" />
         </EntityContainer>
         <EntityType Name="M_User">
@@ -565,13 +587,24 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalDeduction" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="M_Salary">
+          <Key>
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Currency" Type="Byte" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
         <EntityType Name="L_Log">
           <Key>
-            <PropertyRef Name="StaffID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="FormName" />
           </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Precision="3" />
-          <Property Name="FormName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FormName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -837,13 +870,22 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="M_Salary">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Salary">
+              <MappingFragment StoreEntitySet="M_Salary">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="L_Log">
             <EntityTypeMapping TypeName="JSAT_HRModel.L_Log">
               <MappingFragment StoreEntitySet="L_Log">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="FormName" ColumnName="FormName" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

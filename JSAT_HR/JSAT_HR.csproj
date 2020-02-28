@@ -143,6 +143,7 @@
     <Compile Include="Controllers\ActivityLogController.cs" />
     <Compile Include="Controllers\AllowanceController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\BasicSalaryController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -430,6 +431,7 @@
     <Content Include="Views\Shared\MessagePartialView.cshtml" />
     <Content Include="Views\PayRoll\PayRoll_Detail.cshtml" />
     <Content Include="Views\ActivityLog\Activity_Log.cshtml" />
+    <Content Include="Views\BasicSalary\BasicSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -462,6 +464,10 @@
     <ProjectReference Include="..\Attendance_BL\Attendance_BL.csproj">
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicSalary_BL\BasicSalary_BL.csproj">
+      <Project>{b33fad1e-efa6-48e4-958f-832f4c6b90f0}</Project>
+      <Name>BasicSalary_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
