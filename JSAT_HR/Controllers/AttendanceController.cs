@@ -150,7 +150,7 @@ namespace JSAT_HR.Controllers
             MultiModel mm = new MultiModel();
             mm.attModel = new AttendanceModel();
             mm.attModel.YYYY = DateTime.Now.Year.ToString();
-            mm.attModel.MM = DateTime.Now.Month.ToString();
+            mm.attModel.MM = DateTime.Now.Month.ToString().PadLeft(2,'0');
             return View(mm);
 
         }
