@@ -143,7 +143,7 @@
 
             function SelectStaff() {
                 $.ajax({
-                    url: "../Staff/GetStaff",
+                    url:'@Url.Action("GetStaff", "Staff")',
                     type: "GET",
                     dataType: "JSON",
                     dataSrc: '',
@@ -162,7 +162,7 @@
                 var staffID = $("#ddlStaff").val();
                 $.ajax({
                     type: 'POST',
-                    url: "../Attendance/_AttendanceSearch/" + YYY + '_' + MM + '_' + staffID,
+                    url:'@Url.Action("_AttendanceSearch", "Attendance", new { @id = "ID" })'.replace("ID", YYY + '_' + MM + '_' + staffID),
                     dataType: 'json',
                     success: function (json) {
                         if (json == null || json == "") {
