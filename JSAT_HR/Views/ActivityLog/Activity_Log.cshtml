@@ -1,0 +1,62 @@
+﻿@model JH_Model.CompanyModel
+@{
+    ViewBag.Title = "Activity_Log";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
+}
+
+@using (Html.BeginForm("Company_Save", "Activity_Log", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-md-12 mb-2">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tbLog" class="hrtable col-sm-12 col-md-12">
+                                <thead>
+                                    <tr>
+                                        <th>StaffID</th>
+                                        <th>DateTime</th>
+                                        <th>Form Name</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tbLog').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../ActivityLog/GETL_Log",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "StaffID", orderable: false, "width": "3%" },
+                        { "data": "DateTime", orderable: false, "width": "3%" },
+                        { "data": "FromName", orderable: false, "width": "3%" },
+                        { "data": "Description", orderable: false, "width": "13%" }
+                    ],
+                }
+        });
+    </script>
+}

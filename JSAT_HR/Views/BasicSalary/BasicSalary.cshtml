@@ -1,0 +1,143 @@
+﻿@model JH_Model.SalaryModel
+@{
+    ViewBag.Title = "BasicSalary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                 url: '@Url.Action("GETBasicSalary", "BasicSalary")',
+                dataType: 'json',
+                success: function (result) {
+                    $('#txtpermanent1').val(result[0].Amount);
+                    $('#txtprovision1').val(result[1].Amount);
+
+                    $('#txtpermanent2').val(result[2].Amount);
+                    $('#txtprovision2').val(result[3].Amount);
+                }
+            })
+        });
+    </script>
+}
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("BasicSalary_Save", "BasicSalary", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xl-6 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Currency:MMK</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Permanent">Permanent</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-money-bill-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.MMKPermanentSalary, new
+                           {
+                               @class = "form-control input-sm input-numeral1",
+                               @tabindex = "1",
+                               //@required = "required",
+                               @id = "txtpermanent1",
+                               @autofocus = "autofocus",
+                               maxlength = "10"
+                           })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Provision">Provision</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-money-bill-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.MMKProvisionSalary, new
+                           {
+                               @class = "form-control input-sm input-numeral2",
+                               @tabindex = "2",
+                               //@required = "required",
+                               @id = "txtprovision1",
+                               maxlength = "10"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Currency:USD</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Permanent">Permanent</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-money-bill-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.USDPermanentSalary, new
+                           {
+                               @class = "form-control input-sm input-numeral3",
+                               @tabindex = "3",
+                               //@required = "required",
+                               @id = "txtpermanent2",
+                               @autofocus = "autofocus",
+                               maxlength = "10"
+
+                           })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Provision">Provision</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-money-bill-alt"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.USDProvisionSalary, new
+                           {
+                               @class = "form-control input-sm input-numeral4",
+                               @tabindex = "4",
+                               //@required = "required",
+                               @id = "txtprovision2",
+                               maxlength = "10"
+
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

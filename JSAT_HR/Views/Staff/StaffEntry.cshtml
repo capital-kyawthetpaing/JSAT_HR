@@ -64,7 +64,7 @@
                            {
                                @class = "form-control input-sm",
                                @tabindex = "3",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtNRC",
                                @autofocus = "autofocus",
                                maxlength = "30"
@@ -98,17 +98,17 @@
                                 </div>
 
                                 @Html.TextBoxFor(sm => sm.JoinDate, "{0:dd-MM-yyyy}", new
-                               {
-                                   @class = "form-control input-sm",
-                                   @type = "date",
-                                   placeHolder = "dd/MM/yyyy",
-                                   @required = "required",
-                                   @tabindex = "5",
-                                   @id = "txtJoinDate",
-                                   maxlength = "10",
-                                   max = "12-12-2100",
-                                   @Value = Model.JoinDate
-                               })
+                           {
+                               @class = "form-control input-sm",
+                               @type = "date",
+                               placeHolder = "dd/MM/yyyy",
+                               //@required = "required",
+                               @tabindex = "5",
+                               @id = "txtJoinDate",
+                               maxlength = "10",
+                               max = "12-12-2100",
+                               @Value = Model.JoinDate
+                           })
                             </div>
                         </div>
                         <div class="form-group col-xl-2 col-md-4">
@@ -122,7 +122,7 @@
                                @class = "form-control input-sm",
                                @type = "date",
                                placeHolder = "dd/MM/yyyy",
-                               @required = "required",
+                               //@required = "required",
                                @tabindex = "6",
                                @id = "txtPermanentDate",
                                max = "12-12-2100"
@@ -154,7 +154,7 @@
                            {
                                @class = "form-control input-sm",
                                @tabindex = "8",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtBankInformation",
                                @autofocus = "autofocus",
                                maxlength = "10"
@@ -186,17 +186,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
                                 </div>
-                                @{
-                                    var SalarylistItem = new List<SelectListItem>();
-                                    SalarylistItem.Add(new SelectListItem { Text = "Permanent", Value = "1" });
-                                    SalarylistItem.Add(new SelectListItem { Text = "OJT", Value = "2" });
-                                }
-                                @Html.DropDownListFor(sm => sm.BasicSalary, SalarylistItem, new
-                           {
-                               @class = "form-control",
-                               @tabindex = "10",
-                               @id = "ddlBasicSalary"
-                           })
+                             
+
+                                @Html.DropDownListFor(sm => sm.BasicSalary, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), new
+                        {
+                            @class = "select2 form-control input-sm",
+                            @required = "required",
+                            @id = "ddlBasicSalary",
+                            @tabindex = "10"
+                        })
                             </div>
                         </div>
                         <div class="form-group col-xl-2 col-md-4">
@@ -252,7 +250,7 @@
                                 @Html.DropDownListFor(sm => sm.CompanyCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
                                @class = "select2 form-control input-sm",
-                               @required = "required",
+                               //@required = "required",
                                @id = "ddlCompany",
                                @tabindex = "13"
                            })
@@ -267,7 +265,7 @@
                                 @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
                                @class = "select2 form-control input-sm",
-                               @required = "required",
+                               //@required = "required",
                                @id = "ddlDepartment",
                                @tabindex = "14"
                            })
@@ -282,7 +280,7 @@
                                 @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
                                @class = "form-control select2 input-sm",
-                               @required = "required",
+                               //@required = "required",
                                @id = "ddlSubDivision",
                                @tabindex = "15"
                            })
@@ -297,8 +295,8 @@
                                 @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
                            {
                                @class = "select2 form-control input-sm",
-                               @required = "required",
-                               @id = "ddlPosition",
+                               //@required = "required",
+                               //@id = "ddlPosition",
                                @tabindex = "16"
                            })
                             </div>
@@ -364,7 +362,7 @@
                            {
                                @class = "form-control input-sm",
                                @tabindex = "19",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtPhoneNo",
                                @autofocus = "autofocus",
                                maxlength = "100"
@@ -381,7 +379,7 @@
                            {
                                @class = "form-control input-sm",
                                @tabindex = "20",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtEmergencyPhoneNo",
                                @autofocus = "autofocus",
                                maxlength = "100"
@@ -399,7 +397,7 @@
                                @class = "form-control input-sm",
                                @type = "email",
                                @tabindex = "21",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtEmailAddress",
                                @autofocus = "autofocus",
                                maxlength = "50"
@@ -419,7 +417,7 @@
                                @class = "form-control input-sm",
                                @type = "email",
                                @tabindex = "22",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtPermanentAddress",
                                @autofocus = "autofocus",
                                maxlength = "400"
@@ -437,7 +435,7 @@
                                @class = "form-control input-sm",
                                @type = "email",
                                @tabindex = "23",
-                               @required = "required",
+                               //@required = "required",
                                @id = "txtTemporaryAddress",
                                @autofocus = "autofocus",
                                maxlength = "400"
@@ -469,7 +467,7 @@
                                 @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
                            {
                                @class = "form-control",
-                               @required = "required",
+                               //@required = "required",
                                @tabindex = "24",
                                @id = "ddlTransportation"
                            })
@@ -694,13 +692,20 @@
 }
 @section Scripts{
     <script type="text/javascript">
+        $(function () {
+            $("[id='ddlCurrency']").change(function () {
+                $("#ddlBasicSalary option").remove();
+                SelectBasicSalary();
+            });
+        });
+
         $(document).ready(function () {
             SelectDepartment();
             SelectSubDivision();
             SelectPosition();
             SelectOffice();
             SelectCompany();
-
+            SelectBasicSalary();
 
             if('@Model.Mode' == "update")
             {
@@ -708,6 +713,23 @@
                 $("#btnSave").html("Update");
             }
         });
+
+        function SelectBasicSalary() {
+            var currency = $("#ddlCurrency").val();
+            $.ajax({
+                url: '@Url.Action("GETBasicSalaryByID", "BasicSalary", new { @id = "currency" })'.replace("currency", currency),
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $("#ddlBasicSalary").append(
+                            $('<option></option>').val(item.BasicSalary).html(item.Status));
+                    });
+                    $("#ddlBasicSalary").val('@Model.BasicSalary');
+                }
+            });
+        }
 
         function SelectCompany() {
             $.ajax({
@@ -720,7 +742,6 @@
                         $("#ddlCompany").append(
                             $('<option></option>').val(item.CompanyCD).html(item.CompanyName));
                     });
-
                     $("#ddlCompany").val('@Model.CompanyCD');
                 }
             });
@@ -735,8 +756,7 @@
                     $.each(items, function (i, item) {
                         $("#ddlDepartment").append(
                             $('<option></option>').val(item.DepartmentCD).html(item.DepartmentName));
-                    });  
-
+                    });
                     $("#ddlDepartment").val('@Model.DepartmentCD');
                 }
             });

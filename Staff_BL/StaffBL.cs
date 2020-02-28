@@ -79,6 +79,9 @@ namespace Staff_BL
 
         public string Staff_Save(StaffModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
             JSAT_HREntities db = new JSAT_HREntities();
             M_Staff ms = new M_Staff();
             Staff_Allowance sa = new Staff_Allowance();
@@ -110,16 +113,13 @@ namespace Staff_BL
             ms.TransportationCD = model.TransportationCD;
             ms.Currency = model.Currency;
             ms.Photo = model.Photo;
-            if (model.BasicSalary == 1)
-                ms.BasicSalary = 250000;
-            else
-                ms.BasicSalary = 150000;
+            ms.BasicSalary = model.BasicSalary;
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",","");
             ms.Effort = Convert.ToDecimal(model.Effort);
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
-            ms.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            ms.InsertedBy = updatedby;
 
             sa.StaffID = Convert.ToInt32(model.StaffID);
             //sa.ChangeDate= Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
@@ -154,10 +154,10 @@ namespace Staff_BL
 
         public string Staff_Update(StaffModel model)
         {
+
             string updatedby = string.Empty;
             updatedby = HttpContext.Current.Session["UserID"].ToString();
             updatedby = updatedby.Split('_')[0];
-
             JSAT_HREntities db = new JSAT_HREntities();
             string msg = string.Empty;
             int staffid = Convert.ToInt32(model.StaffID);
@@ -188,10 +188,7 @@ namespace Staff_BL
             updatestaff.TransportationCD = model.TransportationCD;
             updatestaff.Currency = model.Currency;
             updatestaff.Photo = model.Photo;
-            if (model.BasicSalary == 1)
-                updatestaff.BasicSalary = 250000;
-            else
-                updatestaff.BasicSalary = 150000;
+            updatestaff.BasicSalary = model.BasicSalary;
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",", "");
             updatestaff.Effort = Convert.ToDecimal(model.Effort);
@@ -214,9 +211,8 @@ namespace Staff_BL
             updateallow.Overseas2ndInterviewer = model.Overseas2ndInterviewer;
             updateallow.MarketingTeamAllowance = model.MarketingTeamAllowance;
             updateallow.MentorAllowance = model.MentorAllowance;
+           
 
-            updatestaff.UpdatedDate = DateTime.Now;
-            updatestaff.UpdatedBy = updatedby;
             try
             {
                 db.SaveChanges();

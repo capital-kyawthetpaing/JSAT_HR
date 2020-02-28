@@ -41,6 +41,5 @@ namespace JH_Model
 
         public byte Currency { get; set; }
 
-     
     }
 }

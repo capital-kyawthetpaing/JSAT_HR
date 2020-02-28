@@ -140,8 +140,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActivityLogController.cs" />
     <Compile Include="Controllers\AllowanceController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\BasicSalaryController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -428,6 +430,8 @@
     <Content Include="Views\CommonView\Common_View.cshtml" />
     <Content Include="Views\Shared\MessagePartialView.cshtml" />
     <Content Include="Views\PayRoll\PayRoll_Detail.cshtml" />
+    <Content Include="Views\ActivityLog\Activity_Log.cshtml" />
+    <Content Include="Views\BasicSalary\BasicSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -449,6 +453,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActivityLog_BL\ActivityLog_BL.csproj">
+      <Project>{fea7b8ad-5f2d-471b-875f-37542e6c2eac}</Project>
+      <Name>ActivityLog_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Allowance_BL\Allowance_BL.csproj">
       <Project>{394329f4-5398-4972-9a58-1cfaec3821c8}</Project>
       <Name>Allowance_BL</Name>
@@ -456,6 +464,10 @@
     <ProjectReference Include="..\Attendance_BL\Attendance_BL.csproj">
       <Project>{39d38240-3b04-42b8-a80a-4dd5fd0fb80b}</Project>
       <Name>Attendance_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicSalary_BL\BasicSalary_BL.csproj">
+      <Project>{b33fad1e-efa6-48e4-958f-832f4c6b90f0}</Project>
+      <Name>BasicSalary_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonFunction\CommonFunction.csproj">
       <Project>{85dabd1c-a1c4-4b10-8e81-f3fcbe29b713}</Project>
