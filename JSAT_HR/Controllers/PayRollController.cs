@@ -91,7 +91,7 @@ namespace JSAT_HR.Controllers
             DataTable dtpay = new DataTable();
             if (id != "00")
             {
-                string date = id.Substring(0, 4) + "-" + id.Substring(4) + "-" + "01";
+                string date = id.Substring(0, 4) + "-" + id.Substring(4,2) + "-" + "01";
                 if (!String.IsNullOrWhiteSpace(id))
                 {
                     dtpay = pbl.PayRoll_Calculate(id, date);
