@@ -430,6 +430,7 @@
     <Content Include="Views\Shared\MessagePartialView.cshtml" />
     <Content Include="Views\PayRoll\PayRoll_Detail.cshtml" />
     <Content Include="Views\ActivityLog\Activity_Log.cshtml" />
+    <Content Include="Views\BasicSalary\BasicSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
