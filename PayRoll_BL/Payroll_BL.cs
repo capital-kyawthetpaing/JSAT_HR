@@ -104,7 +104,17 @@ namespace PayRoll_BL
             else return null;
         }
 
-       
 
+        public DataTable PayRoll_Setting_Report(string yyyymm)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dtpaydetail = new DataTable();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = yyyymm };
+            dtpaydetail = bdl.SelectData("PayRoll_Setting_Report", prms);
+            if (dtpaydetail.Rows.Count > 0)
+                return dtpaydetail;
+            else return null;
+        }
     }
 }
