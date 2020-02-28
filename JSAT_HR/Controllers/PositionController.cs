@@ -16,6 +16,12 @@ namespace JSAT_HR.Controllers
         // GET: Position
         public ActionResult PositionList()
         {
+            String message = Session["Message"] as string;
+            String msgSave = Session["MessageSave"] as string;
+            ViewBag.mesg = message;
+            ViewBag.mesgsave = msgSave;
+            Session["Message"] = "";
+            Session["MessageSave"] = "";
             return View();
         }
 
@@ -35,11 +41,29 @@ namespace JSAT_HR.Controllers
                 var position_CD = pbl.Check_Position(pm);
                 if (position_CD == "")
                 {
-                    pbl.Position_Save(pm);
+                    flag = pbl.Position_Save(pm);
+                    if (flag == "OK")
+                    {
+                        Session["MessageSave"] = "OK";
+                    }
+                    else
+                    {
+                        Session["MessageSave"] = "NOT OK";
+                    }
                 }
                 else
                 {
                     flag = pbl.Position_Update(pm);
+                    if (flag == "OK")
+
+                    {
+                        Session["Message"] = "OK";
+
+                    }
+                    else
+                    {
+                        Session["Message"] = "Not OK";
+                    }
                 }
             }
             return RedirectToAction("PositionList");

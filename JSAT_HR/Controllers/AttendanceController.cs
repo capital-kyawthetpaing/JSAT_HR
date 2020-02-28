@@ -140,7 +140,11 @@ namespace JSAT_HR.Controllers
 
         public ActionResult AttendanceSetting()
         {
-            return View();
+            MultiModel mm = new MultiModel();
+            mm.attModel = new AttendanceModel();
+            mm.attModel.YYYY = DateTime.Now.Year.ToString();
+            mm.attModel.MM = DateTime.Now.Month.ToString();
+            return View(mm);
 
         }
 

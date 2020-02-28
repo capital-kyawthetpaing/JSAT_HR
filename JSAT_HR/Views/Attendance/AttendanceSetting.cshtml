@@ -11,96 +11,112 @@
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
-                    <div class="col-xl-12 col-md-12 mb-2">
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="Year">Year</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
-                                    </div>
-                                    @{
-                                        var listYear = new List<SelectListItem>();
-                                        listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                        listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
-                                        listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
-                                        listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
-                                        listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
-                                        listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
-                                        listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
-                                        listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
-                                        listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
-                                        listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
-                                        listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
-                                        listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
-                                        listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
-                                    }
-                                    @Html.DropDownListFor(m => m.attModel.YYYY, listYear, new
-                               {
-                                   @class = "form-control",
-                                   @required = "required",
-                                   @id = "ddlYear",
-                                   @tabindex = "1"
-                               })
+                    <div class="form-row">
+                        <div class="form-group col-xl-5 col-md-12 mb-2">
+                            <div class="form-row">
+                                <div class="form-group col-xl-1 col-md-12 mb-1">
+                                    <label for="Year">Year</label>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="Year">Month</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                <div class="form-group col-xl-5 col-md-12 mb-1">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                        </div>
+                                        @{
+                                            var listYear = new List<SelectListItem>();
+                                            listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
+                                            listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
+                                            listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
+                                            listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
+                                            listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
+                                            listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
+                                            listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
+                                            listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
+                                            listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
+                                            listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
+                                            listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
+                                            listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
+                                        }
+                                        @Html.DropDownListFor(m => m.attModel.YYYY, listYear, new
+                                   {
+                                       @class = "form-control",
+                                       @required = "required",
+                                       @id = "ddlYear",
+                                       @tabindex = "1"
+                                   })
                                     </div>
-                                    @{
-                                        var listMonth = new List<SelectListItem>();
-                                        listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                        listMonth.Add(new SelectListItem { Text = "January", Value = "1" });
-                                        listMonth.Add(new SelectListItem { Text = "February", Value = "2" });
-                                        listMonth.Add(new SelectListItem { Text = "March", Value = "3" });
-                                        listMonth.Add(new SelectListItem { Text = "April", Value = "4" });
-                                        listMonth.Add(new SelectListItem { Text = "May", Value = "5" });
-                                        listMonth.Add(new SelectListItem { Text = "June", Value = "6" });
-                                        listMonth.Add(new SelectListItem { Text = "July", Value = "7" });
-                                        listMonth.Add(new SelectListItem { Text = "August", Value = "8" });
-                                        listMonth.Add(new SelectListItem { Text = "September", Value = "9" });
-                                        listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
-                                        listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
-                                        listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
-                                    }
-                                    @Html.DropDownListFor(m => m.attModel.MM, listMonth, new
-                                {
-                                    @class = "form-control",
-                                    @required = "required",
-                                    @id = "ddkMonth",
-                                    @tabindex = "2"
-                                })
                                 </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="Year">Staff</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                <div class="form-group col-xl-1 col-md-12 mb-1">
+                                    <label for="Year">Month</label>
+                                </div>
+                                <div class="form-group col-xl-5 col-md-12 mb-1">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                        </div>
+                                        @{
+                                            var listMonth = new List<SelectListItem>();
+                                            listMonth.Add(new SelectListItem { Text = "January", Value = "1" });
+                                            listMonth.Add(new SelectListItem { Text = "February", Value = "2" });
+                                            listMonth.Add(new SelectListItem { Text = "March", Value = "3" });
+                                            listMonth.Add(new SelectListItem { Text = "April", Value = "4" });
+                                            listMonth.Add(new SelectListItem { Text = "May", Value = "5" });
+                                            listMonth.Add(new SelectListItem { Text = "June", Value = "6" });
+                                            listMonth.Add(new SelectListItem { Text = "July", Value = "7" });
+                                            listMonth.Add(new SelectListItem { Text = "August", Value = "8" });
+                                            listMonth.Add(new SelectListItem { Text = "September", Value = "9" });
+                                            listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
+                                            listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
+                                            listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
+                                        }
+                                        @Html.DropDownListFor(m => m.attModel.MM, listMonth, new
+                                    {
+                                        @class = "form-control",
+                                        @required = "required",
+                                        @id = "ddlMonth",
+                                        @tabindex = "2"
+                                    })
                                     </div>
-                                    @Html.DropDownListFor(m => m.attModel.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
-                               {
-                                   @class = "form-control",
-                                   @required = "required",
-                                   @id = "ddlStaff",
-                                   @tabindex = "3"
-                               })
                                 </div>
+
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="Process" style="color:white;">Process</label>
-                                <div class="input-group">
+                        </div>
+                        <div class="form-group col-xl-5 col-md-12 mb-2">
+                            <div class="form-row">
+                                <div class="form-group col-xl-1 col-md-12 mb-1">
+                                    <label for="Year">Staff</label>
+                                </div>
+                                <div class="form-group col-xl-5 col-md-12 mb-1">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.attModel.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                                   {
+                                       @class = "form-control",
+                                       @required = "required",
+                                       @id = "ddlStaff",
+                                       @tabindex = "3"
+                                   })
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-12 mb-1">
                                     <button type="button" id="btnsearch" class="btn btn-info" onclick="_Search()"><i class="fa fa-search"></i>&nbsp; Search</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-md-12 mb-2 dynamcdiv">
-                        @*<div class="form-row dynamicAtt">
-                        </div>*@
+                    <div class="form-group col-xl-5 col-md-12 mb-2">
+                        
+                        
+                    </div>
+                    <div class="form-group col-xl-7 col-md-12 mb-2">
+                        
+                    </div>
+                    <div class="dynamcdiv" style="height:670px;overflow-y:scroll;">
+                        <div class="form-row dynamicAtt">
+                            
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -119,7 +135,7 @@
     </div>
 }
     @section Scripts{
-        <script type="text/javascript">
+    <script type="text/javascript">
             $(document).ready(function () {
                 SelectStaff();
 
@@ -142,7 +158,7 @@
 
             function _Search() {
                 var YYY = $("#ddlYear").val();
-                var MM = $("#ddkMonth").val();
+                var MM = $("#ddlMonth").val();
                 var staffID = $("#ddlStaff").val();
                 $.ajax({
                     type: 'POST',
@@ -153,7 +169,7 @@
                              $(".dynamicAtt").remove();
                              window.location.href =  '@Url.Action("AttendanceSetting", "Attendance")'
                         }
-                        else {                   
+                        else {
                             Filltable(json);
                             $("#update").css("display", "block");
                         }
@@ -162,7 +178,7 @@
                 });
             }
 
-            function Filltable(json) 
+            function Filltable(json)
             {
                 $(".dynamicAtt").remove();
 
@@ -170,6 +186,15 @@
                 var newdiv = document.createElement('div');
                 newdiv.className = 'form-row dynamicAtt';
                 $(maindiv).append(newdiv);
+
+                var weekday = new Array(7);
+                weekday[0] = "Sunday";
+                weekday[1] = "Monday";
+                weekday[2] = "Tuesday";
+                weekday[3] = "Wednesday";
+                weekday[4] = "Thursday";
+                weekday[5] = "Friday";
+                weekday[6] = "Saturday"; 
 
                 var x;
                 for (x = 1; x <= json[0].Total; x++) {
@@ -180,7 +205,7 @@
                     var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x-1) + '__TimeOut" name="attlistModel[' + (x-1) + '].TimeOut">';
 
                     var unpaidfull = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeFull" name="attlistModel[' + (x-1) + '].LeaveType" value="1" >';
-                
+
                     var unpaidhalf = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__LeaveTypeHalf" name="attlistModel[' + (x-1) + '].LeaveType" value="2">';
 
                     var onehrleave = '<input type="checkbox" id="attlistModel_' + (x-1) + '__LeaveTypeOnehr" name="attlistModel[' + (x-1) +'].LeaveType" value="3">';
@@ -188,43 +213,137 @@
                     var onehrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutOnehr" name="attlistModel[' + (x-1) + '].EarlyOut" value="1">';
 
                     var twohrearly = '<input type="radio" class="Uncheckclass" onclick="Uncheck(this)" id="attlistModel_' + (x-1) + '__EarlyOutTwohr"  name="attlistModel[' + (x-1) + '].EarlyOut" value="2">';
-                
 
-                    $(wrapper).append('<div class="form-group col-md-2">' +
-                                    ' <label for="Day">' + x + '</label>' +     
-                                    ' <table style="border: 1px solid #999999;width:80%">' +
-                                    '<tbody>' +
+                    var date = new Date($('#ddlYear').val() + '-' + $('#ddlMonth').val() + '-' + x);
+                    var day = weekday[date.getDay()];
+                    var weekend = 'text-info';
+                    if (day == 'Sunday' || day == 'Saturday')
+                        weekend = 'text-danger';
+                    $(wrapper).append('<div class="form-group col-xl-4 col-md-12 mb-2">'+
+                                            '<div class="card border-left-info shadow h-100 py-2">' +
+                                                '<div class="card-body" style="padding:0.5rem;">' +
+                                                    '<div class="text-s font-weight-bold '+weekend+' text-uppercase mb-1" style="font-size:22px;">'+x+' ('+day+')</div>'+
+                                                    '<div class="form-row">' +
+                                                        '<div class="form-group col-xl-2 col-md-12 mb-1">'+
+                                                            '<div class="input-group">'+
+                                                                '<label for="TimeIn">Time In</label>'+
+                                                            '</div>'+
+                                                        '</div>'+
+                                                        '<div class="form-group col-xl-4 col-md-12 mb-1">'+
+                                                            '<div class="input-group">'+
+                                                                timein +
+                                                            '</div>'+
+                                                        '</div>'+
+                                                        '<div class="form-group col-xl-2 col-md-12 mb-1">'+
+                                                            '<div class="input-group">'+
+                                                                '<label for="TimeIn">Time Out</label>'+
+                                                            '</div>'+
+                                                        '</div>'+
+                                                        '<div class="form-group col-xl-4 col-md-12 mb-1">'+
+                                                            '<div class="input-group">'+
+                                                                timeout+
+                                                            '</div>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="form-row">'+
+                                                    '<div class="form-group col-xl-2 col-md-12 mb-1">'+
+                                                        '<label for="Year">Early Out</label>'+
+                                                    '</div>'+
+                                                    '<div class="form-group col-xl-4 col-md-12 mb-1">'+
+                                                        '<div class="input-group">'+
+                                                            '<div class="input-group-prepend">'+
+                                                                '<div class="input-group-text">'+
+                                                                    onehrearly+
+                                                                '</div>'+
+                                                            '</div>'+
+                                                            '<label class="form-control" for="1HourEarly">1 Hour</label>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="form-group col-xl-4 col-md-12 mb-1">'+
+                                                        '<div class="input-group">'+
+                                                            '<div class="input-group-prepend">'+
+                                                                '<div class="input-group-text">'+
+                                                                    twohrearly+
+                                                                '</div>'+
+                                                            '</div>'+
+                                                            '<label class="form-control" for="MarketingTeamAllowance">2 Hour</label>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="form-row">'+
+                                                    '<div class="form-group col-xl-2 col-md-12 mb-1">'+
+                                                        '<label for="UnpaidLeave">Unpaid Leave</label>'+
+                                                    '</div>'+
+                                                    '<div class="form-group col-xl-3 col-md-12 mb-1">'+
+                                                        '<div class="input-group">'+
+                                                            '<div class="input-group-prepend">'+
+                                                                '<div class="input-group-text">'+
+                                                                    unpaidfull+
+                                                                '</div>'+
+                                                            '</div>'+
+                                                            '<label class="form-control" for="Full">Full</label>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="form-group col-xl-3 col-lg-12 col-md-12 mb-1">'+
+                                                        '<div class="input-group">'+
+                                                            '<div class="input-group-prepend">'+
+                                                                '<div class="input-group-text">'+
+                                                                    unpaidhalf+
+                                                                '</div>'+
+                                                            '</div>'+
+                                                            '<label class="form-control" for="Hlalf">Half</label>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="form-group col-xl-3 col-lg-12 col-md-12 mb-1">'+
+                                                        '<div class="input-group">'+
+                                                            '<div class="input-group-prepend">'+
+                                                                '<div class="input-group-text">'+
+                                                                    onehrleave+
+                                                                '</div>'+
+                                                            '</div>'+
+                                                            '<label class="form-control" for="OneHrLeave">1 Hour</label>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>');
 
-                                    '<tr class="form-group_entry">' +
-                                    '<td>Time IN:'+ timein + '</td>' +
-                                    '</tr>' +
+                    //$(wrapper).append('<div class="form-group col-md-2">' +
+                    //                ' <label for="Day">' + x + '</label>' +
+                    //                ' <table style="border: 1px solid #999999;width:80%">' +
+                    //                '<tbody>' +
 
-                                    '<tr class="form-group_entry">' +
-                                     '<td>Tine Out:' + timeout+ '</td>' +
-                                    '</tr>' +
+                    //                '<tr class="form-group_entry">' +
+                    //                '<td>Time IN:'+ timein + '</td>' +
+                    //                '</tr>' +
 
-                                    '<tr class="form-group_entry">' +
-                                    '<td>Unpaid:' +
-                                     unpaidfull + '<label for="Full">Full</label>'+
-                                     unpaidhalf + '<label for="Half">Half</label>'+
-                                    '</td>'+
-                                  '</tr>' +
+                    //                '<tr class="form-group_entry">' +
+                    //                 '<td>Tine Out:' + timeout+ '</td>' +
+                    //                '</tr>' +
 
-                                    '<tr class="form-group_entry">' +
-                                    '<td>1 Hour Leave:' + onehrleave + '</td > ' +
-                                   '</tr>' +
+                    //                '<tr class="form-group_entry">' +
+                    //                '<td>Unpaid:' +
+                    //                 unpaidfull + '<label for="Full">Full</label>'+
+                    //                 unpaidhalf + '<label for="Half">Half</label>'+
+                    //                '</td>'+
+                    //              '</tr>' +
 
-                                    '<tr class="form-group_entry">' +
-                                    '<td>Early Out:' +
-                                     onehrearly+'<label for="1Hour">1 Hour</label>' +
-                                     twohrearly +'<label for="2Hour">2 Hours</label>' +
-                                    '</td > ' +
-                                    '</tr>' +
+                    //                '<tr class="form-group_entry">' +
+                    //                '<td>1 Hour Leave:' + onehrleave + '</td > ' +
+                    //               '</tr>' +
 
-                                    '</tbody >' +
-                                    '</table >' +
-                        '</div>');
-                    
+                    //                '<tr class="form-group_entry">' +
+                    //                '<td>Early Out:' +
+                    //                 onehrearly+'<label for="1Hour">1 Hour</label>' +
+                    //                 twohrearly +'<label for="2Hour">2 Hours</label>' +
+                    //                '</td > ' +
+                    //                '</tr>' +
+
+                    //                '</tbody >' +
+                    //                '</table >' +
+                    //    '</div>');
+
                     $('#attlistModel_' + (x - 1) + '__TimeIn').val(json[x - 1].TimeIn);
                     $('#attlistModel_' + (x - 1) + '__TimeOut').val(json[x - 1].TimeOut);
                     if (json[x - 1].LeaveType == 1) {
@@ -254,6 +373,6 @@
                 });
             }
 
-        </script>
+    </script>
     }
 

@@ -37,13 +37,17 @@ namespace SubDivision_BL
 
         public string SubDivision_Save(SubDivisionModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
+
             JSAT_HREntities db = new JSAT_HREntities();
             M_SubDivision msd = new M_SubDivision();
 
             msd.SubDivisionCD = model.SubDivisionCD;
             msd.SubDivision = model.SubDivisionName;
             msd.InsertedDate = DateTime.Now;
-            msd.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            msd.InsertedBy = updatedby;
 
             db.M_SubDivision.Add(msd);
             db.SaveChanges();
@@ -54,6 +58,9 @@ namespace SubDivision_BL
 
         public string SubDivision_Update(SubDivisionModel model)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
             JSAT_HREntities db = new JSAT_HREntities();
             M_SubDivision md = new M_SubDivision();
             string msg = string.Empty;
@@ -61,7 +68,7 @@ namespace SubDivision_BL
             update.SubDivisionCD = model.SubDivisionCD;
             update.SubDivision = model.SubDivisionName;
             update.UpdatedDate = DateTime.Now;
-            update.UpdatedBy = HttpContext.Current.Session["UserID"].ToString();
+            update.UpdatedBy = updatedby;
             try
             {
                 db.SaveChanges();

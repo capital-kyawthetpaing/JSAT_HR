@@ -1,6 +1,7 @@
 ﻿@model JH_Model.PositionModel
 @{
     ViewBag.Title = "PositionList";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 @using (Html.BeginForm("Position_Save", "Position", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
@@ -87,6 +88,23 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            var tt = '@ViewBag.mesg';
+           
+            if (tt == "OK") {
+                
+                GetMessage("I_1002", "Update");
+
+                $('#myModal').modal('show');
+            }
+            
+            var aa = '@ViewBag.mesgsave';
+            if (aa == "OK") {
+              
+               
+                GetMessage("I_1001", "Insert");
+                $('#myModal').modal('show');
+            }
+           
             var table = $('#tbPosition').DataTable(
                 {
                     "language": {

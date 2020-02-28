@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2122bddf8530417f95579bbc976fc77e" Name="Diagram1">
+      <Diagram DiagramId="2122bddf8530417f95579bbc976fc77e" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="JSAT_HRModel.L_Import" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_Position" Width="1.5" PointX="11.838727768435481" PointY="5.7616296437390284" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="9.4643518968784957" PointY="20.163359412999526" />
         <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Deduction" Width="1.5" PointX="8.44563190846035" PointY="16.227549336956603" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_Salary" Width="1.5" PointX="9.428798719043284" PointY="10.153342981894195" />
+        <EntityTypeShape EntityType="JSAT_HRModel.L_Log" Width="1.5" PointX="4.84709358999836" PointY="31.155499636733673" />
         
         
         
