@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_SubDivision" Width="1.5" PointX="9.4643518968784957" PointY="20.163359412999526" />
         <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Deduction" Width="1.5" PointX="8.44563190846035" PointY="16.227549336956603" />
         <EntityTypeShape EntityType="JSAT_HRModel.L_Log" Width="1.5" PointX="4.84709358999836" PointY="31.155499636733673" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Salary" Width="1.5" PointX="2.0748815136379011" PointY="10.026182879705999" />
         
         
         

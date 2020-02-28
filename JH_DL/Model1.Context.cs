@@ -42,5 +42,6 @@ namespace JH_DL
         public virtual DbSet<M_SubDivision> M_SubDivision { get; set; }
         public virtual DbSet<Payroll_Deduction> Payroll_Deduction { get; set; }
         public virtual DbSet<L_Log> L_Log { get; set; }
+        public virtual DbSet<M_Salary> M_Salary { get; set; }
     }
 }
