@@ -107,21 +107,14 @@ namespace JSAT_HR.Controllers
             return JsonConvert.SerializeObject(dtpay);
         }
 
-        public FileStreamResult PayRoll_Detail_Report(string yyyymm)
+        public FileStreamResult PayRoll_Detail_Report(string id)
         {
             DataSet ds = new DataSet();
             string savefilename = "PayRoll_Report_Detail" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Detail_Report(yyyymm.Substring(6,1),yyyymm.Substring(0,6));
-            //if (dt.Rows.Count > 0)
-            //{
-                //for (int i = 0; dt.Rows.Count < 20; i++)
-                //{
-                //    dt.Rows.Add();
-                //    dt.AcceptChanges();
-                //}
-
+            dt = pbl.PayRoll_Detail_Report(id.Substring(6,1),id.Substring(0,6));
+           
                 ds.Tables.Add(dt);
 
                 Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
@@ -134,7 +127,7 @@ namespace JSAT_HR.Controllers
                 str.Seek(0, SeekOrigin.Begin);
 
                 return File(str, "application/pdf");
-            //}
+           
         }
 
         public ActionResult PayRoll_Detail()

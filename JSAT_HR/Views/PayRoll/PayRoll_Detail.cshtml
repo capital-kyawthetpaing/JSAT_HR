@@ -80,8 +80,8 @@
                     <div class="form-group col-md-5">
                         <label for="StaffID" style="color:white;">Search</label>
                         <div class="input-group">
-                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData()"><i class="fa fa-search"></i>&nbsp; Search</button>
-
+                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;
+                            <button type="button" id="btnreport" class="btn btn-warning col-md-3" onclick="Report()"><i class="fa fa-print"></i>&nbsp; Report</button>
                         </div>
                     </div>
 
@@ -219,7 +219,6 @@
 
         function ShowData()
         {
-
             var Name = "";
             var Year = "";
             var Month = "";
@@ -241,9 +240,17 @@
                 alert("Please Select StaffName , Year and Month.");
               
             }
-
-            
-          
         }
+
+
+        function Report() {
+            alert("aa");
+            var year = $('#ddlYear').val();
+                var month = $('#ddlMonth').val();
+                var stid = $('#staffNameID').val();
+                var yearmonth = year + month + stid;
+            window.open('@Url.Action("PayRoll_Detail_Report", "PayRoll")?id=' + yearmonth);
+        }
+      
     </script>
     }
