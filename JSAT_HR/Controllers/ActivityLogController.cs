@@ -13,6 +13,7 @@ namespace JSAT_HR.Controllers
     public class ActivityLogController : Controller
     {
         Activity_Log_BL albl = new Activity_Log_BL();
+        
         // GET: ActivityLog
         public ActionResult Activity_Log()
         {
@@ -20,10 +21,12 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpGet]
-        public string GETL_Log()
+        public string GETL_Log_ByID()
         {
             Function fun = new Function();
-            return fun.DataTableToJSONWithJSONNet(albl.GETL_Log());
+            string userid = Session["UserID"].ToString().Substring(0,4);
+            return fun.DataTableToJSONWithJSONNet(albl.GETL_Log_ByID(userid));
+
         }
     }
 }

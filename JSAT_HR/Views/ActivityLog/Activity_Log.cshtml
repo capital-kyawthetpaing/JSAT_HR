@@ -5,7 +5,7 @@
     Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
-@using (Html.BeginForm("Company_Save", "Activity_Log", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
+@using (Html.BeginForm("Company_Save", "Activity_Log", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
     <div class="container-fluid">
         <div class="row">
@@ -16,7 +16,7 @@
                             <table id="tbLog" class="hrtable col-sm-12 col-md-12">
                                 <thead>
                                     <tr>
-                                        <th>StaffID</th>
+                                        <th>UserID</th>
                                         <th>DateTime</th>
                                         <th>Form Name</th>
                                         <th>Description</th>
@@ -45,18 +45,18 @@
                         "sLengthMenu": "Display _MENU_ records",
                     },
                     "ajax": {
-                        "url": "../ActivityLog/GETL_Log",
+                        "url": "../ActivityLog/GETL_Log_ByID",
                         "type": "GET",
                         "datatype": "json",
                         "dataSrc": ""
                     },
                     "columns": [
-                        { "data": "StaffID", orderable: false, "width": "3%" },
-                        { "data": "DateTime", orderable: false, "width": "3%" },
-                        { "data": "FromName", orderable: false, "width": "3%" },
+                        { "data": "UserID", orderable: false, "width": "3%" },
+                        { "data": "DateTime", orderable: false, "width": "5%" },
+                        { "data": "FormName", orderable: false, "width": "3%" },
                         { "data": "Description", orderable: false, "width": "13%" }
                     ],
-                }
+                })
         });
     </script>
 }
