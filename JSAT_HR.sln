@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRoll_BL", "PayRoll_BL\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityLog_BL", "ActivityLog_BL\ActivityLog_BL.csproj", "{FEA7B8AD-5F2D-471B-875F-37542E6C2EAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSalary_BL", "BasicSalary_BL\BasicSalary_BL.csproj", "{B33FAD1E-EFA6-48E4-958F-832F4C6B90F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{FEA7B8AD-5F2D-471B-875F-37542E6C2EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA7B8AD-5F2D-471B-875F-37542E6C2EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA7B8AD-5F2D-471B-875F-37542E6C2EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33FAD1E-EFA6-48E4-958F-832F4C6B90F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33FAD1E-EFA6-48E4-958F-832F4C6B90F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33FAD1E-EFA6-48E4-958F-832F4C6B90F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33FAD1E-EFA6-48E4-958F-832F4C6B90F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
