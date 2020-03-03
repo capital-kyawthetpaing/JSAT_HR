@@ -95,30 +95,27 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            var tt = '@ViewBag.mesg';
-
-            if (tt == "OK") {
-
+             var Imsg = '@ViewBag.Imsg';
+            if (Imsg == "OK") {
+                GetMessage("I_1001", "Update");
+                $('#myModal').modal('show');
+            }
+            var EImsg = '@ViewBag.EImsg';
+            if (EImsg == "NotOK") {
+                GetMessage("I_1007", "Update");
+                $('#myModal').modal('show');
+            }
+            var Umsg = '@ViewBag.Umsg';
+            if (Umsg == "OK") {
                 GetMessage("I_1002", "Update");
-
                 $('#myModal').modal('show');
             }
-            else
-            {
-
-            }
-
-            var aa = '@ViewBag.mesgsave';
-            if (aa == "OK") {
-               
-                GetMessage("I_1001", "Insert");
+            var EUmsg = '@ViewBag.EUmsg';
+            if (EUmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
                 $('#myModal').modal('show');
             }
-            else {
-
-            }
-           
-
+          
             var table = $('#tbCompany').DataTable(
                 {
                     "language": {
