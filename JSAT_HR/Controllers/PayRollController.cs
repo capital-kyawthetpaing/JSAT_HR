@@ -17,6 +17,8 @@ namespace JSAT_HR.Controllers
     public class PayRollController : Controller
     {
         Payroll_BL pbl = new Payroll_BL();
+        DataTable AllowanceDt = new DataTable();
+        DataTable DeductionDt = new DataTable();
         // GET: PayRoll
         public ActionResult PayRoll_Setting()
         {
@@ -60,7 +62,7 @@ namespace JSAT_HR.Controllers
             string savefilename = "PayRoll_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Search(id,1);
+            dt = pbl.PayRoll_Setting_Report(id);
             if (dt.Rows.Count < 20)
             {
                 for (int i = 0; dt.Rows.Count < 20; i++)
@@ -89,7 +91,7 @@ namespace JSAT_HR.Controllers
             DataTable dtpay = new DataTable();
             if (id != "00")
             {
-                string date = id.Substring(0, 4) + "-" + id.Substring(4) + "-" + "01";
+                string date = id.Substring(0, 4) + "-" + id.Substring(4,2) + "-" + "01";
                 if (!String.IsNullOrWhiteSpace(id))
                 {
                     dtpay = pbl.PayRoll_Calculate(id, date);
@@ -105,21 +107,14 @@ namespace JSAT_HR.Controllers
             return JsonConvert.SerializeObject(dtpay);
         }
 
-        public FileStreamResult PayRoll_Detail_Report(string yyyymm)
+        public FileStreamResult PayRoll_Detail_Report(string id)
         {
             DataSet ds = new DataSet();
             string savefilename = "PayRoll_Report_Detail" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Detail_Report(yyyymm.Substring(6,1),yyyymm.Substring(0,6));
-            //if (dt.Rows.Count > 0)
-            //{
-                //for (int i = 0; dt.Rows.Count < 20; i++)
-                //{
-                //    dt.Rows.Add();
-                //    dt.AcceptChanges();
-                //}
-
+            dt = pbl.PayRoll_Detail_Report(id.Substring(6,1),id.Substring(0,6));
+           
                 ds.Tables.Add(dt);
 
                 Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
@@ -132,7 +127,7 @@ namespace JSAT_HR.Controllers
                 str.Seek(0, SeekOrigin.Begin);
 
                 return File(str, "application/pdf");
-            //}
+           
         }
 
         public ActionResult PayRoll_Detail()
@@ -149,24 +144,33 @@ namespace JSAT_HR.Controllers
         public JsonResult GetPayRollDetail_AllowanceLabel(string id)
         {
             Payroll_BL bl = new Payroll_BL();
+            
+            AllowanceDt = bl.PayRoll_Detail_Allow(id);
+            return Json(PRD_ALabelCol(AllowanceDt), JsonRequestBehavior.AllowGet);
+        }
 
+        public JsonResult GetPayRollDetail_AllowanceData(string id)
+        {
 
-            DataTable dt = bl.PayRoll_Detail_Allow(id);
-            return Json(PRD_ALabelCol(dt), JsonRequestBehavior.AllowGet);
+            Payroll_BL bl = new Payroll_BL();
+
+           AllowanceDt = bl.PayRoll_Detail_Allow(id);
+
+            return Json(PRD_ADataCol(AllowanceDt), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetPayRollDetail_DeductionLabel(string id)
         {
             Payroll_BL bl = new Payroll_BL();
-            DataTable dt = bl.PayRoll_Detail_Deduction(id);
-            return Json(PRD_DLabelCol(dt), JsonRequestBehavior.AllowGet);
+            DeductionDt = bl.PayRoll_Detail_Deduction(id);
+            return Json(PRD_DLabelCol(DeductionDt), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetPayRollDetail_DeductionData(string id)
         {
             Payroll_BL bl = new Payroll_BL();
-            DataTable dt = bl.PayRoll_Detail_Deduction(id);
-            return Json(PRD_DDataCol(dt), JsonRequestBehavior.AllowGet);
+            DeductionDt = bl.PayRoll_Detail_Deduction(id);
+            return Json(PRD_DDataCol(DeductionDt), JsonRequestBehavior.AllowGet);
         }
 
         public string PRD_Row(string id)
@@ -439,16 +443,7 @@ namespace JSAT_HR.Controllers
             return Deduction_Data;
 
         }
-
-        public JsonResult GetPayRollDetail_AllowanceData(string id)
-        {
-
-            Payroll_BL bl = new Payroll_BL();
-
-            DataTable dt = bl.PayRoll_Detail_Allow(id);
-
-            return Json(PRD_ADataCol(dt), JsonRequestBehavior.AllowGet);
-        }
+             
 
         public string PRD_ADataCol(DataTable dt)
         {

@@ -114,6 +114,7 @@
                         <h6 class="collapse-header">Allowance:</h6>
                         <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance",new { @id = 1 })'>Allowance Setting(MMK)</a>
                         <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance",new { @id = 2 })'>Allowance Setting(USD)</a>
+                        <a class="collapse-item" href='@Url.Action("BasicSalary", "BasicSalary")'>Basic Salary Setting</a>
                     </div>
                 </div>
             </li>
@@ -330,7 +331,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href='@Url.Action("Activity_Log", "ActivityLog",new { @userid = loginID })'>
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
