@@ -41,7 +41,11 @@ namespace JSAT_HR.Controllers
             if(model!=null)
             {
                 var deptCD = dbl.Check_DeptCD(model);
-                if (deptCD == "")
+                var dept = deptCD.Split(',');
+                var cd = dept[0].ToString();
+                var name = dept[1].ToString();
+
+                if (cd == "")
                 {
                     flag = dbl.Department_Save(model);
 
@@ -51,22 +55,20 @@ namespace JSAT_HR.Controllers
                     }
                     else
                     {
-                        Session["MessageSave"] = "NOT OK";
+
                     }
+
                 }
                 else
                 {
                     flag = dbl.Department_Update(model);
-
                     if (flag == "OK")
-                        
                     {
                         Session["Message"] = "OK";
-
                     }
                     else
                     {
-                        Session["Message"] = "Not OK";
+                        Session["Message"] = "NOT OK";
                     }
                 }
             }

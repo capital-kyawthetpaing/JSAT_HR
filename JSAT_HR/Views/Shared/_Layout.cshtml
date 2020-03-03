@@ -75,9 +75,9 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Attendance:</h6>
-                        <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
+                        @*<a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>*@
                         <a class="collapse-item" href='@Url.Action("AttendanceSetting", "Attendance")'>Attendance Setting</a>
-                        @*<a class="collapse-item" href='@Url.Action("AttendanceImport", "Attendance")'>Attendance Import</a>*@
+                      
                     </div>
                 </div>
             </li>
@@ -331,7 +331,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href='@Url.Action("Activity_Log", "ActivityLog",new { @userid = loginID })'>
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>

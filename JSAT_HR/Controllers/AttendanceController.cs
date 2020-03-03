@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using JH_Model;
 using CommonFunction;
 using FastMember;
-
+using Spire.Xls;
 
 namespace JSAT_HR.Controllers
 {
@@ -45,6 +45,7 @@ namespace JSAT_HR.Controllers
                     if (file != null)
                     {
                         string filename = string.Empty;
+                        string newfilename = string.Empty;
                         filename = file.FileName;
                         string[] arr;
                         string OfficeCD = string.Empty;
@@ -66,15 +67,22 @@ namespace JSAT_HR.Controllers
                             }
                             if (filename.Contains(".xlsx"))
                             {
-                                filename = filename.Replace(".xlsx", "");
+                                filename = filename.Replace(" ", "_").Replace(".xls", "");
                                 filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+
                             }
                             file.SaveAs(AttendanceFile + filename);
+                            //Workbook workbook1 = new Workbook();
+                            //workbook1.LoadFromFile(AttendanceFile + filename,ExcelVersion.Version97to2003);
+                            //filename = filename.Replace(".xls", "");
+                            //newfilename = filename + ".xlsx";
+                            //workbook1.SaveToFile(AttendanceFile + newfilename , ExcelVersion.Version2016);
 
                             dt = abl.AttendanceData(AttendanceFile + filename, id);
                             if (dt.Rows.Count > 0)
                             {
                                 abl.Insert_Attendance_Data(dt, file.FileName,id);
+                                Session["Imsg"] = "OK";
                             }
                         }
                        else
@@ -93,10 +101,21 @@ namespace JSAT_HR.Controllers
                             }
                             file.SaveAs(IncomeTaxFile + filename);
 
-                            dt = abl.ExcelToTable(IncomeTaxFile + filename,id);
+                            dt = abl.ExcelToTable(IncomeTaxFile + filename);
+                            string[] arr1;
+                            string YYYMM = string.Empty;
+                            string officeid = string.Empty;
+                            if (id != null)
+                            {
+                                arr1 = id.Split('_');
+                                officeid = arr1[0];
+                                YYYMM = arr1[1] + arr1[2];
+
+                            }
                             if (dt.Rows.Count > 0)
                             {
-                                abl.Insert_IncomeTax_Data(dt, file.FileName);
+                                abl.Insert_IncomeTax_Data(dt, YYYMM, file.FileName);
+                                Session["Imsg"] = "OK";
                             }
                         }                      
                     }
@@ -105,7 +124,7 @@ namespace JSAT_HR.Controllers
             }
                         
 
-            catch (Exception ex) { string error = ex.ToString(); }
+            catch (Exception ex) { string error = ex.ToString(); Session["Emsg"] = "NotOK"; }
 
             //return RedirectToAction("AttendanceImport");
             return JsonConvert.SerializeObject("OK");
@@ -113,6 +132,12 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Import_Log_List()
         {
+            String Imsg = Session["Imsg"] as string;
+            String Emsg = Session["Emsg"] as string;
+            ViewBag.Imsg = Imsg;
+            ViewBag.Emsg = Emsg;
+            Session["Imsg"] = "";
+            Session["Emsg"] = "";
             PayrollModel pm = new PayrollModel();
             return View(pm);
         }
@@ -140,10 +165,16 @@ namespace JSAT_HR.Controllers
 
         public ActionResult AttendanceSetting()
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
             MultiModel mm = new MultiModel();
             mm.attModel = new AttendanceModel();
             mm.attModel.YYYY = DateTime.Now.Year.ToString();
-            mm.attModel.MM = DateTime.Now.Month.ToString();
+            mm.attModel.MM = DateTime.Now.Month.ToString().PadLeft(2,'0');
             return View(mm);
 
         }
@@ -192,13 +223,13 @@ namespace JSAT_HR.Controllers
                     }
                     abl.Update_Attendance_Data(dtattendance,model);
                 }
-                TempData["Imsg"] = "success";
+                Session["UImsg"] = "OK";
                 return RedirectToAction("AttendanceSetting");
             }
             catch (Exception ex)
             {
                 string st = ex.ToString();
-                TempData["Emsg"] = "Unsuccess";
+                Session["UEmsg"] = "NotOK";
                 return RedirectToAction("AttendanceSetting");
             }
         }

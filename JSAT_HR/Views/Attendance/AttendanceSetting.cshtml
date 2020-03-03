@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "AttendanceSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Attendance_Setting_Save", "Attendance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -56,15 +57,15 @@
                                         </div>
                                         @{
                                             var listMonth = new List<SelectListItem>();
-                                            listMonth.Add(new SelectListItem { Text = "January", Value = "1" });
-                                            listMonth.Add(new SelectListItem { Text = "February", Value = "2" });
-                                            listMonth.Add(new SelectListItem { Text = "March", Value = "3" });
-                                            listMonth.Add(new SelectListItem { Text = "April", Value = "4" });
-                                            listMonth.Add(new SelectListItem { Text = "May", Value = "5" });
-                                            listMonth.Add(new SelectListItem { Text = "June", Value = "6" });
-                                            listMonth.Add(new SelectListItem { Text = "July", Value = "7" });
-                                            listMonth.Add(new SelectListItem { Text = "August", Value = "8" });
-                                            listMonth.Add(new SelectListItem { Text = "September", Value = "9" });
+                                            listMonth.Add(new SelectListItem { Text = "January", Value = "01" });
+                                            listMonth.Add(new SelectListItem { Text = "February", Value = "02" });
+                                            listMonth.Add(new SelectListItem { Text = "March", Value = "03" });
+                                            listMonth.Add(new SelectListItem { Text = "April", Value = "04" });
+                                            listMonth.Add(new SelectListItem { Text = "May", Value = "05" });
+                                            listMonth.Add(new SelectListItem { Text = "June", Value = "06" });
+                                            listMonth.Add(new SelectListItem { Text = "July", Value = "07" });
+                                            listMonth.Add(new SelectListItem { Text = "August", Value = "08" });
+                                            listMonth.Add(new SelectListItem { Text = "September", Value = "09" });
                                             listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
                                             listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                             listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
@@ -136,14 +137,23 @@
 }
     @section Scripts{
     <script type="text/javascript">
-            $(document).ready(function () {
-                SelectStaff();
-
-            });
+        $(document).ready(function () {
+            var UImsg = '@ViewBag.UImsg';
+            if (UImsg == "OK") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
+            var UEmsg = '@ViewBag.UEmsg';
+            if (UEmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
+                $('#myModal').modal('show');
+            }
+            SelectStaff();
+        });
 
             function SelectStaff() {
                 $.ajax({
-                    url: "../Staff/GetStaff",
+                    url:'@Url.Action("GetStaff", "Staff")',
                     type: "GET",
                     dataType: "JSON",
                     dataSrc: '',
@@ -162,7 +172,7 @@
                 var staffID = $("#ddlStaff").val();
                 $.ajax({
                     type: 'POST',
-                    url: "../Attendance/_AttendanceSearch/" + YYY + '_' + MM + '_' + staffID,
+                    url:'@Url.Action("_AttendanceSearch", "Attendance", new { @id = "ID" })'.replace("ID", YYY + '_' + MM + '_' + staffID),
                     dataType: 'json',
                     success: function (json) {
                         if (json == null || json == "") {

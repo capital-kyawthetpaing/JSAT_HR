@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JH_Model
 {
-   public  class MultiModel
+   public  class MultiModel:BaseModel
     {
         public List<AttendanceModel> attlistModel { get; set; }
 

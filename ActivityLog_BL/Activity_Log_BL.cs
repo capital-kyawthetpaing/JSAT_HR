@@ -13,11 +13,12 @@ namespace ActivityLog_BL
 {
     public class Activity_Log_BL
     {
-        public DataTable GETL_Log()
+        public DataTable GETL_Log_ByID(string userid)
         {
             BaseDL bdl = new BaseDL();
-            SqlParameter[] prms = new SqlParameter[0];
-            return bdl.SelectData("M_Company_SelectAll", prms);
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = userid };
+            return bdl.SelectData("L_Log_SelectByID", prms);
         }
     }
 }
