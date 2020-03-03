@@ -62,7 +62,7 @@ namespace JSAT_HR.Controllers
             string savefilename = "PayRoll_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Search(id,1);
+            dt = pbl.PayRoll_Setting_Report(id);
             if (dt.Rows.Count < 20)
             {
                 for (int i = 0; dt.Rows.Count < 20; i++)
