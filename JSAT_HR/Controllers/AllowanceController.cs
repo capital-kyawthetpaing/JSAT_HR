@@ -17,6 +17,12 @@ namespace JSAT_HR.Controllers
         // GET: Allowance
         public ActionResult Allowance_Setting(int id)
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
             if (id == 1)
             {
                 ViewBag.Data = "MMK";
@@ -32,12 +38,25 @@ namespace JSAT_HR.Controllers
         }
         public ActionResult Allowance_Setting_Save(AllowanceModel model)
         {
-            string flag = string.Empty;
-            if (model != null)
+            try
             {
-               flag = asbl.Allowance_Setting_Save(model);
+                string flag = string.Empty;
+                if (model != null)
+                {
+                    flag = asbl.Allowance_Setting_Save(model);
+                }
+                if(flag=="OK")
+                {
+                    Session["UImsg"] = "OK";
+                }
+                return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency });
             }
-            return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency});
+            catch (Exception ex)
+            {
+                string st = ex.ToString();
+                Session["UEmsg"] = "NotOK";
+                return RedirectToAction("Allowance_Setting", "Allowance", new { @id = model.Currency });
+            }
         }
 
 

@@ -18,6 +18,12 @@ namespace JSAT_HR.Controllers
         // GET: Office
         public ActionResult Office_Hours_Setting()
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
             return View();
         }
         [HttpGet]
@@ -29,9 +35,21 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Hours_Setting_Save(OfficeModel om)
         {
-            string flag =  obl.Hours_Setting_Save(om);
-
-            return RedirectToAction("Office_Hours_Setting");
+            try
+            {
+                string flag = obl.Hours_Setting_Save(om);
+                if (flag == "OK")
+                {
+                    Session["UImsg"] = "OK";
+                }
+                return RedirectToAction("Office_Hours_Setting");
+            }
+            catch(Exception ex)
+            {
+                string st = ex.ToString();
+                Session["UEmsg"] = "NotOK";
+                return RedirectToAction("Office_Hours_Setting");
+            }
         }
 
         [HttpGet]

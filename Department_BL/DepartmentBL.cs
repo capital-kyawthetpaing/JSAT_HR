@@ -76,6 +76,7 @@ namespace Department_BL
             M_Department update = db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefault();
             if (update != null)
                 msg = update.DepartmentCD;
+
             else
                 msg = "";
            

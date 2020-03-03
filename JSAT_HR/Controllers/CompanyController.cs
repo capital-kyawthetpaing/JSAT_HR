@@ -16,13 +16,19 @@ namespace JSAT_HR.Controllers
         // GET: Company
         public ActionResult Company_List()
         {
-            String message= Session["Message"] as string;
-            String msgSave = Session["MessageSave"] as string;
-            ViewBag.mesg = message;
-            ViewBag.mesgsave = msgSave;
+            String Imsg = Session["Imsg"] as string;
+            String Umsg = Session["Umsg"] as string;
+            String EImsg = Session["EImsg"] as string;
+            String EUmsg = Session["EUmsg"] as string;
+            ViewBag.Imsg = Imsg;
+            ViewBag.Umsg = Umsg;
+            ViewBag.EImsg = EImsg;
+            ViewBag.IUmsg = EUmsg;
 
-            Session["Message"] = "";
-            Session["MessageSave"] = "";
+            Session["Imsg"] = "";
+            Session["Umsg"] = "";
+            Session["EImsg"] = "";
+            Session["EUmsg"] = "";
             return View();
         }
 
@@ -45,11 +51,11 @@ namespace JSAT_HR.Controllers
                    flag= cbl.Company_Save(cm);
                     if (flag == "OK")
                     {
-                        Session["MessageSave"] = "OK";
+                        Session["Imsg"] = "OK";
                     }
                     else
                     {
-
+                        Session["IEmsg"] = "NotoK";
                     }
                     
                 }
@@ -59,11 +65,11 @@ namespace JSAT_HR.Controllers
 
                     if (flag == "OK")
                     {
-                        Session["Message"] = "OK";
+                        Session["Umsg"] = "OK";
                     }
                     else
                     {
-                        Session["Message"] = "NOT OK";
+                        Session["UEmsg"] = "NotoK";
                     }
                 }              
             }

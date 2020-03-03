@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JH_Model
 {
-    public class AllowanceModel
+    public class AllowanceModel:BaseModel
     {
         public string Bus { get; set; }
 

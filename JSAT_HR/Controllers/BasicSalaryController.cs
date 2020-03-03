@@ -16,6 +16,12 @@ namespace JSAT_HR.Controllers
         // GET: BasicSalary
         public ActionResult BasicSalary()
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
             return View();
         }
 
@@ -35,9 +41,22 @@ namespace JSAT_HR.Controllers
 
         public ActionResult BasicSalary_Save(SalaryModel sm)
         {
-            string flag =  bsbl.BasicSalary_Save(sm);
+            try
+            {
 
-            return RedirectToAction("BasicSalary");
+                string flag = bsbl.BasicSalary_Save(sm);
+                if (flag == "OK")
+                {
+                    Session["UImsg"] = "OK";
+                }
+                return RedirectToAction("BasicSalary");
+            }
+            catch(Exception ex)
+            {
+                string st = ex.ToString();
+                Session["UEmsg"] = "NotOK";
+                return RedirectToAction("BasicSalary");
+            }
         }
     }
 }

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "AttendanceSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Attendance_Setting_Save", "Attendance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -93,7 +94,7 @@
                                         </div>
                                         @Html.DropDownListFor(m => m.attModel.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
                                    {
-                                       @class = "form-control",
+                                       @class = "select2 form-control",
                                        @required = "required",
                                        @id = "ddlStaff",
                                        @tabindex = "3"
@@ -136,10 +137,19 @@
 }
     @section Scripts{
     <script type="text/javascript">
-            $(document).ready(function () {
-                SelectStaff();
-
-            });
+        $(document).ready(function () {
+            var UImsg = '@ViewBag.UImsg';
+            if (UImsg == "OK") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
+            var UEmsg = '@ViewBag.UEmsg';
+            if (UEmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
+                $('#myModal').modal('show');
+            }
+            SelectStaff();
+        });
 
             function SelectStaff() {
                 $.ajax({
