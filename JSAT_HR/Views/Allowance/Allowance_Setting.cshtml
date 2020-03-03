@@ -2,10 +2,26 @@
 @{
     ViewBag.Title = "Allowance Setting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
-
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var UImsg = '@ViewBag.UImsg';
+            if (UImsg == "OK") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
+            var UEmsg = '@ViewBag.UEmsg';
+            if (UEmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
+                $('#myModal').modal('show');
+            }
+        });
+    </script>
+    }
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" ,@id = "MyForm" }))
+@using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "MyForm" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-4 mb-2">
@@ -357,12 +373,13 @@
             <div class="card border-bottom-success shadow h-100">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
-                        <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Save</button>
+                        <button type="submit" class="btn btn-success col-xl-3"><i class="fa fa-save"></i>&nbsp; Update</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
+
 
 

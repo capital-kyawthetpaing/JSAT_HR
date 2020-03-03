@@ -75,7 +75,7 @@ namespace Department_BL
             string msg = string.Empty;
             M_Department update = db.M_Department.Where(s => s.DepartmentCD.Equals(model.DepartmentCD)).SingleOrDefault();
             if (update != null)
-                msg = update.DepartmentCD + ','  + update.Department;
+                msg = update.DepartmentCD;
 
             else
                 msg = "";
