@@ -266,18 +266,18 @@ namespace Attendance_BL
             return dtImportList;
         }
 
-        public DataTable ExcelToTable(string filename,string id)
+        public DataTable ExcelToTable(string filename)
         {
-            string[] arr;
-            string YYYMM = string.Empty;
-            string OfficeCD = string.Empty;
-            if (id != null)
-            {
-                arr = id.Split('_');
-                OfficeCD = arr[0];
-                YYYMM = arr[1]+arr[2] ;
+            //string[] arr;
+            //string YYYMM = string.Empty;
+            //string OfficeCD = string.Empty;
+            //if (id != null)
+            //{
+            //    arr = id.Split('_');
+            //    OfficeCD = arr[0];
+            //    YYYMM = arr[1]+arr[2] ;
 
-            }
+            //}
             FileStream excelStream = new FileStream(filename, FileMode.Open);
             var book = new XSSFWorkbook(excelStream);
             excelStream.Close();
@@ -293,7 +293,7 @@ namespace Attendance_BL
 
             //header
             table.Columns.Add("StaffID", typeof(string));
-            table.Columns.Add("YYYYMM", typeof(string));
+            //table.Columns.Add("YYYYMM", typeof(string));
             table.Columns.Add("IncomeTax", typeof(string));
 
             //body
@@ -306,7 +306,7 @@ namespace Attendance_BL
                     for (int j = row.FirstCellNum; j < cellCount; j++)
                     {
 
-                        dataRow["YYYYMM"] = YYYMM;
+                        //dataRow["YYYYMM"] = YYYMM;
 
 
                         if (row.GetCell(j) != null)
@@ -323,11 +323,11 @@ namespace Attendance_BL
             return IncomeTaxDataSet.Tables[0];
         }
 
-        public void Insert_IncomeTax_Data(DataTable dttest, string filename)
+        public void Insert_IncomeTax_Data(DataTable dttest,string YYYMM, string filename)
         {
             DataTable dt = new DataTable();
             BaseDL bdl = new BaseDL();
-            SqlParameter[] prms = new SqlParameter[4];
+            SqlParameter[] prms = new SqlParameter[5];
             if (!string.IsNullOrWhiteSpace(filename))
             {
                 prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = filename };
@@ -336,17 +336,24 @@ namespace Attendance_BL
             {
                 prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = System.DBNull.Value };
             }
+            if (!string.IsNullOrWhiteSpace(YYYMM))
+            {
+                prms[1] = new SqlParameter("@YYYMM", SqlDbType.VarChar) { Value = YYYMM };
+            }
+            else
+            {
+                prms[1] = new SqlParameter("@YYYMM", SqlDbType.VarChar) { Value = System.DBNull.Value };
+            }
 
-
-            prms[1] = new SqlParameter("@ImportType", SqlDbType.VarChar) { Value = 3 };
-            prms[2] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
+            prms[2] = new SqlParameter("@ImportType", SqlDbType.VarChar) { Value = 3 };
+            prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
 
 
             dttest.TableName = "Payroll_Deduction";
             System.IO.StringWriter writer = new System.IO.StringWriter();
             dttest.WriteXml(writer, XmlWriteMode.WriteSchema, false);
             string result = writer.ToString();
-            prms[3] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
+            prms[4] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
             bdl.InsertUpdateDeleteData("Payroll_Deduction_IncomeTax_Insert", prms);
         }
 

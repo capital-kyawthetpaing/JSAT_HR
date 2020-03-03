@@ -101,10 +101,20 @@ namespace JSAT_HR.Controllers
                             }
                             file.SaveAs(IncomeTaxFile + filename);
 
-                            dt = abl.ExcelToTable(IncomeTaxFile + filename,id);
+                            dt = abl.ExcelToTable(IncomeTaxFile + filename);
+                            string[] arr1;
+                            string YYYMM = string.Empty;
+                            string officeid = string.Empty;
+                            if (id != null)
+                            {
+                                arr1 = id.Split('_');
+                                officeid = arr1[0];
+                                YYYMM = arr1[1] + arr1[2];
+
+                            }
                             if (dt.Rows.Count > 0)
                             {
-                                abl.Insert_IncomeTax_Data(dt, file.FileName);
+                                abl.Insert_IncomeTax_Data(dt, YYYMM, file.FileName);
                                 Session["Imsg"] = "OK";
                             }
                         }                      
@@ -157,8 +167,8 @@ namespace JSAT_HR.Controllers
         {
             String UImsg = Session["UImsg"] as string;
             String UEmsg = Session["UEmsg"] as string;
-            ViewBag.Imsg = UImsg;
-            ViewBag.Emsg = UEmsg;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
             Session["UImsg"] = "";
             Session["UEmsg"] = "";
             MultiModel mm = new MultiModel();

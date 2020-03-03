@@ -2,11 +2,22 @@
 @{
     ViewBag.Title = "BasicSalary";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            var UImsg = '@ViewBag.UImsg';
+            if (UImsg == "OK") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
+            var UEmsg = '@ViewBag.UEmsg';
+            if (UEmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
+                $('#myModal').modal('show');
+            }
             $.ajax({
                 type: 'GET',
                  url: '@Url.Action("GETBasicSalary", "BasicSalary")',
