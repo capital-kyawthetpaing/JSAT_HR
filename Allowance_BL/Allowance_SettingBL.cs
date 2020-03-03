@@ -17,6 +17,9 @@ namespace Allowance_BL
 
         public string  Allowance_Setting_Save(AllowanceModel am)
         {
+            string updatedby = string.Empty;
+            updatedby = HttpContext.Current.Session["UserID"].ToString();
+            updatedby = updatedby.Split('_')[0];
 
             string msg = string.Empty;
             JSAT_HREntities db = new JSAT_HREntities();
@@ -40,7 +43,7 @@ namespace Allowance_BL
             tb.Overseas1stInterviewer = Convert.ToDecimal(am.Oversea1stInterviewer);
             tb.Overseas2ndInterviewer = Convert.ToDecimal(am.Oversea2ndInterviewer);
             tb.InsertedDate = DateTime.Now;
-            tb.InsertedBy = HttpContext.Current.Session["UserID"].ToString();
+            tb.InsertedBy = updatedby;
 
             db.SaveChanges();
 
