@@ -41,11 +41,11 @@ namespace JSAT_HR.Controllers
             if(model!=null)
             {
                 var deptCD = dbl.Check_DeptCD(model);
-                var dept = deptCD.Split(',');
-                var cd = dept[0].ToString();
-                var name = dept[1].ToString();
+                //var dept = deptCD.Split(',');
+                //var cd = dept[0].ToString();
+                //var name = dept[1].ToString();
 
-                if (cd == "")
+                if (deptCD == "")
                 {
                     flag = dbl.Department_Save(model);
 
