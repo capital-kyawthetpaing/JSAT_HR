@@ -55,19 +55,20 @@ namespace JSAT_HR.Controllers
                     }
                     else
                     {
-                        Session["MessageSave"] = "NOT OK";
+
                     }
+
                 }
                 else
                 {
                     flag = dbl.Department_Update(model);
                     if (flag == "OK")
                     {
-                        Session["MessageSave"] = "OK";
+                        Session["Message"] = "OK";
                     }
                     else
                     {
-                        Session["MessageSave"] = "NOT OK";
+                        Session["Message"] = "NOT OK";
                     }
                 }
             }
