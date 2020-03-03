@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JH_Model
 {
-    public class PayrollModel
+    public class PayrollModel:BaseModel
     {
         public string YYYYMM { get; set; }
 
