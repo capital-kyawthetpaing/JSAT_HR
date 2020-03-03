@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "DepartmentList";
     Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
+
 }
 @using (Html.BeginForm("Department_Save", "Department", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
