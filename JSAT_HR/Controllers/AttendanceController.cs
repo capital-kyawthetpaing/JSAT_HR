@@ -82,6 +82,7 @@ namespace JSAT_HR.Controllers
                             if (dt.Rows.Count > 0)
                             {
                                 abl.Insert_Attendance_Data(dt, file.FileName,id);
+                                Session["Imsg"] = "OK";
                             }
                         }
                        else
@@ -104,6 +105,7 @@ namespace JSAT_HR.Controllers
                             if (dt.Rows.Count > 0)
                             {
                                 abl.Insert_IncomeTax_Data(dt, file.FileName);
+                                Session["Imsg"] = "OK";
                             }
                         }                      
                     }
@@ -112,7 +114,7 @@ namespace JSAT_HR.Controllers
             }
                         
 
-            catch (Exception ex) { string error = ex.ToString(); }
+            catch (Exception ex) { string error = ex.ToString(); Session["Emsg"] = "NotOK"; }
 
             //return RedirectToAction("AttendanceImport");
             return JsonConvert.SerializeObject("OK");
@@ -120,6 +122,12 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Import_Log_List()
         {
+            String Imsg = Session["Imsg"] as string;
+            String Emsg = Session["Emsg"] as string;
+            ViewBag.Imsg = Imsg;
+            ViewBag.Emsg = Emsg;
+            Session["Imsg"] = "";
+            Session["Emsg"] = "";
             PayrollModel pm = new PayrollModel();
             return View(pm);
         }
@@ -147,6 +155,12 @@ namespace JSAT_HR.Controllers
 
         public ActionResult AttendanceSetting()
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            ViewBag.Imsg = UImsg;
+            ViewBag.Emsg = UEmsg;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
             MultiModel mm = new MultiModel();
             mm.attModel = new AttendanceModel();
             mm.attModel.YYYY = DateTime.Now.Year.ToString();
@@ -199,13 +213,13 @@ namespace JSAT_HR.Controllers
                     }
                     abl.Update_Attendance_Data(dtattendance,model);
                 }
-                TempData["Imsg"] = "success";
+                Session["UImsg"] = "OK";
                 return RedirectToAction("AttendanceSetting");
             }
             catch (Exception ex)
             {
                 string st = ex.ToString();
-                TempData["Emsg"] = "Unsuccess";
+                Session["UEmsg"] = "NotOK";
                 return RedirectToAction("AttendanceSetting");
             }
         }
