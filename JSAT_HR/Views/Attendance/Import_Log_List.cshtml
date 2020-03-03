@@ -173,6 +173,13 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
     $(document).ready(function () {
+        var d = new Date();
+        var month = fixDigit(d.getMonth() + 1);
+        var year = d.getFullYear();
+
+        $('#ddlYear').val(year);
+        $('#ddkMonth').val(month); 
+
         var Imsg = '@ViewBag.Imsg';
         if (Imsg == "OK") {
             GetMessage("I_1004", "Import");
@@ -186,6 +193,10 @@
         }
         ImportListViewTable();
     });
+
+    function fixDigit(val) {
+        return val.toString().length === 1 ? "0" + val : val;
+    }
 
     function ImportListViewTable() {
         var table = $('#tblogview').DataTable(
