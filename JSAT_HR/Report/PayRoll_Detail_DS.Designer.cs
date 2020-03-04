@@ -327,6 +327,10 @@ namespace JSAT_HR.Report {
             
             private global::System.Data.DataColumn columnCurrency;
             
+            private global::System.Data.DataColumn columnUnpaidLeaveFee;
+            
+            private global::System.Data.DataColumn columnLateFee;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public PayRoll_Detail_tbDataTable() {
@@ -554,6 +558,22 @@ namespace JSAT_HR.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UnpaidLeaveFeeColumn {
+                get {
+                    return this.columnUnpaidLeaveFee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LateFeeColumn {
+                get {
+                    return this.columnLateFee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -613,7 +633,9 @@ namespace JSAT_HR.Report {
                         string IncomeTax, 
                         string SocialSecurity, 
                         string NetSalary, 
-                        string Currency) {
+                        string Currency, 
+                        string UnpaidLeaveFee, 
+                        string LateFee) {
                 PayRoll_Detail_tbRow rowPayRoll_Detail_tbRow = ((PayRoll_Detail_tbRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
@@ -639,7 +661,9 @@ namespace JSAT_HR.Report {
                         IncomeTax,
                         SocialSecurity,
                         NetSalary,
-                        Currency};
+                        Currency,
+                        UnpaidLeaveFee,
+                        LateFee};
                 rowPayRoll_Detail_tbRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPayRoll_Detail_tbRow);
                 return rowPayRoll_Detail_tbRow;
@@ -686,6 +710,8 @@ namespace JSAT_HR.Report {
                 this.columnSocialSecurity = base.Columns["SocialSecurity"];
                 this.columnNetSalary = base.Columns["NetSalary"];
                 this.columnCurrency = base.Columns["Currency"];
+                this.columnUnpaidLeaveFee = base.Columns["UnpaidLeaveFee"];
+                this.columnLateFee = base.Columns["LateFee"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -739,6 +765,10 @@ namespace JSAT_HR.Report {
                 base.Columns.Add(this.columnNetSalary);
                 this.columnCurrency = new global::System.Data.DataColumn("Currency", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCurrency);
+                this.columnUnpaidLeaveFee = new global::System.Data.DataColumn("UnpaidLeaveFee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnpaidLeaveFee);
+                this.columnLateFee = new global::System.Data.DataColumn("LateFee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLateFee);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1268,6 +1298,38 @@ namespace JSAT_HR.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UnpaidLeaveFee {
+                get {
+                    try {
+                        return ((string)(this[this.tablePayRoll_Detail_tb.UnpaidLeaveFeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnpaidLeaveFee\' in table \'PayRoll_Detail_tb\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePayRoll_Detail_tb.UnpaidLeaveFeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string LateFee {
+                get {
+                    try {
+                        return ((string)(this[this.tablePayRoll_Detail_tb.LateFeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LateFee\' in table \'PayRoll_Detail_tb\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePayRoll_Detail_tb.LateFeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tablePayRoll_Detail_tb.NameColumn);
             }
@@ -1552,6 +1614,30 @@ namespace JSAT_HR.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCurrencyNull() {
                 this[this.tablePayRoll_Detail_tb.CurrencyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsUnpaidLeaveFeeNull() {
+                return this.IsNull(this.tablePayRoll_Detail_tb.UnpaidLeaveFeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetUnpaidLeaveFeeNull() {
+                this[this.tablePayRoll_Detail_tb.UnpaidLeaveFeeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsLateFeeNull() {
+                return this.IsNull(this.tablePayRoll_Detail_tb.LateFeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetLateFeeNull() {
+                this[this.tablePayRoll_Detail_tb.LateFeeColumn] = global::System.Convert.DBNull;
             }
         }
         
