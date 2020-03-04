@@ -137,11 +137,21 @@
     <script>
 
         $(document).ready(function () {
+            var d = new Date();
+            var month = fixDigit(d.getMonth() + 1);
+            var year = d.getFullYear();
+            $('#ddlYear').val(year);
+            $('#ddlMonth').val(month); 
+
             GetLabel_PayRollAllowance("1_201912");
             GetData_PayRollAllowance("1_201912");
             GetLabel_PayRollDeduction("1_201912");
             GetData_PayRollDeduction("1_201912");
         });
+
+        function fixDigit(val) {
+            return val.toString().length === 1 ? "0" + val : val;
+        }
 
         function GetLabel_PayRollAllowance(id)
         {
