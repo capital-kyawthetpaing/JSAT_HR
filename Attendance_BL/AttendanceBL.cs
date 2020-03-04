@@ -55,6 +55,7 @@ namespace Attendance_BL
                         string attdate = string.Empty;
                         string newattdate = string.Empty;
                         string yyymm = string.Empty;
+                        string dd = string.Empty;
 
 
                         for (int j = sheet.FirstRowNum + 2; j <= 2; j++)
@@ -64,7 +65,7 @@ namespace Attendance_BL
                             string[] lines = Regex.Split(attdate, "-");
                             newattdate = lines[0] + "-" + lines[1];
                             yyymm = lines[0] + lines[1];
-
+                            dd = lines[4];
 
                         }
                         for (int j = sheet.FirstRowNum + 4; j <= Convert.ToUInt32(rowCount); j = j + 2)
@@ -72,7 +73,7 @@ namespace Attendance_BL
                             DataRow AttendanceDataRow;
                             var row = sheet.GetRow(j);
 
-                            for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(cellCount); i++)
+                            for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(dd); i++)
                             {
                                 AttendanceDataRow = table.NewRow();
 

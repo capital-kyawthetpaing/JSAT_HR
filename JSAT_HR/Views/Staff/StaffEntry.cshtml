@@ -333,9 +333,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom1" id="basic-addon1"><i class="fas fa-hiking"></i></span>
                                 </div>
-                                @Html.DropDownListFor(sm => sm.OfficeCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                                @Html.DropDownListFor(sm => sm.OfficeCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""),new
                            {
-                               @class = "select2 form-control input-sm",
+                               @class = "form-control input-sm",
                                @required = "required",
                                @id = "ddlOffice",
                                @tabindex = "18"
@@ -706,7 +706,7 @@
             SelectOffice();
             SelectCompany();
             SelectBasicSalary();
-
+           
             if('@Model.Mode' == "update")
             {
                 $("#txtStaffID").attr('readonly',true);
@@ -809,6 +809,9 @@
                     });
 
                     $("#ddlOffice").val(@Model.OfficeCD);
+                    if ('@Model.Mode' == "save") {
+                         $("#ddlOffice").val(2);
+                    }
                 }
             });
         }
