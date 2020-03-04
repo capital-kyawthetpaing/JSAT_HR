@@ -80,7 +80,7 @@
         $(document).ready(function () {
             var table = $('#tblStaff').DataTable(
                 {
-                    "order": [[1, "desc"]],
+                    "order": [[2, "asc"]],
                     "language": {
                         "info": "Display _START_ to _END_ of _TOTAL_ records",
                     },
@@ -146,7 +146,7 @@
                 '<td style="text-align:right;">' + d.BasicSalary + '</td>' +
                 '</tr>' +
                 '<tr>' +
-                '<td>Meal Allowance:</td>' +
+                '<td>Currency:</td>' +
                 '<td style="text-align:right;">' + d.Currency + '</td>' +
                 '</tr>' +
                 //'<tr>' +

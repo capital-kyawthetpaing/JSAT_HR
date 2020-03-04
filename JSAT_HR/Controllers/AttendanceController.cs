@@ -94,11 +94,11 @@ namespace JSAT_HR.Controllers
                             {
                                 Directory.CreateDirectory(IncomeTaxFile);
                             }
-                            //if (filename.Contains(".xlsx"))
-                            //{
-                            //    filename = filename.Replace(".xlsx", "");
-                            //    filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
-                            //}
+                            if (filename.Contains(".xlsx"))
+                            {
+                                filename = filename.Replace(".xlsx", "");
+                                filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+                            }
                             file.SaveAs(IncomeTaxFile + filename);
 
                             dt = abl.ExcelToTable(IncomeTaxFile + filename);
