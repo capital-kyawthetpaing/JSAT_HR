@@ -34,8 +34,6 @@ namespace Allowance_BL
             tb.N2 = Convert.ToDecimal(am.N2);
             tb.N3 = Convert.ToDecimal(am.N3);
             tb.JpnUniGrade = Convert.ToDecimal(am.JpnUniGrade);
-            tb.Bus = Convert.ToDecimal(am.Bus);
-            tb.Train = Convert.ToDecimal(am.Train);
             tb.MarketingTeamAllowance = Convert.ToDecimal(am.MarketingTeamAllowance);
             tb.MentorAllowance = Convert.ToDecimal(am.MentorAllowance);
             tb.Local1stInterviewer = Convert.ToDecimal(am.Local1stInterviewer);
@@ -72,8 +70,7 @@ namespace Allowance_BL
                 am.Local2ndInterviewer = String.Format("{0:n0}", model.Local2ndInterviewer);
                 am.Oversea1stInterviewer = String.Format("{0:n0}", model.Overseas1stInterviewer);
                 am.Oversea2ndInterviewer = String.Format("{0:n0}", model.Overseas2ndInterviewer);
-                am.Bus = String.Format("{0:n0}", model.Bus);
-                am.Train = String.Format("{0:n0}", model.Train);
+               
                 return am;
             }
                 
