@@ -526,7 +526,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Report\PayRoll_Detail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PayRoll_Detail.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\PayRoll_List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
