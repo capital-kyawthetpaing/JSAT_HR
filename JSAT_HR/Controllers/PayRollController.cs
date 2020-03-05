@@ -114,7 +114,8 @@ namespace JSAT_HR.Controllers
 
             DataTable dt = new DataTable();
             dt = pbl.PayRoll_Detail_Report(id.Substring(6,1),id.Substring(0,6));
-           
+            if (dt.Rows.Count > 0)
+            {
                 ds.Tables.Add(dt);
 
                 Report.PayRoll_Detail rpt = new Report.PayRoll_Detail();
@@ -127,7 +128,9 @@ namespace JSAT_HR.Controllers
                 str.Seek(0, SeekOrigin.Begin);
 
                 return File(str, "application/pdf");
-           
+            }
+            else
+                return null;
         }
 
         public ActionResult PayRoll_Detail()
