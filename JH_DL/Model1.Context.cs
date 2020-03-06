@@ -29,7 +29,6 @@ namespace JH_DL
         public virtual DbSet<M_Transportation> M_Transportation { get; set; }
         public virtual DbSet<Staff_Allowance> Staff_Allowance { get; set; }
         public virtual DbSet<M_User> M_User { get; set; }
-        public virtual DbSet<M_Attendance> M_Attendance { get; set; }
         public virtual DbSet<M_Office> M_Office { get; set; }
         public virtual DbSet<M_Department> M_Department { get; set; }
         public virtual DbSet<M_Allowance> M_Allowance { get; set; }
@@ -37,11 +36,12 @@ namespace JH_DL
         public virtual DbSet<M_Message> M_Message { get; set; }
         public virtual DbSet<M_Payroll> M_Payroll { get; set; }
         public virtual DbSet<Payroll_Allowance> Payroll_Allowance { get; set; }
-        public virtual DbSet<M_Staff> M_Staff { get; set; }
         public virtual DbSet<M_Position> M_Position { get; set; }
         public virtual DbSet<M_SubDivision> M_SubDivision { get; set; }
         public virtual DbSet<Payroll_Deduction> Payroll_Deduction { get; set; }
         public virtual DbSet<M_Salary> M_Salary { get; set; }
         public virtual DbSet<L_Log> L_Log { get; set; }
+        public virtual DbSet<M_Staff> M_Staff { get; set; }
+        public virtual DbSet<M_Attendance> M_Attendance { get; set; }
     }
 }

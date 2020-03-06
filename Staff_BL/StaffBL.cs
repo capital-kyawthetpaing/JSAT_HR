@@ -32,6 +32,11 @@ namespace Staff_BL
             DataTable dt = bdl.SelectData("M_Staff_Search", prms);
             if (dt.Rows.Count > 0)
             {
+                sm.IsResign = Convert.ToBoolean(dt.Rows[0]["IsResign"]);
+                if (!string.IsNullOrWhiteSpace(dt.Rows[0]["Photo"].ToString()))
+                    sm.Photo = dt.Rows[0]["Photo"].ToString();
+                else
+                    sm.Photo = "Default.png";
                 sm.StaffID =  dt.Rows[0]["StaffID"].ToString();
                 sm.Name = dt.Rows[0]["Name"].ToString();
                 sm.NRC = dt.Rows[0]["NRC"].ToString();
@@ -117,6 +122,7 @@ namespace Staff_BL
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",","");
             ms.Effort = Convert.ToDecimal(model.Effort);
+            ms.IsResign = model.IsResign;
             ms.DeleteFlg = model.DeleteFlg;
             ms.InsertedDate = DateTime.Now;
             ms.InsertedBy = updatedby;
@@ -187,11 +193,15 @@ namespace Staff_BL
             updatestaff.PositionCD = model.PositionCD;
             updatestaff.TransportationCD = model.TransportationCD;
             updatestaff.Currency = model.Currency;
-            updatestaff.Photo = model.Photo;
-            updatestaff.BasicSalary = model.BasicSalary;
+            if (!string.IsNullOrWhiteSpace(model.Photo))
+                updatestaff.Photo = model.Photo;
+            else
+                updatestaff.Photo = updatestaff.Photo;
+           updatestaff.BasicSalary = model.BasicSalary;
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",", "");
             updatestaff.Effort = Convert.ToDecimal(model.Effort);
+            updatestaff.IsResign = model.IsResign;
             updatestaff.DeleteFlg = model.DeleteFlg;
             updatestaff.InsertedDate = DateTime.Now;
             updatestaff.InsertedBy = updatedby;

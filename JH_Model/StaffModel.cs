@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace JH_Model
 {
@@ -22,9 +23,9 @@ namespace JH_Model
         public string PhoneNo { get; set; }
         public string EmergencyPhoneNo { get; set; }
         public string EmailAddress { get; set; }
-        public string UniformCharges { get; set; }
-        public int FingerPrintID { get; set; }
-        public string OfficeCD { get; set; } = "0";
+        public string UniformCharges { get; set; } = "0";
+        public int FingerPrintID { get; set; } = 0;
+        public string OfficeCD { get; set; } 
         public string CompanyCD { get; set; } = "0";
         public string DepartmentCD { get; set; } = "0";
         public string SubDivisionCD { get; set; } = "0";
@@ -33,7 +34,8 @@ namespace JH_Model
         public byte Currency { get; set; }
         public string Photo { get; set; }
         public decimal BasicSalary { get; set; }
-        public string Effort { get; set; }
+        public string Effort { get; set; } = "0";
+        public bool IsResign { get; set; }
         public bool DeleteFlg { get; set; }
         public bool MD { get; set; }
         public bool Director { get; set; }

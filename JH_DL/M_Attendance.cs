@@ -18,7 +18,7 @@ namespace JH_DL
         public byte DD { get; set; }
         public int FingerPrintID { get; set; }
         public byte OfficeCD { get; set; }
-        public Nullable<System.DateTime> AttandenceDate { get; set; }
+        public string AttandenceDate { get; set; }
         public Nullable<System.TimeSpan> TimeIn { get; set; }
         public Nullable<System.TimeSpan> TimeOut { get; set; }
         public Nullable<byte> LeaveType { get; set; }
