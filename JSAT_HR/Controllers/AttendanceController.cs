@@ -102,21 +102,30 @@ namespace JSAT_HR.Controllers
                             file.SaveAs(IncomeTaxFile + filename);
 
                             dt = abl.ExcelToTable(IncomeTaxFile + filename);
-                            string[] arr1;
-                            string YYYMM = string.Empty;
-                            string officeid = string.Empty;
-                            if (id != null)
+                            String[] colName = { "StaffID", "StaffName", "IncomeTax" };
+                            if (abl.CheckColumn(colName, dt))
                             {
-                                arr1 = id.Split('_');
-                                officeid = arr1[0];
-                                YYYMM = arr1[1] + arr1[2];
+                                string[] arr1;
+                                string YYYMM = string.Empty;
+                                string officeid = string.Empty;
+                                if (id != null)
+                                {
+                                    arr1 = id.Split('_');
+                                    officeid = arr1[0];
+                                    YYYMM = arr1[1] + arr1[2];
 
+                                }
+                                if (dt.Rows.Count > 0)
+                                {
+                                    abl.Insert_IncomeTax_Data(dt, YYYMM, file.FileName);
+                                    Session["Imsg"] = "OK";
+                                }
                             }
-                            if (dt.Rows.Count > 0)
+                            else
                             {
-                                abl.Insert_IncomeTax_Data(dt, YYYMM, file.FileName);
-                                Session["Imsg"] = "OK";
+                                Session["Emsg"] = "NotOK";
                             }
+                            
                         }                      
                     }
 

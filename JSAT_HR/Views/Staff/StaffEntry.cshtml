@@ -10,9 +10,17 @@
         Model.Mode = "update";
     }
 }
-
+<style>
+    .imgcss {
+        max-height: 130px;
+        max-width: 130px;
+        width: auto;
+        height: auto;
+        padding-left: 20px;
+    }
+</style>
 @Html.AntiForgeryToken()
-@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" ,@class = "form-horizontal", role = "form" }))
 {
     <div class="row">
         <div class="col-xl-12 col-md-12 col-sm-12 mb-2">
@@ -20,6 +28,26 @@
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
                     <div class="form-row">
+                        <div style="width:17%;">
+                            <img id="imgpreview" onclick="$('#imgdata').click();" src="../../StaffPhoto/@(Model.Photo)" class="imgcss" >
+                            <input type="file" name="imgdata" id="imgdata" onchange="showpreview(this)" style="visibility:hidden">
+                        </div>
+                        <div class="form-group col-xl-2 col-md-4">
+                            <div class="input-group" style="padding-top:83px;">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBoxFor(sm => sm.IsResign,new
+                                   {
+                                       @tabindex = "0"
+                                   })
+                                    </div>
+                                </div>
+                                <label class="form-control" for="Resign">Resign</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        
                         <div class="form-group col-xl-2 col-md-4">
                             <label for="StaffID">StaffID</label><label style="color:red;">&nbsp;*</label>
                             <div class="input-group">
@@ -186,7 +214,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="far fa-money-bill-alt"></i></span>
                                 </div>
-                             
+
 
                                 @Html.DropDownListFor(sm => sm.BasicSalary, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), new
                         {
@@ -305,6 +333,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-xl-4 col-md-12 mb-2">
             <div class="card border-left-custom1 shadow">
                 <div class="card-body">
@@ -814,6 +843,18 @@
                     }
                 }
             });
+        }
+
+        function showpreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgpreview').css('visibility', 'visible');
+                    $('#imgpreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);              
+            }
+
         }
     </script>
 }

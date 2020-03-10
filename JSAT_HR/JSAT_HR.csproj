@@ -222,6 +222,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\cvphoto.png" />
     <Content Include="Images\details_close.png" />
     <Content Include="Images\details_open.png" />
     <Content Include="Images\JSAT.jpg" />
@@ -383,7 +384,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -526,7 +529,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Report\PayRoll_Detail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PayRoll_Detail.cs</LastGenOutput>
+      <LastGenOutput>PayRoll_Detail3.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\PayRoll_List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

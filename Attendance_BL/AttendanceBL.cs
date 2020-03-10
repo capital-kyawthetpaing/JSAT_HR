@@ -282,16 +282,6 @@ namespace Attendance_BL
 
         public DataTable ExcelToTable(string filename)
         {
-            //string[] arr;
-            //string YYYMM = string.Empty;
-            //string OfficeCD = string.Empty;
-            //if (id != null)
-            //{
-            //    arr = id.Split('_');
-            //    OfficeCD = arr[0];
-            //    YYYMM = arr[1]+arr[2] ;
-
-            //}
             FileStream excelStream = new FileStream(filename, FileMode.Open);
             var book = new XSSFWorkbook(excelStream);
             excelStream.Close();
@@ -307,7 +297,7 @@ namespace Attendance_BL
 
             //header
             table.Columns.Add("StaffID", typeof(string));
-            //table.Columns.Add("YYYYMM", typeof(string));
+            table.Columns.Add("StaffName", typeof(string));
             table.Columns.Add("IncomeTax", typeof(string));
 
             //body
@@ -319,15 +309,14 @@ namespace Attendance_BL
                 {
                     for (int j = row.FirstCellNum; j < cellCount; j++)
                     {
-
-                        //dataRow["YYYYMM"] = YYYMM;
-
-
                         if (row.GetCell(j) != null)
                             dataRow["StaffID"] = GetCellValue(row.GetCell(0));
 
+                        if (row.GetCell(j) != null)
+                            dataRow["StaffName"] = GetCellValue(row.GetCell(1));
+
                         if(row.GetCell(j)!=null)
-                            dataRow["IncomeTax"] = GetCellValue(row.GetCell(1));
+                            dataRow["IncomeTax"] = GetCellValue(row.GetCell(2));
 
                     }
                 }
@@ -337,6 +326,24 @@ namespace Attendance_BL
             return IncomeTaxDataSet.Tables[0];
         }
 
+        public Boolean CheckColumn(string[] colName, DataTable dt)
+        {
+            try
+            {
+                DataColumnCollection col = dt.Columns;
+                for (int i = 0; i < colName.Length; i++)
+                {
+                    if (!col.Contains(colName[i]))
+                        return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string error = ex.ToString();
+                return false;
+            }
+        }
         public void Insert_IncomeTax_Data(DataTable dttest,string YYYMM, string filename)
         {
             DataTable dt = new DataTable();

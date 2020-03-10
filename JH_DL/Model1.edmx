@@ -63,7 +63,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
           <Property Name="DD" Type="tinyint" Nullable="false" />
           <Property Name="FingerPrintID" Type="int" Nullable="false" />
           <Property Name="OfficeCD" Type="tinyint" Nullable="false" />
-          <Property Name="AttandenceDate" Type="date" />
+          <Property Name="AttandenceDate" Type="varchar" MaxLength="10" />
           <Property Name="TimeIn" Type="time" Precision="0" />
           <Property Name="TimeOut" Type="time" Precision="0" />
           <Property Name="LeaveType" Type="tinyint" />
@@ -176,6 +176,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="Photo" Type="varchar" MaxLength="20" />
           <Property Name="BasicSalary" Type="money" />
           <Property Name="Effort" Type="money" />
+          <Property Name="IsResign" Type="bit" />
           <Property Name="DeleteFlg" Type="bit" />
           <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
           <Property Name="InsertedDate" Type="datetime" />
@@ -363,7 +364,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Transportation" EntityType="Self.M_Transportation" />
           <EntitySet Name="Staff_Allowance" EntityType="Self.Staff_Allowance" />
           <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
-          <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
           <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
           <EntitySet Name="M_Department" EntityType="JSAT_HRModel.M_Department" />
           <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
@@ -371,12 +371,13 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Message" EntityType="JSAT_HRModel.M_Message" />
           <EntitySet Name="M_Payroll" EntityType="JSAT_HRModel.M_Payroll" />
           <EntitySet Name="Payroll_Allowance" EntityType="JSAT_HRModel.Payroll_Allowance" />
-          <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
           <EntitySet Name="M_Position" EntityType="JSAT_HRModel.M_Position" />
           <EntitySet Name="M_SubDivision" EntityType="JSAT_HRModel.M_SubDivision" />
           <EntitySet Name="Payroll_Deduction" EntityType="JSAT_HRModel.Payroll_Deduction" />
           <EntitySet Name="M_Salary" EntityType="JSAT_HRModel.M_Salary" />
           <EntitySet Name="L_Log" EntityType="JSAT_HRModel.L_Log" />
+          <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
+          <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -385,25 +386,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="M_Attendance">
-          <Key>
-            <PropertyRef Name="YYYYMM" />
-            <PropertyRef Name="DD" />
-            <PropertyRef Name="FingerPrintID" />
-            <PropertyRef Name="OfficeCD" />
-          </Key>
-          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
-          <Property Name="DD" Type="Byte" Nullable="false" />
-          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
-          <Property Name="OfficeCD" Type="Byte" Nullable="false" />
-          <Property Name="AttandenceDate" Type="DateTime" Precision="0" />
-          <Property Name="TimeIn" Type="Time" Precision="0" />
-          <Property Name="TimeOut" Type="Time" Precision="0" />
-          <Property Name="LeaveType" Type="Byte" />
-          <Property Name="LateTime" Type="Time" Precision="0" />
-          <Property Name="LateMinutes" Type="Int32" />
-          <Property Name="EarlyOut" Type="Byte" />
         </EntityType>
         <EntityType Name="M_Office">
           <Key>
@@ -510,41 +492,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalSalary" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="M_Staff">
-          <Key>
-            <PropertyRef Name="StaffID" />
-          </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="Byte" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="NRC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="JoinDate" Type="DateTime" Precision="0" />
-          <Property Name="PermanentDate" Type="DateTime" Precision="0" />
-          <Property Name="BankInformation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="PermanentAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="TemporaryAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FingerPrintID" Type="Int32" />
-          <Property Name="OfficeCD" Type="Byte" />
-          <Property Name="CompanyCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="DepartmentCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="SubDivisionCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="PositionCD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="TransportationCD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Currency" Type="Byte" />
-          <Property Name="Photo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="DeleteFlg" Type="Boolean" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="M_Position">
           <Key>
             <PropertyRef Name="PositionCD" />
@@ -607,6 +554,61 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="FormName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="M_Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Byte" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="NRC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="DateTime" Precision="0" />
+          <Property Name="PermanentDate" Type="DateTime" Precision="0" />
+          <Property Name="BankInformation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="TemporaryAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyPhoneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UniformCharges" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FingerPrintID" Type="Int32" />
+          <Property Name="OfficeCD" Type="Byte" />
+          <Property Name="CompanyCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SubDivisionCD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PositionCD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TransportationCD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="Byte" />
+          <Property Name="Photo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsResign" Type="Boolean" />
+          <Property Name="DeleteFlg" Type="Boolean" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Attendance">
+          <Key>
+            <PropertyRef Name="YYYYMM" />
+            <PropertyRef Name="DD" />
+            <PropertyRef Name="FingerPrintID" />
+            <PropertyRef Name="OfficeCD" />
+          </Key>
+          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
+          <Property Name="DD" Type="Byte" Nullable="false" />
+          <Property Name="FingerPrintID" Type="Int32" Nullable="false" />
+          <Property Name="OfficeCD" Type="Byte" Nullable="false" />
+          <Property Name="AttandenceDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TimeIn" Type="Time" Precision="0" />
+          <Property Name="TimeOut" Type="Time" Precision="0" />
+          <Property Name="LeaveType" Type="Byte" />
+          <Property Name="LateTime" Type="Time" Precision="0" />
+          <Property Name="LateMinutes" Type="Int32" />
+          <Property Name="EarlyOut" Type="Byte" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -660,23 +662,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Attendance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attendance">
-              <MappingFragment StoreEntitySet="M_Attendance">
-                <ScalarProperty Name="EarlyOut" ColumnName="EarlyOut" />
-                <ScalarProperty Name="LateMinutes" ColumnName="LateMinutes" />
-                <ScalarProperty Name="LateTime" ColumnName="LateTime" />
-                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
-                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
-                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
-                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
-                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
-                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
-                <ScalarProperty Name="DD" ColumnName="DD" />
-                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -790,42 +775,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="M_Staff">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Staff">
-              <MappingFragment StoreEntitySet="M_Staff">
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="DeleteFlg" ColumnName="DeleteFlg" />
-                <ScalarProperty Name="Effort" ColumnName="Effort" />
-                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="TransportationCD" ColumnName="TransportationCD" />
-                <ScalarProperty Name="PositionCD" ColumnName="PositionCD" />
-                <ScalarProperty Name="SubDivisionCD" ColumnName="SubDivisionCD" />
-                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
-                <ScalarProperty Name="CompanyCD" ColumnName="CompanyCD" />
-                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
-                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
-                <ScalarProperty Name="UniformCharges" ColumnName="UniformCharges" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="EmergencyPhoneNo" ColumnName="EmergencyPhoneNo" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="TemporaryAddress" ColumnName="TemporaryAddress" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="BankInformation" ColumnName="BankInformation" />
-                <ScalarProperty Name="PermanentDate" ColumnName="PermanentDate" />
-                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
-                <ScalarProperty Name="NRC" ColumnName="NRC" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_Position">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Position">
               <MappingFragment StoreEntitySet="M_Position">
@@ -886,6 +835,60 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
                 <ScalarProperty Name="FormName" ColumnName="FormName" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Staff">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Staff">
+              <MappingFragment StoreEntitySet="M_Staff">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="DeleteFlg" ColumnName="DeleteFlg" />
+                <ScalarProperty Name="IsResign" ColumnName="IsResign" />
+                <ScalarProperty Name="Effort" ColumnName="Effort" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TransportationCD" ColumnName="TransportationCD" />
+                <ScalarProperty Name="PositionCD" ColumnName="PositionCD" />
+                <ScalarProperty Name="SubDivisionCD" ColumnName="SubDivisionCD" />
+                <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
+                <ScalarProperty Name="CompanyCD" ColumnName="CompanyCD" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
+                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
+                <ScalarProperty Name="UniformCharges" ColumnName="UniformCharges" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmergencyPhoneNo" ColumnName="EmergencyPhoneNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="TemporaryAddress" ColumnName="TemporaryAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="BankInformation" ColumnName="BankInformation" />
+                <ScalarProperty Name="PermanentDate" ColumnName="PermanentDate" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="NRC" ColumnName="NRC" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Attendance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Attendance">
+              <MappingFragment StoreEntitySet="M_Attendance">
+                <ScalarProperty Name="EarlyOut" ColumnName="EarlyOut" />
+                <ScalarProperty Name="LateMinutes" ColumnName="LateMinutes" />
+                <ScalarProperty Name="LateTime" ColumnName="LateTime" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
+                <ScalarProperty Name="OfficeCD" ColumnName="OfficeCD" />
+                <ScalarProperty Name="FingerPrintID" ColumnName="FingerPrintID" />
+                <ScalarProperty Name="DD" ColumnName="DD" />
+                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

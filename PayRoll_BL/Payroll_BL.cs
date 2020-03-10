@@ -101,7 +101,7 @@ namespace PayRoll_BL
             dtpaydetail = bdl.SelectData("PayRoll_Detail_Report", prms);
             if (dtpaydetail.Rows.Count > 0)
                 return dtpaydetail;
-            else return null;
+            else return dtpaydetail;
         }
 
 
@@ -114,7 +114,7 @@ namespace PayRoll_BL
             dtpaydetail = bdl.SelectData("PayRoll_Setting_Report", prms);
             if (dtpaydetail.Rows.Count > 0)
                 return dtpaydetail;
-            else return null;
+            else return dtpaydetail;
         }
     }
 }

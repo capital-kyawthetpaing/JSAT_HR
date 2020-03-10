@@ -39,6 +39,7 @@ namespace JH_DL
         public string Photo { get; set; }
         public Nullable<decimal> BasicSalary { get; set; }
         public Nullable<decimal> Effort { get; set; }
+        public Nullable<bool> IsResign { get; set; }
         public Nullable<bool> DeleteFlg { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
