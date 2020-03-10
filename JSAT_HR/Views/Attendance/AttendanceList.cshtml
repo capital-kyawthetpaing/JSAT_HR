@@ -74,86 +74,153 @@
 
                     </div>
                 </div>
-                <div style="overflow-x:scroll;">
-                    <table id="tblAttendance" class="hrtable" style="width:3300px;text-align:center">
+                <div>
+                    <table id="content" class="hrtable">
                         <thead>
                             <tr>
-                                <th style="padding:10px 18px;">StaffID</th>
-                                <th style="padding:10px 18px;">Name</th>
-                                @{
-                                    int maxday = DateTime.DaysInMonth(2019, 12);
-                                    for (int i = 1; i <= maxday; i++)
-                                    {
-                                        <th>@i</th>
-                                    }
-                                }
+                                <th>Day</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>LateTime</th>
+                                <th>Early Out</th>
+                                <th>Leave</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                DataTable dt = Model.Tables[1];
-                                foreach (DataRow row in Model.Tables[0].Rows)
-                                {
-                                    <tr>
-                                        <td style="width:100px;border:1px solid;text-align:center">
-                                            @row["StaffID"]
-                                        </td>
-                                        <td style="width:100px;border:1px solid;text-align:center">
-                                            @row["StaffName"]
-                                        </td>
-                                        @for (int j = 1; j <= maxday; j++)
+                                @{
+                                    int maxday1 = DateTime.DaysInMonth(2020, 02);
+                                    DataTable dt = Model.Tables[0];
+                                    DataTable dt1 = Model.Tables[1];
+                                    SelectList list = new SelectList(dt1.AsEnumerable().ToList(), "LeaveCD", "LeaveType");
+
+                                    for (int i = 1; i <= maxday1; i++)
+                                    {
+                                        DataRow[] dr = dt.Select("DD =" + i);
+                                        string timeIn = string.Empty;
+                                        string timeOut = string.Empty;
+                                        string lateTime = string.Empty;
+                                        string earlyout = string.Empty;
+                                        if (dr.Count() > 0)
                                         {
-                                            DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM = 201912 and DD = " + j);
-                                            <td style="width:130px;border:1px solid;text-align:left">
-                                                In :
-                                                @if (dr.Count() > 0)
-                                                {
-                                                    if (string.Equals(dr[0]["TimeIn"].ToString(), "-"))
-                                                    {
-                                                        <label style="color:blue;">
-                                                            @dr[0]["TimeIn"]
-                                                        </label>
-                                                    }
-                                                    else if (string.Compare(dr[0]["LateTime"].ToString(), "00:00:00") == 1)
-                                                    {
-                                                        <label style="color:red;">
-                                                            @dr[0]["TimeIn"]
-                                                        </label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <label style="color:blue;">
-                                                            @dr[0]["TimeIn"]
-                                                        </label>
-                                                    }
-                                                }
-                                                <br />
-                                                Out:
-                                                <label style="color:blue;">
-                                                    @if (@dr.Count() > 0)
-                                                    {
-                                                        @dr[0]["TimeOut"]
-                                                    }
-                                                </label>
-                                                <br />
-                                                @{
-                                                    var listUnpaidLeave = new List<SelectListItem>();
-                                                    listUnpaidLeave.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                                    listUnpaidLeave.Add(new SelectListItem { Text = "Full", Value = "1" });
-                                                    listUnpaidLeave.Add(new SelectListItem { Text = "Half", Value = "2" });
-                                                    listUnpaidLeave.Add(new SelectListItem { Text = "1Hour", Value = "3" });
-                                                }@Html.DropDownList("UnpaidLeave",
-                                       listUnpaidLeave,
-                                       new { @id="ddlUnpaidLeave", onchange = "LeaveChange(this);" })
-                                            </td>
+                                            timeIn = dr[0]["TimeIn"].ToString();
+                                            timeOut = dr[0]["TimeOut"].ToString();
+                                            lateTime = dr[0]["LateTime"].ToString();
+                                            earlyout = dr[0]["EarlyOut"].ToString();
                                         }
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                <input id="txtTimeIn" type="time" value="@timeIn" />
+                                            </td>
+                                            <td>
+                                                <input id="txtTimeIn" type="time" value="@timeOut" />
+                                            </td>
+                                            <td>
+                                                <label style="color:red;">
+                                                    @lateTime
+                                                </label>
+                                            </td>
+                                            <td>                                              
+                                            @{
+                                            var LeaveType = new List<SelectListItem>();
+                                            LeaveType.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                            LeaveType.Add(new SelectListItem { Text = "1 Hr", Value = "1" });
+                                            LeaveType.Add(new SelectListItem { Text = "2 Hr", Value = "2" });
+                                        }@Html.DropDownList("EarlyOut",LeaveType, earlyout,new { @class = "form-control", @id = "ddlEarlyOut" })
+                                    </td>
+                                            <td>
+                                                @Html.DropDownList("ddlList", new SelectList(list, "LeaveType", "LeaveCD"), new { @id = "ddlist" })
+                                            </td>
+
+
+                                </tr>
                                 }
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                                }
+                    </tbody>
+                </table>
             </div>
+                                            @*<div style="overflow-x:scroll;">
+        <table id="tblAttendance" class="hrtable" style="width:3300px;text-align:center">
+            <thead>
+                <tr>
+                    <th style="padding:10px 18px;">StaffID</th>
+                    <th style="padding:10px 18px;">Name</th>
+                    @{
+                        int maxday = DateTime.DaysInMonth(2019, 12);
+                        for (int i = 1; i <= maxday; i++)
+                        {
+                            <th>@i</th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    DataTable dt = Model.Tables[1];
+                    foreach (DataRow row in Model.Tables[0].Rows)
+                    {
+                        <tr>
+                            <td style="width:100px;border:1px solid;text-align:center">
+                                @row["StaffID"]
+                            </td>
+                            <td style="width:100px;border:1px solid;text-align:center">
+                                @row["StaffName"]
+                            </td>
+                            @for (int j = 1; j <= maxday; j++)
+                            {
+                                DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM = 201912 and DD = " + j);
+                                <td style="width:130px;border:1px solid;text-align:left">
+                                    In :
+                                    @if (dr.Count() > 0)
+                                    {
+                                        if (string.Equals(dr[0]["TimeIn"].ToString(), "-"))
+                                        {
+                                            <label style="color:blue;">
+                                                @dr[0]["TimeIn"]
+                                            </label>
+                                        }
+                                        else if (string.Compare(dr[0]["LateTime"].ToString(), "00:00:00") == 1)
+                                        {
+                                            <label style="color:red;">
+                                                @dr[0]["TimeIn"]
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label style="color:blue;">
+                                                @dr[0]["TimeIn"]
+                                            </label>
+                                        }
+                                    }
+                                    <br />
+                                    Out:
+                                    <label style="color:blue;">
+                                        @if (@dr.Count() > 0)
+                                        {
+                                            @dr[0]["TimeOut"]
+                                        }
+                                    </label>
+                                    <br />
+                                    @{
+                                        var listUnpaidLeave = new List<SelectListItem>();
+                                        listUnpaidLeave.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                        listUnpaidLeave.Add(new SelectListItem { Text = "Full", Value = "1" });
+                                        listUnpaidLeave.Add(new SelectListItem { Text = "Half", Value = "2" });
+                                        listUnpaidLeave.Add(new SelectListItem { Text = "1Hour", Value = "3" });
+                                    }@Html.DropDownList("UnpaidLeave",
+                           listUnpaidLeave,
+                           new { @id="ddlUnpaidLeave", onchange = "LeaveChange(this);" })
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>*@
+</div>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ using NPOI.HSSF.Model;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using System.Web;
-using System.Collections.Generic;
+using Leave_BL;
 
 namespace Attendance_BL
 {
@@ -229,10 +229,22 @@ namespace Attendance_BL
         public DataSet M_Attendance_Select(AttendanceModel am)
         {
             BaseDL bdl = new BaseDL();
-            SqlParameter[] prms = new SqlParameter[1];
+            SqlParameter[] prms = new SqlParameter[2];
             prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = am.YYYYMM };
-            //prms[1] = new SqlParameter("@StaffName", SqlDbType.VarChar) { Value = sm.StaffName };
-            return bdl.SelectDataSet("M_Attendance_Select", prms);
+            prms[1] = new SqlParameter("@StaffID", SqlDbType.VarChar) { Value = am.StaffID };
+
+            DataTable dtAttendance = new DataTable();
+            dtAttendance = bdl.SelectData("M_Attendance_Select", prms);
+
+            LeaveBL lbl = new LeaveBL();
+            DataTable dtleave = new DataTable();
+            dtleave = lbl.M_Leave_Select();
+
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dtAttendance);
+            ds.Tables.Add(dtleave);
+
+            return ds;
         }
        
 
@@ -403,6 +415,7 @@ namespace Attendance_BL
                 throw ex;
             }
         }
-     
+
+
     }
 }
