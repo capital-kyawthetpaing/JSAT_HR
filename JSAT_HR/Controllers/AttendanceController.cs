@@ -158,8 +158,10 @@ namespace JSAT_HR.Controllers
         {
             AttendanceBL abl = new AttendanceBL();
             AttendanceModel am = new AttendanceModel();
-            am.YYYYMM = "201912";
+            am.YYYYMM = "202002";
+            am.StaffID = "2";
             DataSet ds = abl.M_Attendance_Select(am);
+
             return View(ds);
         }
 
