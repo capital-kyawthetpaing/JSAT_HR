@@ -14,6 +14,7 @@ using JH_Model;
 using CommonFunction;
 using FastMember;
 using Spire.Xls;
+using System.Data.SqlClient;
 
 namespace JSAT_HR.Controllers
 {
@@ -167,8 +168,10 @@ namespace JSAT_HR.Controllers
         {
             AttendanceBL abl = new AttendanceBL();
             AttendanceModel am = new AttendanceModel();
-            am.YYYYMM = "201912";
+            am.YYYYMM = "202002";
+            am.StaffID = "2";
             DataSet ds = abl.M_Attendance_Select(am);
+
             return View(ds);
         }
 
@@ -242,5 +245,11 @@ namespace JSAT_HR.Controllers
                 return RedirectToAction("AttendanceSetting");
             }
         }
+
+        public ActionResult QuickAttendance()
+        {           
+            return View();
+        }
+
     }
 }

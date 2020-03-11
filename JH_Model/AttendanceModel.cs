@@ -1,4 +1,5 @@
-﻿namespace JH_Model
+﻿using System.Data;
+namespace JH_Model
 {
     public class AttendanceModel : BaseModel
     {
@@ -11,6 +12,6 @@
         public string TimeOut { get; set; }
         public string LeaveType { get; set; }
         public string EarlyOut { get; set; }
-        public bool chk { get; set; }
+
     }
 }
