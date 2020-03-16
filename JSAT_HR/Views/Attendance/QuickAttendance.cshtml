@@ -1,5 +1,98 @@
-﻿
+﻿@using JH_Model
+@model JH_Model.StaffModel
+
 @{
+    /**/
+
     ViewBag.Title = "QuickAttendance";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Scripts{
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#StaffList').attr('data-live-search', true);
+
+            $('#StaffList').attr('multiple', true);
+            $('#StaffList').attr('data-selected-text-format', 'count');
+
+          
+            $('.selectStaff').selectpicker(
+                {
+                    width: '100%',
+                    title: '- [Please Choose Multiple Staff] -',
+                    style: 'btn-info',
+                    size: 6,
+                    iconBase: 'fa',
+                    tickIcon: 'fa-check'
+
+
+                });
+        });
+
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-push-2">
+        <section>
+            @using (Html.BeginForm("QuickAttendance", "Attendance", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+
+                <div class="well bs-component">
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-push-2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon icon-custom"><i class="fa fa-user"></i></span>
+                                    @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new { id = "StaffList", @class = "selectStaff show-tick input-md" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-md-push-2">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info" value="Select" id="btnselect" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+<hr />
+
+
+@if (Model.SelectedStaffName != null &&
+     Model.SelectedStaffName.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+            <section>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Sr.</th>
+                            <th style="text-align: center;">Staff Name</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.SelectedStaffName.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@(i + 1)</td>
+                                <td style="text-align: center;">@Model.SelectedStaffName[i].StaffName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,76 @@
+﻿@using Syncfusion.EJ2
+@using Syncfusion.EJ2.DropDowns;
+@model JH_Model.StaffModel
+@{
+    ViewBag.Title = "QuickSetting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section ControlsSection{
+    <div class="control-section col-lg-9">
+        <div class="control-wrapper">
+            <h4>All Staff</h4>
+            @Html.EJS().MultiSelect("checkList").DataSource((IEnumerable<JH_Model.StaffModel>)ViewBag.data).Placeholder("" +
+                "Select Staff").Mode(VisualMode.CheckBox).ShowDropDownIcon(true).ShowSelectAll(true).FilterBarPlaceholder("Search " +
+                "countries").PopupHeight("350px").Fields(new MultiSelectFieldSettings { Text = "Name", Value = "StaffID" }).Render()
+        </div>
+    </div>
+    <div class="col-lg-3 property-section">
+        <div id="property" title="Properties">
+            <table id="property" title="Properties">
+                <tbody>
+                    <tr>
+                        <td style="width: 50%;">
+                            <div>
+                                @Html.EJS().CheckBox("selectall").Change("selectallchange").Label("Show Select All").Checked(true).Render()
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%;">
+                            <div>
+                                @Html.EJS().CheckBox("dropicon").Change("dropiconchange").Label("DropDown Button").Checked(true).Render()
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%;">
+                            <div>
+                                @Html.EJS().CheckBox("reorder").Change("reorderchange").Label("Selection Reorder").Checked(true).Render()
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        .control-fluid, .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function selectallchange(args) {
+            var checkList = document.getElementById("checkList").ej2_instances[0];
+            // enable or disable the SelectAll in multiselect on CheckBox checked state
+            checkList.showSelectAll = args.checked;
+        }
+
+
+        function dropiconchange(args) {
+            var checkList = document.getElementById("checkList").ej2_instances[0];
+            // enable or disable the SelectAll in multiselect on CheckBox checked state
+            checkList.showDropDownIcon = args.checked;
+        }
+        function reorderchange(args) {
+            var checkList = document.getElementById("checkList").ej2_instances[0];
+            // enable or disable the SelectAll in multiselect on CheckBox checked state
+            checkList.enableSelectionOrder = args.checked;
+        }
+    </script>
+}
+

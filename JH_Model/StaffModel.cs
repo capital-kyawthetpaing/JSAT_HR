@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
+
 namespace JH_Model
 {
     public class StaffModel : BaseModel
@@ -51,10 +52,30 @@ namespace JH_Model
         public bool MarketingTeamAllowance { get; set; }
         public bool MentorAllowance { get; set; }
 
+        public List<int> SelectedMultiStaffId { get; set; }
+        public List<StaffObj> SelectedStaffName { get; set; }
+
     }
     public class staffName
     {
         public int StaffID { get; set; }
         public string Name { get; set; }
+    }
+
+
+    //public class MultiStaff
+    //{
+    //    public List<int> SelectedMultiStaffId { get; set; }
+    //    public List<StaffObj> SelectedStaffName { get; set; }
+    //}
+
+    public class StaffObj
+    {
+
+        public int StaffID { get; set; }
+
+        public string StaffName { get; set; }
+
+
     }
 }

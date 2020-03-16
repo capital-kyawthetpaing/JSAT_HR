@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Attendance_BL;
+using Staff_BL;
 using System.Configuration;
 using Newtonsoft.Json;
 using JH_Model;
@@ -15,6 +16,7 @@ using CommonFunction;
 using FastMember;
 using Spire.Xls;
 using System.Data.SqlClient;
+
 
 namespace JSAT_HR.Controllers
 {
@@ -37,11 +39,11 @@ namespace JSAT_HR.Controllers
                 if (Request.Files.Count > 0)
                 {
                     HttpFileCollectionBase files = Request.Files;
-                    HttpPostedFileBase file=null;
+                    HttpPostedFileBase file = null;
                     for (int i = 0; i < files.Count; i++)
                     {
 
-                         file = files[i];
+                        file = files[i];
                     }
                     if (file != null)
                     {
@@ -82,11 +84,11 @@ namespace JSAT_HR.Controllers
                             dt = abl.AttendanceData(AttendanceFile + filename, id);
                             if (dt.Rows.Count > 0)
                             {
-                                abl.Insert_Attendance_Data(dt, file.FileName,id);
+                                abl.Insert_Attendance_Data(dt, file.FileName, id);
                                 Session["Imsg"] = "OK";
                             }
                         }
-                       else
+                        else
                         {
                             AttendanceBL abl = new AttendanceBL();
                             System.Data.DataTable dt = new System.Data.DataTable();
@@ -126,13 +128,13 @@ namespace JSAT_HR.Controllers
                             {
                                 Session["Emsg"] = "NotOK";
                             }
-                            
-                        }                      
+
+                        }
                     }
 
                 }
             }
-                        
+
 
             catch (Exception ex) { string error = ex.ToString(); Session["Emsg"] = "NotOK"; }
 
@@ -162,7 +164,7 @@ namespace JSAT_HR.Controllers
             dt = atbl.Get_Import_List_View();
             jsonresult = fn.DataTableToJSONWithJSONNet(dt);
             return jsonresult;
-        }       
+        }
 
         public ActionResult AttendanceList()
         {
@@ -186,7 +188,7 @@ namespace JSAT_HR.Controllers
             MultiModel mm = new MultiModel();
             mm.attModel = new AttendanceModel();
             mm.attModel.YYYY = DateTime.Now.Year.ToString();
-            mm.attModel.MM = DateTime.Now.Month.ToString().PadLeft(2,'0');
+            mm.attModel.MM = DateTime.Now.Month.ToString().PadLeft(2, '0');
             return View(mm);
 
         }
@@ -195,17 +197,17 @@ namespace JSAT_HR.Controllers
         public string _AttendanceSearch(string id)
         {
             string jsonresult;
-            DataTable dt  = abl.Get_Attendance_List(id);
+            DataTable dt = abl.Get_Attendance_List(id);
             dt.Columns.Add("Total", typeof(System.Int32));
             if (dt.Rows.Count > 0)
-                {
+            {
                 foreach (DataRow dr in dt.Rows)
                 {
                     dr["Total"] = dt.Rows.Count;
                 }
-                    jsonresult = JsonConvert.SerializeObject(dt);
-                    return jsonresult;
-                }
+                jsonresult = JsonConvert.SerializeObject(dt);
+                return jsonresult;
+            }
             else
                 return JsonConvert.SerializeObject(dt);
 
@@ -213,15 +215,16 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Attendance_Setting_Save(MultiModel model)
         {
-            try {
+            try
+            {
 
-                DataTable dtattendance= new DataTable();
+                DataTable dtattendance = new DataTable();
                 using (var reader = ObjectReader.Create(model.attlistModel, "TimeIn", "TimeOut", "LeaveType", "EarlyOut"))
                 {
                     dtattendance.Load(reader);
                 }
                 dtattendance.Columns.Add("DD", typeof(System.Int32));
-                if (dtattendance.Rows.Count>0)
+                if (dtattendance.Rows.Count > 0)
                 {
                     int count = 1;
                     foreach (DataRow dr in dtattendance.Rows)
@@ -233,7 +236,7 @@ namespace JSAT_HR.Controllers
                         if (dr["EarlyOut"].ToString() == "")
                             dr["EarlyOut"] = 0;
                     }
-                    abl.Update_Attendance_Data(dtattendance,model);
+                    abl.Update_Attendance_Data(dtattendance, model);
                 }
                 Session["UImsg"] = "OK";
                 return RedirectToAction("AttendanceSetting");
@@ -246,10 +249,89 @@ namespace JSAT_HR.Controllers
             }
         }
 
-        public ActionResult QuickAttendance()
-        {           
-            return View();
+       
+        public ActionResult QuickAttendance(StaffModel model)
+        {
+            try
+            {
+                if (model.SelectedMultiStaffId != null)
+                {
+                    List<StaffObj> stafflist = this.LoadData();
+                    model.SelectedStaffName = stafflist.Where(p => model.SelectedMultiStaffId.Contains(p.StaffID)).Select(q => q).ToList();
+                }
+                this.ViewBag.StaffList = this.GetStaffList();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            return this.View(model);
         }
+
+        private IEnumerable<SelectListItem> GetStaffList()
+        {
+
+            SelectList lstobj = null;
+            try
+            {
+                var list = this.LoadData()
+                                  .Select(p =>
+                                            new SelectListItem
+                                            {
+                                                Value = Convert.ToInt32(p.StaffID).ToString(),
+                                                Text = p.StaffName,
+                                            });
+                lstobj = new SelectList(list, "Value", "Text");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return lstobj;
+        }
+
+        private List<StaffObj> LoadData()
+        {
+            StaffBL sbl = new StaffBL();
+            List<StaffObj> lst = new List<StaffObj>();
+            //List<DataRow> list = dt.AsEnumerable().ToList();
+            try
+            {
+                
+                DataTable dt = new DataTable();
+                dt = sbl.GetAllStaff();
+
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        StaffObj infoObj = new StaffObj();
+                        infoObj.StaffID = Convert.ToInt32(dt.Rows[i]["StaffID"].ToString());
+                        infoObj.StaffName = dt.Rows[i]["Name"].ToString();
+                        lst.Add(infoObj);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            return lst;
+        }
+
+        //public ActionResult QuickSetting()
+        //{
+        //    try
+        //    {
+        //       ViewBag.StaffList = GetStaffList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.Write(ex);
+        //    }
+        //    return View();
+        //}
 
     }
 }

@@ -23,6 +23,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   
 </head>
 
 <body id="page-top">
@@ -390,6 +391,8 @@
     </div>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+   
     <!-- Core plugin JavaScript-->
     <script src="~/Scripts/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
@@ -399,9 +402,9 @@
     <script src="~/Scripts/Select2.js"></script>
     <script src="~/Scripts/Cleave.js"></script>
 
-    <link href="~/Content/ej2/material.css" rel="stylesheet" />
-    <script src="~/Scripts/ej2/ej2.min.js"></script>
 
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 
