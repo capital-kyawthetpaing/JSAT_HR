@@ -16,6 +16,7 @@ using CommonFunction;
 using FastMember;
 using Spire.Xls;
 using System.Data.SqlClient;
+using JH_DL;
 
 
 namespace JSAT_HR.Controllers
@@ -168,13 +169,93 @@ namespace JSAT_HR.Controllers
 
         public ActionResult AttendanceList()
         {
+            String UImsg = Session["UImsg"] as string;
+            String UEmsg = Session["UEmsg"] as string;
+            string S_Display = Session["SearchDisplay"] as string;
+            ViewBag.UImsg = UImsg;
+            ViewBag.UEmsg = UEmsg;
+            ViewBag.S_Display = S_Display;
+            Session["UImsg"] = "";
+            Session["UEmsg"] = "";
+            Session["SearchDisplay"] = "";
+
+            return View();
+        }
+
+        [HttpPost]
+        public string _AttendanceListSearch(string id)
+        {
+            string jsonresult;
             AttendanceBL abl = new AttendanceBL();
             AttendanceModel am = new AttendanceModel();
-            am.YYYYMM = "202002";
-            am.StaffID = "2";
-            DataSet ds = abl.M_Attendance_Select(am);
 
-            return View(ds);
+            string[] arr;
+            string YYYMM = string.Empty;
+            string StaffID = string.Empty;
+            if (id != null)
+            {
+                arr = id.Split('_');
+                YYYMM = arr[0] + arr[1];
+                StaffID = arr[2];
+
+            }
+            am.YYYYMM = YYYMM;
+            am.StaffID = StaffID;
+            DataTable dt = abl.M_Attendance_Select(am);
+
+            dt.Columns.Add("Total", typeof(System.Int32));
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["Total"] = dt.Rows.Count;
+                }
+                jsonresult = JsonConvert.SerializeObject(dt);
+                return jsonresult;
+            }
+            else
+                return JsonConvert.SerializeObject(dt);
+
+        }
+
+        [HttpGet]
+        public string GetLeave(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(abl.GetLeave(id));
+        }
+
+        public ActionResult Attendance_List_Save(MultiModel model)
+        {
+            try
+            {
+
+                DataTable dtAttlist = new DataTable();
+                using (var reader = ObjectReader.Create(model.attlistModel, "TimeIn", "TimeOut", "EarlyOut", "MorningLeaveType", "EveningLeaveType"))
+                {
+                    dtAttlist.Load(reader);
+                }
+                dtAttlist.Columns.Add("DD", typeof(System.Int32));
+                if (dtAttlist.Rows.Count > 0)
+                {
+                    int count = 1;
+                    foreach (DataRow dr in dtAttlist.Rows)
+                    {
+                        dr["DD"] = count;
+                        count++;
+                    }
+                    abl.Update_Attendance_List(dtAttlist, model);
+                }
+                Session["UImsg"] = "OK";
+                Session["SearchDisplay"]= model.attModel.YYYY +'_'+ model.attModel.MM+'_'+ model.attModel.StaffID;
+                return RedirectToAction("AttendanceList");
+            }
+            catch (Exception ex)
+            {
+                string st = ex.ToString();
+                Session["UEmsg"] = "NotOK";
+                return RedirectToAction("AttendanceList");
+            }
         }
 
         public ActionResult AttendanceSetting()

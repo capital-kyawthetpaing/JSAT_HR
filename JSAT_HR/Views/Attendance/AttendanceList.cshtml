@@ -1,242 +1,601 @@
 ﻿@using System.Data;
-@model DataSet
+@model JH_Model.MultiModel
 @{
     ViewBag.Title = "AttendanceList";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
-
-<div class="row">
-    <div class="col-xl-12 col-md-12 mb-2">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="Year">Year</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
-                            </div>
-                            @{
-                                var listYear = new List<SelectListItem>();
-                                listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
-                                listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
-                                listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
-                                listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
-                                listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
-                                listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
-                                listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
-                                listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
-                                listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
-                                listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
-                                listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
-                                listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
-                            }@Html.DropDownList("Year",
-                   listYear,
-                   new { @class="form-control",@id="ddlYear" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="Year">Month</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
-                            </div>
-                            @{
-                                var listMonth = new List<SelectListItem>();
-                                listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                listMonth.Add(new SelectListItem { Text = "January", Value = "01" });
-                                listMonth.Add(new SelectListItem { Text = "February", Value = "02" });
-                                listMonth.Add(new SelectListItem { Text = "March", Value = "03" });
-                                listMonth.Add(new SelectListItem { Text = "April", Value = "04" });
-                                listMonth.Add(new SelectListItem { Text = "May", Value = "05" });
-                                listMonth.Add(new SelectListItem { Text = "June", Value = "06" });
-                                listMonth.Add(new SelectListItem { Text = "July", Value = "07" });
-                                listMonth.Add(new SelectListItem { Text = "August", Value = "08" });
-                                listMonth.Add(new SelectListItem { Text = "September", Value = "09" });
-                                listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
-                                listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
-                                listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
-                            }@Html.DropDownList("Month",
-                     listMonth,
-                     new { @class="form-control",@id="ddlYear" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-
-                    </div>
-                </div>
-                <div>
-                    <table id="content" class="hrtable">
-                        <thead>
-                            <tr>
-                                <th>Day</th>
-                                <th>Time In</th>
-                                <th>Time Out</th>
-                                <th>LateTime</th>
-                                <th>Early Out</th>
-                                <th>Leave</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("Attendance_List_Save", "Attendance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="Year">Year</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                </div>
                                 @{
-                                    int maxday1 = DateTime.DaysInMonth(2020, 02);
-                                    DataTable dt = Model.Tables[0];
-                                    DataTable dt1 = Model.Tables[1];
-                                    SelectList list = new SelectList(dt1.AsEnumerable().ToList(), "LeaveCD", "LeaveType");
-
-                                    for (int i = 1; i <= maxday1; i++)
-                                    {
-                                        DataRow[] dr = dt.Select("DD =" + i);
-                                        string timeIn = string.Empty;
-                                        string timeOut = string.Empty;
-                                        string lateTime = string.Empty;
-                                        string earlyout = string.Empty;
-                                        if (dr.Count() > 0)
-                                        {
-                                            timeIn = dr[0]["TimeIn"].ToString();
-                                            timeOut = dr[0]["TimeOut"].ToString();
-                                            lateTime = dr[0]["LateTime"].ToString();
-                                            earlyout = dr[0]["EarlyOut"].ToString();
-                                        }
-                                        <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>
-                                                <input id="txtTimeIn" type="time" value="@timeIn" />
-                                            </td>
-                                            <td>
-                                                <input id="txtTimeIn" type="time" value="@timeOut" />
-                                            </td>
-                                            <td>
-                                                <label style="color:red;">
-                                                    @lateTime
-                                                </label>
-                                            </td>
-                                            <td>                                              
-                                            @{
-                                            var LeaveType = new List<SelectListItem>();
-                                            LeaveType.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                            LeaveType.Add(new SelectListItem { Text = "1 Hr", Value = "1" });
-                                            LeaveType.Add(new SelectListItem { Text = "2 Hr", Value = "2" });
-                                        }@Html.DropDownList("EarlyOut",LeaveType, earlyout,new { @class = "form-control", @id = "ddlEarlyOut" })
-                                    </td>
-                                            @*<td>
-                                                @Html.DropDownList("ddlList", new SelectList(list, "LeaveType", "LeaveCD"), new { @id = "ddlist" })
-                                            </td>*@
-
-
-                                </tr>
+                                    var listYear = new List<SelectListItem>();
+                                    listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                    listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
+                                    listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
+                                    listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
+                                    listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
+                                    listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
+                                    listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
+                                    listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
+                                    listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
+                                    listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
+                                    listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
+                                    listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
+                                    listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
                                 }
+                                @Html.DropDownListFor(m => m.attModel.YYYY, listYear, new
+                                  {
+                                      @class = "form-control",
+                                      @required = "required",
+                                      @id = "ddlYear",
+                                      @tabindex = "1"
+                                  })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Year">Month</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                </div>
+                                @{
+                                    var listMonth = new List<SelectListItem>();
+                                    listMonth.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                    listMonth.Add(new SelectListItem { Text = "January", Value = "01" });
+                                    listMonth.Add(new SelectListItem { Text = "February", Value = "02" });
+                                    listMonth.Add(new SelectListItem { Text = "March", Value = "03" });
+                                    listMonth.Add(new SelectListItem { Text = "April", Value = "04" });
+                                    listMonth.Add(new SelectListItem { Text = "May", Value = "05" });
+                                    listMonth.Add(new SelectListItem { Text = "June", Value = "06" });
+                                    listMonth.Add(new SelectListItem { Text = "July", Value = "07" });
+                                    listMonth.Add(new SelectListItem { Text = "August", Value = "08" });
+                                    listMonth.Add(new SelectListItem { Text = "September", Value = "09" });
+                                    listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
+                                    listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
+                                    listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
+                                }
+                                @Html.DropDownListFor(m => m.attModel.MM, listMonth, new
+                                     {
+                                         @class = "form-control",
+                                         @required = "required",
+                                         @id = "ddlMonth",
+                                         @tabindex = "2"
+                                     })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Year">Staff</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                                </div>
+                                @Html.DropDownListFor(m => m.attModel.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                           {
+                               @class = "select2 form-control",
+                               @required = "required",
+                               @id = "ddlStaff",
+                               @tabindex = "3"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Button" style="visibility:hidden;">Button</label>
+                            <div class="input-group">
+                                <button type="button" id="btnsearch" class="btn btn-info" onclick="_Search(0)"><i class="fa fa-search"></i>&nbsp; Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <div class="input-group">
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+
+                        </div>
+                    </div>
+                    <div class="dynamcdiv">
+                        <div class="form-row dynamicAtt">
+
+                        </div>
+                    </div>
+                    @*<div>
+                                <table id="content" class="hrtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Time In</th>
+                                            <th>Time Out</th>
+                                            <th>LateTime</th>
+                                            <th>Early Out</th>
+                                            <th>Leave</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            @{
+                                                int maxday1 = DateTime.DaysInMonth(2020, 02);
+                                                DataTable dt = Model.Tables[0];
+                                                DataTable dt1 = Model.Tables[1];
+                                                SelectList list = new SelectList(dt1.AsEnumerable().ToList(), "LeaveCD", "LeaveType");
+
+                                                for (int i = 1; i <= maxday1; i++)
+                                                {
+                                                    DataRow[] dr = dt.Select("DD =" + i);
+                                                    string timeIn = string.Empty;
+                                                    string timeOut = string.Empty;
+                                                    string lateTime = string.Empty;
+                                                    string earlyout = string.Empty;
+                                                    if (dr.Count() > 0)
+                                                    {
+                                                        timeIn = dr[0]["TimeIn"].ToString();
+                                                        timeOut = dr[0]["TimeOut"].ToString();
+                                                        lateTime = dr[0]["LateTime"].ToString();
+                                                        earlyout = dr[0]["EarlyOut"].ToString();
+                                                    }
+                                                    <tr>
+                                                        <td>
+                                                            @i
+                                                        </td>
+                                                        <td>
+                                                            <input id="txtTimeIn" type="time" value="@timeIn" />
+                                                        </td>
+                                                        <td>
+                                                            <input id="txtTimeIn" type="time" value="@timeOut" />
+                                                        </td>
+                                                        <td>
+                                                            <label style="color:red;">
+                                                                @lateTime
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                        @{
+                                                        var LeaveType = new List<SelectListItem>();
+                                                        LeaveType.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                                        LeaveType.Add(new SelectListItem { Text = "1 Hr", Value = "1" });
+                                                        LeaveType.Add(new SelectListItem { Text = "2 Hr", Value = "2" });
+                                                    }@Html.DropDownList("EarlyOut",LeaveType, earlyout,new { @class = "form-control", @id = "ddlEarlyOut" })
+                                                </td>
+                                                        <td>
+                                                            @Html.DropDownList("ddlList", new SelectList(list, "LeaveType", "LeaveCD"), new { @id = "ddlist" })
+                                                        </td>
+
+
+                                            </tr>
+                                            }
+                                                            }
+                                </tbody>
+                            </table>
+                        </div>*@
+                    @*<div style="overflow-x:scroll;">
+                            <table id="tblAttendance" class="hrtable" style="width:3300px;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th style="padding:10px 18px;">StaffID</th>
+                                        <th style="padding:10px 18px;">Name</th>
+                                        @{
+                                            int maxday = DateTime.DaysInMonth(2019, 12);
+                                            for (int i = 1; i <= maxday; i++)
+                                            {
+                                                <th>@i</th>
+                                            }
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        DataTable dt = Model.Tables[1];
+                                        foreach (DataRow row in Model.Tables[0].Rows)
+                                        {
+                                            <tr>
+                                                <td style="width:100px;border:1px solid;text-align:center">
+                                                    @row["StaffID"]
+                                                </td>
+                                                <td style="width:100px;border:1px solid;text-align:center">
+                                                    @row["StaffName"]
+                                                </td>
+                                                @for (int j = 1; j <= maxday; j++)
+                                                {
+                                                    DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM = 201912 and DD = " + j);
+                                                    <td style="width:130px;border:1px solid;text-align:left">
+                                                        In :
+                                                        @if (dr.Count() > 0)
+                                                        {
+                                                            if (string.Equals(dr[0]["TimeIn"].ToString(), "-"))
+                                                            {
+                                                                <label style="color:blue;">
+                                                                    @dr[0]["TimeIn"]
+                                                                </label>
+                                                            }
+                                                            else if (string.Compare(dr[0]["LateTime"].ToString(), "00:00:00") == 1)
+                                                            {
+                                                                <label style="color:red;">
+                                                                    @dr[0]["TimeIn"]
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label style="color:blue;">
+                                                                    @dr[0]["TimeIn"]
+                                                                </label>
+                                                            }
+                                                        }
+                                                        <br />
+                                                        Out:
+                                                        <label style="color:blue;">
+                                                            @if (@dr.Count() > 0)
+                                                            {
+                                                                @dr[0]["TimeOut"]
+                                                            }
+                                                        </label>
+                                                        <br />
+                                                        @{
+                                                            var listUnpaidLeave = new List<SelectListItem>();
+                                                            listUnpaidLeave.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                                            listUnpaidLeave.Add(new SelectListItem { Text = "Full", Value = "1" });
+                                                            listUnpaidLeave.Add(new SelectListItem { Text = "Half", Value = "2" });
+                                                            listUnpaidLeave.Add(new SelectListItem { Text = "1Hour", Value = "3" });
+                                                        }@Html.DropDownList("UnpaidLeave",
+                                               listUnpaidLeave,
+                                               new { @id="ddlUnpaidLeave", onchange = "LeaveChange(this);" })
+                                                    </td>
                                                 }
-                    </tbody>
-                </table>
-            </div>
-                                            @*<div style="overflow-x:scroll;">
-        <table id="tblAttendance" class="hrtable" style="width:3300px;text-align:center">
-            <thead>
-                <tr>
-                    <th style="padding:10px 18px;">StaffID</th>
-                    <th style="padding:10px 18px;">Name</th>
-                    @{
-                        int maxday = DateTime.DaysInMonth(2019, 12);
-                        for (int i = 1; i <= maxday; i++)
-                        {
-                            <th>@i</th>
-                        }
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    DataTable dt = Model.Tables[1];
-                    foreach (DataRow row in Model.Tables[0].Rows)
-                    {
-                        <tr>
-                            <td style="width:100px;border:1px solid;text-align:center">
-                                @row["StaffID"]
-                            </td>
-                            <td style="width:100px;border:1px solid;text-align:center">
-                                @row["StaffName"]
-                            </td>
-                            @for (int j = 1; j <= maxday; j++)
-                            {
-                                DataRow[] dr = dt.Select("StaffID = " + row["StaffID"] + " and YYYYMM = 201912 and DD = " + j);
-                                <td style="width:130px;border:1px solid;text-align:left">
-                                    In :
-                                    @if (dr.Count() > 0)
-                                    {
-                                        if (string.Equals(dr[0]["TimeIn"].ToString(), "-"))
-                                        {
-                                            <label style="color:blue;">
-                                                @dr[0]["TimeIn"]
-                                            </label>
-                                        }
-                                        else if (string.Compare(dr[0]["LateTime"].ToString(), "00:00:00") == 1)
-                                        {
-                                            <label style="color:red;">
-                                                @dr[0]["TimeIn"]
-                                            </label>
-                                        }
-                                        else
-                                        {
-                                            <label style="color:blue;">
-                                                @dr[0]["TimeIn"]
-                                            </label>
+                                            </tr>
                                         }
                                     }
-                                    <br />
-                                    Out:
-                                    <label style="color:blue;">
-                                        @if (@dr.Count() > 0)
-                                        {
-                                            @dr[0]["TimeOut"]
-                                        }
-                                    </label>
-                                    <br />
-                                    @{
-                                        var listUnpaidLeave = new List<SelectListItem>();
-                                        listUnpaidLeave.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                        listUnpaidLeave.Add(new SelectListItem { Text = "Full", Value = "1" });
-                                        listUnpaidLeave.Add(new SelectListItem { Text = "Half", Value = "2" });
-                                        listUnpaidLeave.Add(new SelectListItem { Text = "1Hour", Value = "3" });
-                                    }@Html.DropDownList("UnpaidLeave",
-                           listUnpaidLeave,
-                           new { @id="ddlUnpaidLeave", onchange = "LeaveChange(this);" })
-                                </td>
-                            }
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-    </div>*@
-</div>
+                                </tbody>
+                            </table>
+                        </div>*@
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div class="row" id="update" style="display:none;">
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" id="btnSave" class="btn btn-success col-xl-3" tabindex="38"><i class="fa fa-save"></i>&nbsp; Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ }
 
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
+ @section Scripts{
+     <script type="text/javascript">
 
-        });
+         $(document).ready(function () {
+             var UImsg = '@ViewBag.UImsg';
+             if (UImsg == "OK") {
+                 GetMessage("I_1002", "Update");
+                 $('#myModal').modal('show');
+             }
+             var UEmsg = '@ViewBag.UEmsg';
+             if (UEmsg == "NotOK") {
+                 GetMessage("I_1006", "Update");
+                 $('#myModal').modal('show');
+             }
+            var S_Display='@ViewBag.S_Display'
+            if (S_Display != "") {
+                var arr;
+                var YYYY; var MM; var StaffID;
+                if (S_Display != null) {
+                    arr = S_Display.split('_');
+                    YYYY = arr[0];
+                    MM = arr[1];
+                    StaffID = arr[2];
 
-        function LeaveChange(ddl) {
-            if (ddl.value > 0)
-                ddl.style.color = 'red';
-            else
-                ddl.style.color = 'black';
-        }
+                    $("#ddlYear").val(YYYY);
+                    $("#ddlMonth").val(MM);
+                    SelectStaff(StaffID);
+                    _Search(StaffID);
+                }
+            }
+            else {
+                var d = new Date();
+                var month = fixDigit(d.getMonth() + 1);
+                var year = d.getFullYear();
+                $('#ddlYear').val(year);
+                $('#ddlMonth').val(month); 
+                SelectStaff(0);
+             }
 
-    </script>
-}
+         });
+
+        
+         function LeaveChange(ddl) {
+             if (ddl.value > 0)
+                 ddl.style.color = 'red';
+             else
+                 ddl.style.color = 'black';
+         }
+
+
+         function _Search(x) {
+             var YYY;
+             var MM;
+             var staffID;
+             YYY = $("#ddlYear").val();
+             MM = $("#ddlMonth").val();
+             if (x == 0) {
+                 staffID = $("#ddlStaff").val();
+             }
+             else {
+                 staffID = x;
+             }         
+             $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("_AttendanceListSearch", "Attendance", new { @id = "ID" })'.replace("ID", YYY + '_' + MM + '_' + staffID),
+                 dataType: 'json',
+                 success: function (json) {
+                     if (json == null || json == "") {
+                         if (YYY != 0 && MM != 0 && staffID != 0) {
+                             NewAttendance();
+                             $("#update").css("display", "block");
+                         }
+                         else {
+                             $(".dynamicAtt").remove();
+                             window.location.href = '@Url.Action("AttendanceList", "Attendance")'
+                         }
+                     }
+                     else {
+                         FillAttendance(json);
+                         $("#update").css("display", "block");
+                     }
+                 }
+             });
+         }
+
+         function FillAttendance(json) {
+             $(".dynamicAtt").remove();
+             var maindiv = $(".dynamcdiv");
+             var newdiv = document.createElement('div');
+             newdiv.className = 'form-row dynamicAtt';
+             $(maindiv).append(newdiv);
+
+             var YYY = $("#ddlYear").val();
+             var MM = $("#ddlMonth").val();
+             var maxday1 = daysInMonth(MM, YYY);
+
+             var x;
+             if (json[0].Total > 0) {
+                 var wrapper = $(".dynamicAtt");
+                 $(wrapper).append(' <table id="content" class="hrtable">' +
+                     '<thead>' +
+                     '<tr>' +
+                     '<th>Day</th>' +
+                     '<th>Time In</th>' +
+                     '<th>Time Out</th>' +
+                     '<th>LateTime</th>' +
+                     '<th>Early Out</th>' +
+                     '<th>Morning Leave</th>' +
+                     '<th>Evening Leave</th>' +
+                     '</tr>' +
+                     '</thead>' +
+                     '<tbody>' +
+                     '</tbody>' +
+                     '</table>');
+
+                 for (x = 1; x <= maxday1; x++) {
+
+                    var timein = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x - 1) + '__TimeIn" name="attlistModel[' + (x - 1) + '].TimeIn">';
+
+                    var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x - 1) + '__TimeOut" name="attlistModel[' + (x - 1) + '].TimeOut">';
+
+                    var EarlyOut = '<select class = "form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__EarlyOut" name="attlistModel[' + (x - 1) + '].EarlyOut">' +
+                        '<option value="0">---Select---</option>' +
+                        '<option value="1"> 1 Hr</option>'+
+                        '<option value="2"> 2 Hr</option>'+
+                        '</select > ';
+
+                    var MorningLeaveType = '<select class = "select2 form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__MorningLeaveType" name="attlistModel[' + (x - 1) + '].MorningLeaveType">' +
+                        '<option value="0">---Select---</option>' +
+                        '</select > ';
+
+                    var EveningLeaveType = '<select class = "select2 form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__EveningLeaveType" name="attlistModel[' + (x - 1) + '].EveningLeaveType">' +
+                        '<option value="0">---Select---</option>' +
+                        '</select > ';
+
+                    var latetime = '';
+
+                    if (x <= Object.keys(json).length) {
+                        if (json[x - 1].LateTime != null) {
+                            if (json[x - 1].LateTime != '00:00:00')
+                                latetime = '<label style="color:red;" >' + json[x - 1].LateTime + '</label>'
+                        }
+
+                        $("#content > tbody").append(' <tr>' +
+                            ' <td>' + json[x - 1].DD + '</td>' +
+                            '<td>' + timein + '</td>' +
+                            ' <td>' + timeout + ' </td>' +
+                            ' <td>' + latetime+'</td>' +
+                            '<td>' + EarlyOut + '</td >' +
+                            ' <td>' + MorningLeaveType + ' </td>' +
+                            ' <td>' + EveningLeaveType + ' </td>' +
+                            ' </tr>');
+                        $('#attlistModel_' + (x - 1) + '__TimeIn').val(json[x - 1].TimeIn);
+                        $('#attlistModel_' + (x - 1) + '__TimeOut').val(json[x - 1].TimeOut);
+                        $('#attlistModel_' + (x - 1) + '__EarlyOut').val(json[x - 1].EarlyOut);
+
+                        SelectMorningLeaveType(x - 1, json[x - 1].MorningLeaveType);
+                        SelectEveningLeaveType(x - 1, json[x - 1].EveningLeaveType);
+
+                        if (json[x - 1].EarlyOut > 0)
+                            $('#attlistModel_' + (x - 1) + '__EarlyOut').css('color', 'red');
+                        else
+                            $('#attlistModel_' + (x - 1) + '__EarlyOut').css('color', 'black');
+                    }
+                    else {
+                        $("#content > tbody").append(' <tr>' +
+                            ' <td>' + x + '</td>' +
+                            '<td>' + timein + '</td>' +
+                            ' <td>' + timeout + ' </td>' +
+                            '  <td>' + latetime+'</td>' +
+                            '<td>' + EarlyOut + '</td >' +
+                            ' <td>' + MorningLeaveType + ' </td>' +
+                            ' <td>' + EveningLeaveType + ' </td>' +
+                            ' </tr>');
+
+                        SelectMorningLeaveType(x - 1, 0);
+                        SelectEveningLeaveType(x - 1, 0);
+                    }
+                 }
+             }
+         }
+
+
+         function NewAttendance() {
+             $(".dynamicAtt").remove();
+             var maindiv = $(".dynamcdiv");
+             var newdiv = document.createElement('div');
+             newdiv.className = 'form-row dynamicAtt';
+             $(maindiv).append(newdiv);
+
+             var YYY = $("#ddlYear").val();
+             var MM = $("#ddlMonth").val();
+             var maxday1 = daysInMonth(MM, YYY);
+
+             var x;
+             var wrapper = $(".dynamicAtt");
+
+             $(wrapper).append(' <table id="content" class="hrtable">' +
+                 '<thead>' +
+                 '<tr>' +
+                 '<th>Day</th>' +
+                 '<th>Time In</th>' +
+                 ' <th>Time Out</th>' +
+                 ' <th>LateTime</th>' +
+                 '<th>Early Out</th>' +
+                 '<th>Morning Leave</th>' +
+                 '<th>Evening Leave</th>' +
+                 '</tr>' +
+                 '</thead>' +
+                 '<tbody>' +
+                 ' </tbody>' +
+                 '</table>');
+
+             for (x = 1; x <= maxday1; x++) {
+
+                 var timein = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x - 1) + '__TimeIn" name="attlistModel[' + (x - 1) + '].TimeIn">';
+
+                 var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x - 1) + '__TimeOut" name="attlistModel[' + (x - 1) + '].TimeOut">';
+
+                 var timeout = '<input type="time" class = "form-control input-sm" id="attlistModel_' + (x - 1) + '__TimeOut" name="attlistModel[' + (x - 1) + '].TimeOut">';
+
+                 var EarlyOut = '<select class = "form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__EarlyOut" name="attlistModel[' + (x - 1) + '].EarlyOut">' +
+                    '<option value="0">---Select---</option>' +
+                    '<option value="1"> 1 Hr</option>' +
+                    '<option value="2"> 2 Hr</option>' +
+                     '</select > ';
+
+                 var MorningLeaveType = '<select class = "select2 form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__MorningLeaveType" name="attlistModel[' + (x - 1) + '].MorningLeaveType">' +
+                    '<option value="0">---Select---</option>' +
+                     '</select > ';
+
+                 var EveningLeaveType = '<select class = "select2 form-control" onchange = "LeaveChange(this);" id="attlistModel_' + (x - 1) + '__EveningLeaveType" name="attlistModel[' + (x - 1) + '].EveningLeaveType">' +
+                    '<option value="0">---Select---</option>' +
+                     '</select > ';
+
+                 var latetime = '';
+
+                 $("#content > tbody").append(' <tr>' +
+                        ' <td>' + x + '</td>' +
+                        '<td>' + timein + '</td>' +
+                        ' <td>' + timeout + '</td>' +
+                        '  <td>' + latetime+'</td>' +
+                        '<td>' + EarlyOut + '</td >' +
+                        ' <td>' + MorningLeaveType + '</td>' +
+                        ' <td>' + EveningLeaveType + '</td>' +
+                     ' </tr>');
+
+                 SelectMorningLeaveType(x - 1, 0);
+                 SelectEveningLeaveType(x - 1, 0);
+             }
+         }
+
+
+         function SelectMorningLeaveType(x, MorningLeaveType) {
+             $.ajax({
+                 url: '@Url.Action("GetLeave", "Attendance",new { @id = "ID" })'.replace("ID", 1),
+                 type: "GET",
+                 dataType: "JSON",
+                 dataSrc: '',
+                 success: function (items) {
+                     $.each(items, function (i, item) {
+                         $('#attlistModel_' + x + '__MorningLeaveType').append(
+                             $('<option></option>').val(item.LeaveCD).html(item.LeaveType));
+                     });
+                     $('#attlistModel_' + x + '__MorningLeaveType').val(MorningLeaveType);
+
+                     if (MorningLeaveType > 0)
+                         $('#attlistModel_' + x + '__MorningLeaveType').css('color', 'red');
+                     else
+                         $('#attlistModel_' + x + '__MorningLeaveType').css('color', 'black');
+                 }
+             });
+         }
+
+
+         function SelectEveningLeaveType(x, EveningLeaveType) {
+             $.ajax({
+                 url: '@Url.Action("GetLeave", "Attendance",new { @id = "ID" })'.replace("ID", 2),
+                 type: "GET",
+                 dataType: "JSON",
+                 dataSrc: '',
+                 success: function (items) {
+                     $.each(items, function (i, item) {
+                         $('#attlistModel_' + x + '__EveningLeaveType').append(
+                             $('<option></option>').val(item.LeaveCD).html(item.LeaveType));
+                     });
+                     $('#attlistModel_' + x + '__EveningLeaveType').val(EveningLeaveType);
+
+                     if (EveningLeaveType > 0)
+                         $('#attlistModel_' + x + '__EveningLeaveType').css('color', 'red');
+                     else
+                         $('#attlistModel_' + x + '__EveningLeaveType').css('color', 'black');
+                 }
+             });
+         }
+
+         function SelectStaff(x) {
+             $.ajax({
+                 url: '@Url.Action("GetStaff", "Staff")',
+                 type: "GET",
+                 dataType: "JSON",
+                 dataSrc: '',
+                 success: function (items) {
+                     $.each(items, function (i, item) {
+                         $("#ddlStaff").append(
+                             $('<option></option>').val(item.StaffID).html(item.Name));
+                     });
+                     $('#ddlStaff').val(x);
+                 }
+             });
+         }
+
+
+         function daysInMonth(month, year) {
+             return new Date(year, month, 0).getDate();
+         }
+
+         function fixDigit(val) {
+             return val.toString().length === 1 ? "0" + val : val;
+         }
+
+     </script>
+     }

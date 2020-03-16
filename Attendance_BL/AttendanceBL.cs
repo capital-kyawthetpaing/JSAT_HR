@@ -226,7 +226,7 @@ namespace Attendance_BL
             bdl.InsertUpdateDeleteData("M_Attendance_Insert", prms);
         }
 
-        public DataSet M_Attendance_Select(AttendanceModel am)
+        public DataTable M_Attendance_Select(AttendanceModel am)
         {
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[2];
@@ -235,18 +235,17 @@ namespace Attendance_BL
 
             DataTable dtAttendance = new DataTable();
             dtAttendance = bdl.SelectData("M_Attendance_Select", prms);
-
-            LeaveBL lbl = new LeaveBL();
-            DataTable dtleave = new DataTable();
-            dtleave = lbl.M_Leave_Select();
-
-            DataSet ds = new DataSet();
-            ds.Tables.Add(dtAttendance);
-            ds.Tables.Add(dtleave);
-
-            return ds;
+        
+            return dtAttendance;
         }
        
+        public DataTable GetLeave(string id)
+        {
+            LeaveBL lbl = new LeaveBL();
+            DataTable dtleave = new DataTable();
+            dtleave = lbl.M_Leave_Select(id);
+            return dtleave;
+        }
 
         public DataTable Get_Import_List_View()
         {
@@ -416,6 +415,43 @@ namespace Attendance_BL
             }
         }
 
+        public void Update_Attendance_List(DataTable dtAttlist, MultiModel mModel)
+        {
+            BaseDL dl = new BaseDL();
+            try
+            {
+                string YYYMM = string.Empty;
+                YYYMM = mModel.attModel.YYYY + mModel.attModel.MM;
+                SqlParameter[] prms = new SqlParameter[3];
+                if (!string.IsNullOrWhiteSpace(mModel.attModel.StaffID))
+                {
+                    prms[0] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = mModel.attModel.StaffID };
+                }
+                else
+                {
+                    prms[0] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = System.DBNull.Value };
+                }
+                if (!string.IsNullOrWhiteSpace(YYYMM))
+                {
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value = Convert.ToInt32(YYYMM) };
+                }
+                else
+                {
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value = System.DBNull.Value };
+                }
+
+                dtAttlist.TableName = "attendance";
+                System.IO.StringWriter writer = new System.IO.StringWriter();
+                dtAttlist.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                string result = writer.ToString();
+                prms[2] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
+                dl.InsertUpdateDeleteData("Attendance_List_Update", prms);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

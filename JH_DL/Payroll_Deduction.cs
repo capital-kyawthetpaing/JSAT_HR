@@ -28,5 +28,7 @@ namespace JH_DL
         public Nullable<decimal> IncomeTax { get; set; }
         public Nullable<decimal> UniformCharges { get; set; }
         public Nullable<decimal> TotalDeduction { get; set; }
+        public Nullable<decimal> CutUnpaidLeave { get; set; }
+        public Nullable<decimal> CutUnpaidLeaveFees { get; set; }
     }
 }
