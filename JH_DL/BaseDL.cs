@@ -33,7 +33,7 @@ namespace JH_DL
                 adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
                 if (para != null)
                     adapt.SelectCommand.Parameters.AddRange(para);
-                adapt.Fill(ds);
+                 adapt.Fill(ds);
                 newCon.Close();
             }
             return ds;
