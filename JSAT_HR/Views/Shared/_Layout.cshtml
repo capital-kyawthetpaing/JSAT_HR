@@ -76,7 +76,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Attendance:</h6>
                         @*<a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>*@
-                        <a class="collapse-item" href='@Url.Action("AttendanceSetting", "Attendance")'>Attendance Setting</a>
+                        <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
                         <a class="collapse-item" href='@Url.Action("QuickAttendance", "Attendance")'>Quick Attendance</a>
                     </div>
                 </div>
@@ -398,9 +398,6 @@
     <script src="~/Scripts/Common.js"></script>
     <script src="~/Scripts/Select2.js"></script>
     <script src="~/Scripts/Cleave.js"></script>
-
-    <link href="~/Content/ej2/material.css" rel="stylesheet" />
-    <script src="~/Scripts/ej2/ej2.min.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

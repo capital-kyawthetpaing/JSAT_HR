@@ -12,6 +12,8 @@ namespace JH_Model
         public string TimeOut { get; set; }
         public string LeaveType { get; set; }
         public string EarlyOut { get; set; }
+        public string MorningLeaveType { get; set; }
+        public string EveningLeaveType { get; set; }
 
     }
 }

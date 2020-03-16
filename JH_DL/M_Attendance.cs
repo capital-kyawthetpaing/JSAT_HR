@@ -21,7 +21,8 @@ namespace JH_DL
         public string AttandenceDate { get; set; }
         public Nullable<System.TimeSpan> TimeIn { get; set; }
         public Nullable<System.TimeSpan> TimeOut { get; set; }
-        public Nullable<byte> LeaveType { get; set; }
+        public Nullable<byte> MorningLeaveType { get; set; }
+        public Nullable<byte> EveningLeaveType { get; set; }
         public Nullable<System.TimeSpan> LateTime { get; set; }
         public Nullable<int> LateMinutes { get; set; }
         public Nullable<byte> EarlyOut { get; set; }
