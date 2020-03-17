@@ -77,7 +77,8 @@
                         <h6 class="collapse-header">Attendance:</h6>
                         @*<a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>*@
                         <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
-                        <a class="collapse-item" href='@Url.Action("QuickAttendance", "Attendance")'>Quick Attendance</a>
+                        @*<a class="collapse-item" href='@Url.Action("QuickAttendance", "Attendance")'>Quick Attendance</a>*@
+                        <a class="collapse-item" href='@Url.Action("QuickSetting", "Attendance")'>Quick Setting</a>
                     </div>
                 </div>
             </li>
@@ -390,6 +391,7 @@
     </div>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
     <!-- Core plugin JavaScript-->
     <script src="~/Scripts/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
@@ -399,7 +401,10 @@
     <script src="~/Scripts/Select2.js"></script>
     <script src="~/Scripts/Cleave.js"></script>
 
+
+
     @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
 </body>
 
 </html>

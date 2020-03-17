@@ -1,76 +1,95 @@
-﻿@using Syncfusion.EJ2
-@using Syncfusion.EJ2.DropDowns;
+﻿
 @model JH_Model.StaffModel
 @{
     ViewBag.Title = "QuickSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section ControlsSection{
-    <div class="control-section col-lg-9">
-        <div class="control-wrapper">
-            <h4>All Staff</h4>
-            @Html.EJS().MultiSelect("checkList").DataSource((IEnumerable<JH_Model.StaffModel>)ViewBag.data).Placeholder("" +
-                "Select Staff").Mode(VisualMode.CheckBox).ShowDropDownIcon(true).ShowSelectAll(true).FilterBarPlaceholder("Search " +
-                "countries").PopupHeight("350px").Fields(new MultiSelectFieldSettings { Text = "Name", Value = "StaffID" }).Render()
-        </div>
-    </div>
-    <div class="col-lg-3 property-section">
-        <div id="property" title="Properties">
-            <table id="property" title="Properties">
-                <tbody>
-                    <tr>
-                        <td style="width: 50%;">
-                            <div>
-                                @Html.EJS().CheckBox("selectall").Change("selectallchange").Label("Show Select All").Checked(true).Render()
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%;">
-                            <div>
-                                @Html.EJS().CheckBox("dropicon").Change("dropiconchange").Label("DropDown Button").Checked(true).Render()
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%;">
-                            <div>
-                                @Html.EJS().CheckBox("reorder").Change("reorderchange").Label("Selection Reorder").Checked(true).Render()
+@section Styles{
+    <link href="~/Content/jquery.multiselect.css" type="text/css" rel="stylesheet" />
+}
 
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+@section Scripts{
 
-    <style>
-        .control-fluid, .container-fluid {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-    </style>
+    <script src="~/Scripts/jquery.multiselect.js" type="text/javascript"></script>
+
     <script type="text/javascript">
+       
+        $(document).ready(function () {
+            $('#StaffList').multiselect({
+                columns: 8,
+                search: true,
+                selectAll: true,
+                texts: {
+                    placeholder: '--- [ Choose Multiple Staff ] ---',
+                    search: '--Search Staff--'
+                }
+                
+            });
 
-        function selectallchange(args) {
-            var checkList = document.getElementById("checkList").ej2_instances[0];
-            // enable or disable the SelectAll in multiselect on CheckBox checked state
-            checkList.showSelectAll = args.checked;
+        });
+
+        function Update() {
+            var date = $('#lbldate').val();
+            var staff = $('#StaffList').val();
+            var updateinfo = date + '_' + staff;
+         
+            $.ajax({
+                    type: 'GET',
+                url: '@Url.Action("QuickAttendance_Update", "Attendance", new { @id = "ID" })'.replace("ID", updateinfo),
+                    dataType: 'json',
+                     success: function (data) {
+                          window.location.href = '@Url.Action("QuickSetting", "Attendance")';
+                }
+
+            })
         }
 
 
-        function dropiconchange(args) {
-            var checkList = document.getElementById("checkList").ej2_instances[0];
-            // enable or disable the SelectAll in multiselect on CheckBox checked state
-            checkList.showDropDownIcon = args.checked;
-        }
-        function reorderchange(args) {
-            var checkList = document.getElementById("checkList").ej2_instances[0];
-            // enable or disable the SelectAll in multiselect on CheckBox checked state
-            checkList.enableSelectionOrder = args.checked;
-        }
     </script>
 }
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="form-row">
+
+                        <div class="form-group col-md-14">
+                            <label for="Date">Date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" name="date" class="form-control" id="lbldate">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Update" style="color:white;">Update</label>
+                            <div class="input-group">
+                                <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-14">
+                            <label for="Staff">All Staff</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new { id = "StaffList", @class = "form-control" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
 
