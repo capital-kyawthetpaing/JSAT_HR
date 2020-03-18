@@ -48,10 +48,10 @@ namespace JSAT_HR.Controllers
         }
 
         [HttpGet]
-        public string GetStaff()
+        public string GetStaff(string id)
         {
             Function fun = new Function();
-            return fun.DataTableToJSONWithJSONNet(sbl.GetAllStaff());
+            return fun.DataTableToJSONWithJSONNet(sbl.GetAllStaff(id));
         }
 
         [HttpPost]

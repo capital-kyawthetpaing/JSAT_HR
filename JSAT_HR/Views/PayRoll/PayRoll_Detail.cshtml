@@ -1,4 +1,4 @@
-﻿
+﻿@model JH_Model.StaffModel
 @{
     ViewBag.Title = "PayRoll_Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +17,13 @@
                                 <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
                             </div>
 
-                            @Html.DropDownList("staffNameList", ViewBag.staffNameList as SelectList, "---Select---", new { @id = "staffNameID", @class = "select2 form-control input-sm" })
+                            @Html.DropDownListFor(m => m.StaffID, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                          {
+                              @class = "select2 form-control",
+                              @required = "required",
+                              @id = "staffNameID",
+                              @tabindex = "1"
+                          })
 
                         </div>
                     </div>
@@ -142,12 +148,28 @@
             var year = d.getFullYear();
             $('#ddlYear').val(year);
             $('#ddlMonth').val(month); 
-
+            SelectStaff();
             //GetLabel_PayRollAllowance("1_201912");--edit by amon--
             //GetData_PayRollAllowance("1_201912");
             //GetLabel_PayRollDeduction("1_201912");
             //GetData_PayRollDeduction("1_201912");
         });
+
+          function SelectStaff() {
+             $.ajax({
+                 url: '@Url.Action("GetStaff", "Staff", new { @id = "ID" })'.replace("ID", 1),
+                 type: "GET",
+                 dataType: "JSON",
+                 dataSrc: '',
+                 success: function (items) {
+                     $.each(items, function (i, item) {
+                         $("#staffNameID").append(
+                             $('<option></option>').val(item.StaffID).html(item.Name));
+                     });
+                 }
+             });
+        }
+
 
         function fixDigit(val) {
             return val.toString().length === 1 ? "0" + val : val;

@@ -135,12 +135,6 @@ namespace JSAT_HR.Controllers
 
         public ActionResult PayRoll_Detail()
         {
-            
-            Payroll_BL bl = new Payroll_BL();
-            var staffName = bl.SelectStaff();
-            SelectList list = new SelectList(staffName, "StaffID", "Name");
-            ViewBag.staffNameList = list;
-
             return View();
         }
 
@@ -271,16 +265,21 @@ namespace JSAT_HR.Controllers
                     Table_Header += PRD_Row("Mentor");
                 }
 
-                var Bus = dt.Rows[0]["Bus"].ToString();
-                if (Bus.Split('.')[0] != "0")
-                {
-                    Table_Header += PRD_Row("Bus");
-                }
+                //var Bus = dt.Rows[0]["Bus"].ToString();
+                //if (Bus.Split('.')[0] != "0")
+                //{
+                //    Table_Header += PRD_Row("Bus");
+                //}
 
-                var Train = dt.Rows[0]["Train"].ToString();
-                if (Train.Split('.')[0] != "0")
+                //var Train = dt.Rows[0]["Train"].ToString();
+                //if (Train.Split('.')[0] != "0")
+                //{
+                //    Table_Header += PRD_Row("Train");
+                //}
+                var TransportationCharges = dt.Rows[0]["TransportationCharges"].ToString();
+                if (TransportationCharges.Split('.')[0] != "0")
                 {
-                    Table_Header += PRD_Row("Train");
+                    Table_Header += PRD_Row("TransportationCharges");
                 }
 
 
@@ -546,19 +545,23 @@ namespace JSAT_HR.Controllers
                     AllowanceData += "<tr><td>" + Mentor + "</td></tr>";
                 }
 
-                var Bus = dt.Rows[0]["Bus"].ToString();
-                if (Bus.Split('.')[0] != "0")
+                //var Bus = dt.Rows[0]["Bus"].ToString();
+                //if (Bus.Split('.')[0] != "0")
+                //{
+                //    AllowanceData += "<tr><td>" + Bus + "</td></tr>";
+                //}
+
+                //var Train = dt.Rows[0]["Train"].ToString();
+                //if (Train.Split('.')[0] != "0")
+                //{
+                //    AllowanceData += "<tr><td>" + Train + "</td></tr>";
+                //}
+
+                var TransportationCharges = dt.Rows[0]["TransportationCharges"].ToString();
+                if (TransportationCharges.Split('.')[0] != "0")
                 {
-                    AllowanceData += "<tr><td>" + Bus + "</td></tr>";
+                    AllowanceData += "<tr><td>" + TransportationCharges + "</td></tr>";
                 }
-
-                var Train = dt.Rows[0]["Train"].ToString();
-                if (Train.Split('.')[0] != "0")
-                {
-                    AllowanceData += "<tr><td>" + Train + "</td></tr>";
-                }
-
-
 
                 var TotalSalary = dt.Rows[0]["TotalSalary"].ToString();
                 AllowanceData += "<br><tr><td><b>" + TotalSalary + "</b></td></tr>";

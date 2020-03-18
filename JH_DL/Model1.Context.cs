@@ -40,9 +40,9 @@ namespace JH_DL
         public virtual DbSet<Payroll_Deduction> Payroll_Deduction { get; set; }
         public virtual DbSet<M_Salary> M_Salary { get; set; }
         public virtual DbSet<L_Log> L_Log { get; set; }
-        public virtual DbSet<M_Staff> M_Staff { get; set; }
         public virtual DbSet<M_Leave> M_Leave { get; set; }
         public virtual DbSet<M_Attendance> M_Attendance { get; set; }
         public virtual DbSet<Payroll_Allowance> Payroll_Allowance { get; set; }
+        public virtual DbSet<M_Staff> M_Staff { get; set; }
     }
 }

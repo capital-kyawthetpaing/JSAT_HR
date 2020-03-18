@@ -380,7 +380,7 @@ namespace JSAT_HR.Controllers
             {
                 
                 DataTable dt = new DataTable();
-                dt = sbl.GetAllStaff();
+                dt = sbl.GetAllStaff("1");
 
                 if (dt.Rows.Count > 0)
                 {

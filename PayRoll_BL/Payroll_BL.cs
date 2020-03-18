@@ -87,8 +87,9 @@ namespace PayRoll_BL
 
         public List<staffName> SelectStaff()
         {
+            int notresign = 0;
             JSAT_HREntities context = new JSAT_HREntities();
-            var staffName = context.M_Staff.Select(s => new staffName {StaffID=s.StaffID,Name=s.Name  }).ToList();
+            var staffName = context.M_Staff.Where(s => s.IsResign.Equals(notresign)).Select(s => new staffName {StaffID=s.StaffID,Name=s.Name  }).ToList();
             return staffName;
         }
         public DataTable PayRoll_Detail_Report(string StaffID, string yyyymm)

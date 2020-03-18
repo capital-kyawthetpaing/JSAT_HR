@@ -34,7 +34,7 @@ namespace JH_DL
         public string DepartmentCD { get; set; }
         public string SubDivisionCD { get; set; }
         public string PositionCD { get; set; }
-        public string TransportationCD { get; set; }
+        public Nullable<decimal> TransportationFee { get; set; }
         public Nullable<byte> Currency { get; set; }
         public string Photo { get; set; }
         public Nullable<decimal> BasicSalary { get; set; }

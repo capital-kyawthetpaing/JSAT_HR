@@ -14,12 +14,13 @@ namespace Staff_BL
 {
     public class StaffBL
     {
-        public DataTable GetAllStaff()
+        public DataTable GetAllStaff(string option)
         {
             BaseDL bdl = new BaseDL();
-            SqlParameter[] prms = new SqlParameter[0];
+            SqlParameter[] prms = new SqlParameter[1];
             //prms[0] = new SqlParameter("@StaffCD", SqlDbType.VarChar) { Value = sm.StaffCD };
             //prms[1] = new SqlParameter("@StaffName", SqlDbType.VarChar) { Value = sm.StaffName };
+             prms[0] = new SqlParameter("@option", SqlDbType.Int) { Value = Convert.ToInt32(option) };
             return bdl.SelectData("M_Staff_SelectAll", prms);
         }
 
@@ -46,7 +47,7 @@ namespace Staff_BL
                 sm.Gender = dt.Rows[0]["Gender"].ToString();
                 sm.BankInformation = dt.Rows[0]["BankInformation"].ToString();
                 sm.Currency = Convert.ToByte(dt.Rows[0]["Currency"]);
-                sm.BasicSalary = Convert.ToDecimal(dt.Rows[0]["BasicSalary"]);
+                sm.BasicSalary = dt.Rows[0]["BasicSalary"].ToString();
                 sm.Effort = dt.Rows[0]["Effort"].ToString();
                 sm.UniformCharges = dt.Rows[0]["UniformCharges"].ToString();
                 sm.CompanyCD = dt.Rows[0]["CompanyCD"].ToString();
@@ -59,12 +60,11 @@ namespace Staff_BL
 
                 sm.PhoneNo = dt.Rows[0]["PhoneNo"].ToString();
                 sm.EmergencyPhoneNo = dt.Rows[0]["EmergencyPhoneNo"].ToString();
-                sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
                 sm.EmailAddress = dt.Rows[0]["EmailAddress"].ToString();
                 sm.PermanentAddress = dt.Rows[0]["PermanentAddress"].ToString();
                 sm.TemporaryAddress = dt.Rows[0]["TemporaryAddress"].ToString();
 
-                sm.TransportationCD = dt.Rows[0]["TransportationCD"].ToString();
+                sm.TransportationFee = dt.Rows[0]["TransportationFee"].ToString();
                 sm.MD = Convert.ToBoolean(dt.Rows[0]["MD"]);
                 sm.Director = Convert.ToBoolean(dt.Rows[0]["Director"]);
                 sm.Manager = Convert.ToBoolean(dt.Rows[0]["Manager"]);
@@ -115,10 +115,10 @@ namespace Staff_BL
             ms.DepartmentCD = model.DepartmentCD;
             ms.SubDivisionCD = model.SubDivisionCD;
             ms.PositionCD = model.PositionCD;
-            ms.TransportationCD = model.TransportationCD;
+            ms.TransportationFee = Convert.ToDecimal(model.TransportationFee);
             ms.Currency = model.Currency;
             ms.Photo = model.Photo;
-            ms.BasicSalary = model.BasicSalary;
+            ms.BasicSalary = Convert.ToDecimal(model.BasicSalary);
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",","");
             ms.Effort = Convert.ToDecimal(model.Effort);
@@ -191,13 +191,13 @@ namespace Staff_BL
             updatestaff.DepartmentCD = model.DepartmentCD;
             updatestaff.SubDivisionCD = model.SubDivisionCD;
             updatestaff.PositionCD = model.PositionCD;
-            updatestaff.TransportationCD = model.TransportationCD;
+            updatestaff.TransportationFee = Convert.ToDecimal(model.TransportationFee);
             updatestaff.Currency = model.Currency;
             if (!string.IsNullOrWhiteSpace(model.Photo))
                 updatestaff.Photo = model.Photo;
             else
                 updatestaff.Photo = updatestaff.Photo;
-           updatestaff.BasicSalary = model.BasicSalary;
+           updatestaff.BasicSalary = Convert.ToDecimal(model.BasicSalary);
             if (model.Effort.Contains(","))
                 model.Effort = model.Effort.Replace(",", "");
             updatestaff.Effort = Convert.ToDecimal(model.Effort);

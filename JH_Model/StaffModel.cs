@@ -31,10 +31,10 @@ namespace JH_Model
         public string DepartmentCD { get; set; } = "0";
         public string SubDivisionCD { get; set; } = "0";
         public string PositionCD { get; set; } = "0";
-        public string TransportationCD { get; set; }
+        public string TransportationFee { get; set; } = "0";
         public byte Currency { get; set; }
         public string Photo { get; set; }
-        public decimal BasicSalary { get; set; }
+        public string BasicSalary { get; set; } = "0";
         public string Effort { get; set; } = "0";
         public bool IsResign { get; set; }
         public bool DeleteFlg { get; set; }

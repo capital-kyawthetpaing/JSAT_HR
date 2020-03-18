@@ -574,7 +574,7 @@
 
          function SelectStaff(x) {
              $.ajax({
-                 url: '@Url.Action("GetStaff", "Staff")',
+                 url: '@Url.Action("GetStaff", "Staff", new { @id = "ID" })'.replace("ID", 1),
                  type: "GET",
                  dataType: "JSON",
                  dataSrc: '',
