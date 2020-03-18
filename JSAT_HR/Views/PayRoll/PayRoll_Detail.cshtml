@@ -86,7 +86,7 @@
                     <div class="form-group col-md-5">
                         <label for="StaffID" style="color:white;">Search</label>
                         <div class="input-group">
-                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;
+                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData(0)"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;
                             <button type="button" id="btnreport" class="btn btn-warning col-md-3" onclick="Report()"><i class="fa fa-print"></i>&nbsp; Report</button>
                         </div>
                     </div>
@@ -143,19 +143,36 @@
     <script>
 
         $(document).ready(function () {
-            var d = new Date();
-            var month = fixDigit(d.getMonth() + 1);
-            var year = d.getFullYear();
-            $('#ddlYear').val(year);
-            $('#ddlMonth').val(month); 
-            SelectStaff();
+            var sid = '@ViewBag.Staffid';
+            if (sid == null || sid == "") {
+                var d = new Date();
+                var month = fixDigit(d.getMonth() + 1);
+                var year = d.getFullYear();
+                $('#ddlYear').val(year);
+                $('#ddlMonth').val(month);
+                SelectStaff(0);
+            }
+            else {
+                var arr;
+                var YYYY; var MM; var StaffID;
+                if (sid != null) {
+                    arr = sid.split('_');
+                    YYYY = arr[0];
+                    MM = arr[1];
+                    StaffID = arr[2];
+                    $('#ddlYear').val(YYYY);
+                    $('#ddlMonth').val(MM);
+                    SelectStaff(StaffID);
+                    ShowData(StaffID);
+                }
+            }
             //GetLabel_PayRollAllowance("1_201912");--edit by amon--
             //GetData_PayRollAllowance("1_201912");
             //GetLabel_PayRollDeduction("1_201912");
             //GetData_PayRollDeduction("1_201912");
         });
 
-          function SelectStaff() {
+          function SelectStaff(x) {
              $.ajax({
                  url: '@Url.Action("GetStaff", "Staff", new { @id = "ID" })'.replace("ID", 1),
                  type: "GET",
@@ -166,6 +183,7 @@
                          $("#staffNameID").append(
                              $('<option></option>').val(item.StaffID).html(item.Name));
                      });
+                     $('#staffNameID').val(x);
                  }
              });
         }
@@ -249,14 +267,19 @@
             });
         }
 
-        function ShowData()
+        function ShowData(x)
         {
             var Name = "";
             var Year = "";
             var Month = "";
-             Name = document.getElementById("staffNameID").value;
-             Year = document.getElementById("ddlYear").value;
-             Month = document.getElementById("ddlMonth").value;
+            Year = document.getElementById("ddlYear").value;
+            Month = document.getElementById("ddlMonth").value;
+            if (x == 0) {
+                Name = document.getElementById("staffNameID").value;
+            }
+            else {
+                Name = x;
+            }  
 
             if (Name != "" && Year != "0" && Month != "0")
             {

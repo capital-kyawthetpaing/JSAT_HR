@@ -32,8 +32,6 @@ namespace JSAT_HR.Controllers
             return fun.DataTableToJSONWithJSONNet(pbl.PayRoll_Search("",1));
         }
 
-
-
         [HttpGet]
         public string PayRoll_Search(string id )
         {
@@ -133,8 +131,16 @@ namespace JSAT_HR.Controllers
                 return null;
         }
 
-        public ActionResult PayRoll_Detail()
+        public ActionResult PayRoll_Detail(string id)
         {
+            if (id == null)
+            {
+                ViewBag.Staffid = "";
+            }
+            else
+            {
+                ViewBag.Staffid = id;
+            }
             return View();
         }
 

@@ -79,7 +79,12 @@
                                 },
                                 "data": data,
                                 "columns": [
-                                    { "data": "No", orderable: false, "width": "3%" },
+                                    {
+                                        "data": "StaffID", "render": function (data, type, row) {
+                                            return '<a href="../PayRoll/PayRoll_Detail/' + year + '_' + month + '_' + row.StaffID + '">' + row.StaffID + '</a>';
+                                        }, orderable: false, "width": "1%"
+                                    },
+                                    //{ "data": "No", orderable: false, "width": "3%" },
                                     { "data": "Name", orderable: false, "width": "8%" },
                                     { "data": "NRC_No", orderable: false, "width": "9%" },
                                     { "data": "Account_Number", orderable: false, "width": "5%" },
