@@ -401,18 +401,44 @@ namespace JSAT_HR.Controllers
             return lst;
         }
 
-        //public ActionResult QuickSetting()
-        //{
-        //    try
-        //    {
-        //       ViewBag.StaffList = GetStaffList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.Write(ex);
-        //    }
-        //    return View();
-        //}
+        public ActionResult QuickSetting(StaffModel model)
+        {
+            try
+            {
+                if (model.SelectedMultiStaffId != null)
+                {
+                    List<StaffObj> stafflist = this.LoadData();
+                    model.SelectedStaffName = stafflist.Where(p => model.SelectedMultiStaffId.Contains(p.StaffID)).Select(q => q).ToList();
+                }
+                this.ViewBag.StaffList = this.GetStaffList();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            return this.View(model);
+        }
+
+       
+        public ActionResult QuickAttendance_Update(string id)
+        {
+            AttendanceBL abl = new AttendanceBL();
+            string[] list;string[] stafflist;
+            list = id.Split('_');
+
+            string date = list[0].ToString();date = date.Replace("-", "");
+
+            string staff = list[1].ToString();
+            stafflist = staff.Split(',');
+           
+
+            foreach (string st in stafflist)
+            {
+                abl.QuickAttendance_Update(st,date);
+            }
+
+            return RedirectToAction("QuickSetting");
+        }
 
     }
 }

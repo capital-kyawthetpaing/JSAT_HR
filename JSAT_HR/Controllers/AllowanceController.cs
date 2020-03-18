@@ -45,7 +45,7 @@ namespace JSAT_HR.Controllers
                 {
                     flag = asbl.Allowance_Setting_Save(model);
                 }
-                if(flag=="OK")
+                if (flag == "OK")
                 {
                     Session["UImsg"] = "OK";
                 }
@@ -59,6 +59,6 @@ namespace JSAT_HR.Controllers
             }
         }
 
-
+       
     }
 }

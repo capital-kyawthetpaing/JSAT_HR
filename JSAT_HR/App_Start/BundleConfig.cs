@@ -22,6 +22,11 @@ namespace JSAT_HR
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            // Boorstrap dropdown select
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap-select").Include(
+            //                      "~/Scripts/bootstrap-select.js",
+            //                      "~/Scripts/script-bootstrap-select.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                     "~/Content/fontawesome-all.min.css",
                     "~/Content/sb-admin-2.min.css",
@@ -30,6 +35,11 @@ namespace JSAT_HR
                       "~/Content/cdnDatatables.css",
                       "~/Content/Select2.css"
                       ));
+
+            // Bootstrap dropdown select
+            //bundles.Add(new StyleBundle("~/Content/Bootstrap-Select/css").Include(
+            //                     "~/Content/style/bootstrap-select.css",
+            //                     "~/Content/style/bootstrap-select.min.css"));
         }
     }
 }

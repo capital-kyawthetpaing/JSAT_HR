@@ -94,3 +94,16 @@ tr.shown td.details-control {
     background-color: rgb(217, 83, 79);
     border-color: rgb(212, 63, 58);
 }
+
+.ms-options-wrap > .ms-options{
+    position:inherit!important;
+}
+
+.ms-options-wrap > button:focus, .ms-options-wrap > button {
+    height: 35px !important;
+    text-align: center !important;
+    margin-top: 0px !important;
+    font-size: 1rem !important;
+    color: black !important;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
