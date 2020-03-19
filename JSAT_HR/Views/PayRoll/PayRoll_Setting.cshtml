@@ -102,7 +102,12 @@
             var yearmonth = year + month;
             window.open('@Url.Action("PayRoll_Report", "PayRoll")?id=' + yearmonth);
         }
-
+    function TransportationReport() {
+            var year = $('#ddlYear').val();
+            var month = $('#ddlMonth').val();
+            var yearmonth = year + month;
+            window.open('@Url.Action("Transportation_Report", "PayRoll")?id=' + yearmonth);
+        }
 
         function Process() {
             var year = $('#ddlYear').val();
@@ -186,7 +191,7 @@
                         <div class="input-group">
                             <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
                             <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>&nbsp;&nbsp;&nbsp;
-                          
+                            <button type="button" id="btnTransportationReport" class="btn btn-warning col-xl-4" onclick="TransportationReport()"><i class="fa fa-print"></i>Transportation Report</button>
                         </div>
                     </div>
                  </div>

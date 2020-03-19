@@ -84,6 +84,35 @@ namespace JSAT_HR.Controllers
             return File(str, "application/pdf");
         }
 
+        public FileStreamResult Transportation_Report(string id)
+        {
+            DataSet ds = new DataSet();
+            string savefilename = "Transportation_Report" + (DateTime.Now).ToShortDateString() + ".pdf";
+
+            DataTable dt = new DataTable();
+            dt = pbl.Get_Transportation_Report(id);
+            if (dt.Rows.Count < 20)
+            {
+                for (int i = 0; dt.Rows.Count < 20; i++)
+                {
+                    dt.Rows.Add();
+                    dt.AcceptChanges();
+                }
+            }
+            ds.Tables.Add(dt);
+
+            Report.Transportation_List rpt = new Report.Transportation_List();
+            rpt.Database.Tables["Transportation_TB"].SetDataSource(ds.Tables[0]);
+
+            Stream str = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            str.Seek(0, SeekOrigin.Begin);
+
+            return File(str, "application/pdf");
+        }
+
         public string PayRoll_Process(string id)
         {
             DataTable dtpay = new DataTable();

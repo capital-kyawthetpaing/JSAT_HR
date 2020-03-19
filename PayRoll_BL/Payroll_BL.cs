@@ -117,5 +117,16 @@ namespace PayRoll_BL
                 return dtpaydetail;
             else return dtpaydetail;
         }
+        public DataTable Get_Transportation_Report(string yyyymm)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dtpaydetail = new DataTable();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = yyyymm };
+            dtpaydetail = bdl.SelectData("Transportation_Report_Select", prms);
+            if (dtpaydetail.Rows.Count > 0)
+                return dtpaydetail;
+            else return dtpaydetail;
+        }
     }
 }
