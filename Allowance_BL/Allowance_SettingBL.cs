@@ -40,6 +40,10 @@ namespace Allowance_BL
             tb.Local2ndInterviewer = Convert.ToDecimal(am.Local2ndInterviewer);
             tb.Overseas1stInterviewer = Convert.ToDecimal(am.Oversea1stInterviewer);
             tb.Overseas2ndInterviewer = Convert.ToDecimal(am.Oversea2ndInterviewer);
+
+            tb.Maternity = Convert.ToByte(am.Maternity.Replace("%", ""));
+            tb.Medical = Convert.ToByte(am.Medical.Replace("%", ""));
+
             tb.InsertedDate = DateTime.Now;
             tb.InsertedBy = updatedby;
 
@@ -70,7 +74,9 @@ namespace Allowance_BL
                 am.Local2ndInterviewer = String.Format("{0:n0}", model.Local2ndInterviewer);
                 am.Oversea1stInterviewer = String.Format("{0:n0}", model.Overseas1stInterviewer);
                 am.Oversea2ndInterviewer = String.Format("{0:n0}", model.Overseas2ndInterviewer);
-               
+
+                am.Maternity = String.Format("{0:n0}", model.Maternity) +"%";
+                am.Medical = String.Format("{0:n0}", model.Medical) + "%";
                 return am;
             }
                 

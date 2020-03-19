@@ -8,10 +8,6 @@ namespace JH_Model
 {
     public class AllowanceModel:BaseModel
     {
-        public string Bus { get; set; }
-
-        public string Train { get; set; }
-
         public string MD { get; set; }
 
         public string Director { get; set; }
@@ -38,8 +34,11 @@ namespace JH_Model
 
         public string MentorAllowance { get; set; }
 
-
         public byte Currency { get; set; }
+
+        public string Medical { get; set; }
+
+        public string Maternity { get; set; }
 
     }
 }

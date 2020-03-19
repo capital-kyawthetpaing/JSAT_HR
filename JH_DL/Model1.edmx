@@ -47,8 +47,8 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
           <Property Name="Overseas2ndInterviewer" Type="money" />
           <Property Name="MarketingTeamAllowance" Type="money" />
           <Property Name="MentorAllowance" Type="money" />
-          <Property Name="Bus" Type="money" />
-          <Property Name="Train" Type="money" />
+          <Property Name="Maternity" Type="tinyint" />
+          <Property Name="Medical" Type="tinyint" />
           <Property Name="InsertedBy" Type="varchar" MaxLength="4" />
           <Property Name="InsertedDate" Type="datetime" />
         </EntityType>
@@ -243,8 +243,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="Overseas2ndInterviewer" Type="money" />
           <Property Name="MarketingTeam" Type="money" />
           <Property Name="Mentor" Type="money" />
-          <Property Name="Bus" Type="money" />
-          <Property Name="Train" Type="money" />
+          <Property Name="TransportationCharges" Type="money" />
           <Property Name="TotalSalary" Type="money" />
         </EntityType>
         <EntityType Name="Payroll_Deduction">
@@ -377,7 +376,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
           <EntitySet Name="M_Office" EntityType="JSAT_HRModel.M_Office" />
           <EntitySet Name="M_Department" EntityType="JSAT_HRModel.M_Department" />
-          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
           <EntitySet Name="M_Company" EntityType="JSAT_HRModel.M_Company" />
           <EntitySet Name="M_Message" EntityType="JSAT_HRModel.M_Message" />
           <EntitySet Name="M_Payroll" EntityType="JSAT_HRModel.M_Payroll" />
@@ -388,8 +386,9 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="L_Log" EntityType="JSAT_HRModel.L_Log" />
           <EntitySet Name="M_Leave" EntityType="JSAT_HRModel.M_Leave" />
           <EntitySet Name="M_Attendance" EntityType="JSAT_HRModel.M_Attendance" />
-          <EntitySet Name="Payroll_Allowance" EntityType="JSAT_HRModel.Payroll_Allowance" />
           <EntitySet Name="M_Staff" EntityType="JSAT_HRModel.M_Staff" />
+          <EntitySet Name="Payroll_Allowance" EntityType="JSAT_HRModel.Payroll_Allowance" />
+          <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
         </EntityContainer>
         <EntityType Name="M_User">
           <Key>
@@ -419,30 +418,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="ChangeDate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="M_Allowance">
-          <Key>
-            <PropertyRef Name="Currency" />
-          </Key>
-          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Currency" Type="Byte" Nullable="false" />
-          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="M_Company">
           <Key>
@@ -568,33 +543,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="LateMinutes" Type="Int32" />
           <Property Name="EarlyOut" Type="Byte" />
         </EntityType>
-        <EntityType Name="Payroll_Allowance">
-          <Key>
-            <PropertyRef Name="StaffID" />
-            <PropertyRef Name="YYYYMM" />
-          </Key>
-          <Property Name="StaffID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
-          <Property Name="Currency" Type="Byte" />
-          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="JpnUNiGradurate" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Local2dstInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="MarketingTeam" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Mentor" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Bus" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Train" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalSalary" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
         <EntityType Name="M_Staff">
           <Key>
             <PropertyRef Name="StaffID" />
@@ -630,6 +578,56 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="InsertedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Payroll_Allowance">
+          <Key>
+            <PropertyRef Name="StaffID" />
+            <PropertyRef Name="YYYYMM" />
+          </Key>
+          <Property Name="StaffID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="YYYYMM" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="Byte" />
+          <Property Name="BasicSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Effort" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JpnUNiGradurate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local2dstInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MarketingTeam" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Mentor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransportationCharges" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalSalary" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="M_Allowance">
+          <Key>
+            <PropertyRef Name="Currency" />
+          </Key>
+          <Property Name="Currency" Type="Byte" Nullable="false" />
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Director" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Manager" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="N3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JpnUniGrade" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Local2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas1stInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Overseas2ndInterviewer" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MarketingTeamAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MentorAllowance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Maternity" Type="Byte" />
+          <Property Name="Medical" Type="Byte" />
+          <Property Name="InsertedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -707,31 +705,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
                 <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="DepartmentCD" ColumnName="DepartmentCD" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="M_Allowance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
-              <MappingFragment StoreEntitySet="M_Allowance">
-                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
-                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
-                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
-                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
-                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
-                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
-                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
-                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
-                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
-                <ScalarProperty Name="N3" ColumnName="N3" />
-                <ScalarProperty Name="N2" ColumnName="N2" />
-                <ScalarProperty Name="N1" ColumnName="N1" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="MD" ColumnName="MD" />
-                <ScalarProperty Name="Train" ColumnName="Train" />
-                <ScalarProperty Name="Bus" ColumnName="Bus" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -861,33 +834,6 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payroll_Allowance">
-            <EntityTypeMapping TypeName="JSAT_HRModel.Payroll_Allowance">
-              <MappingFragment StoreEntitySet="Payroll_Allowance">
-                <ScalarProperty Name="TotalSalary" ColumnName="TotalSalary" />
-                <ScalarProperty Name="Train" ColumnName="Train" />
-                <ScalarProperty Name="Bus" ColumnName="Bus" />
-                <ScalarProperty Name="Mentor" ColumnName="Mentor" />
-                <ScalarProperty Name="MarketingTeam" ColumnName="MarketingTeam" />
-                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
-                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
-                <ScalarProperty Name="Local2dstInterviewer" ColumnName="Local2dstInterviewer" />
-                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
-                <ScalarProperty Name="JpnUNiGradurate" ColumnName="JpnUNiGradurate" />
-                <ScalarProperty Name="N3" ColumnName="N3" />
-                <ScalarProperty Name="N2" ColumnName="N2" />
-                <ScalarProperty Name="N1" ColumnName="N1" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="MD" ColumnName="MD" />
-                <ScalarProperty Name="Effort" ColumnName="Effort" />
-                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="M_Staff">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Staff">
               <MappingFragment StoreEntitySet="M_Staff">
@@ -922,6 +868,57 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payroll_Allowance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.Payroll_Allowance">
+              <MappingFragment StoreEntitySet="Payroll_Allowance">
+                <ScalarProperty Name="TotalSalary" ColumnName="TotalSalary" />
+                <ScalarProperty Name="TransportationCharges" ColumnName="TransportationCharges" />
+                <ScalarProperty Name="Mentor" ColumnName="Mentor" />
+                <ScalarProperty Name="MarketingTeam" ColumnName="MarketingTeam" />
+                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
+                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
+                <ScalarProperty Name="Local2dstInterviewer" ColumnName="Local2dstInterviewer" />
+                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
+                <ScalarProperty Name="JpnUNiGradurate" ColumnName="JpnUNiGradurate" />
+                <ScalarProperty Name="N3" ColumnName="N3" />
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="N1" ColumnName="N1" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MD" ColumnName="MD" />
+                <ScalarProperty Name="Effort" ColumnName="Effort" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="YYYYMM" ColumnName="YYYYMM" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Allowance">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Allowance">
+              <MappingFragment StoreEntitySet="M_Allowance">
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="Medical" ColumnName="Medical" />
+                <ScalarProperty Name="Maternity" ColumnName="Maternity" />
+                <ScalarProperty Name="MentorAllowance" ColumnName="MentorAllowance" />
+                <ScalarProperty Name="MarketingTeamAllowance" ColumnName="MarketingTeamAllowance" />
+                <ScalarProperty Name="Overseas2ndInterviewer" ColumnName="Overseas2ndInterviewer" />
+                <ScalarProperty Name="Overseas1stInterviewer" ColumnName="Overseas1stInterviewer" />
+                <ScalarProperty Name="Local2ndInterviewer" ColumnName="Local2ndInterviewer" />
+                <ScalarProperty Name="Local1stInterviewer" ColumnName="Local1stInterviewer" />
+                <ScalarProperty Name="JpnUniGrade" ColumnName="JpnUniGrade" />
+                <ScalarProperty Name="N3" ColumnName="N3" />
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="N1" ColumnName="N1" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MD" ColumnName="MD" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

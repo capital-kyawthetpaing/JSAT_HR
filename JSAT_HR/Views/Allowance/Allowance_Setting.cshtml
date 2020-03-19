@@ -18,8 +18,20 @@
                 $('#myModal').modal('show');
             }
         });
+
+        function fnAllowNumeric() {
+            if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode!=8 && event.keyCode != 53) {
+                if ((event.keyCode < 106 && event.keyCode > 95)) {
+                    return true;
+                }
+                event.preventDefault();
+                return false;
+
+            }
+        }
     </script>
     }
+
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Allowance_Setting_Save", "Allowance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "MyForm" }))
 {
@@ -31,6 +43,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
@@ -47,12 +60,9 @@
                            {
                                @class = "form-control input-sm input-numeral1",
                                @tabindex = "1",
-                               //@required = "required",
                                @id = "txtMD",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -66,11 +76,8 @@
                            {
                                @class = "form-control input-sm input-numeral2",
                                @tabindex = "2",
-                               //@required = "required",
                                @id = "txtdirector",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -84,12 +91,9 @@
                            {
                                @class = "form-control input-sm input-numeral3",
                                @tabindex = "3",
-                               //@required = "required",
                                @id = "txtManager",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -113,12 +117,9 @@
                            {
                                @class = "form-control input-sm input-numeral4",
                                @tabindex = "4",
-                               //@required = "required",
                                @id = "txtN1",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -132,12 +133,9 @@
                            {
                                @class = "form-control input-sm input-numeral5",
                                @tabindex = "5",
-                               //@required = "required",
                                @id = "txtN2",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -151,12 +149,9 @@
                            {
                                @class = "form-control input-sm input-numeral6",
                                @tabindex = "6",
-                               //@required = "required",
                                @id = "txtN3",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -170,12 +165,9 @@
                            {
                                @class = "form-control input-sm input-numeral7",
                                @tabindex = "7",
-                               //@required = "required",
                                @id = "txtJpnunigrande",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -197,15 +189,11 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.MarketingTeamAllowance, new
                            {
-                               @class = "form-control input-sm input-numeral12",
-                               //@type = "email",
-                               @tabindex = "12",
-                               // @required = "required",
+                               @class = "form-control input-sm input-numeral8",
+                               @tabindex = "8",
                                @id = "txtmarketingteam",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -217,14 +205,11 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.MentorAllowance, new
                            {
-                               @class = "form-control input-sm input-numeral13",
-                               @tabindex = "13",
-                               //@required = "required",
+                               @class = "form-control input-sm input-numeral9",
+                               @tabindex = "9",
                                @id = "txtmentor",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -247,14 +232,11 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.Local1stInterviewer, new
                            {
-                               @class = "form-control input-sm input-numeral8",
-                               @tabindex = "8",
-                               //@required = "required",
+                               @class = "form-control input-sm input-numeral10",
+                               @tabindex = "10",
                                @id = "txtlocal1stinterviewer",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -266,14 +248,11 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.Local2ndInterviewer, new
                            {
-                               @class = "form-control input-sm input-numeral9",
-                               @tabindex = "9",
-                               //@required = "required",
+                               @class = "form-control input-sm input-numeral11",
+                               @tabindex = "11",
                                @id = "txtlocal2ndinterviewer",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -285,14 +264,11 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.Oversea1stInterviewer, new
                            {
-                               @class = "form-control input-sm input-numeral10",
-                               @tabindex = "10",
-                               //@required = "required",
+                               @class = "form-control input-sm input-numeral12",
+                               @tabindex = "12",
                                @id = "txtoversea1stinterviewer",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
                            })
                             </div>
                         </div>
@@ -304,14 +280,57 @@
                                 </div>
                                 @Html.TextBoxFor(am => am.Oversea2ndInterviewer, new
                            {
-                               @class = "form-control input-sm input-numeral11",
-                               @tabindex = "11",
-                               //@required = "required",
+                               @class = "form-control input-sm input-numeral13",
+                               @tabindex = "13",
                                @id = "txtoversea1stinterviewer",
                                @autofocus = "autofocus",
-                               maxlength = "10",
-                               //@onkeypress = "return CheckNumeric();",
-                               //@onkeyup = "FormatCurrency(this)"
+                               maxlength = "10"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-4 mb-2">
+            <div class="card border-left-primary shadow">
+                <div  class="card-body">
+                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1">Health</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="MaternityAllowance">Maternity Allowance</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-primary" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Maternity, new
+                           {
+                               @class = "form-control input-sm",
+                               @style = "text-align:right",
+                               @tabindex = "14",
+                               @id = "txtMaternity",
+                               @autofocus = "autofocus",
+                               maxlength = "4",
+                               @onkeydown = "fnAllowNumeric()"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="MedicalAllowance"> Medical Allowance</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-primary" id="basic-addon1"><i class="fa fa-money-bill-wave"></i></span>
+                                </div>
+                                @Html.TextBoxFor(am => am.Medical, new
+                           {
+                               @class = "form-control input-sm",
+                               @style="text-align:right",
+                               @tabindex = "15",
+                               @id = "txtMedical",
+                               @autofocus = "autofocus",
+                               maxlength = "4",
+                               @onkeydown = "fnAllowNumeric()"
                            })
                             </div>
                         </div>

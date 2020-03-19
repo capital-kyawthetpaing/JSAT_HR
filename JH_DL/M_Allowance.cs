@@ -14,10 +14,8 @@ namespace JH_DL
     
     public partial class M_Allowance
     {
-        public System.DateTime ChangeDate { get; set; }
         public byte Currency { get; set; }
-        public Nullable<decimal> Bus { get; set; }
-        public Nullable<decimal> Train { get; set; }
+        public System.DateTime ChangeDate { get; set; }
         public Nullable<decimal> MD { get; set; }
         public Nullable<decimal> Director { get; set; }
         public Nullable<decimal> Manager { get; set; }
@@ -31,6 +29,8 @@ namespace JH_DL
         public Nullable<decimal> Overseas2ndInterviewer { get; set; }
         public Nullable<decimal> MarketingTeamAllowance { get; set; }
         public Nullable<decimal> MentorAllowance { get; set; }
+        public Nullable<byte> Maternity { get; set; }
+        public Nullable<byte> Medical { get; set; }
         public string InsertedBy { get; set; }
         public Nullable<System.DateTime> InsertedDate { get; set; }
     }
