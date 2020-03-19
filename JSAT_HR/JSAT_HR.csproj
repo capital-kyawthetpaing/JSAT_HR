@@ -520,6 +520,10 @@
       <Project>{940eac72-dec2-4e6d-8b2c-82b2fd8a697a}</Project>
       <Name>JH_Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Leave_BL\Leave_BL.csproj">
+      <Project>{c797a40d-f8c5-4c15-a07b-a10a37c6fc52}</Project>
+      <Name>Leave_BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Office_BL\Office_BL.csproj">
       <Project>{9691f025-65d3-4be7-b523-483636f8661d}</Project>
       <Name>Office_BL</Name>

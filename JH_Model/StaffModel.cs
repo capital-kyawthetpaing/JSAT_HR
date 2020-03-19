@@ -52,6 +52,12 @@ namespace JH_Model
         public bool MarketingTeamAllowance { get; set; }
         public bool MentorAllowance { get; set; }
 
+        public string LeaveType { get; set; }
+
+        public bool MorningLeave { get; set; }
+
+        public bool EveningLeave { get; set; }
+
         public List<int> SelectedMultiStaffId { get; set; }
         public List<StaffObj> SelectedStaffName { get; set; }
 

@@ -95,6 +95,11 @@ tr.shown td.details-control {
     border-color: rgb(212, 63, 58);
 }
 
+.ms-options-wrap, .ms-options-wrap * {
+    box-sizing: border-box;
+    z-index:1000!important;
+}
+
 .ms-options-wrap > .ms-options{
     position:inherit!important;
 }
