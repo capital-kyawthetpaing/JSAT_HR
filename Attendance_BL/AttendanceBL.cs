@@ -453,14 +453,17 @@ namespace Attendance_BL
             }
         }
 
-        public string QuickAttendance_Update(string staffid, string date)
+        public string QuickAttendance_Update(string staffid, string date,string leavetype ,string morningleave, string eveleave)
         {
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
             string result = string.Empty;
-            SqlParameter[] prms = new SqlParameter[2];
+            SqlParameter[] prms = new SqlParameter[5];
             prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
             prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
+            prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
+            prms[3] = new SqlParameter("@morningleave", SqlDbType.VarChar) { Value = morningleave };
+            prms[4] = new SqlParameter("@eveleave", SqlDbType.VarChar) { Value = eveleave };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
@@ -473,6 +476,5 @@ namespace Attendance_BL
             }
             return flag;
         }
-
     }
 }

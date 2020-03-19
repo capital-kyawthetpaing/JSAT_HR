@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Attendance_BL;
 using Staff_BL;
+using Leave_BL;
 using System.Configuration;
 using Newtonsoft.Json;
 using JH_Model;
@@ -17,6 +18,7 @@ using FastMember;
 using Spire.Xls;
 using System.Data.SqlClient;
 using JH_DL;
+
 
 
 namespace JSAT_HR.Controllers
@@ -424,34 +426,40 @@ namespace JSAT_HR.Controllers
         }
 
        
-        public string QuickAttendance_Update(string id)
+        public string QuickAttendance_Update(string id, string fromdate,string todate, string leavetype , string morningleave, string eveleave)
         {
-            string jsonresult;
+            string jsonresult; string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
-            string[] list;string[] stafflist;string flag = string.Empty;
-            list = id.Split('_');
 
-            string date = list[0].ToString();date = date.Replace("-", "");
-
-            string staff = list[1].ToString();
-            stafflist = staff.Split(',');
-            foreach (string st in stafflist)
+            if (!String.IsNullOrWhiteSpace(id))
             {
-                flag = abl.QuickAttendance_Update(st,date);
-                if (flag == "OK")
+                string[] list; list = id.Split(',');
+                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
                 {
-                    Session["Message"] = "OK";
+                    string date = day.ToString("yyyyMMdd").Replace("/", "");
+                    foreach (string st in list)
+                    {
+                        flag = abl.QuickAttendance_Update(st, date,leavetype,morningleave,eveleave);
+                        if (flag == "OK")
+                        {
+                            Session["Message"] = "OK";
+                        }
+                        else
+                        {
+                            Session["Message"] = "NOT OK";
+                        }
+                    }
                 }
-                else
-                {
-                    Session["Message"] = "NOT OK";
-                }
-
             }
             jsonresult = JsonConvert.SerializeObject(flag);
             return jsonresult;
             
         }
 
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
+        {
+            for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
+                yield return day;
+        }
     }
 }
