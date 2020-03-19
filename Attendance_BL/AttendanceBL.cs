@@ -453,14 +453,25 @@ namespace Attendance_BL
             }
         }
 
-        public void QuickAttendance_Update(string staffid, string date)
+        public string QuickAttendance_Update(string staffid, string date)
         {
+            string flag = string.Empty;
             BaseDL bdl = new BaseDL();
             string result = string.Empty;
             SqlParameter[] prms = new SqlParameter[2];
             prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
             prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
-            bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
+            try
+            {
+                bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
+                flag = "OK";
+            }
+            catch(Exception ex)
+            {
+                string msg = ex.Message;
+                flag = "NOT OK";
+            }
+            return flag;
         }
 
     }

@@ -403,6 +403,10 @@ namespace JSAT_HR.Controllers
 
         public ActionResult QuickSetting(StaffModel model)
         {
+            String message = Session["Message"] as string;
+            ViewBag.mesg = message;
+            Session["Message"] = "";
+         
             try
             {
                 if (model.SelectedMultiStaffId != null)
@@ -420,24 +424,33 @@ namespace JSAT_HR.Controllers
         }
 
        
-        public ActionResult QuickAttendance_Update(string id)
+        public string QuickAttendance_Update(string id)
         {
+            string jsonresult;
             AttendanceBL abl = new AttendanceBL();
-            string[] list;string[] stafflist;
+            string[] list;string[] stafflist;string flag = string.Empty;
             list = id.Split('_');
 
             string date = list[0].ToString();date = date.Replace("-", "");
 
             string staff = list[1].ToString();
             stafflist = staff.Split(',');
-           
-
             foreach (string st in stafflist)
             {
-                abl.QuickAttendance_Update(st,date);
-            }
+                flag = abl.QuickAttendance_Update(st,date);
+                if (flag == "OK")
+                {
+                    Session["Message"] = "OK";
+                }
+                else
+                {
+                    Session["Message"] = "NOT OK";
+                }
 
-            return RedirectToAction("QuickSetting");
+            }
+            jsonresult = JsonConvert.SerializeObject(flag);
+            return jsonresult;
+            
         }
 
     }
