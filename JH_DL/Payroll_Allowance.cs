@@ -32,8 +32,7 @@ namespace JH_DL
         public Nullable<decimal> Overseas2ndInterviewer { get; set; }
         public Nullable<decimal> MarketingTeam { get; set; }
         public Nullable<decimal> Mentor { get; set; }
-        public Nullable<decimal> Bus { get; set; }
-        public Nullable<decimal> Train { get; set; }
+        public Nullable<decimal> TransportationCharges { get; set; }
         public Nullable<decimal> TotalSalary { get; set; }
     }
 }

@@ -193,6 +193,17 @@
       <DependentUpon>PayRoll_List.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Transportation_DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transportation_DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Transportation_List.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transportation_List.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -305,6 +316,17 @@
     </None>
     <Content Include="Report\PayRoll_DS.xss">
       <DependentUpon>PayRoll_DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\Transportation_DS.xsc">
+      <DependentUpon>Transportation_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Transportation_DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Transportation_DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\Transportation_DS.xss">
+      <DependentUpon>Transportation_DS.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -557,6 +579,10 @@
     <EmbeddedResource Include="Report\PayRoll_List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PayRoll_List.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Transportation_List.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Transportation_List.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
