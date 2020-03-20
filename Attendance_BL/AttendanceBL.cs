@@ -517,7 +517,7 @@ namespace Attendance_BL
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
             prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 3 };
-            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
+            prms[6] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);

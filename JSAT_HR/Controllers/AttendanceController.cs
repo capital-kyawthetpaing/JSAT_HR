@@ -426,95 +426,95 @@ namespace JSAT_HR.Controllers
         }
 
        
-        public string QuickAttendance_Update(string id, string fromdate,string todate, string leavetype, string morningleave, string eveleave,string transportation)
-        {
-            string jsonresult; string flag = string.Empty;
-            AttendanceBL abl = new AttendanceBL();
+        //public string QuickAttendance_Update(string id, string fromdate,string todate, string leavetype, string morningleave, string eveleave,string transportation)
+        //{
+        //    string jsonresult; string flag = string.Empty;
+        //    AttendanceBL abl = new AttendanceBL();
 
-            if (!String.IsNullOrWhiteSpace(id))
-            {
-                string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
-                {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
-                    {
-                        flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave,transportation);
-                        if (flag == "OK")
-                        {
-                            Session["Message"] = "OK";
-                        }
-                        else
-                        {
-                            Session["Message"] = "NOT OK";
-                        }
-                    }
-                }
-            }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+        //    if (!String.IsNullOrWhiteSpace(id))
+        //    {
+        //        string[] list; list = id.Split(',');
+        //        foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+        //        {
+        //            string date = day.ToString("yyyyMMdd").Replace("/", "");
+        //            foreach (string st in list)
+        //            {
+        //                flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave,transportation);
+        //                if (flag == "OK")
+        //                {
+        //                    Session["Message"] = "OK";
+        //                }
+        //                else
+        //                {
+        //                    Session["Message"] = "NOT OK";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    jsonresult = JsonConvert.SerializeObject(flag);
+        //    return jsonresult;
             
-        }
+        //}
 
-        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
-        {
-            string jsonresult; string flag = string.Empty;
-            AttendanceBL abl = new AttendanceBL();
+        //public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        //{
+        //    string jsonresult; string flag = string.Empty;
+        //    AttendanceBL abl = new AttendanceBL();
 
-            if (!String.IsNullOrWhiteSpace(id))
-            {
-                string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
-                {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
-                    {
-                        flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave,transportation);
-                        if (flag == "OK")
-                        {
-                            Session["Message"] = "OK";
-                        }
-                        else
-                        {
-                            Session["Message"] = "NOT OK";
-                        }
-                    }
-                }
-            }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+        //    if (!String.IsNullOrWhiteSpace(id))
+        //    {
+        //        string[] list; list = id.Split(',');
+        //        foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+        //        {
+        //            string date = day.ToString("yyyyMMdd").Replace("/", "");
+        //            foreach (string st in list)
+        //            {
+        //                flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave,transportation);
+        //                if (flag == "OK")
+        //                {
+        //                    Session["Message"] = "OK";
+        //                }
+        //                else
+        //                {
+        //                    Session["Message"] = "NOT OK";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    jsonresult = JsonConvert.SerializeObject(flag);
+        //    return jsonresult;
 
-        }
+        //}
 
-        public string QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
-        {
-            string jsonresult; string flag = string.Empty;
-            AttendanceBL abl = new AttendanceBL();
+        //public string QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        //{
+        //    string jsonresult; string flag = string.Empty;
+        //    AttendanceBL abl = new AttendanceBL();
 
-            if (!String.IsNullOrWhiteSpace(id))
-            {
-                string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
-                {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
-                    {
-                        flag = abl.QuickAttendance_TranspoartationUpdate(st, date, leavetype, morningleave, eveleave,transportation);
-                        if (flag == "OK")
-                        {
-                            Session["Message"] = "OK";
-                        }
-                        else
-                        {
-                            Session["Message"] = "NOT OK";
-                        }
-                    }
-                }
-            }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+        //    if (!String.IsNullOrWhiteSpace(id))
+        //    {
+        //        string[] list; list = id.Split(',');
+        //        foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+        //        {
+        //            string date = day.ToString("yyyyMMdd").Replace("/", "");
+        //            foreach (string st in list)
+        //            {
+        //                flag = abl.QuickAttendance_TranspoartationUpdate(st, date, leavetype, morningleave, eveleave,transportation);
+        //                if (flag == "OK")
+        //                {
+        //                    Session["Message"] = "OK";
+        //                }
+        //                else
+        //                {
+        //                    Session["Message"] = "NOT OK";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    jsonresult = JsonConvert.SerializeObject(flag);
+        //    return jsonresult;
 
-        }
+        //}
 
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
         {
