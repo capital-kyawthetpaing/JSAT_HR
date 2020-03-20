@@ -465,7 +465,7 @@ namespace Attendance_BL
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
             prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 1 };
-            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
+            prms[6] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
@@ -484,14 +484,14 @@ namespace Attendance_BL
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
             string result = string.Empty;
-            SqlParameter[] prms = new SqlParameter[6];
+            SqlParameter[] prms = new SqlParameter[7];
             prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
             prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
             prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
             prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 2 };
-            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
+            prms[6] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
@@ -510,7 +510,7 @@ namespace Attendance_BL
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
             string result = string.Empty;
-            SqlParameter[] prms = new SqlParameter[6];
+            SqlParameter[] prms = new SqlParameter[7];
             prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
             prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
             prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };

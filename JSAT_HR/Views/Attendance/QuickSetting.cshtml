@@ -18,6 +18,10 @@
         $(document).ready(function () {
             $('#ms-list-1').attr("position", "inherit");
 
+            $("#btnupdate").attr('disabled', 'disabled');
+            $("#btnupdate2").attr('disabled', 'disabled');
+            $("#btnupdate3").attr('disabled', 'disabled');
+
             $('#StaffList').multiselect({
                 columns: 8,
                 search: true,
@@ -99,7 +103,7 @@
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("QuickAttendance_TranspoartationUpdate", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate, 'transportationflag': transportation },
+                data: { 'fromdate': fromdate, 'todate': todate, 'transportation': transportationflag },
                 dataType: 'json',
                 success: function (data) {
                     if (data == "OK") {
@@ -111,7 +115,18 @@
             })
         }
 
-
+        $("#lbltodate").change(function () {
+            var startdate = $("#lblfromdate").val();
+            var enddate = $("#lbltodate").val();
+            if (Date.parse(startdate) > Date.parse(enddate)) {
+                alert("ToDate must be greater than FromDate");
+                //var T = "E";
+                //var K = "1003";
+                //var M = "Message1";
+                //Errormessage(T, K, M);
+                $("#lbltodate").val('');
+            }
+        });
         
 
         function SelectLeave() {
@@ -129,6 +144,22 @@
                 }
             });
         }
+
+      
+
+        $("#ddlleave").change(function () {
+            $("#btnupdate2").removeAttr('disabled');
+        });
+
+        $("#chktimeinout").change(function () {
+            if ($(this).prop("checked")) {
+                $(this).val("1");
+                $("#btnupdate").removeAttr('disabled');
+            } else {
+                $(this).val("0");
+                $("#btnupdate").attr('disabled', 'disabled');
+            }
+        });
 
         $("#chkmorningleave").change(function () {
             if ($(this).prop("checked")) {
@@ -149,8 +180,10 @@
         $("#chktransportation").change(function () {
             if ($(this).prop("checked")) {
                 $(this).val("1");
+                $("#btnupdate3").removeAttr('disabled');
             } else {
                 $(this).val("0");
+                $("#btnupdate3").attr('disabled', 'disabled');
             }
         });
 
@@ -293,10 +326,10 @@
                                 <label class="form-control" for="timeinout">Pay Transportation Setting</label>
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div  class="form-group col-md-3" >
                             <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;">
-                                <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                            <div  class="input-group" style="width:500px;">
+                                <button type="button" id="btnupdate3" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
                     </div>
