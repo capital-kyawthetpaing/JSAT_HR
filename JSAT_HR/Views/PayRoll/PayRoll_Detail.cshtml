@@ -49,9 +49,13 @@
                                 listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
                                 listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
                                 listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
-                            }@Html.DropDownList("Year",
-               listYear,
-               new { @class="form-control",@id="ddlYear" })
+                            }
+                            @Html.DropDownList("Year",listYear,new
+                       {
+                           @class ="form-control",
+                           @id ="ddlYear",
+                           @tabindex="2"
+                       })
                         </div>
                     </div>
 
@@ -76,9 +80,12 @@
                                 listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
-                            }@Html.DropDownList("Month",
-                 listMonth,
-                 new { @class="form-control",@id="ddlMonth" })
+                            }@Html.DropDownList("Month",listMonth,new
+                        {
+                            @class ="form-control",
+                            @id ="ddlMonth",
+                            @tabindex="3"
+                        })
                         </div>
                     </div>
 
@@ -86,8 +93,8 @@
                     <div class="form-group col-md-5">
                         <label for="StaffID" style="color:white;">Search</label>
                         <div class="input-group">
-                            <button type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData(0)"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;
-                            <button type="button" id="btnreport" class="btn btn-warning col-md-3" onclick="Report()"><i class="fa fa-print"></i>&nbsp; Report</button>
+                            <button tabindex="4" type="button" id="btnsearch" class="btn btn-info col-md-4" onclick="ShowData(0)"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;
+                            <button tabindex="5" type="button" id="btnreport" class="btn btn-warning col-md-3" onclick="Report()"><i class="fa fa-print"></i>&nbsp; Report</button>
                         </div>
                     </div>
 
