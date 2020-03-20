@@ -155,9 +155,12 @@
                                 listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
                                 listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
                                 listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
-                            }@Html.DropDownList("Year",
-          listYear,
-          new { @class="form-control",@id="ddlYear" })
+                            }@Html.DropDownList("Year",listYear,new
+                        {
+                            @class ="form-control",
+                            @id ="ddlYear",
+                            @tabindex="1"
+                        })
                         </div>
                     </div>
                     <div class="form-group col-md-2">
@@ -181,17 +184,20 @@
                                 listMonth.Add(new SelectListItem { Text = "October", Value = "10" });
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
-                            }@Html.DropDownList("Month",
-            listMonth,
-            new { @class= "form-control", @id="ddlMonth" })
+                            }@Html.DropDownList("Month",listMonth,new
+                        {
+                            @class = "form-control",
+                            @id ="ddlMonth",
+                            @tabindex="2"
+                        })
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="Process" style="color:white;">Process</label>
                         <div class="input-group">
-                            <button type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="btnTransportationReport" class="btn btn-warning col-xl-4" onclick="TransportationReport()"><i class="fa fa-print"></i>Transportation Report</button>
+                            <button tabindex="3" type="button" id="btnsearch" class="btn btn-info col-xl-3" onclick="Search()"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
+                            <button tabindex="4" type="button" id="btnreport" class="btn btn-warning col-xl-3" onclick="Report()"><i class="fa fa-print"></i>Report</button>&nbsp;&nbsp;&nbsp;
+                            <button tabindex="5" type="button" id="btnTransportationReport" class="btn btn-warning col-xl-4" onclick="TransportationReport()"><i class="fa fa-print"></i>Transportation Report</button>
                         </div>
                     </div>
                  </div>
@@ -201,7 +207,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <div class="input-group">
-                            <button type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
+                            <button tabindex="6" type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
                             <label for="Warning" style="color:red;">
                                 <span>&#9888;</span>Import Attendance Office Excel.<br />
                                 <span>&#9888;</span>Import Attendance Acadmey Excel.<br />
