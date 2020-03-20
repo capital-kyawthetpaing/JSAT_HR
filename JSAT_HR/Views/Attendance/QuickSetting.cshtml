@@ -159,9 +159,6 @@
 }
 
     <div class="row">
-
-
-
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
@@ -201,12 +198,12 @@
             </div>
         </div>
 
-        <div class="col-xl-10 col-md-10 mb-2">
+        <div class="col-xl-4 col-md-4 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Time-In/Out Default Setting</div>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-8">
                             <div class="input-group" style="padding-top:29px;">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -216,7 +213,7 @@
                                 <label class="form-control" for="timeinout">Time In/Out Default Setting</label>
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-3">
                             <label for="Update" style="color:white;">Update</label>
                             <div class="input-group" style="width:500px;">
                                 <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
@@ -233,35 +230,82 @@
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Leave Setting</div>
                     <div class="form-row">
 
-                        <div class="form-group col-md-13">
-                            <label for="FromDate">FromDate</label>
+                        <div class="form-group col-md-3">
+                            <label for="LeaveType">Leave Type</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-list-alt"></i></span>
                                 </div>
-                                <input type="date" name="fromdate" class="form-control" id="lblfromdate2">
+                                @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                           {
+                               @class = "form-control input-sm",
+                               @id = "ddlleave"
+                           })
+
                             </div>
                         </div>
 
-                        <div class="form-group col-md-13">
-                            <label for="ToDate">ToDate</label>
-                            <div class="input-group">
+                        <div class="form-group col-md-3">
+                            <div class="input-group" style="padding-top:29px;">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                                    <div class="input-group-text">
+                                        @Html.CheckBox("chkmorningleave", new { value = "0" })
+                                    </div>
                                 </div>
-                                <input type="date" name="todate" class="form-control" id="lbltodate2">
+                                <label class="form-control" for="MorningLeave">Morning Leave (AM)</label>
                             </div>
                         </div>
 
-                     
+                        <div class="form-group col-md-3">
+                            <div class="input-group" style="padding-top:29px;">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBox("chkeveleave", new { value = "0" })
+                                    </div>
+                                </div>
+                                <label class="form-control" for="EveningLeave">Evening Leave (PM)</label>
+                            </div>
+                        </div>
 
+                        <div class="form-group col-md-2">
+                            <label for="Update" style="color:white;">Update</label>
+                            <div class="input-group" style="width:500px;">
+                                <button type="button" id="btnupdate2" class="btn btn-info col-xl-3" onclick="LeaveUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-4 mb-2">
+            <div class="card border-left-info shadow">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Pay Transportation Setting</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <div class="input-group" style="padding-top:29px;">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBox("chktransportation", new { value = "0" })
+                                    </div>
+                                </div>
+                                <label class="form-control" for="timeinout">Pay Transportation Setting</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Update" style="color:white;">Update</label>
+                            <div class="input-group" style="width:500px;">
+                                <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-     
+
     </div>
         
 
