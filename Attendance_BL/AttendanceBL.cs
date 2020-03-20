@@ -453,18 +453,19 @@ namespace Attendance_BL
             }
         }
 
-        public string QuickAttendance_Update(string staffid, string date, string leavetype, string amleave, string pmleave)
+        public string QuickAttendance_Update(string staffid, string date, string leavetype, string amleave, string pmleave,string transportation)
         {
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
             string result = string.Empty;
-            SqlParameter[] prms = new SqlParameter[6];
+            SqlParameter[] prms = new SqlParameter[7];
             prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
             prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
             prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
             prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 1 };
+            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
@@ -478,7 +479,7 @@ namespace Attendance_BL
             return flag;
         }
 
-        public string QuickAttendance_LeaveUpdate(string staffid, string date,string leavetype, string amleave , string pmleave)
+        public string QuickAttendance_LeaveUpdate(string staffid, string date,string leavetype, string amleave , string pmleave,string transportation)
         {
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
@@ -490,6 +491,33 @@ namespace Attendance_BL
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
             prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 2 };
+            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
+            try
+            {
+                bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
+                flag = "OK";
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                flag = "NOT OK";
+            }
+            return flag;
+        }
+
+        public string QuickAttendance_TranspoartationUpdate(string staffid, string date, string leavetype, string amleave, string pmleave, string transportation)
+        {
+            string flag = string.Empty;
+            BaseDL bdl = new BaseDL();
+            string result = string.Empty;
+            SqlParameter[] prms = new SqlParameter[6];
+            prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
+            prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
+            prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
+            prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
+            prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
+            prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 3 };
+            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = transportation };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
