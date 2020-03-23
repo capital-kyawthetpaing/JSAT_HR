@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "QuickSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
 @section Styles{
@@ -16,6 +17,18 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+          
+            var Imsg = '@ViewBag.Imsg';
+            if (Imsg == "OK") {
+                GetMessage("I_1001", "Update");
+                $('#myModal').modal('show');
+            }
+            var EImsg = '@ViewBag.EImsg';
+            if (EImsg == "NotOK") {
+                GetMessage("I_1007", "Update");
+                $('#myModal').modal('show');
+            }
+
             $('#ms-list-1').attr("position", "inherit");
 
             $("#btnupdate").attr('disabled', 'disabled');
@@ -142,7 +155,7 @@
                         $("#ddlleave").append(
                             $('<option></option>').val(item.LeaveCD).html(item.LeaveType));
                     });
-                    $('#ddlleave').val('@Model.LeaveType');
+                    @*$('#ddlleave').val('@Model.LeaveType');*@
                 }
             });
         }
@@ -197,41 +210,43 @@
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
-
-                    <div class="form-group col-md-2">
-                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" name="fromdate" class="form-control" id="lblfromdate">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
                             </div>
-                            <input type="date" name="fromdate" class="form-control" id="lblfromdate">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" name="todate" class="form-control" id="lbltodate">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group col-md-2">
-                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
+                        <div class="form-group col-md-14">
+                            <div class="input-group" style="height:50px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
+                           { id = "StaffList", @class = "form-control"})
                             </div>
-                            <input type="date" name="todate" class="form-control" id="lbltodate">
                         </div>
-                    </div>
-
-
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1" style="padding-left: 15px;">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
-                    <div class="form-group col-md-14">
-                        <div class="input-group" style="height:50px;padding-left: 15px;">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
-                            </div>
-                            @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
-                       { id = "StaffList", @class = "form-control"})
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
+        
 
         <div class="col-xl-4 col-md-4 mb-2">
             <div class="card border-left-info shadow">
