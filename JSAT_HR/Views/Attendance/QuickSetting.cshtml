@@ -118,6 +118,8 @@
         $("#lbltodate").change(function () {
             var startdate = $("#lblfromdate").val();
             var enddate = $("#lbltodate").val();
+            if (startdate == "")
+                alert("Please inset StartDate!");
             if (Date.parse(startdate) > Date.parse(enddate)) {
                 alert("ToDate must be greater than FromDate");
                 //var T = "E";
@@ -196,30 +198,30 @@
             <div class="card border-left-info shadow">
                 <div class="card-body">
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
                             </div>
                             <input type="date" name="fromdate" class="form-control" id="lblfromdate">
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
                             </div>
                             <input type="date" name="todate" class="form-control" id="lbltodate">
                         </div>
                     </div>
 
 
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1" style="padding-left: 15px;">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
                     <div class="form-group col-md-14">
-                        <div class="input-group" style="height:50px;">
+                        <div class="input-group" style="height:50px;padding-left: 15px;">
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
                             </div>
@@ -248,7 +250,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;">
+                            <div class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
@@ -267,7 +269,7 @@
                             <label for="LeaveType">Leave Type</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-list-alt"></i></span>
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-list-alt"></i></span>
                                 </div>
                                 @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
                            {
@@ -302,7 +304,7 @@
 
                         <div class="form-group col-md-2">
                             <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;">
+                            <div class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate2" class="btn btn-info col-xl-3" onclick="LeaveUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
@@ -328,7 +330,7 @@
                         </div>
                         <div  class="form-group col-md-3" >
                             <label for="Update" style="color:white;">Update</label>
-                            <div  class="input-group" style="width:500px;">
+                            <div  class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate3" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>

@@ -431,6 +431,9 @@ namespace JSAT_HR.Controllers
             string jsonresult; string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
 
+            if (todate == "")
+                todate = fromdate;
+
             if (!String.IsNullOrWhiteSpace(id))
             {
                 string[] list; list = id.Split(',');
