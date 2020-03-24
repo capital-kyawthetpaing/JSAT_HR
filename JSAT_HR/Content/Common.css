@@ -115,3 +115,15 @@ tr.shown td.details-control {
 .ms-options-wrap{
     position:inherit;
 }
+
+.ms-options-wrap > .ms-options > ul label {
+    color:darkblue;
+    font-weight:bold;
+    background: #007bff33;
+}
+
+.ms-options-wrap > .ms-options > ul li.selected label {
+    background-color: #efefef;
+    border-color: transparent;
+    color:red;
+}

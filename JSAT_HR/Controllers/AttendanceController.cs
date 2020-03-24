@@ -332,25 +332,6 @@ namespace JSAT_HR.Controllers
             }
         }
 
-       
-        public ActionResult QuickAttendance(StaffModel model)
-        {
-            try
-            {
-                if (model.SelectedMultiStaffId != null)
-                {
-                    List<StaffObj> stafflist = this.LoadData();
-                    model.SelectedStaffName = stafflist.Where(p => model.SelectedMultiStaffId.Contains(p.StaffID)).Select(q => q).ToList();
-                }
-                this.ViewBag.StaffList = this.GetStaffList();
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex);
-            }
-            return this.View(model);
-        }
-
         private IEnumerable<SelectListItem> GetStaffList()
         {
 
@@ -405,10 +386,13 @@ namespace JSAT_HR.Controllers
 
         public ActionResult QuickSetting(StaffModel model)
         {
-            String message = Session["Message"] as string;
-            ViewBag.mesg = message;
-            Session["Message"] = "";
-         
+            String Imsg = Session["Imsg"] as string;
+            String EImsg = Session["EImsg"] as string;
+            ViewBag.Imsg = Imsg;
+            ViewBag.EImsg = EImsg;
+            Session["Imsg"] = "";
+            Session["EImsg"] = "";
+          
             try
             {
                 if (model.SelectedMultiStaffId != null)
@@ -422,14 +406,17 @@ namespace JSAT_HR.Controllers
             {
                 Console.Write(ex);
             }
-            return this.View(model);
+            return View(model);
         }
 
 
-        public string QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public ActionResult QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
-            string jsonresult; string flag = string.Empty;
+            string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
+
+            if (todate == "")
+                todate = fromdate;
 
             if (!String.IsNullOrWhiteSpace(id))
             {
@@ -442,25 +429,26 @@ namespace JSAT_HR.Controllers
                         flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
                         if (flag == "OK")
                         {
-                            Session["Message"] = "OK";
+                            Session["Imsg"] = "OK";
                         }
                         else
                         {
-                            Session["Message"] = "NOT OK";
+                            Session["IEmsg"] = "NotoK";
                         }
                     }
                 }
             }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+            return RedirectToAction("QuickSetting");
 
         }
 
-        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public ActionResult QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
-            string jsonresult; string flag = string.Empty;
+            string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
 
+            if (todate == "")
+                todate = fromdate;
             if (!String.IsNullOrWhiteSpace(id))
             {
                 string[] list; list = id.Split(',');
@@ -481,16 +469,16 @@ namespace JSAT_HR.Controllers
                     }
                 }
             }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+            return RedirectToAction("QuickSetting");
 
         }
 
-        public string QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public ActionResult QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
-            string jsonresult; string flag = string.Empty;
+            string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
-
+            if (todate == "")
+                todate = fromdate;
             if (!String.IsNullOrWhiteSpace(id))
             {
                 string[] list; list = id.Split(',');
@@ -511,8 +499,7 @@ namespace JSAT_HR.Controllers
                     }
                 }
             }
-            jsonresult = JsonConvert.SerializeObject(flag);
-            return jsonresult;
+            return RedirectToAction("QuickSetting");
 
         }
 

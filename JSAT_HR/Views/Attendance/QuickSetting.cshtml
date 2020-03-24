@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "QuickSetting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
 @section Styles{
@@ -16,6 +17,18 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+          
+            var Imsg = '@ViewBag.Imsg';
+            if (Imsg == "OK") {
+                GetMessage("I_1001", "Update");
+                $('#myModal').modal('show');
+            }
+            var EImsg = '@ViewBag.EImsg';
+            if (EImsg == "NotOK") {
+                GetMessage("I_1007", "Update");
+                $('#myModal').modal('show');
+            }
+
             $('#ms-list-1').attr("position", "inherit");
 
             $("#btnupdate").attr('disabled', 'disabled');
@@ -118,6 +131,8 @@
         $("#lbltodate").change(function () {
             var startdate = $("#lblfromdate").val();
             var enddate = $("#lbltodate").val();
+            if (startdate == "")
+                alert("Please inset StartDate!");
             if (Date.parse(startdate) > Date.parse(enddate)) {
                 alert("ToDate must be greater than FromDate");
                 //var T = "E";
@@ -140,7 +155,7 @@
                         $("#ddlleave").append(
                             $('<option></option>').val(item.LeaveCD).html(item.LeaveType));
                     });
-                    $('#ddlleave').val('@Model.LeaveType');
+                    @*$('#ddlleave').val('@Model.LeaveType');*@
                 }
             });
         }
@@ -195,41 +210,43 @@
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow">
                 <div class="card-body">
-
-                    <div class="form-group col-md-4">
-                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" name="fromdate" class="form-control" id="lblfromdate">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
                             </div>
-                            <input type="date" name="fromdate" class="form-control" id="lblfromdate">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" name="todate" class="form-control" id="lbltodate">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-calendar-check"></i></span>
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
+                        <div class="form-group col-md-14">
+                            <div class="input-group" style="height:50px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
+                           { id = "StaffList", @class = "form-control"})
                             </div>
-                            <input type="date" name="todate" class="form-control" id="lbltodate">
                         </div>
-                    </div>
-
-
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
-                    <div class="form-group col-md-14">
-                        <div class="input-group" style="height:50px;">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
-                            </div>
-                            @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
-                       { id = "StaffList", @class = "form-control"})
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
+        
 
         <div class="col-xl-4 col-md-4 mb-2">
             <div class="card border-left-info shadow">
@@ -248,7 +265,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;">
+                            <div class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
@@ -267,7 +284,7 @@
                             <label for="LeaveType">Leave Type</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-list-alt"></i></span>
+                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-list-alt"></i></span>
                                 </div>
                                 @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
                            {
@@ -302,7 +319,7 @@
 
                         <div class="form-group col-md-2">
                             <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;">
+                            <div class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate2" class="btn btn-info col-xl-3" onclick="LeaveUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
@@ -328,7 +345,7 @@
                         </div>
                         <div  class="form-group col-md-3" >
                             <label for="Update" style="color:white;">Update</label>
-                            <div  class="input-group" style="width:500px;">
+                            <div  class="input-group" style="width:500px;margin-top: -4px;">
                                 <button type="button" id="btnupdate3" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
