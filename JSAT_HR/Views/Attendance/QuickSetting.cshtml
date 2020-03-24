@@ -23,8 +23,8 @@
                 GetMessage("I_1001", "Update");
                 $('#myModal').modal('show');
             }
-            var EImsg = '@ViewBag.EImsg';
-            if (EImsg == "NotOK") {
+            var IEmsg = '@ViewBag.IEmsg';
+            if (IEmsg == "NotOK") {
                 GetMessage("I_1007", "Update");
                 $('#myModal').modal('show');
             }
@@ -41,20 +41,10 @@
                 selectAll: true,
                 texts: {
                     placeholder: '--- [ Choose Multiple Staff ] ---',
-                    search: '--Search Staff--'
-                }
-
-            });
-
-            $('#StaffList1').multiselect({
-                columns: 8,
-                search: true,
-                selectAll: true,
-                texts: {
-                    placeholder: '--- [ Choose Multiple Staff ] ---',
-                    search: '--Search Staff--'
-                }
-
+                    search: '--Search Staff--',
+                },
+               
+                
             });
 
             SelectLeave();
@@ -74,9 +64,10 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == "OK") {
-
+                         window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                     }
-
+                    else
+                        window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                 }
 
             })
@@ -98,10 +89,11 @@
                 data: { 'fromdate': fromdate, 'todate': todate, 'leavetype': leavetype, 'morningleave': amleave, 'eveleave': pmleave },
                 dataType: 'json',
                 success: function (data) {
-                    if (data == "OK") {
-
+                   if (data == "OK") {
+                         window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                     }
-
+                    else
+                        window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                 }
 
             })
@@ -120,9 +112,10 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == "OK") {
-
+                         window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                     }
-
+                    else
+                        window.location.href = '@Url.Action("QuickSetting", "Attendance")'
                 }
 
             })
@@ -134,11 +127,9 @@
             if (startdate == "")
                 alert("Please inset StartDate!");
             if (Date.parse(startdate) > Date.parse(enddate)) {
-                alert("ToDate must be greater than FromDate");
-                //var T = "E";
-                //var K = "1003";
-                //var M = "Message1";
-                //Errormessage(T, K, M);
+               
+                GetMessage("I_1008", "CheckDate");
+                $('#myModal').modal('show');
                 $("#lbltodate").val('');
             }
         });

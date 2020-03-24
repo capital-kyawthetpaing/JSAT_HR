@@ -387,11 +387,11 @@ namespace JSAT_HR.Controllers
         public ActionResult QuickSetting(StaffModel model)
         {
             String Imsg = Session["Imsg"] as string;
-            String EImsg = Session["EImsg"] as string;
+            String IEmsg = Session["IEmsg"] as string;
             ViewBag.Imsg = Imsg;
-            ViewBag.EImsg = EImsg;
+            ViewBag.IEmsg = IEmsg;
             Session["Imsg"] = "";
-            Session["EImsg"] = "";
+            Session["IEmsg"] = "";
           
             try
             {
@@ -406,11 +406,12 @@ namespace JSAT_HR.Controllers
             {
                 Console.Write(ex);
             }
-            return View(model);
+            
+            return View();
         }
 
 
-        public ActionResult QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public String QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
             string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
@@ -429,20 +430,20 @@ namespace JSAT_HR.Controllers
                         flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
                         if (flag == "OK")
                         {
-                            Session["Imsg"] = "OK";
+                            Session["Imsg"] = flag;
                         }
                         else
                         {
-                            Session["IEmsg"] = "NotoK";
+                            Session["IEmsg"] = flag;
                         }
                     }
                 }
             }
-            return RedirectToAction("QuickSetting");
+            return JsonConvert.SerializeObject(flag);
 
         }
 
-        public ActionResult QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
             string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
@@ -460,20 +461,21 @@ namespace JSAT_HR.Controllers
                         flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave, transportation);
                         if (flag == "OK")
                         {
-                            Session["Message"] = "OK";
+                            Session["Imsg"] = flag;
                         }
                         else
                         {
-                            Session["Message"] = "NOT OK";
+                            Session["IEmsg"] = flag;
                         }
                     }
                 }
             }
-            return RedirectToAction("QuickSetting");
+            return JsonConvert.SerializeObject(flag);
+
 
         }
 
-        public ActionResult QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public string QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
             string flag = string.Empty;
             AttendanceBL abl = new AttendanceBL();
@@ -490,16 +492,17 @@ namespace JSAT_HR.Controllers
                         flag = abl.QuickAttendance_TranspoartationUpdate(st, date, leavetype, morningleave, eveleave, transportation);
                         if (flag == "OK")
                         {
-                            Session["Message"] = "OK";
+                            Session["Imsg"] = flag;
                         }
                         else
                         {
-                            Session["Message"] = "NOT OK";
+                            Session["IEmsg"] = flag;
                         }
                     }
                 }
             }
-            return RedirectToAction("QuickSetting");
+            return JsonConvert.SerializeObject(flag);
+
 
         }
 

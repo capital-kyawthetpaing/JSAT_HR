@@ -474,7 +474,7 @@ namespace Attendance_BL
             catch(Exception ex)
             {
                 string msg = ex.Message;
-                flag = "NOT OK";
+                flag = "NotOK";
             }
             return flag;
         }
@@ -500,7 +500,7 @@ namespace Attendance_BL
             catch (Exception ex)
             {
                 string msg = ex.Message;
-                flag = "NOT OK";
+                flag = "NotOK";
             }
             return flag;
         }
@@ -526,7 +526,7 @@ namespace Attendance_BL
             catch (Exception ex)
             {
                 string msg = ex.Message;
-                flag = "NOT OK";
+                flag = "NotOK";
             }
             return flag;
         }

@@ -127,3 +127,8 @@ tr.shown td.details-control {
     border-color: transparent;
     color:red;
 }
+
+.ms-options-wrap > .ms-options > .ms-search input {
+    font-weight: bold;
+    text-align: center;
+}
