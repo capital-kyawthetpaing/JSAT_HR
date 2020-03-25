@@ -1,7 +1,7 @@
 ﻿
 @model JH_Model.StaffModel
 @{
-    ViewBag.Title = "QuickSetting";
+    ViewBag.Title = "Attendance Quick Setting";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
@@ -17,7 +17,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-          
+
             var Imsg = '@ViewBag.Imsg';
             if (Imsg == "OK") {
                 GetMessage("I_1001", "Update");
@@ -29,11 +29,21 @@
                 $('#myModal').modal('show');
             }
 
+            var Umsg = '@ViewBag.Umsg';
+            if (Umsg == "OK") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
+
+            var UEmsg = '@ViewBag.UEmsg';
+            if (UEmsg == "NotOK") {
+                GetMessage("I_1006", "Update");
+                $('#myModal').modal('show');
+            }
+
             $('#ms-list-1').attr("position", "inherit");
 
-            $("#btnupdate").attr('disabled', 'disabled');
-            $("#btnupdate2").attr('disabled', 'disabled');
-            $("#btnupdate3").attr('disabled', 'disabled');
+
 
             $('#StaffList').multiselect({
                 columns: 8,
@@ -43,12 +53,12 @@
                     placeholder: '--- [ Choose Multiple Staff ] ---',
                     search: '--Search Staff--',
                 },
-               
-                
+
+
             });
 
             SelectLeave();
-           
+
         });
 
         //timein timeout update
@@ -56,11 +66,12 @@
             var fromdate = $('#lblfromdate').val();
             var todate = $('#lbltodate').val();
             var staff = $('#StaffList').val();
+            var transportation = $('#chktransportation').val();
 
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("QuickAttendance_Update", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate},
+                data: { 'fromdate': fromdate, 'todate': todate, 'transportation': transportation},
                 dataType: 'json',
                 success: function (data) {
                     if (data == "OK") {
@@ -81,7 +92,7 @@
             var leavetype = $('#ddlleave').val();
             var amleave = $('#chkmorningleave').val();
             var pmleave = $('#chkeveleave').val();
-            
+
 
             $.ajax({
                 type: 'GET',
@@ -99,41 +110,23 @@
             })
         }
 
-        function TransportationUpdate() {
-            var fromdate = $('#lblfromdate').val();
-            var todate = $('#lbltodate').val();
-            var staff = $('#StaffList').val();
-            var transportationflag = $('#chktransportation').val();
-
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("QuickAttendance_TranspoartationUpdate", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate, 'transportation': transportationflag },
-                dataType: 'json',
-                success: function (data) {
-                    if (data == "OK") {
-                         window.location.href = '@Url.Action("QuickSetting", "Attendance")'
-                    }
-                    else
-                        window.location.href = '@Url.Action("QuickSetting", "Attendance")'
-                }
-
-            })
-        }
+       
 
         $("#lbltodate").change(function () {
             var startdate = $("#lblfromdate").val();
             var enddate = $("#lbltodate").val();
-            if (startdate == "")
-                alert("Please inset StartDate!");
+            if (startdate == "") {
+                GetMessage("W_1009", "StartDate");
+                $('#myModal').modal('show');
+                $("#lbltodate").val('');
+            }
             if (Date.parse(startdate) > Date.parse(enddate)) {
-               
-                GetMessage("I_1008", "CheckDate");
+                GetMessage("W_1008", "CheckDate");
                 $('#myModal').modal('show');
                 $("#lbltodate").val('');
             }
         });
-        
+
 
         function SelectLeave() {
             $.ajax({
@@ -151,19 +144,14 @@
             });
         }
 
-      
 
-        $("#ddlleave").change(function () {
-            $("#btnupdate2").removeAttr('disabled');
-        });
+
 
         $("#chktimeinout").change(function () {
             if ($(this).prop("checked")) {
                 $(this).val("1");
-                $("#btnupdate").removeAttr('disabled');
             } else {
                 $(this).val("0");
-                $("#btnupdate").attr('disabled', 'disabled');
             }
         });
 
@@ -185,11 +173,9 @@
 
         $("#chktransportation").change(function () {
             if ($(this).prop("checked")) {
-                $(this).val("1");
-                $("#btnupdate3").removeAttr('disabled');
-            } else {
                 $(this).val("0");
-                $("#btnupdate3").attr('disabled', 'disabled');
+            } else {
+                $(this).val("1");
             }
         });
 
@@ -197,158 +183,142 @@
     </script>
 }
 
-    <div class="row">
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-info shadow">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
-                                </div>
-                                <input type="date" name="fromdate" class="form-control" id="lblfromdate">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+<div class="row">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">FROM DATE<label style="color:red;">&nbsp;*</label></div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
                             </div>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
-                                </div>
-                                <input type="date" name="todate" class="form-control" id="lbltodate">
-                            </div>
+                            <input type="date" name="fromdate" class="form-control" id="lblfromdate">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
 
-                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
-                        <div class="form-group col-md-14">
-                            <div class="input-group" style="height:50px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user"></i></span>
-                                </div>
-                                @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
-                           { id = "StaffList", @class = "form-control"})
+                    <div class="form-group col-md-3">
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">TO DATE<label style="color:red;">&nbsp;*</label></div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
                             </div>
-                        </div>
-                   
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="col-xl-4 col-md-4 mb-2">
-            <div class="card border-left-info shadow">
-                <div class="card-body">
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Time-In/Out Default Setting</div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <div class="input-group" style="padding-top:29px;">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        @Html.CheckBox("chktimeinout", new { value = "0" })
-                                    </div>
-                                </div>
-                                <label class="form-control" for="timeinout">Time In/Out Default Setting</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;margin-top: -4px;">
-                                <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
-                            </div>
+                            <input type="date" name="todate" class="form-control" id="lbltodate">
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-xl-8 col-md-8 mb-2">
-            <div class="card border-left-info shadow">
-                <div class="card-body">
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Leave Setting</div>
-                    <div class="form-row">
-
-                        <div class="form-group col-md-3">
-                            <label for="LeaveType">Leave Type</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-list-alt"></i></span>
-                                </div>
-                                @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
-                           {
-                               @class = "form-control input-sm",
-                               @id = "ddlleave"
-                           })
-
-                            </div>
+                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
+                <div class="form-group col-md-14">
+                    <div class="input-group" style="height:50px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user-check"></i></span>
                         </div>
-
-                        <div class="form-group col-md-3">
-                            <div class="input-group" style="padding-top:29px;">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        @Html.CheckBox("chkmorningleave", new { value = "0" })
-                                    </div>
-                                </div>
-                                <label class="form-control" for="MorningLeave">Morning Leave (AM)</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <div class="input-group" style="padding-top:29px;">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        @Html.CheckBox("chkeveleave", new { value = "0" })
-                                    </div>
-                                </div>
-                                <label class="form-control" for="EveningLeave">Evening Leave (PM)</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <label for="Update" style="color:white;">Update</label>
-                            <div class="input-group" style="width:500px;margin-top: -4px;">
-                                <button type="button" id="btnupdate2" class="btn btn-info col-xl-3" onclick="LeaveUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
-                            </div>
-                        </div>
+                        @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
+                   { id = "StaffList", @class = "form-control"})
                     </div>
                 </div>
+
             </div>
         </div>
-
-        <div class="col-xl-4 col-md-4 mb-2">
-            <div class="card border-left-info shadow">
-                <div class="card-body">
-                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Pay Transportation Setting</div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <div class="input-group" style="padding-top:29px;">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        @Html.CheckBox("chktransportation", new { value = "0" })
-                                    </div>
-                                </div>
-                                <label class="form-control" for="timeinout">Pay Transportation Setting</label>
-                            </div>
-                        </div>
-                        <div  class="form-group col-md-3" >
-                            <label for="Update" style="color:white;">Update</label>
-                            <div  class="input-group" style="width:500px;margin-top: -4px;">
-                                <button type="button" id="btnupdate3" class="btn btn-info col-xl-3" onclick="TransportationUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
     </div>
-        
+
+
+    <div class="col-xl-4 col-md-4 mb-2">
+        <div class="card border-left-info shadow"> 
+            <div class="card-body">
+                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Default Time & Pay Transportation</div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="LeaveType">Default Time</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" value="0" checked="checked" />
+                                </div>
+                            </div>
+                            <label class="form-control" for="timeinout">Time In/Out</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="LeaveType">TransportationFees</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" id="chktransportation" value="1" />
+                                </div>
+                            </div>
+                            <label class="form-control" for="timeinout">No Pay</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="Update" style="color:white;">Update</label>
+                        <div class="input-group" style="width:500px;">
+                            <button type="button" id="btnupdate" class="btn btn-info col-xl-3" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-8 col-md-8 mb-2">
+        <div class="card border-left-info shadow">
+            <div class="card-body">
+                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Leave Setting</div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="LeaveType">Leave Type</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-list-alt"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                       {
+                           @class = "form-control input-sm",
+                           @id = "ddlleave"
+                       })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <div class="input-group" style="padding-top:29px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" id="chkmorningleave" value="0" />
+                                </div>
+                            </div>
+                            <label class="form-control" for="MorningLeave">Morning Leave (AM)</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <div class="input-group" style="padding-top:29px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" id="chkeveleave" value="0" />
+                                </div>
+                            </div>
+                            <label class="form-control" for="EveningLeave">Evening Leave (PM)</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="Update" style="color:white;">Update</label>
+                        <div class="input-group" style="width:500px;margin-top: -4px;">
+                            <button type="button" id="btnupdate2" class="btn btn-info col-xl-3" onclick="LeaveUpdate()"><i class="fa fa-save"></i>&nbsp; Update</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
 
 
 

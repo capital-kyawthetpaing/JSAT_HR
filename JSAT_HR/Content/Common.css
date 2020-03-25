@@ -132,3 +132,10 @@ tr.shown td.details-control {
     font-weight: bold;
     text-align: center;
 }
+
+
+.ms-options-wrap > .ms-options > .ms-selectall.global {
+    color: blue;
+    font-weight: bold;
+    font-size:large;
+}
