@@ -386,13 +386,19 @@ namespace JSAT_HR.Controllers
 
         public ActionResult QuickSetting(StaffModel model)
         {
-            String Imsg = Session["Imsg"] as string;
-            String EImsg = Session["EImsg"] as string;
+            String Imsg = Session["Imsg"] as string;//insert ok
+            String IEmsg = Session["IEmsg"] as string;// insert notok
+            String Umsg = Session["Umsg"] as string;// update ok
+            String UEmsg = Session["UEmsg"] as string;//update notok
             ViewBag.Imsg = Imsg;
-            ViewBag.EImsg = EImsg;
+            ViewBag.IEmsg = IEmsg;
+            ViewBag.Umsg = Umsg;
+            ViewBag.UEmsg = UEmsg;
             Session["Imsg"] = "";
-            Session["EImsg"] = "";
-          
+            Session["IEmsg"] = "";
+            Session["Umsg"] = "";
+            Session["UEmsg"] = "";
+
             try
             {
                 if (model.SelectedMultiStaffId != null)
@@ -406,19 +412,20 @@ namespace JSAT_HR.Controllers
             {
                 Console.Write(ex);
             }
-            return View(model);
+            
+            return View();
         }
 
 
-        public ActionResult QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public String QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
-            string flag = string.Empty;
+            string flag = string.Empty; DateTime todaydate = DateTime.Now;
             AttendanceBL abl = new AttendanceBL();
 
             if (todate == "")
                 todate = fromdate;
 
-            if (!String.IsNullOrWhiteSpace(id))
+            if (!String.IsNullOrWhiteSpace(id)&& !String.IsNullOrWhiteSpace(fromdate)&&!String.IsNullOrWhiteSpace(todate))
             {
                 string[] list; list = id.Split(',');
                 foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
@@ -427,29 +434,43 @@ namespace JSAT_HR.Controllers
                     foreach (string st in list)
                     {
                         flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
-                        if (flag == "OK")
+                    }
+                    if (flag == "OK")
+                    {
+                        if (DateTime.Parse(todate) < todaydate)
                         {
-                            Session["Imsg"] = "OK";
+                            Session["Umsg"] = flag;
                         }
                         else
+                            Session["Imsg"] = flag;
+                    }
+                    else
+                    {
+                        if (DateTime.Parse(todate) < todaydate)
                         {
-                            Session["IEmsg"] = "NotoK";
+                            Session["UEmsg"] = flag;
                         }
+                        else
+                            Session["Imsg"] = flag;
                     }
                 }
             }
-            return RedirectToAction("QuickSetting");
+            return JsonConvert.SerializeObject(flag);
 
         }
 
-        public ActionResult QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
         {
-            string flag = string.Empty;
+            string flag = string.Empty;DateTime todaydate = DateTime.Now;
             AttendanceBL abl = new AttendanceBL();
 
             if (todate == "")
                 todate = fromdate;
-            if (!String.IsNullOrWhiteSpace(id))
+            if(leavetype=="")
+            {
+                morningleave = "-1";eveleave = "-1";
+            }
+            if (!String.IsNullOrWhiteSpace(id) && !String.IsNullOrWhiteSpace(fromdate) && !String.IsNullOrWhiteSpace(todate))
             {
                 string[] list; list = id.Split(',');
                 foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
@@ -458,51 +479,32 @@ namespace JSAT_HR.Controllers
                     foreach (string st in list)
                     {
                         flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave, transportation);
-                        if (flag == "OK")
-                        {
-                            Session["Message"] = "OK";
-                        }
-                        else
-                        {
-                            Session["Message"] = "NOT OK";
-                        }
                     }
                 }
-            }
-            return RedirectToAction("QuickSetting");
-
-        }
-
-        public ActionResult QuickAttendance_TranspoartationUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
-        {
-            string flag = string.Empty;
-            AttendanceBL abl = new AttendanceBL();
-            if (todate == "")
-                todate = fromdate;
-            if (!String.IsNullOrWhiteSpace(id))
-            {
-                string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+                if (flag == "OK")
                 {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
+                    if(DateTime.Parse(todate) < todaydate)
                     {
-                        flag = abl.QuickAttendance_TranspoartationUpdate(st, date, leavetype, morningleave, eveleave, transportation);
-                        if (flag == "OK")
-                        {
-                            Session["Message"] = "OK";
-                        }
-                        else
-                        {
-                            Session["Message"] = "NOT OK";
-                        }
+                        Session["Umsg"] = flag;
                     }
+                    else
+                        Session["Imsg"] = flag;
+                }
+                else
+                {
+                    if (DateTime.Parse(todate) < todaydate)
+                    {
+                        Session["UEmsg"] = flag;
+                    }
+                    else
+                        Session["Imsg"] = flag;
                 }
             }
-            return RedirectToAction("QuickSetting");
+            return JsonConvert.SerializeObject(flag);
+
 
         }
-
+       
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
         {
             for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))

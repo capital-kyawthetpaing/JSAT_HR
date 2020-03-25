@@ -127,3 +127,15 @@ tr.shown td.details-control {
     border-color: transparent;
     color:red;
 }
+
+.ms-options-wrap > .ms-options > .ms-search input {
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.ms-options-wrap > .ms-options > .ms-selectall.global {
+    color: blue;
+    font-weight: bold;
+    font-size:large;
+}

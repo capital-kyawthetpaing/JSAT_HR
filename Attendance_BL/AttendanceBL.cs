@@ -20,7 +20,7 @@ namespace Attendance_BL
 {
     public class AttendanceBL
     {
-        public DataTable AttendanceData(string excelfile,string officeid)
+        public DataTable AttendanceData(string excelfile, string officeid)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace Attendance_BL
                                     //}
                                     if (GetCellValue(row2.GetCell(i - 1)).ToString() != "")
                                     {
-                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);                        
+                                        AttendanceDataRow["TimeOut"] = GetCellValue(row2.GetCell(i - 1)).Substring(GetCellValue(row2.GetCell(i - 1)).Length - 5, 5);
                                     }
                                     //else
                                     //{
@@ -158,7 +158,7 @@ namespace Attendance_BL
                     return AttendanceDataSet.Tables[0];
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.ToString();
                 return null;
@@ -199,7 +199,7 @@ namespace Attendance_BL
             }
         }
 
-        public void Insert_Attendance_Data(DataTable dttest, string filename,string id)
+        public void Insert_Attendance_Data(DataTable dttest, string filename, string id)
         {
             DataTable dt = new DataTable();
             BaseDL bdl = new BaseDL();
@@ -235,10 +235,10 @@ namespace Attendance_BL
 
             DataTable dtAttendance = new DataTable();
             dtAttendance = bdl.SelectData("M_Attendance_Select", prms);
-        
+
             return dtAttendance;
         }
-       
+
         public DataTable GetLeave(string id)
         {
             LeaveBL lbl = new LeaveBL();
@@ -265,7 +265,7 @@ namespace Attendance_BL
             if (id != null)
             {
                 arr = id.Split('_');
-                YYYMM = arr[0]+arr[1];
+                YYYMM = arr[0] + arr[1];
                 StaffID = arr[2];
 
             }
@@ -314,7 +314,7 @@ namespace Attendance_BL
                         if (row.GetCell(j) != null)
                             dataRow["StaffName"] = GetCellValue(row.GetCell(1));
 
-                        if(row.GetCell(j)!=null)
+                        if (row.GetCell(j) != null)
                             dataRow["IncomeTax"] = GetCellValue(row.GetCell(2));
 
                     }
@@ -343,7 +343,7 @@ namespace Attendance_BL
                 return false;
             }
         }
-        public void Insert_IncomeTax_Data(DataTable dttest,string YYYMM, string filename)
+        public void Insert_IncomeTax_Data(DataTable dttest, string YYYMM, string filename)
         {
             DataTable dt = new DataTable();
             BaseDL bdl = new BaseDL();
@@ -395,11 +395,11 @@ namespace Attendance_BL
                 }
                 if (!string.IsNullOrWhiteSpace(YYYMM))
                 {
-                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value=Convert.ToInt32(YYYMM) };
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value = Convert.ToInt32(YYYMM) };
                 }
                 else
                 {
-                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value=System.DBNull.Value };
+                    prms[1] = new SqlParameter("@YYYMM", SqlDbType.Int) { Value = System.DBNull.Value };
                 }
 
                 dtattendance.TableName = "attendance";
@@ -453,7 +453,7 @@ namespace Attendance_BL
             }
         }
 
-        public string QuickAttendance_Update(string staffid, string date, string leavetype, string amleave, string pmleave,string transportation)
+        public string QuickAttendance_Update(string staffid, string date, string leavetype, string amleave, string pmleave, string transportation)
         {
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
@@ -464,22 +464,22 @@ namespace Attendance_BL
             prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
             prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
             prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
-            prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 1 };
-            prms[6] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
+            prms[5] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
+            prms[6] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 1 };
             try
             {
                 bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
                 flag = "OK";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string msg = ex.Message;
-                flag = "NOT OK";
+                flag = "NotOK";
             }
             return flag;
         }
 
-        public string QuickAttendance_LeaveUpdate(string staffid, string date,string leavetype, string amleave , string pmleave,string transportation)
+        public string QuickAttendance_LeaveUpdate(string staffid, string date, string leavetype, string amleave, string pmleave, string transportation)
         {
             string flag = string.Empty;
             BaseDL bdl = new BaseDL();
@@ -500,33 +500,7 @@ namespace Attendance_BL
             catch (Exception ex)
             {
                 string msg = ex.Message;
-                flag = "NOT OK";
-            }
-            return flag;
-        }
-
-        public string QuickAttendance_TranspoartationUpdate(string staffid, string date, string leavetype, string amleave, string pmleave, string transportation)
-        {
-            string flag = string.Empty;
-            BaseDL bdl = new BaseDL();
-            string result = string.Empty;
-            SqlParameter[] prms = new SqlParameter[7];
-            prms[0] = new SqlParameter("@staffid", SqlDbType.VarChar) { Value = staffid };
-            prms[1] = new SqlParameter("@date", SqlDbType.VarChar) { Value = date };
-            prms[2] = new SqlParameter("@leavetype", SqlDbType.VarChar) { Value = leavetype };
-            prms[3] = new SqlParameter("@amleave", SqlDbType.VarChar) { Value = amleave };
-            prms[4] = new SqlParameter("@pmleave", SqlDbType.VarChar) { Value = pmleave };
-            prms[5] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 3 };
-            prms[6] = new SqlParameter("@transportation", SqlDbType.VarChar) { Value = transportation };
-            try
-            {
-                bdl.InsertUpdateDeleteData("QuickAttendance_Update", prms);
-                flag = "OK";
-            }
-            catch (Exception ex)
-            {
-                string msg = ex.Message;
-                flag = "NOT OK";
+                flag = "NotOK";
             }
             return flag;
         }
