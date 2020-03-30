@@ -194,15 +194,19 @@ namespace JSAT_HR.Controllers
             string[] arr;
             string YYYMM = string.Empty;
             string StaffID = string.Empty;
+            string AttandenceDate = string.Empty;
             if (id != null)
             {
                 arr = id.Split('_');
                 YYYMM = arr[0] + arr[1];
                 StaffID = arr[2];
+                AttandenceDate= arr[0] +"-"+ arr[1]+"-01";
 
             }
             am.YYYYMM = YYYMM;
             am.StaffID = StaffID;
+            am.AttandenceDate = AttandenceDate;
+
             DataTable dt = abl.M_Attendance_Select(am);
 
             dt.Columns.Add("Total", typeof(System.Int32));
@@ -238,18 +242,20 @@ namespace JSAT_HR.Controllers
                     dtAttlist.Load(reader);
                 }
                 dtAttlist.Columns.Add("DD", typeof(System.Int32));
+                dtAttlist.Columns.Add("AttandenceDate", typeof(System.DateTime));
                 if (dtAttlist.Rows.Count > 0)
                 {
                     int count = 1;
                     foreach (DataRow dr in dtAttlist.Rows)
                     {
                         dr["DD"] = count;
+                        dr["AttandenceDate"] = model.attModel.YYYY + "-" + model.attModel.MM + "-" + count;
                         count++;
                     }
                     abl.Update_Attendance_List(dtAttlist, model);
                 }
                 Session["UImsg"] = "OK";
-                Session["SearchDisplay"]= model.attModel.YYYY +'_'+ model.attModel.MM+'_'+ model.attModel.StaffID;
+                Session["SearchDisplay"]= model.attModel.YYYY +"_"+ model.attModel.MM+"_"+ model.attModel.StaffID;
                 return RedirectToAction("AttendanceList");
             }
             catch (Exception ex)

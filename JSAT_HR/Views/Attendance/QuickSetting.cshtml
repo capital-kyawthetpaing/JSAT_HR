@@ -67,7 +67,6 @@
             var todate = $('#lbltodate').val();
             var staff = $('#StaffList').val();
             var transportation = $('#chktransportation').val();
-
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("QuickAttendance_Update", "Attendance", new { @id = "ID" })'.replace("ID", staff),

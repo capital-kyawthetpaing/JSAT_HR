@@ -77,8 +77,10 @@ namespace Attendance_BL
                             for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(dd); i++)
                             {
                                 AttendanceDataRow = table.NewRow();
-
-                                AttendanceDataRow["AttandenceDate"] = newattdate + "-" + i;
+                                if(i<10)
+                                    AttendanceDataRow["AttandenceDate"] = newattdate + "-0" + i;
+                                else
+                                    AttendanceDataRow["AttandenceDate"] = newattdate + "-" + i;
 
                                 AttendanceDataRow["DD"] = i;
 
@@ -229,9 +231,10 @@ namespace Attendance_BL
         public DataTable M_Attendance_Select(AttendanceModel am)
         {
             BaseDL bdl = new BaseDL();
-            SqlParameter[] prms = new SqlParameter[2];
+            SqlParameter[] prms = new SqlParameter[3];
             prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = am.YYYYMM };
             prms[1] = new SqlParameter("@StaffID", SqlDbType.VarChar) { Value = am.StaffID };
+            prms[2]= new SqlParameter("@YYYYMMDD", SqlDbType.VarChar) { Value = am.AttandenceDate };
 
             DataTable dtAttendance = new DataTable();
             dtAttendance = bdl.SelectData("M_Attendance_Select", prms);

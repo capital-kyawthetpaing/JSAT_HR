@@ -415,12 +415,14 @@
 
                     if (x <= Object.keys(json).length) {
                         if (json[x - 1].LateTime != null) {
-                            if (json[x - 1].LateTime != '00:00:00')
-                                latetime = '<label style="color:red;" >' + json[x - 1].LateTime + '</label>'
+                            if (json[x - 1].LateTime != '00:00:00' ) {
+                                if (json[x - 1].LateTime != '00:00')
+                                    latetime = '<label style="color:red;" >' + json[x - 1].LateTime + '</label>'
+                            }
                         }
 
                         $("#content > tbody").append(' <tr>' +
-                            ' <td>' + json[x - 1].DD + '</td>' +
+                            ' <td>' + x + '</td>' +
                             '<td>' + timein + '</td>' +
                             ' <td>' + timeout + ' </td>' +
                             ' <td>' + latetime+'</td>' +
