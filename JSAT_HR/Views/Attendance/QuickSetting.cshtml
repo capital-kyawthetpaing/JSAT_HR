@@ -18,6 +18,9 @@
 
         $(document).ready(function () {
 
+            $("input[name='timeinout']").attr('checked', 'checked');
+            $("input[name='timeinout']").attr('disabled', true);
+
             var Imsg = '@ViewBag.Imsg';
             if (Imsg == "OK") {
                 GetMessage("I_1001", "Update");
@@ -234,7 +237,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="checkbox" value="0" checked="checked" />
+                                    <input type="checkbox" value="0" name="timeinout" id="timeinout" />
                                 </div>
                             </div>
                             <label class="form-control" for="timeinout">Time In/Out</label>
