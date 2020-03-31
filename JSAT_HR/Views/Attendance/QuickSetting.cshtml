@@ -49,7 +49,7 @@
 
 
             $('#StaffList').multiselect({
-                columns: 6,
+                columns: 5,
                 search: true,
                 selectAll: true,
                 texts: {
@@ -211,19 +211,21 @@
                     </div>
                 </div>
 
-                <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
-                <div class="form-group col-md-14">
-                    <div class="input-group" style="height:50px;">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user-check"></i></span>
-                        </div>
-                        @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
-                   { id = "StaffList", @class = "form-control"})
-                    </div>
-                </div>
+               
+                    <div class="text-s font-weight-bold text-info text-uppercase mb-1">Choose Multiple Staff <label style="color:red;">&nbsp;*</label></div>
+                    <div class="form-group col-md-12">
+                        <div class="input-group" style="height:50px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1" style="height:35px;"><i class="fa fa-user-check"></i></span>
 
-            </div>
-        </div>
+                            </div>
+                            @Html.ListBoxFor(m => m.SelectedMultiStaffId, ViewBag.StaffList as SelectList, new
+                   { id = "StaffList", @class = "form-control"})
+                        </div>
+                    </div>
+                   
+                </div>
+            </div> 
     </div>
 
 
@@ -233,14 +235,14 @@
                 <div class="text-s font-weight-bold text-info text-uppercase mb-1">Default Time & Pay Transportation</div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="LeaveType">Default Time</label>
+                        <label for="LeaveType">Attendance:Time</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <input type="checkbox" value="0" name="timeinout" id="timeinout" />
                                 </div>
                             </div>
-                            <label class="form-control" for="timeinout">Time In/Out</label>
+                            <label class="form-control" for="timeinout">Default</label>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -277,7 +279,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-list-alt"></i></span>
                             </div>
-                            @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---", new
+                            @Html.DropDownListFor(m => m.LeaveType, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "Select", new
                        {
                            @class = "form-control input-sm",
                            @id = "ddlleave"
@@ -293,7 +295,7 @@
                                     <input type="checkbox" id="chkmorningleave" value="0" />
                                 </div>
                             </div>
-                            <label class="form-control" for="MorningLeave">Morning Leave</label>
+                            <label class="form-control" for="MorningLeave">AM:Leave</label>
                         </div>
                     </div>
 
@@ -304,7 +306,7 @@
                                     <input type="checkbox" id="chkeveleave" value="0" />
                                 </div>
                             </div>
-                            <label class="form-control" for="EveningLeave">Evening Leave</label>
+                            <label class="form-control" for="EveningLeave">PM:Leave</label>
                         </div>
                     </div>
 
