@@ -36,15 +36,14 @@
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Hours_Setting_Save", "Office", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+
 <div class="row">
-
-
     <div class="col-xl-6 col-md-12 mb-2">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="text-s font-weight-bold text-info text-uppercase mb-1">Office</div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
                         <label for="Time-In">Time-In</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -62,7 +61,7 @@
                        })
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
                         <label for="Timeout">Time-Out</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -88,7 +87,7 @@
             <div class="card-body">
                 <div class="text-s font-weight-bold text-info text-uppercase mb-1">Academy</div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
                         <label for="Time-In">Time-In</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -106,7 +105,7 @@
                        })
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
                         <label for="Timeout">Time-Out</label>
                         <div class="input-group">
                             <div class="input-group-prepend">

@@ -29,11 +29,11 @@
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
                     <div class="form-row">
                         <div style="width:17%;">
-                            <img id="imgpreview" onclick="$('#imgdata').click();" src="../../StaffPhoto/@(Model.Photo)" class="imgcss" >
-                            <input type="file" name="imgdata" id="imgdata" onchange="showpreview(this)" style="visibility:hidden">
+                            <img id="imgpreview" onclick="$('#imgdata').click();" src="../../StaffPhoto/@(Model.Photo)" class="imgcss" style="margin-left: -7px;" >
+                            <input type="file" name="imgdata" id="imgdata" onchange="showpreview(this)" style="visibility:hidden;">
                         </div>
                         <div class="form-group col-xl-2 col-md-4">
-                            <div class="input-group" style="padding-top:83px;">
+                            <div class="input-group" style="padding-top:70px;">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         @Html.CheckBoxFor(sm => sm.IsResign,new
@@ -275,7 +275,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-city"></i></span>
                                 </div>
-                                @Html.DropDownListFor(sm => sm.CompanyCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                                @Html.DropDownListFor(sm => sm.CompanyCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "-Select-",new
                            {
                                @class = "select2 form-control input-sm",
                                //@required = "required",
@@ -290,7 +290,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-building"></i></span>
                                 </div>
-                                @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                                @Html.DropDownListFor(sm => sm.DepartmentCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "-Select-",new
                            {
                                @class = "select2 form-control input-sm",
                                //@required = "required",
@@ -305,7 +305,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-store"></i></span>
                                 </div>
-                                @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                                @Html.DropDownListFor(sm => sm.SubDivisionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "-Select-",new
                            {
                                @class = "form-control select2 input-sm",
                                //@required = "required",
@@ -320,7 +320,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-custom2" id="basic-addon1"><i class="fa fa-map-pin"></i></span>
                                 </div>
-                                @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "---Select---",new
+                                @Html.DropDownListFor(sm => sm.PositionCD, new SelectList(Enumerable.Empty<SelectListItem>(), "", ""), "-Select-",new
                            {
                                @class = "select2 form-control input-sm",
                                //@required = "required",
@@ -603,7 +603,7 @@
                                 <label class="form-control" for="N3">N3</label>
                             </div>
                         </div>
-                        <div class="form-group col-xl-2 col-md-4">
+                        <div class="form-group col-xl-3 col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -613,7 +613,7 @@
                                    })
                                     </div>
                                 </div>
-                                <label class="form-control" for="JpnUniGradurate">JpnUniGradurate</label>
+                                <label class="form-control" for="JpnUniGradurate">Japan Uni Graduate</label>
                             </div>
                         </div>
                     </div>
@@ -684,7 +684,7 @@
                         <label for="OtherAllowance">Ohter Allowance</label>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-xl-2 col-md-4">
+                        <div class="form-group col-xl-3 col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
