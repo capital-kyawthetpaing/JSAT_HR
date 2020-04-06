@@ -114,8 +114,8 @@ tr.shown td.details-control {
 
 .ms-options-wrap{
     position:inherit;
+    width:1000px;
 }
-
 .ms-options-wrap > .ms-options > ul label {
     color:darkblue;
     font-weight:bold;

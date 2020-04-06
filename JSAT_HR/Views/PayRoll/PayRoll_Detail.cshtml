@@ -203,7 +203,7 @@
         function GetLabel_PayRollAllowance(id)
         {
             $.ajax({
-                url: "/PayRoll/GetPayRollDetail_AllowanceLabel/" + id,
+                url: '@Url.Action("GetPayRollDetail_AllowanceLabel", "PayRoll", new { @id = "ID" })'.replace("ID", id),
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
 
@@ -222,7 +222,7 @@
         function GetData_PayRollAllowance(id)
         {
             $.ajax({
-                url: "/PayRoll/GetPayRollDetail_AllowanceData/" + id,
+                url:  '@Url.Action("GetPayRollDetail_AllowanceData", "PayRoll", new { @id = "ID" })'.replace("ID", id),
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
 
@@ -241,7 +241,7 @@
         function GetLabel_PayRollDeduction(id)
         {
             $.ajax({
-                url: "/PayRoll/GetPayRollDetail_DeductionLabel/" + id,
+                url: '@Url.Action("GetPayRollDetail_DeductionLabel", "PayRoll", new { @id = "ID" })'.replace("ID", id),
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
 
@@ -259,7 +259,7 @@
         function GetData_PayRollDeduction(id)
         {
             $.ajax({
-                url: "/PayRoll/GetPayRollDetail_DeductionData/" + id,
+                url: '@Url.Action("GetPayRollDetail_DeductionData", "PayRoll", new { @id = "ID" })'.replace("ID", id),
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
 
