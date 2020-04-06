@@ -1,6 +1,6 @@
 ﻿@model JH_Model.PositionModel
 @{
-    ViewBag.Title = "PositionList";
+    ViewBag.Title = "Position List";
     Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 @using (Html.BeginForm("Position_Save", "Position", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
