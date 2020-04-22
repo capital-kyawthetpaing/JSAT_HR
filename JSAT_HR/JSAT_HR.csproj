@@ -486,13 +486,14 @@
     <Content Include="Views\ActivityLog\Activity_Log.cshtml" />
     <Content Include="Views\BasicSalary\BasicSalary.cshtml" />
     <Content Include="Views\Attendance\QuickSetting.cshtml" />
+    <Content Include="Views\User\User_List.cshtml" />
+    <Content Include="Views\User\User_Entry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Message\" />
     <Folder Include="Views\Share\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

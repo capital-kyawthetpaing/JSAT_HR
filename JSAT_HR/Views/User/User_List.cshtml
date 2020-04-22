@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "User_List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tblUser" class="hrtable col-sm-12 col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>User Name</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#tblUser').DataTable(
+                {
+                    "language": {
+                        "info": "Display _START_ to _END_ of _TOTAL_ records",
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": "Display _MENU_ records",
+                    },
+                    "ajax": {
+                        "url": "../User/GETUser",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        {
+                            "data": "UserID", "render": function (data, type, row) {
+                                return '<a href="../User/User_Entry/' + row.UserID + '">' + row.UserID + '</a>';
+                            }, orderable: false
+                        },
+                        { "data": "UserName", orderable: false },
+                        {"data": "CreatedDate", orderable:false}
+                    ],
+                }
+            );
+
+        })
+    </script>
+    }

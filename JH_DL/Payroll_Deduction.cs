@@ -30,5 +30,11 @@ namespace JH_DL
         public Nullable<decimal> TotalDeduction { get; set; }
         public Nullable<decimal> CutUnpaidLeave { get; set; }
         public Nullable<decimal> CutUnpaidLeaveFees { get; set; }
+        public Nullable<decimal> MedicalLeave { get; set; }
+        public Nullable<decimal> MaternityLeave { get; set; }
+        public Nullable<decimal> MedicalLeaveFees { get; set; }
+        public Nullable<decimal> MaternityLeaveFees { get; set; }
+        public Nullable<decimal> MedicalLeavePercent { get; set; }
+        public Nullable<decimal> MaternityLeavePercent { get; set; }
     }
 }

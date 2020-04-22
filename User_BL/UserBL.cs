@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using JH_Model;
 using JH_DL;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web;
 
 namespace User_BL
 {
@@ -23,6 +26,69 @@ namespace User_BL
                 umodel.UserName = um.UserName;
                 return umodel;
             }
+        }
+
+        public DataTable GetAllUser()
+        {
+            BaseDL bdl = new BaseDL();
+            return bdl.SelectData("M_User_SelectAll", null);
+        }
+
+        public DataTable M_View_Select()
+        {
+            BaseDL bdl = new BaseDL();
+            return bdl.SelectData("M_View_SelectAll", null);
+        }
+
+        public DataTable M_View_Select_ForEdit(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[1];
+
+            prms[0] = new SqlParameter("@UserID", SqlDbType.Int) { Value = id };
+
+            return bdl.SelectData("User_SelectAll_ForEdit", prms);
+        }
+
+        public void Update_User_Authorization(DataTable dtUserlist, MultiModel mModel)
+        {
+            BaseDL dl = new BaseDL();
+            try
+            {
+                SqlParameter[] prms = new SqlParameter[6];
+
+                prms[0] = new SqlParameter("@UserID", SqlDbType.Int) { Value = mModel.userModel.UserID };
+
+                prms[1] = new SqlParameter("@UserName", SqlDbType.VarChar) { Value = mModel.userModel.UserName };
+
+                prms[2] = new SqlParameter("@Password", SqlDbType.VarChar) { Value = mModel.userModel.Password };
+
+                prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
+
+                prms[4] = new SqlParameter("@saveUpdateFlag", SqlDbType.VarChar) { Value = mModel.userModel.SaveUpdateFlag };
+
+                dtUserlist.TableName = "user";
+                System.IO.StringWriter writer = new System.IO.StringWriter();
+                dtUserlist.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                string result = writer.ToString();
+                prms[5] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
+                dl.InsertUpdateDeleteData("User_List_Save_Update", prms);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool UserExists(MultiModel model)
+        {
+            JSAT_HREntities db = new JSAT_HREntities();
+            M_User md = new M_User();
+            string UserID = model.userModel.UserID;
+            M_User userid = db.M_User.Where(mu => mu.UserID.Equals(UserID)).SingleOrDefault();
+            if (userid != null)
+                return true;
+            return false;
         }
     }
 }

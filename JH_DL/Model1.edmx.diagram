@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_Transportation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JSAT_HRModel.Staff_Allowance" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
 <<<<<<< HEAD
-        <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="4.25" PointY="8.375" />
+        
         <EntityTypeShape EntityType="JSAT_HRModel.M_Office" Width="1.5" PointX="4.75" PointY="10.625" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Department" Width="1.5" PointX="4.0072155762497408" PointY="31.011498629586537" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Company" Width="1.5" PointX="6.4912366431631323" PointY="16.481604583785685" />
@@ -25,6 +25,9 @@
         <EntityTypeShape EntityType="JSAT_HRModel.M_Staff" Width="1.5" PointX="3.6017040235929678" PointY="17.337537028518291" />
         <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Allowance" Width="1.5" PointX="10.235800975112152" PointY="19.943016985404778" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="3.6507609727097492" PointY="9.9330019848109234" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="11.496386362005204" PointY="19.491854006187921" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_View" Width="1.5" PointX="4.95061432428221" PointY="28.585803849895392" />
+        <EntityTypeShape EntityType="JSAT_HRModel.User_Authorization" Width="1.5" PointX="3.8117367363589523" PointY="7.0456933560993953" />
         
         
         
