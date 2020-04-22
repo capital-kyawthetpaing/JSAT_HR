@@ -1,0 +1,256 @@
+﻿@model JH_Model.MultiModel
+@{
+    ViewBag.Title = "User_Entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
+}
+<style>
+    input[type=checkbox] {
+        position: relative;
+        cursor: pointer;
+    }
+
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 0;
+            left: 0;
+            border: 2px solid #555555;
+            border-radius: 3px;
+            background-color: white;
+        }
+
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 10px;
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 2px;
+            left: 6px;
+        }
+</style>
+
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("User_Save", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xl-12 col-md-12 col-sm-12 mb-2">
+            <div class="card border-left-info shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-xl-2 col-md-3">
+                            <label for="UserID">UserID</label><label style="color:red;">&nbsp;*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-id-card-alt"></i></span>
+                                </div>
+                                @Html.HiddenFor(um => um.userModel.SaveUpdateFlag, new { @id = "hfSave_Update" })
+                                @Html.TextBoxFor(um => um.userModel.UserID, new
+                                {
+                                    @class = "form-control input-sm input-integeronly1",
+                                    @tabindex = "1",
+                                    @required = "required",
+                                    @id = "txtUserID",
+                                    @autofocus = "autofocus",
+                                    maxlength = "4",
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group col-xl-2 col-md-3">
+                            <label for="UserName">User Name</label><label style="color:red;">&nbsp;*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-signature"></i></span>
+                                </div>
+                                @Html.TextBoxFor(um => um.userModel.UserName, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "2",
+                               @required = "required",
+                               @id = "txtUserName",
+                               @autofocus = "autofocus",
+                               maxlength = "100"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group col-xl-2 col-md-3">
+                            <label for="Password">Password</label><label style="color:red;">&nbsp;*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-key"></i></span>
+                                </div>
+                                @Html.TextBoxFor(um => um.userModel.Password, new
+                           {
+                               @class = "form-control input-sm",
+                               @tabindex = "3",
+                               @required = "required",
+                               @id = "txtPwd",
+                               @autofocus = "autofocus",
+                               maxlength = "100"
+                           })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dynamcdiv">
+                        <div class="form-row dynamicAtt">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xl-12 text-center">
+            <div class="card border-bottom-success shadow h-100">
+                <div class="card-body">
+                    <div class="text-s font-weight-bold text-custom1 text-uppercase mb-1">
+                        <button type="submit" id="btnSave" class="btn btn-success col-xl-2" tabindex="38"><i class="fa fa-save"></i>&nbsp; Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+             var Emsg = '@ViewBag.Emsg';
+            if (Emsg == "Duplicate") {
+                GetMessage("I_1003", "Duplicate");
+                 $('#myModal').modal('show');
+            }
+            var sid = '@ViewBag.Userid';
+            if (sid == null || sid == "") {
+                BindM_View();
+            }
+            else {
+                BindM_View_ForEdit(sid);
+            }
+        });
+
+        function BindM_View_ForEdit(sid) {
+             $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("_MViewBind_ForEdit", "User",new { @id = "ID" })'.replace("ID", sid),
+                 dataType: 'json',
+                 success: function (json) {
+                     $("#btnSave").html("Update");
+                     document.getElementById("hfSave_Update").value = "Update";
+                     document.getElementById('txtUserID').readOnly = true;
+
+                     $('#txtUserID').val(json[0].UserID);
+                     $('#txtUserName').val(json[0].UserName);
+                     $('#txtPwd').val(json[0].Password);
+
+                     FillMenu(json);
+                 }
+             });
+        }
+
+        function BindM_View() {
+             $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("_MViewBind", "User")',
+                 dataType: 'json',
+                 success: function (json) {
+                     FillMenu(json);
+                 }
+             });
+        }
+
+        function FillMenu(json) {
+            $(".dynamicAtt").remove();
+            var maindiv = $(".dynamcdiv");
+            var newdiv = document.createElement('div');
+            newdiv.className = 'form-row dynamicAtt';
+            $(maindiv).append(newdiv);
+
+            var x;
+            if (json[0].Total > 0) {
+                var wrapper = $(".dynamicAtt");
+                $(wrapper).append(' <table id="content" class="hrtable">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>Show View<input type="checkbox" ></th>' +
+                    '<th>Read Only<input type="checkbox" ></th>' +
+                    '<th>View ID</th>' +
+                    '<th>View Name</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '</tbody>' +
+                    '</table>');
+
+                for (x = 1; x <= json[0].Total; x++) {
+
+                     var ViewID = '<input type="text" id="UserlistModel_' + (x - 1) + '__ViewID" name="UserlistModel[' + (x - 1) + '].ViewID">';
+
+                    var ShowView = '<input type="checkbox" id="UserlistModel_' + (x - 1) + '__ShowView" name="UserlistModel[' + (x - 1) + '].ShowView">';
+
+                    var IsReadOnly = '<input type="checkbox" id="UserlistModel_' + (x - 1) + '__IsReadOnly" name="UserlistModel[' + (x - 1) + '].IsReadOnly">';
+
+                    $("#content > tbody").append(' <tr>' +
+                        ' <td>' + ShowView + '</td>' +
+                        ' <td>' + IsReadOnly + '</td >' +
+                        ' <td>' + ViewID + '</td>' +
+                        ' <td>' + json[x - 1].ViewName + ' </td>' +
+                        ' </tr>');
+                    $('#UserlistModel_' + (x - 1) + '__ViewID').val(json[x - 1].ViewID);
+
+                    if (json[x - 1].ShowView == true) {
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', true);
+                    }
+                    if (json[x - 1].IsReadOnly == true) {
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
+                    }
+
+                    checkshowview(x-1);
+                    checkreadonly(x-1);
+
+
+                }
+            }
+        }
+
+        function checkshowview(x)
+        {
+            $('#UserlistModel_' + (x - 1) + '__ShowView').click(function () {
+                if ($(this).prop("checked") == true) {
+                    $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
+                }
+                else if ($(this).prop("checked") == false) {
+                    $('#UserlistModel_' + (x - 1) + '__ShowView').val(false);
+                }
+            });
+        }
+
+        function checkreadonly(x)
+        {
+            $('#UserlistModel_' + (x - 1) + '__IsReadOnly').click(function () {
+                if ($(this).prop("checked") == true) {
+                    $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
+                }
+                else if ($(this).prop("checked") == false) {
+                    $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(false);
+                }
+            });
+        }
+
+    </script>
+}
+

@@ -14,6 +14,7 @@ namespace JH_Model
         public AttendanceModel attModel { get; set; }
         public StaffModel smodel { get; set; }
 
-
+        public List<UserModel> UserlistModel { get; set; }
+        public UserModel userModel { get; set; }
     }
 }

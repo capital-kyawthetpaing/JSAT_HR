@@ -12,11 +12,13 @@ namespace JH_DL
     using System;
     using System.Collections.Generic;
     
-    public partial class M_User
+    public partial class User_Authorization
     {
         public string UserID { get; set; }
-        public string Password { get; set; }
-        public string UserName { get; set; }
+        public int ViewID { get; set; }
+        public Nullable<bool> ShowView { get; set; }
+        public Nullable<bool> IsReadOnly { get; set; }
+        public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
     }
 }

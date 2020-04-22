@@ -26,5 +26,6 @@ namespace JH_DL
         public Nullable<System.TimeSpan> LateTime { get; set; }
         public Nullable<int> LateMinutes { get; set; }
         public Nullable<byte> EarlyOut { get; set; }
+        public Nullable<bool> PayTransportation { get; set; }
     }
 }
