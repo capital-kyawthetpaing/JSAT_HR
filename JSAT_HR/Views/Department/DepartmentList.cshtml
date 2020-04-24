@@ -7,7 +7,7 @@
 }
 @using (Html.BeginForm("Department_Save", "Department", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
-    <div class="container-fluid">
+    <div class="container-fluid" id="content_zip">
         <!-- Page Heading -->
         <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Staff List</h1>
@@ -161,6 +161,8 @@
 
                 }
             );
+
+            CheckReadOnly();
         });
 
         function DepartmentEdit(depCD, depName) {
@@ -194,6 +196,24 @@
             //$('#myModal').modal('show');
         })
 
+        function CheckReadOnly() {
+            var ViewPageName ="DepartmentList";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
+        }
     </script>
 }
 

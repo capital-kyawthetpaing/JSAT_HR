@@ -9,6 +9,7 @@
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Attendance_List_Save", "Attendance", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+<div class="container-fluid" id="content_zip">
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
@@ -274,6 +275,8 @@
             </div>
         </div>
     </div>
+</div>
+   
  }
 
  @section Scripts{
@@ -315,6 +318,7 @@
                 SelectStaff(0);
              }
 
+             CheckReadOnly();
          });
 
         
@@ -598,6 +602,23 @@
          function fixDigit(val) {
              return val.toString().length === 1 ? "0" + val : val;
          }
-
+         function CheckReadOnly() {
+             var ViewPageName ="AttendanceList";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
+        }
      </script>
      }

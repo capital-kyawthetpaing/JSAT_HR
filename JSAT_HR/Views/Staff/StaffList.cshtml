@@ -139,7 +139,7 @@
                 }
             });
 
-            //CheckReadOnly();
+            CheckReadOnly();
         });
 
         function format(d) {
@@ -160,13 +160,10 @@
                 '</table>';
         }
 
-         @*function CheckReadOnly() {
-             var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
-             if (Session["UserID"] != null) {
-                 alert("a");
-                 var userid = Session["UserID"].ToString().Split('_')[0];
+        function CheckReadOnly() {
+            var ViewPageName ="StaffList";
                  $.ajax({
-                     url: '@Url.Action("UserRead", "CheckUserAccess", new { @id = "ID" })'.replace("ID", ViewPageName + '|' + userid),
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
                      type: "GET",
                      dataType: "JSON",
                      dataSrc: '',
@@ -179,31 +176,9 @@
                              $('#content_zip').css('pointer-events', 'none');
                          }
                      }
-                 });
-             }
-        }*@
+                 });             
+        }
     </script>
 
 }
-@{ 
-    var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
-    string Read = string.Empty;
-
-    if (Session["UserID"] != null)
-    {
-        var userid = Session["UserID"].ToString().Split('_')[0];
-        bool flag = CheckUserAccess.UserRead(ViewPageName + '|' + userid);
-
-        if (flag == false)
-        {
-            Context.Response.Redirect("~/Shared/Error");
-        }
-        else
-        {
-            Read = "OK";
-        }
-    }
-
-}
-
 

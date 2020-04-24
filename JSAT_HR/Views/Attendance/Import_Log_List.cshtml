@@ -27,42 +27,42 @@
     }
 </style>
 
+<div class="container-fluid" id="content_zip">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow">
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-3">
+                        <div class="text-s font-weight-bold text-info  mb-1">Office Attendance Import</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile1" style="border:1px solid #b5b5b5;" name="uploadFile1" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport1" class="btn col-md-4 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel1" class="btn btn-dark col-md-4"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-3">
+                        <div class="text-s font-weight-bold text-info  mb-1">Academy Attendance Import</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile2" style="border:1px solid #b5b5b5;" name="uploadFile2" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport2" class="btn col-md-4 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel2" class="btn btn-dark col-md-4"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                    </div>
+                </div>
+            </div>
 
-<div class="col-xl-12 col-md-12 mb-2">
-    <div class="card border-left-info shadow">
-        <div class="row" style="height:80px;">
-            <div class="form-inline col-md-12 col-sm-12" role="form">
-                <div class="form-group col-md-3">
-                    <div class="text-s font-weight-bold text-info  mb-1">Office Attendance Import</div>
-                </div>
-                <div class="form-group col-md-4 col-sm-12">
-                    <input type="file" id="uploadFile1" style="border:1px solid #b5b5b5;" name="uploadFile1" class="btn btn-default btn-sm col-md-12" />
-                </div>
-                <div class="form-group col-md-4 col-sm-12">
-                    <button type="submit" id="btnimport1" class="btn col-md-4 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
-                    <button type="button" id="btncancel1" class="btn btn-dark col-md-4"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
-                </div>
-            </div>
         </div>
-        <div class="row" style="height:80px;">
-            <div class="form-inline col-md-12 col-sm-12" role="form">
-                <div class="form-group col-md-3">
-                    <div class="text-s font-weight-bold text-info  mb-1">Academy Attendance Import</div>
-                </div>
-                <div class="form-group col-md-4 col-sm-12">
-                    <input type="file" id="uploadFile2" style="border:1px solid #b5b5b5;" name="uploadFile2" class="btn btn-default btn-sm col-md-12" />
-                </div>
-                <div class="form-group col-md-4 col-sm-12">
-                    <button type="submit" id="btnimport2" class="btn col-md-4 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
-                    <button type="button" id="btncancel2" class="btn btn-dark col-md-4"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
-                </div>
-            </div>
-        </div>
-       
     </div>
-</div>
-<div class="col-xl-12 col-md-12 mb-2">
-    <div class="card border-left-info shadow">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow">
             <div class="row" style="height:80px;">
                 <div class="form-inline col-md-12 col-sm-12" role="form">
                     <div class="form-group col-md-2 col-sm-12">
@@ -118,19 +118,19 @@
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
                             }@Html.DropDownList("Month", listMonth, new
-                      {
-                          @class = "form-control",
-                          @required = "required",
-                          @id = "ddkMonth",
-                          @tabindex = "2"
-                      })
+                     {
+                         @class = "form-control",
+                         @required = "required",
+                         @id = "ddkMonth",
+                         @tabindex = "2"
+                     })
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="row" style="height:80px;">
                 <div class="form-inline col-md-12 col-sm-12" role="form">
-                    <div class="form-group col-md-3">                     
+                    <div class="form-group col-md-3">
                         <div class="text-s font-weight-bold text-info  mb-1">Income Tax Import</div>
                     </div>
                     <div class="form-group col-md-4 col-sm-12">
@@ -144,7 +144,6 @@
             </div>
         </div>
     </div>
-<div class="container-fluid">
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
@@ -166,8 +165,8 @@
             </div>
         </div>
     </div>
+    <div class="clearfix"> </div>
 </div>
-<div class="clearfix"> </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -192,6 +191,7 @@
             $('#myModal').modal('show');
         }
         ImportListViewTable();
+        CheckReadOnly();
     });
 
     function fixDigit(val) {
@@ -311,5 +311,24 @@
             }
         });
     });
+
+     function CheckReadOnly() {
+         var ViewPageName ="Import_Log_List";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
+        }
     </script>
     }

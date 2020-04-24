@@ -22,6 +22,7 @@
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("Staff_Save", "Staff", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" ,@class = "form-horizontal", role = "form" }))
 {
+<div class="container-fluid" id="content_zip">
     <div class="row">
         <div class="col-xl-12 col-md-12 col-sm-12 mb-2">
             <div class="card border-left-info shadow">
@@ -29,7 +30,7 @@
                     <div class="text-s font-weight-bold text-info text-uppercase mb-1">Detail Information</div>
                     <div class="form-row">
                         <div style="width:17%;">
-                            <img id="imgpreview" onclick="$('#imgdata').click();" src="../../StaffPhoto/@(Model.Photo)" class="imgcss" style="margin-left: -7px;" >
+                            <img id="imgpreview" onclick="$('#imgdata').click();" src="../../StaffPhoto/@(Model.Photo)" class="imgcss" style="margin-left: -7px;">
                             <input type="file" name="imgdata" id="imgdata" onchange="showpreview(this)" style="visibility:hidden;">
                         </div>
                         <div class="form-group col-xl-2 col-md-4">
@@ -47,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        
+
                         <div class="form-group col-xl-2 col-md-4">
                             <label for="StaffID">StaffID</label><label style="color:red;">&nbsp;*</label>
                             <div class="input-group">
@@ -488,18 +489,18 @@
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-subway"></i></span>
                                 </div>
                                 @*@{
-                                    var listItemParent = new List<SelectListItem>();
-                                    listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
-                                    listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
-                                    listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
-                                }
-                                @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
-                           {
-                               @class = "form-control",
-                               //@required = "required",
-                               @tabindex = "24",
-                               @id = "ddlTransportation"
-                           })*@
+                                             var listItemParent = new List<SelectListItem>();
+                                             listItemParent.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                             listItemParent.Add(new SelectListItem { Text = "Bus", Value = "1" });
+                                             listItemParent.Add(new SelectListItem { Text = "Train", Value = "2" });
+                                         }
+                                         @Html.DropDownListFor(sm => sm.TransportationCD, listItemParent, new
+                                    {
+                                        @class = "form-control",
+                                        //@required = "required",
+                                        @tabindex = "24",
+                                        @id = "ddlTransportation"
+                                    })*@
                                 @Html.TextBoxFor(sm => sm.TransportationFee, new
                          {
                              @class = "form-control input-sm  input-numeral3",
@@ -727,6 +728,8 @@
             </div>
         </div>
     </div>
+</div>
+
 }
 @section Scripts{
     <script type="text/javascript">
@@ -750,6 +753,7 @@
                 $("#txtStaffID").attr('readonly',true);
                 $("#btnSave").html("Update");
             }
+            CheckReadOnly();
         });
 
         function SelectBasicSalary() {
@@ -864,6 +868,24 @@
                 reader.readAsDataURL(input.files[0]);              
             }
 
+        }
+         function CheckReadOnly() {
+             var ViewPageName ="StaffEntry";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
         }
     </script>
 }

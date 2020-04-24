@@ -6,7 +6,7 @@
 }
 @using (Html.BeginForm("SubDivision_Save", "SubDivision", FormMethod.Post, new { enctype = "multipart/form-data", @id = "MyForm" }))
 {
-    <div class="container-fluid">
+    <div class="container-fluid" id="content_zip">
         <!-- Page Heading -->
         <div class="row">
             <div class="col-xl-12 mb-2">
@@ -140,6 +140,8 @@
                         ],
                     }
                 );
+
+                CheckReadOnly();
             });
             function SubDivisionEdit(subDivCD, subDivName) {
                 $('#txtSubDivisionCD').val(subDivCD);
@@ -165,6 +167,24 @@
 
             })
 
+            function CheckReadOnly() {
+                var ViewPageName ="SubDivisionList";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
+        }
         </script>
     }
 

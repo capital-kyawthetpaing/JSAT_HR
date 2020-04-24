@@ -10,18 +10,9 @@
     {
         if (Session["UserID"] != null)
         {
-            var userid = Session["UserID"].ToString().Split('_')[0];
-            bool flag = CheckUserAccess.UserAccess(ViewPageName + '|' + userid);
-
-            if (flag == false)
-            {
-                Context.Response.Redirect("~/Shared/Error");
-            }
-            else
-            {
                 loginID = Session["UserID"].ToString().Split('_')[0];
                 UserName = Session["UserID"].ToString().Split('_')[1];
-            }
+
         }
         else
         {

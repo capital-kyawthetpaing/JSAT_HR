@@ -30,13 +30,33 @@
                     $('#txtprovision2').val(result[3].Amount);
                 }
             })
+            CheckReadOnly();
         });
+
+        function CheckReadOnly() {
+            var ViewPageName ="BasicSalary";
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });             
+        }
     </script>
 }
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("BasicSalary_Save", "BasicSalary", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <div class="row">
+    <div class="row" id="content_zip">
         <div class="col-xl-6 col-md-12 mb-2">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">

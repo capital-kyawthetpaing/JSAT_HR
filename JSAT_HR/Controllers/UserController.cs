@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CommonFunction;
 using FastMember;
+using JH_DL;
 using JH_Model;
 using Newtonsoft.Json;
 using User_BL;
@@ -155,6 +157,13 @@ namespace JSAT_HR.Controllers
                 string st = ex.ToString();               
                 return RedirectToAction("User_List");
             }
+        }
+
+
+        public string UserRead(string id)
+        {            
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(ubl.UserRead(id));
         }
     }
 }

@@ -90,5 +90,20 @@ namespace User_BL
                 return true;
             return false;
         }
+
+        public DataTable UserRead(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dt = new DataTable();
+            string viewname = id;
+            string userid = HttpContext.Current.Session["UserID"].ToString();
+                SqlParameter[] prms = new SqlParameter[3];
+                prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = userid };
+                prms[1] = new SqlParameter("@ViewName", SqlDbType.VarChar) { Value = viewname };
+                prms[2] = new SqlParameter("@Option", SqlDbType.Int) { Value = 2 };
+                dt = bdl.SelectData("User_Authorization_SelectAll", prms);
+
+            return dt;
+        }
     }
 }
