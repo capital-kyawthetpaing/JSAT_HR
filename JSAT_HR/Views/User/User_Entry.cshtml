@@ -184,8 +184,8 @@
                 $(wrapper).append(' <table id="content" class="hrtable">' +
                     '<thead>' +
                     '<tr>' +
-                    '<th>Show View<input type="checkbox" ></th>' +
-                    '<th>Read Only<input type="checkbox" ></th>' +
+                    '<th>Show View<input type="checkbox" id="chkall_ShowView"></th>' +
+                    '<th>Read Only<input type="checkbox" id="chkall_ReadOnly"></th>' +
                     '<th>View ID</th>' +
                     '<th>View Name</th>' +
                     '</tr>' +
@@ -193,7 +193,7 @@
                     '<tbody>' +
                     '</tbody>' +
                     '</table>');
-
+               
                 for (x = 1; x <= json[0].Total; x++) {
 
                      var ViewID = '<input type="text" id="UserlistModel_' + (x - 1) + '__ViewID" name="UserlistModel[' + (x - 1) + '].ViewID">';
@@ -219,14 +219,54 @@
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
                     }
 
+                   
                     checkshowview(x-1);
                     checkreadonly(x-1);
 
+                   
 
                 }
+                checkAllShowView(json[0].Total);
+                checkAllReadOnly(json[0].Total);
             }
         }
 
+        function checkAllShowView(j) {
+            $('#chkall_ShowView').click(function () {
+                var x;
+                if ($(this).prop("checked") == true) {
+                    for (x = 1; x <= j; x++) {
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', true);
+                    }
+                }
+                else if ($(this).prop("checked") == false) {
+                  
+                    for (x = 1; x <= j; x++) {
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').val(false);
+                        $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', false);
+                    }
+                }
+            });           
+        }
+
+        function checkAllReadOnly(j) {
+            $('#chkall_ReadOnly').click(function () {
+                var x;
+                if ($(this).prop("checked") == true) {
+                    for (x = 1; x <= j; x++) {
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
+                    }
+                }
+                else if ($(this).prop("checked") == false) {
+                    for (x = 1; x <= j; x++) {
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(false);
+                        $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', false);
+                    }
+                }
+            });
+        }
         function checkshowview(x)
         {
             $('#UserlistModel_' + (x - 1) + '__ShowView').click(function () {

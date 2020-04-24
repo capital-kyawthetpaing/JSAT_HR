@@ -1,10 +1,11 @@
-﻿@model JH_Model.StaffModel
+﻿@using JSAT_HR.CheckUser;
+@model JH_Model.StaffModel
 @{
     ViewBag.Title = "Staff List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container-fluid" id="content_zip">
     <!-- Page Heading -->
     <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Staff List</h1>
@@ -61,9 +62,9 @@
                                     <th>Office</th>
                                     <th>FingerID</th>
                                     @*<th>Company</th>
-                                    <th>Department</th>
-                                    <th>SubDivision</th>
-                                    <th>Postion</th>*@
+                                        <th>Department</th>
+                                        <th>SubDivision</th>
+                                        <th>Postion</th>*@
                                 </tr>
                             </thead>
                             <tfoot>
@@ -78,6 +79,7 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+
             var table = $('#tblStaff').DataTable(
                 {
                     "order": [[2, "asc"]],
@@ -104,7 +106,7 @@
                         {
                             "data": "StaffID", "render": function (data, type, row) {
                                 return '<a href="../Staff/StaffEntry/' + row.StaffID + '">' + row.StaffID + '</a>';
-                            },orderable: false, "width": "1%"
+                            }, orderable: false, "width": "1%"
                         },
                         { "data": "Name", orderable: false, "width": "10%" },
                         { "data": "Currency", orderable: false, "width": "3%" },
@@ -136,6 +138,8 @@
                     tr.addClass('shown');
                 }
             });
+
+            //CheckReadOnly();
         });
 
         function format(d) {
@@ -155,7 +159,50 @@
                 //'</tr>' +
                 '</table>';
         }
+
+         @*function CheckReadOnly() {
+             var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
+             if (Session["UserID"] != null) {
+                 alert("a");
+                 var userid = Session["UserID"].ToString().Split('_')[0];
+                 $.ajax({
+                     url: '@Url.Action("UserRead", "CheckUserAccess", new { @id = "ID" })'.replace("ID", ViewPageName + '|' + userid),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") {
+                             Context.Response.Redirect("~/Shared/Error");
+                         }
+                         else
+                         {
+                             $('#content_zip').css('pointer-events', 'none');
+                         }
+                     }
+                 });
+             }
+        }*@
     </script>
+
+}
+@{ 
+    var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
+    string Read = string.Empty;
+
+    if (Session["UserID"] != null)
+    {
+        var userid = Session["UserID"].ToString().Split('_')[0];
+        bool flag = CheckUserAccess.UserRead(ViewPageName + '|' + userid);
+
+        if (flag == false)
+        {
+            Context.Response.Redirect("~/Shared/Error");
+        }
+        else
+        {
+            Read = "OK";
+        }
+    }
 
 }
 

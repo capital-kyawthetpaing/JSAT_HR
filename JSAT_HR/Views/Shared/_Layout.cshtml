@@ -1,14 +1,32 @@
-﻿<!DOCTYPE html>
+﻿@using JSAT_HR.CheckUser;
+<!DOCTYPE html>
 @{
     var ControllerName = ViewContext.RouteData.Values["controller"].ToString();
     var ViewPageName = ViewContext.RouteData.Values["action"].ToString();
     var time = Session.Timeout;
     string loginID = string.Empty;
     string UserName = string.Empty;
-    if (Session["UserID"] != null)
+    if (ViewPageName != "Error")
     {
-        loginID = Session["UserID"].ToString().Split('_')[0];
-        UserName = Session["UserID"].ToString().Split('_')[1];
+        if (Session["UserID"] != null)
+        {
+            var userid = Session["UserID"].ToString().Split('_')[0];
+            bool flag = CheckUserAccess.UserAccess(ViewPageName + '|' + userid);
+
+            if (flag == false)
+            {
+                Context.Response.Redirect("~/Shared/Error");
+            }
+            else
+            {
+                loginID = Session["UserID"].ToString().Split('_')[0];
+                UserName = Session["UserID"].ToString().Split('_')[1];
+            }
+        }
+        else
+        {
+            Context.Response.Redirect("~/Login/Login");
+        }
     }
 
     else
