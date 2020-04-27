@@ -19,12 +19,10 @@ namespace JSAT_HR.CheckUser
             bool flag = false;
             BaseDL bdl = new BaseDL();
             DataTable dt = new DataTable();
-            string viewname = id.Split('|')[0];
-            string userid = id.Split('|')[1];
-            if (viewname != "StaffList")
-            {
+            string viewname = id;          
+
                 SqlParameter[] prms = new SqlParameter[3];
-                prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = userid };
+                prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
                 prms[1] = new SqlParameter("@ViewName", SqlDbType.VarChar) { Value = viewname };
                 prms[2] = new SqlParameter("@Option", SqlDbType.Int) { Value = 1 };
                 dt = bdl.SelectData("User_Authorization_SelectAll", prms);
@@ -32,10 +30,7 @@ namespace JSAT_HR.CheckUser
                     flag = true;
                 else
                     flag = false;
-            }
-            else
-                flag = true;
-           
+         
             return flag;
         }
         

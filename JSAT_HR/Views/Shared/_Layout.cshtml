@@ -6,12 +6,13 @@
     var time = Session.Timeout;
     string loginID = string.Empty;
     string UserName = string.Empty;
+
     if (ViewPageName != "Error")
     {
         if (Session["UserID"] != null)
         {
-                loginID = Session["UserID"].ToString().Split('_')[0];
-                UserName = Session["UserID"].ToString().Split('_')[1];
+            loginID = Session["UserID"].ToString().Split('_')[0];
+            UserName = Session["UserID"].ToString().Split('_')[1];
 
         }
         else
@@ -19,10 +20,124 @@
             Context.Response.Redirect("~/Login/Login");
         }
     }
-
     else
     {
         Context.Response.Redirect("~/Login/Login");
+    }
+
+    string ShowView1 = string.Empty;
+    string ShowView2 = string.Empty;
+    string ShowView3 = string.Empty;
+    string ShowView4 = string.Empty;
+    string ShowView5 = string.Empty;
+    string ShowView6 = string.Empty;
+    string ShowView7 = string.Empty;
+    string ShowView8 = string.Empty;
+    string ShowView9 = string.Empty;
+    string ShowView10 = string.Empty;
+    string ShowView11 = string.Empty;
+    string ShowView12 = string.Empty;
+    string ShowView13 = string.Empty;
+    string ShowView14 = string.Empty;
+    string ShowView15 = string.Empty;
+    string ShowView16 = string.Empty;
+    if (Session["UserID"] != null)
+    {
+        bool StaffEntryflag = CheckUserAccess.UserAccess("StaffEntry");
+        if (StaffEntryflag == true)
+        {
+            ShowView1 = "1";
+        }
+
+        bool StaffListflag = CheckUserAccess.UserAccess("StaffList");
+        if (StaffListflag == true)
+        {
+            ShowView2 = "2";
+        }
+
+        bool AttendanceListflag = CheckUserAccess.UserAccess("AttendanceList");
+        if (AttendanceListflag == true)
+        {
+            ShowView3 = "3";
+        }
+
+        bool QuickSettingflag = CheckUserAccess.UserAccess("QuickSetting");
+        if (QuickSettingflag == true)
+        {
+            ShowView4 = "4";
+        }
+
+        bool Company_Listflag = CheckUserAccess.UserAccess("Company_List");
+        if (Company_Listflag == true)
+        {
+            ShowView5 = "5";
+        }
+
+        bool DepartmentListflag = CheckUserAccess.UserAccess("DepartmentList");
+        if (DepartmentListflag == true)
+        {
+            ShowView6 = "6";
+        }
+
+        bool SubDivisionListflag = CheckUserAccess.UserAccess("SubDivisionList");
+        if (SubDivisionListflag == true)
+        {
+            ShowView7 = "7";
+        }
+
+        bool PositionListflag = CheckUserAccess.UserAccess("PositionList");
+        if (PositionListflag == true)
+        {
+            ShowView8 = "8";
+        }
+
+        bool Allowance_Settingflag = CheckUserAccess.UserAccess("Allowance_Setting");
+        if (Allowance_Settingflag == true)
+        {
+            ShowView9 = "9";
+        }
+
+        bool BasicSalaryflag = CheckUserAccess.UserAccess("BasicSalary");
+        if (BasicSalaryflag == true)
+        {
+            ShowView10 = "10";
+        }
+
+        bool Office_Hours_Settingflag = CheckUserAccess.UserAccess("Office_Hours_Setting");
+        if (Office_Hours_Settingflag == true)
+        {
+            ShowView11 = "11";
+        }
+
+        bool PayRoll_Settingflag = CheckUserAccess.UserAccess("PayRoll_Setting");
+        if (PayRoll_Settingflag == true)
+        {
+            ShowView12 = "12";
+        }
+
+        bool PayRoll_Detailflag = CheckUserAccess.UserAccess("PayRoll_Detail");
+        if (PayRoll_Detailflag == true)
+        {
+            ShowView13 = "13";
+        }
+
+        bool Import_Log_Listflag = CheckUserAccess.UserAccess("Import_Log_List");
+        if (Import_Log_Listflag == true)
+        {
+            ShowView14 = "14";
+        }
+
+        bool User_Listflag = CheckUserAccess.UserAccess("User_List");
+        if (User_Listflag == true)
+        {
+            ShowView15 = "15";
+        }
+
+        bool User_Entryflag = CheckUserAccess.UserAccess("User_Entry");
+        if (User_Entryflag == true)
+        {
+            ShowView16 = "16";
+        }
     }
 }
 <html>
@@ -62,133 +177,195 @@
                 Interface
             </div>
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user-alt"></i>
-                    <span>Staff</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Staff:</h6>
-                        <a class="collapse-item" href='@Url.Action("StaffEntry", "Staff",new { id = "" })'>Staff Entry</a>
-                        <a class="collapse-item" href='@Url.Action("StaffList", "Staff")'>Staff List</a>
+            @if (ShowView1 == "1" || ShowView2 == "2")
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-user-alt"></i>
+                        <span>Staff</span>
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Staff:</h6>
+                            @if (ShowView1 == "1")
+                            {
+                                <a class="collapse-item" href='@Url.Action("StaffEntry", "Staff", new { id = "" })'>Staff Entry</a>
+                            }
+                            @if (ShowView2 == "2")
+                            {
+                                <a class="collapse-item" href='@Url.Action("StaffList", "Staff")'>Staff List</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user-alt"></i>
-                    <span>User</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">User:</h6>
-                        <a class="collapse-item" href='@Url.Action("User_List", "User")'>User List</a>
-                        <a class="collapse-item" href='@Url.Action("User_Entry", "User",new { id=""})'>User Entry</a>
+                </li>
+            }
+            @if (ShowView15 == "15" || ShowView16 == "16")
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-user-alt"></i>
+                        <span>User</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">User:</h6>
+                            @if (ShowView15 == "15")
+                            {
+                                <a class="collapse-item" href='@Url.Action("User_List", "User")'>User List</a>
+                            }
+                            @if (ShowView16 == "16")
+                            {
+                                <a class="collapse-item" href='@Url.Action("User_Entry", "User", new { id = "" })'>User Entry</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fa fa-clock"></i>
-                    <span>Attendance</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Attendance:</h6>
-                        @*<a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>*@
-                        <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
-                        @*<a class="collapse-item" href='@Url.Action("QuickAttendance", "Attendance")'>Quick Attendance</a>*@
-                        <a class="collapse-item" href='@Url.Action("QuickSetting", "Attendance")'>Quick Attendance Setting</a>
+                </li>
+            }
+            @if (ShowView3 == "3" || ShowView4 == "4")
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" tabindex="-1" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fa fa-clock"></i>
+                        <span>Attendance</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Attendance:</h6>
+                            @*<a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>*@
+                            @if (ShowView3 == "3")
+                            {
+                                <a class="collapse-item" href='@Url.Action("AttendanceList", "Attendance")'>Attendance List</a>
+                            }
+                            @*<a class="collapse-item" href='@Url.Action("QuickAttendance", "Attendance")'>Quick Attendance</a>*@
+                            @if (ShowView4 == "4")
+                            {
+                                <a class="collapse-item" href='@Url.Action("QuickSetting", "Attendance")'>Quick Attendance Setting</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
             <div class="sidebar-heading">
                 Configuration
             </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseResponsible" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Organization</span>
-                </a>
-                <div id="collapseResponsible" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Organization:</h6>
-                        <a class="collapse-item" href='@Url.Action("Company_List", "Company")'>Company List</a>
-                        <a class="collapse-item" href='@Url.Action("DepartmentList", "Department")'>Department List</a>
-                        <a class="collapse-item" href='@Url.Action("SubDivisionList", "SubDivision")'>SubDivision List</a>
-                        <a class="collapse-item" href='@Url.Action("PositionList", "Position")'>Position List</a>
+            @if (ShowView5 == "5" || ShowView6 == "6" || ShowView7 == "7" || ShowView8 == "8")
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseResponsible" aria-expanded="false" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Organization</span>
+                    </a>
+                    <div id="collapseResponsible" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Organization:</h6>
+                            @if (ShowView5 == "5")
+                            {
+                                <a class="collapse-item" href='@Url.Action("Company_List", "Company")'>Company List</a>
+                            }
+                            @if (ShowView6 == "6")
+                            {
+                                <a class="collapse-item" href='@Url.Action("DepartmentList", "Department")'>Department List</a>
+                            }
+                            @if (ShowView7 == "7")
+                            {
+                                <a class="collapse-item" href='@Url.Action("SubDivisionList", "SubDivision")'>SubDivision List</a>
+                            }
+                            @if (ShowView8 == "8")
+                            {
+                                <a class="collapse-item" href='@Url.Action("PositionList", "Position")'>Position List</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
 
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseallowance" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-money-bill-alt"></i>
-                    <span>Allowance</span>
-                </a>
-                <div id="collapseallowance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Allowance:</h6>
-                        <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance",new { @id = 1 })'>Allowance Setting(MMK)</a>
-                        <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance",new { @id = 2 })'>Allowance Setting(USD)</a>
-                        <a class="collapse-item" href='@Url.Action("BasicSalary", "BasicSalary")'>Basic Salary Setting</a>
+            @if (ShowView9 == "9" || ShowView10 == "10")
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseallowance" aria-expanded="false" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-money-bill-alt"></i>
+                        <span>Allowance</span>
+                    </a>
+                    <div id="collapseallowance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Allowance:</h6>
+                            @if (ShowView9 == "9")
+                            {
+                                <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance", new { @id = 1 })'>Allowance Setting(MMK)</a>
+                                <a class="collapse-item" href='@Url.Action("Allowance_Setting", "Allowance", new { @id = 2 })'>Allowance Setting(USD)</a>
+
+                            }
+                            @if (ShowView10 == "10")
+                            {
+                                <a class="collapse-item" href='@Url.Action("BasicSalary", "BasicSalary")'>Basic Salary Setting</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapsetimesetting" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-clock"></i>
-                    <span>Office Hours Setting</span>
-                </a>
-                <div id="collapsetimesetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Office Hours Setting:</h6>
-                        <a class="collapse-item" href='@Url.Action("Office_Hours_Setting", "Office")'>Office Hours Setting</a>
+                </li>
+            }
+            @if (ShowView11 == "11")
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapsetimesetting" aria-expanded="false" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-clock"></i>
+                        <span>Office Hours Setting</span>
+                    </a>
+                    <div id="collapsetimesetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Office Hours Setting:</h6>
+                            <a class="collapse-item" href='@Url.Action("Office_Hours_Setting", "Office")'>Office Hours Setting</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapsepayroll" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-calculator"></i>
-                    <span>PayRoll Setting</span>
-                </a>
-                <div id="collapsepayroll" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">PayRoll Setting:</h6>
-                        <a class="collapse-item" href='@Url.Action("PayRoll_Setting", "PayRoll")'>PayRoll Setting</a>
-                        <a class="collapse-item" href='@Url.Action("PayRoll_Detail", "PayRoll")'>PayRoll Detail</a>
+                </li>
+            }
+            @if (ShowView12 == "12" || ShowView13 == "13")
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapsepayroll" aria-expanded="false" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-calculator"></i>
+                        <span>PayRoll Setting</span>
+                    </a>
+                    <div id="collapsepayroll" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">PayRoll Setting:</h6>
+                            @if (ShowView12 == "12")
+                            {
+                                <a class="collapse-item" href='@Url.Action("PayRoll_Setting", "PayRoll")'>PayRoll Setting</a>
+                            }
+                            @if (ShowView13 == "13")
+                            {
+                                <a class="collapse-item" href='@Url.Action("PayRoll_Detail", "PayRoll")'>PayRoll Detail</a>
+                            }
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseimport" aria-expanded="false" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-file-import"></i>
-                    <span>Import</span>
-                </a>
-                <div id="collapseimport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Import</h6>
-                        <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
+                </li>
+            }
+            @if (ShowView14 == "14")
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseimport" aria-expanded="false" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-file-import"></i>
+                        <span>Import</span>
+                    </a>
+                    <div id="collapseimport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Import</h6>
+                            <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
+                        </div>
                     </div>
+                </li>
+            }
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button tabindex="-1" class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button tabindex="-1" class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>
+            </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
