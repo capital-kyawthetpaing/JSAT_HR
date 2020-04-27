@@ -222,13 +222,9 @@
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
                     }
-
                    
-                    checkshowview(x-1);
-                    checkreadonly(x-1);
-
-                   
-
+                    checkshowview(x);
+                    checkreadonly(x);                  
                 }
                 checkAllShowView(json[0].Total);
                 checkAllReadOnly(json[0].Total);
@@ -271,6 +267,7 @@
                 }
             });
         }
+
         function checkshowview(x)
         {
             $('#UserlistModel_' + (x - 1) + '__ShowView').click(function () {
@@ -279,6 +276,7 @@
                 }
                 else if ($(this).prop("checked") == false) {
                     $('#UserlistModel_' + (x - 1) + '__ShowView').val(false);
+                    $('#chkall_ShowView').prop('checked', false);
                 }
             });
         }
@@ -291,6 +289,7 @@
                 }
                 else if ($(this).prop("checked") == false) {
                     $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(false);
+                    $('#chkall_ReadOnly').prop('checked', false);
                 }
             });
         }
