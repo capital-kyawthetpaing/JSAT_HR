@@ -219,17 +219,33 @@
                     if (json[x - 1].ShowView == true) {
                         $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
                         $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', true);
+                     
                     }
                     if (json[x - 1].IsReadOnly == true) {
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
                     }
+
                     if (x % 2 == 0) {
                         $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
                     }
                     else {
                         $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
-                    }      
+                    }  
+
+                    if (json[x - 1].ShowView == true || json[x - 1].IsReadOnly == true) {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "#7fb2e8");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                    }
+
+                    if (json[x - 1].ShowView == true && json[x - 1].IsReadOnly == true) {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "#ffffb3");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#ffffb3');
+                    }
+
+
                     checkshowview(x);
                     checkreadonly(x);                  
                 }
@@ -245,6 +261,17 @@
                     for (x = 1; x <= j; x++) {
                         $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
                         $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', true);
+
+                        if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "true") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                            $($row).css("background-color", "#ffffb3");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#ffffb3');
+                        }
+                        else if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "on" || $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "false") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                            $($row).css("background-color", "#7fb2e8");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                        }
                     }
                 }
                 else if ($(this).prop("checked") == false) {
@@ -252,6 +279,22 @@
                     for (x = 1; x <= j; x++) {
                         $('#UserlistModel_' + (x - 1) + '__ShowView').val(false);
                         $('#UserlistModel_' + (x - 1) + '__ShowView').prop('checked', false);
+
+                        if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "true") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                            $($row).css("background-color", "#7fb2e8");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                        }
+                        else if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "on" || $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "false") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                            $($row).css("background-color", "");
+                            if (x % 2 == 0) {
+                                $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
+                            }
+                            else {
+                                $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
+                            }  
+                        }
                     }
                 }
             });           
@@ -264,12 +307,39 @@
                     for (x = 1; x <= j; x++) {
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
+
+                        if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "true") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                            $($row).css("background-color", "#ffffb3");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#ffffb3');
+                        }
+                        else if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "on" || $('#UserlistModel_' + (x - 1) + '__ShowView').val() == "false") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                            $($row).css("background-color", "#7fb2e8");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                        }
                     }
                 }
                 else if ($(this).prop("checked") == false) {
                     for (x = 1; x <= j; x++) {
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(false);
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', false);
+
+                        if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "true") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                            $($row).css("background-color", "#7fb2e8");
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                        }
+                        else if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "on" || $('#UserlistModel_' + (x - 1) + '__ShowView').val() == "false") {
+                            var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                            $($row).css("background-color", "");
+                            if (x % 2 == 0) {
+                                $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
+                            }
+                            else {
+                                $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
+                            }  
+                        }
                     }
                 }
             });
@@ -280,10 +350,37 @@
             $('#UserlistModel_' + (x - 1) + '__ShowView').click(function () {
                 if ($(this).prop("checked") == true) {
                     $('#UserlistModel_' + (x - 1) + '__ShowView').val(true);
+                  
+                    if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "true") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                        $($row).css("background-color", "#ffffb3");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#ffffb3');
+                    }
+                    else if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "on" || $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "false") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                        $($row).css("background-color", "#7fb2e8");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                    }
                 }
                 else if ($(this).prop("checked") == false) {
                     $('#UserlistModel_' + (x - 1) + '__ShowView').val(false);
                     $('#chkall_ShowView').prop('checked', false);
+
+                    if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "true") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                        $($row).css("background-color", "#7fb2e8");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                    }
+                    else if ($('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "on" || $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val() == "false") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__ShowView').closest('tr');
+                        $($row).css("background-color", "");
+                        if (x % 2 == 0) {
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
+                        }
+                        else {
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
+                        }  
+                    }
                 }
             });
         }
@@ -293,13 +390,43 @@
             $('#UserlistModel_' + (x - 1) + '__IsReadOnly').click(function () {
                 if ($(this).prop("checked") == true) {
                     $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
+
+                    if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "true") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "#ffffb3");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#ffffb3');
+                    }
+                    else if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "on" || $('#UserlistModel_' + (x - 1) + '__ShowView').val() == "false") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "#7fb2e8");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                    }
                 }
                 else if ($(this).prop("checked") == false) {
                     $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(false);
                     $('#chkall_ReadOnly').prop('checked', false);
+
+                    if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "true") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "#7fb2e8");
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', '#7fb2e8');
+                    }
+                    else if ($('#UserlistModel_' + (x - 1) + '__ShowView').val() == "on" || $('#UserlistModel_' + (x - 1) + '__ShowView').val() == "false") {
+                        var $row = $('#UserlistModel_' + (x - 1) + '__IsReadOnly').closest('tr');
+                        $($row).css("background-color", "");
+                        if (x % 2 == 0) {
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
+                        }
+                        else {
+                            $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
+                        }  
+                    }
                 }
             });
         }
+
+
+      
 
          function CheckReadOnly() {
              var ViewPageName ="User_Entry";
