@@ -37,6 +37,7 @@
             top: 2px;
             left: 6px;
         }
+
 </style>
 
 @Html.AntiForgeryToken()
@@ -201,7 +202,7 @@
                
                 for (x = 1; x <= json[0].Total; x++) {
 
-                    var ViewID = '<input type="text" style="border-style: hidden;" readonly id="UserlistModel_' + (x - 1) + '__ViewID" name="UserlistModel[' + (x - 1) + '].ViewID">';
+                    var ViewID = '<input type="text" style="border-style: hidden;" maxlength="4" size="4" readonly id="UserlistModel_' + (x - 1) + '__ViewID" name="UserlistModel[' + (x - 1) + '].ViewID">';
 
                     var ShowView = '<input type="checkbox" id="UserlistModel_' + (x - 1) + '__ShowView" name="UserlistModel[' + (x - 1) + '].ShowView">';
 
@@ -223,7 +224,12 @@
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').val(true);
                         $('#UserlistModel_' + (x - 1) + '__IsReadOnly').prop('checked', true);
                     }
-                   
+                    if (x % 2 == 0) {
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'azure');
+                    }
+                    else {
+                        $('#UserlistModel_' + (x - 1) + '__ViewID').css('background-color', 'white');
+                    }      
                     checkshowview(x);
                     checkreadonly(x);                  
                 }
