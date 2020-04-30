@@ -104,7 +104,7 @@
             </div>
         </div>
         <br />
-        <div class="card border-left-info shadow h-100 py-2">
+        <div class="card border-left-info shadow h-100 py-2" id="divallowance" style="display:none;">
             <div class="card-body">
 
                 <div class="form-group form-row" >
@@ -112,6 +112,7 @@
                         <table class="form-group" id="Allowance">
                             <tr>
                                 <td id="Allowance_label"></td>
+                                <td>&nbsp;</td>
                                 <td id="Allowance_Data"></td>
 
                             </tr>
@@ -123,6 +124,7 @@
                         <table class="form-group" id="Deduction">
                             <tr>
                                 <td id="Deduction_label"> </td>
+                                <td>&nbsp;</td>
                                 <td id="Deduction_Value"> </td>
 
                             </tr>
@@ -137,8 +139,18 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <div class="card border-left-info shadow h-100 py-2" id="divmsg" style="display:none;">
+            <div class="card-body">
+
+                <div class="form-group form-row">
+                    <label>There is no data</label>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
 
 <style>
     tr:nth-child(even) {
@@ -210,11 +222,12 @@
 
                 dataType: "json",
                 success: function (data) {
-                   // alert(data);
-                    $("#Allowance_label").html(data);
+                 
+                        $("#Allowance_label").html(data);
+                  
                 },
                 error: function (result) {
-                    alert("Error");
+                    alert("Error");                    
                 }
             });
 
@@ -229,8 +242,9 @@
 
                 dataType: "json",
                 success: function (data) {
-                     //alert("Hello");
-                    $("#Allowance_Data").html(data);
+              
+                        $("#Allowance_Data").html(data);
+                   
                 },
                 error: function (result) {
                     alert("Error");
@@ -248,8 +262,9 @@
 
                 dataType: "json",
                 success: function (data) {
-                    // alert(data);
-                    $("#Deduction_label").html(data);
+                  
+                        $("#Deduction_label").html(data);
+                    
                 },
                 error: function (result) {
                     alert("Error");
@@ -266,11 +281,13 @@
 
                 dataType: "json",
                 success: function (data) {
-                    //alert("Hello");
-                    $("#Deduction_Value").html(data);
+                
+                        $("#Deduction_Value").html(data);
+                    
                 },
                 error: function (result) {
                     alert("Error");
+                   
                 }
             });
         }
@@ -291,12 +308,15 @@
 
             if (Name != "" && Year != "0" && Month != "0")
             {
-              //  alert("Hello " + Name + "_" + Year + Month);
                 var id = Name + "_" + Year + Month;
-                  GetLabel_PayRollAllowance(id);
-                  GetData_PayRollAllowance(id);
-                  GetLabel_PayRollDeduction(id);
-                  GetData_PayRollDeduction(id);
+                                                                
+                 GetLabel_PayRollAllowance(id);
+                 GetData_PayRollAllowance(id);
+                 GetLabel_PayRollDeduction(id);
+                 GetData_PayRollDeduction(id);
+
+                 $("#divallowance").css("display", "block");
+                            
             }
             else
             {

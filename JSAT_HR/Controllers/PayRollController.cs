@@ -216,12 +216,16 @@ namespace JSAT_HR.Controllers
             if (dt.Rows.Count > 0)
             {
 
-                var StaffID = dt.Rows[0]["StaffID"].ToString();
-                Table_Header += PRD_Row("StaffID");
+                //var StaffID = dt.Rows[0]["StaffID"].ToString();
+                //Table_Header += PRD_Row("StaffID");
+                var FingerPrintID = dt.Rows[0]["FingerPrintID"].ToString();
+                Table_Header += PRD_Row("FingerPrintID");
+                var OfficeCD = dt.Rows[0]["OfficeCD"].ToString();
+                Table_Header += PRD_Row("OfficeCD");
                 var StaffName = dt.Rows[0]["Name"].ToString();
                 Table_Header += PRD_Row("Name");
-                var YYYYMM = dt.Rows[0]["YYYYMM"].ToString();
-                Table_Header += PRD_Row("YYYYMM");
+                //var YYYYMM = dt.Rows[0]["YYYYMM"].ToString();
+                //Table_Header += PRD_Row("YYYYMM");
                 var Currency = dt.Rows[0]["Currency"].ToString();
                 Table_Header += PRD_Row("Currency");
                 var BasicSalary = dt.Rows[0]["BasicSalary"].ToString();
@@ -488,12 +492,16 @@ namespace JSAT_HR.Controllers
             if (dt.Rows.Count > 0)
             {
 
-                var StaffID = dt.Rows[0]["StaffID"].ToString();
-                AllowanceData += "<tr><td>" + StaffID + "</td></tr>";
+                //var StaffID = dt.Rows[0]["StaffID"].ToString();
+                //AllowanceData += "<tr><td>" + StaffID + "</td></tr>";
+                var FingerPrintID = dt.Rows[0]["FingerPrintID"].ToString();
+                AllowanceData += "<tr><td>" + FingerPrintID + "</td></tr>";
+                var OfficeCD = dt.Rows[0]["OfficeCD"].ToString();
+                AllowanceData += "<tr><td>" + OfficeCD + "</td></tr>";
                 var StaffName = dt.Rows[0]["Name"].ToString();
                 AllowanceData += "<tr><td>" + StaffName + "</td></tr>";
-                var YYYYMM = dt.Rows[0]["YYYYMM"].ToString();
-                AllowanceData += "<tr><td>" + YYYYMM + "</td></tr>";
+                //var YYYYMM = dt.Rows[0]["YYYYMM"].ToString();
+                //AllowanceData += "<tr><td>" + YYYYMM + "</td></tr>";
                 var Currency = dt.Rows[0]["Currency"].ToString();
                 AllowanceData += "<tr><td>" + Currency + "</td></tr>";
                 var BasicSalary = dt.Rows[0]["BasicSalary"].ToString();
