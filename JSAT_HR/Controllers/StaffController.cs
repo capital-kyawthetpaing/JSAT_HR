@@ -32,6 +32,9 @@ namespace JSAT_HR.Controllers
 
         public ActionResult StaffEntry(string id)
         {
+            String Emsg = Session["Emsg"] as string;
+            ViewBag.Emsg = Emsg;
+            Session["Emsg"] = "";
             StaffModel sm = new StaffModel();
             if (!string.IsNullOrWhiteSpace(id))
             {
@@ -86,13 +89,13 @@ namespace JSAT_HR.Controllers
                             model.Photo = "Default.png";
                         }
                         msg = sbl.Staff_Save(model);
-                        TempData["Smsg"] = msg;
+                        //TempData["Smsg"] = msg;
                         return RedirectToAction("StaffList");
                     }
                     else
                     {
-                      
-                        TempData["Imsg"] = "Duplicate";
+
+                        Session["Emsg"] = "Duplicate";
                         return RedirectToAction("StaffEntry");
                     }
                 }

@@ -3,6 +3,7 @@
     /**/
     ViewBag.Title = "Staff Entry";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 
     //Model.Mode = "save";
     //if (Model.StaffID != null)
@@ -744,6 +745,11 @@
         });
 
         $(document).ready(function () {
+             var Emsg = '@ViewBag.Emsg';
+            if (Emsg == "Duplicate") {
+                GetMessage("I_1003", "Duplicate");
+                 $('#myModal').modal('show');
+            }
             SelectDepartment();
             SelectSubDivision();
             SelectPosition();
