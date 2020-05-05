@@ -140,7 +140,7 @@
             </div>
         </div>
 
-        <div class="card border-left-info shadow h-100 py-2" id="divmsg" style="display:none;">
+        @*<div class="card border-left-info shadow h-100 py-2" id="divmsg" style="display:none;">
             <div class="card-body">
 
                 <div class="form-group form-row">
@@ -148,7 +148,7 @@
                     </div>
                 </div>
 
-                </div>
+                </div>*@
             </div>
         </div>
 
@@ -311,7 +311,7 @@
             if (Name != "" && Year != "0" && Month != "0")
             {
                 var id = Name + "_" + Year + Month;
-                $.ajax({
+                @*$.ajax({
                     type: 'POST',
                     url: '@Url.Action("Check_PayRoll", "PayRoll",new { @id = "ID" })'.replace("ID", id),
                     dataType: 'json',
@@ -319,16 +319,16 @@
                         if (json == null || json == "") {
                             $("#divmsg").css("display", "block");
                         }
-                        else {
+                        else {*@
                             GetLabel_PayRollAllowance(id);
                             GetData_PayRollAllowance(id);
                             GetLabel_PayRollDeduction(id);
                             GetData_PayRollDeduction(id);
 
                             $("#divallowance").css("display", "block");
-                        }
-                    }
-                });
+                //        }
+                //    }
+                //});
             }
             else
             {
@@ -342,7 +342,8 @@
             var year = $('#ddlYear').val();
                 var month = $('#ddlMonth').val();
                 var stid = $('#staffNameID').val();
-                var yearmonth = year + month + stid;
+            var yearmonth = year + month + stid;
+            alert(yearmonth);
             window.open('@Url.Action("PayRoll_Detail_Report", "PayRoll")?id=' + yearmonth);
         }
 

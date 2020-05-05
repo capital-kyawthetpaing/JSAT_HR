@@ -146,7 +146,7 @@ namespace JSAT_HR.Controllers
             string savefilename = "PayRoll_Report_Detail" + (DateTime.Now).ToShortDateString() + ".pdf";
 
             DataTable dt = new DataTable();
-            dt = pbl.PayRoll_Detail_Report(id.Substring(6,1),id.Substring(0,6));
+            dt = pbl.PayRoll_Detail_Report(id.Substring(6),id.Substring(0,6));
             if (dt.Rows.Count > 0)
             {
                 ds.Tables.Add(dt);

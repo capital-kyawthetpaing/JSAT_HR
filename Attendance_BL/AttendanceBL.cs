@@ -233,7 +233,7 @@ namespace Attendance_BL
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[3];
             prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = am.YYYYMM };
-            prms[1] = new SqlParameter("@StaffID", SqlDbType.VarChar) { Value = am.StaffID };
+            prms[1] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = am.StaffID };
             prms[2]= new SqlParameter("@YYYYMMDD", SqlDbType.VarChar) { Value = am.AttandenceDate };
 
             DataTable dtAttendance = new DataTable();
