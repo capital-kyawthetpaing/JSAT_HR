@@ -54,6 +54,12 @@ namespace JSAT_HR.Controllers
                 return JsonConvert.SerializeObject(dtpay);
         }
 
+        [HttpPost]
+        public string Check_PayRoll(string id)
+        {
+            DataTable dt = pbl.PayRoll_Select(id);
+            return JsonConvert.SerializeObject(dt);
+        }
         public FileStreamResult PayRoll_Report(string id)
         {
             DataSet ds = new DataSet();

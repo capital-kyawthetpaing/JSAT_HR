@@ -36,12 +36,14 @@ namespace JSAT_HR.Controllers
             if (!string.IsNullOrWhiteSpace(id))
             {
                 sm.StaffID = id;
-                sm.Mode = "update";
+               // sm.Mode = "update";
+                ViewBag.Staffid = id;
                 sm = sbl.SearchStaff(sm);                
             }
             else
             {
-                sm.Mode = "save";
+                //sm.Mode = "save";
+                ViewBag.Staffid = "";
                 sm.Photo = "Default.png";
             }
             return View(sm);
@@ -60,8 +62,9 @@ namespace JSAT_HR.Controllers
             try
             {
                 string msg = string.Empty;
-                if ( model.Mode == "save")
+                if ( model.Mode == null)
                 {
+                    model.Mode = "save";
                     bool exists = sbl.StaffExists(model);
                     if (!exists)
                     {
@@ -82,7 +85,7 @@ namespace JSAT_HR.Controllers
                         {
                             model.Photo = "Default.png";
                         }
-                        msg = sbl.Staff_Save(model);
+                        //msg = sbl.Staff_Save(model);
                         TempData["Smsg"] = msg;
                         return RedirectToAction("StaffList");
                     }
@@ -108,7 +111,7 @@ namespace JSAT_HR.Controllers
                         imgfile.SaveAs(path);
                         model.Photo= model.StaffID + Path.GetExtension(photoname);
                     }
-                    msg = sbl.Staff_Update(model);
+                   // msg = sbl.Staff_Update(model);
                     return RedirectToAction("StaffList");
                 }
             }

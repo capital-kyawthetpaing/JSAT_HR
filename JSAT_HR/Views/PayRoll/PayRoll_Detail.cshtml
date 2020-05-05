@@ -294,6 +294,8 @@
 
         function ShowData(x)
         {
+        //    $("#divmsg").css("display", "none");
+        //    $("#divallowance").css("display", "none");
             var Name = "";
             var Year = "";
             var Month = "";
@@ -309,14 +311,24 @@
             if (Name != "" && Year != "0" && Month != "0")
             {
                 var id = Name + "_" + Year + Month;
-                                                                
-                 GetLabel_PayRollAllowance(id);
-                 GetData_PayRollAllowance(id);
-                 GetLabel_PayRollDeduction(id);
-                 GetData_PayRollDeduction(id);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Check_PayRoll", "PayRoll",new { @id = "ID" })'.replace("ID", id),
+                    dataType: 'json',
+                    success: function (json) {
+                        if (json == null || json == "") {
+                            $("#divmsg").css("display", "block");
+                        }
+                        else {
+                            GetLabel_PayRollAllowance(id);
+                            GetData_PayRollAllowance(id);
+                            GetLabel_PayRollDeduction(id);
+                            GetData_PayRollDeduction(id);
 
-                 $("#divallowance").css("display", "block");
-                            
+                            $("#divallowance").css("display", "block");
+                        }
+                    }
+                });
             }
             else
             {

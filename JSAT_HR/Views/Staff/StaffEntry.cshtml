@@ -4,11 +4,11 @@
     ViewBag.Title = "Staff Entry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    Model.Mode = "save";
-    if (Model.StaffID != null)
-    {
-        Model.Mode = "update";
-    }
+    //Model.Mode = "save";
+    //if (Model.StaffID != null)
+    //{
+    //    Model.Mode = "update";
+    //}
 }
 <style>
     .imgcss {
@@ -55,6 +55,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-id-card-alt"></i></span>
                                 </div>
+                                @Html.HiddenFor(sm => sm.Mode, new { @id = "hfSave_Update" })
                                 @Html.TextBoxFor(sm => sm.StaffID, new
                                 {
                                     @class = "form-control input-sm input-integeronly1",
@@ -186,7 +187,9 @@
                                //@required = "required",
                                @id = "txtBankInformation",
                                @autofocus = "autofocus",
-                               maxlength = "10"
+                               maxlength = "19"
+                               //onkeyup = "checkBankInfo()",
+                               //onkeydown = "fnAllowNumeric()"
                            })
                             </div>
                         </div>
@@ -747,11 +750,12 @@
             SelectOffice();
             SelectCompany();
             SelectBasicSalary();
-           
-            if('@Model.Mode' == "update")
-            {
-                $("#txtStaffID").attr('readonly',true);
+            var sid = '@ViewBag.Staffid';
+            if (sid == null || sid == "") { }
+            else{
+                $("#txtStaffID").attr('readonly', true);
                 $("#btnSave").html("Update");
+                document.getElementById("hfSave_Update").value = "update";
             }
             CheckReadOnly();
         });
@@ -886,6 +890,43 @@
                          }
                      }
                  });             
+        }
+
+        function checkBankInfo() {
+            var bankcode = event.target.value;
+            bankcode = bankcode.replace(/\s/g, '')    // remove all occurrences of ''
+                  
+            if (bankcode.length > 16) {
+                //alert(16);
+                event.target.value = bankcode.substring(0, 4) + " " + bankcode.substring(4, 8) + " " + bankcode.substring(8, 12) + " " + bankcode.substring(4);
+            }
+            else if (bankcode.length > 12) {
+                //alert(12);
+                event.target.value = bankcode.substring(0, 4) + " " + bankcode.substring(4, 8) + " " + bankcode.substring(8, 12) + " " + bankcode.substring(4);
+            }  
+            else if (bankcode.length > 8) {      
+                //alert(8);
+                event.target.value = bankcode.substring(0, 4) + " " + bankcode.substring(4, 8) + " " + bankcode.substring(4);
+            }
+            else if (bankcode.length > 4) {
+                //alert(4);
+                event.target.value = bankcode.substring(0, 4) + " " + bankcode.substring(4);
+            }
+
+        }
+
+        function fnAllowNumeric() {
+            //allow number
+            if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
+
+                if ((event.keyCode < 106 && event.keyCode > 95)) {
+                    return true;
+                }
+
+                event.preventDefault();
+                return false;
+
+            }
         }
     </script>
 }
