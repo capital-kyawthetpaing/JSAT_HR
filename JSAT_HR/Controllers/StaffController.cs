@@ -76,11 +76,11 @@ namespace JSAT_HR.Controllers
                         photoname = imgfile.FileName;
                         if (!string.IsNullOrWhiteSpace(photoname))
                         {
-                            if (!Directory.Exists(StaffPhoto))
+                            if (!Directory.Exists(Server.MapPath("~/StaffPhoto/")))
                             {
-                                Directory.CreateDirectory(StaffPhoto);
+                                Directory.CreateDirectory(Server.MapPath("~/StaffPhoto/"));
                             }
-                            string path = StaffPhoto + model.StaffID + Path.GetExtension(photoname);
+                            string path = Server.MapPath("~/StaffPhoto/") + model.StaffID + Path.GetExtension(photoname);
                             imgfile.SaveAs(path);
                             model.Photo = model.StaffID + Path.GetExtension(photoname);
                         }
@@ -106,11 +106,11 @@ namespace JSAT_HR.Controllers
                     photoname = imgfile.FileName;
                     if (!string.IsNullOrWhiteSpace(photoname))
                     {
-                        if (!Directory.Exists(StaffPhoto))
+                        if (!Directory.Exists(Server.MapPath("~/StaffPhoto/")))
                         {
-                            Directory.CreateDirectory(StaffPhoto);
+                            Directory.CreateDirectory(Server.MapPath("~/StaffPhoto/"));
                         }
-                        string path = StaffPhoto + model.StaffID + Path.GetExtension(photoname);
+                        string path = Server.MapPath("~/StaffPhoto/") + model.StaffID + Path.GetExtension(photoname);
                         imgfile.SaveAs(path);
                         model.Photo= model.StaffID + Path.GetExtension(photoname);
                     }
