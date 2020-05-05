@@ -85,7 +85,7 @@ namespace JSAT_HR.Controllers
                         {
                             model.Photo = "Default.png";
                         }
-                        //msg = sbl.Staff_Save(model);
+                        msg = sbl.Staff_Save(model);
                         TempData["Smsg"] = msg;
                         return RedirectToAction("StaffList");
                     }
@@ -111,7 +111,7 @@ namespace JSAT_HR.Controllers
                         imgfile.SaveAs(path);
                         model.Photo= model.StaffID + Path.GetExtension(photoname);
                     }
-                   // msg = sbl.Staff_Update(model);
+                    msg = sbl.Staff_Update(model);
                     return RedirectToAction("StaffList");
                 }
             }
