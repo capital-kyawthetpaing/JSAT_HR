@@ -98,10 +98,16 @@ namespace Staff_BL
             //ms.ChangeDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             ms.Name = model.Name;
             ms.Gender = Convert.ToByte(model.Gender);
-            ms.DOB = Convert.ToDateTime(model.DOB);
+            if (model.DOB != null)
+                ms.DOB = Convert.ToDateTime(model.DOB);
+            else
+                ms.DOB = null;
             ms.NRC = model.NRC;
             ms.JoinDate = Convert.ToDateTime(model.JoinDate);
-            ms.PermanentDate = Convert.ToDateTime(model.PermanentDate);
+            if (model.PermanentDate != null)
+                ms.PermanentDate = Convert.ToDateTime(model.PermanentDate);
+            else
+                ms.PermanentDate = null;
             ms.BankInformation = model.BankInformation;
             ms.PermanentAddress = model.PermanentAddress;
             ms.TemporaryAddress = model.TemporaryAddress;
