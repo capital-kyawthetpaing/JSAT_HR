@@ -45,7 +45,7 @@ namespace User_BL
             BaseDL bdl = new BaseDL();
             SqlParameter[] prms = new SqlParameter[1];
 
-            prms[0] = new SqlParameter("@UserID", SqlDbType.Int) { Value = id };
+            prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = id };
 
             return bdl.SelectData("User_SelectAll_ForEdit", prms);
         }
