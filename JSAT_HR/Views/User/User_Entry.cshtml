@@ -58,12 +58,12 @@
                                 @Html.HiddenFor(um => um.userModel.SaveUpdateFlag, new { @id = "hfSave_Update" })
                                 @Html.TextBoxFor(um => um.userModel.UserID, new
                                 {
-                                    @class = "form-control input-sm input-integeronly1",
+                                    @class = "form-control input-sm",
                                     @tabindex = "1",
                                     @required = "required",
                                     @id = "txtUserID",
                                     @autofocus = "autofocus",
-                                    maxlength = "4",
+                                    maxlength = "10",
 
                                 })
                             </div>
@@ -193,9 +193,9 @@
                 $(wrapper).append(' <table id="content" class="hrtable">' +
                     '<thead>' +
                     '<tr>' +
-                    '<th>View ID</th>' +
-                    '<th>View Name</th>' +
-                    '<th>Show View<input type="checkbox" id="chkall_ShowView"></th>' +
+                    '<th>Menu ID</th>' +
+                    '<th>Menu</th>' +
+                    '<th>Show Menu<input type="checkbox" id="chkall_ShowView"></th>' +
                     '<th>Read Only<input type="checkbox" id="chkall_ReadOnly"></th>' +                  
                     '</tr>' +
                     '</thead>' +

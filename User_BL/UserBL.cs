@@ -57,7 +57,7 @@ namespace User_BL
             {
                 SqlParameter[] prms = new SqlParameter[6];
 
-                prms[0] = new SqlParameter("@UserID", SqlDbType.Int) { Value = mModel.userModel.UserID };
+                prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = mModel.userModel.UserID };
 
                 prms[1] = new SqlParameter("@UserName", SqlDbType.VarChar) { Value = mModel.userModel.UserName };
 
