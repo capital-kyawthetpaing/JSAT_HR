@@ -69,5 +69,11 @@ namespace JSAT_HR.Controllers
             }
             return RedirectToAction("SubDivisionList");
         }
+
+        public string SubDivisionCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(sdbl.SubDivisionCheck(id));
+        }
     }
 }

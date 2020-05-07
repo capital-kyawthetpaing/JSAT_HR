@@ -74,6 +74,12 @@ namespace JSAT_HR.Controllers
             }
             return RedirectToAction("DepartmentList");
         }
+
+        public string DepartmentCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(dp_bl.DepartmentCheck(id));
+        }
     }
 }
 

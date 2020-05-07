@@ -26,7 +26,8 @@
                                    @required = "required",
                                    @id = "txtSubDivisionCD",
                                    @autofocus = "autofocus",
-                                   maxlength = "100"
+                                   maxlength = "100",
+                                   @onchange = "checkExist(event)"
                                })
                                 </div>
                             </div>
@@ -184,7 +185,27 @@
                          }
                      }
                  });             
-        }
+            }
+
+
+            function checkExist(event) {
+                var userid = event.target.value;
+                $.ajax({
+                    url: '@Url.Action("SubDivisionCheck", "SubDivision", new { @id = "ID" })'.replace("ID", userid),
+                    type: "GET",
+                    dataType: "JSON",
+                    dataSrc: '',
+                    success: function (json) {
+                        if (json == null || json == "") { }
+                        else {
+                            GetMessage("I_1012", "Duplicate");
+                            $('#myModal').modal('show');
+                            $("#txtSubDivisionCD").val('');
+                        }
+                    }
+                });
+            }
+
         </script>
     }
 

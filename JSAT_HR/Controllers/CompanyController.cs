@@ -75,5 +75,11 @@ namespace JSAT_HR.Controllers
             }
             return RedirectToAction("Company_List");
         }
+
+        public string CompanyCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(cbl.CompanyCheck(id));
+        }
     }
 }
