@@ -96,8 +96,8 @@ namespace User_BL
             BaseDL bdl = new BaseDL();
             DataTable dt = new DataTable();
             string viewname = id;
-            string userid = HttpContext.Current.Session["UserID"].ToString();
-                SqlParameter[] prms = new SqlParameter[3];
+            string userid = HttpContext.Current.Session["UserID"].ToString().Split('_')[0];
+            SqlParameter[] prms = new SqlParameter[3];
                 prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = userid };
                 prms[1] = new SqlParameter("@ViewName", SqlDbType.VarChar) { Value = viewname };
                 prms[2] = new SqlParameter("@Option", SqlDbType.Int) { Value = 2 };
