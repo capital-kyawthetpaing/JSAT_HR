@@ -123,6 +123,12 @@ namespace JSAT_HR.Controllers
                 string st = ex.ToString();
                 return RedirectToAction("StaffEntry");
             }
-        }       
+        }
+
+        public string StaffCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(sbl.StaffCheck(id));
+        }
     }
 }

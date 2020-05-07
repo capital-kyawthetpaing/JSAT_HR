@@ -258,5 +258,16 @@ namespace Staff_BL
                 return true;
             return false;
         }
+
+        public DataTable StaffCheck(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dt = new DataTable();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@StaffID", SqlDbType.VarChar) { Value = id };
+            dt = bdl.SelectData("M_Staff_Select_byID", prms);
+
+            return dt;
+        }
     }
 }
