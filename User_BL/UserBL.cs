@@ -105,5 +105,16 @@ namespace User_BL
 
             return dt;
         }
+
+        public DataTable UserCheck(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dt = new DataTable();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@UserID", SqlDbType.VarChar) { Value = id };
+            dt = bdl.SelectData("M_User_Select_byID", prms);
+
+            return dt;
+        }
     }
 }

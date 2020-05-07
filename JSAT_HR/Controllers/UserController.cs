@@ -165,5 +165,11 @@ namespace JSAT_HR.Controllers
             Function fun = new Function();
             return fun.DataTableToJSONWithJSONNet(ubl.UserRead(id));
         }
+
+        public string UserCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(ubl.UserCheck(id));
+        }
     }
 }
