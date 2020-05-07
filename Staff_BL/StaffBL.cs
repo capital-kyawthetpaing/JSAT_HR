@@ -71,6 +71,7 @@ namespace Staff_BL
                 sm.N1 = Convert.ToBoolean(dt.Rows[0]["N1"]);
                 sm.N2 = Convert.ToBoolean(dt.Rows[0]["N2"]);
                 sm.N3 = Convert.ToBoolean(dt.Rows[0]["N3"]);
+                sm.JpnUniGradurate = Convert.ToBoolean(dt.Rows[0]["JpnUniGradurate"]);
                 sm.Local1stInterviewer = Convert.ToBoolean(dt.Rows[0]["Local1stInterviewer"]);
                 sm.Local2ndInterviewer = Convert.ToBoolean(dt.Rows[0]["Local2ndInterviewer"]);
                 sm.Overseas1stInterviewer = Convert.ToBoolean(dt.Rows[0]["Overseas1stInterviewer"]);
