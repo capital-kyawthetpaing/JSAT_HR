@@ -63,7 +63,7 @@ namespace User_BL
 
                 prms[2] = new SqlParameter("@Password", SqlDbType.VarChar) { Value = mModel.userModel.Password };
 
-                prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
+                prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString().Split('_')[0] };
 
                 prms[4] = new SqlParameter("@saveUpdateFlag", SqlDbType.VarChar) { Value = mModel.userModel.SaveUpdateFlag };
 

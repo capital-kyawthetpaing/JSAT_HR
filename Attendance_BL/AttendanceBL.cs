@@ -217,7 +217,7 @@ namespace Attendance_BL
 
 
             prms[1] = new SqlParameter("@ImportType", SqlDbType.VarChar) { Value = id };
-            prms[2] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
+            prms[2] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString().Split('_')[0] };
 
 
             dttest.TableName = "M_Attendance";
