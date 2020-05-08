@@ -748,7 +748,7 @@
         $(document).ready(function () {
              var Emsg = '@ViewBag.Emsg';
             if (Emsg == "Duplicate") {
-                GetMessage("I_1003", "Duplicate");
+                GetMessage("I_1010", "Duplicate");
                  $('#myModal').modal('show');
             }
             SelectDepartment();
@@ -947,7 +947,7 @@
                          if (json == null || json == "") { }
                          else
                          {
-                             GetMessage("I_1003", "Duplicate");
+                             GetMessage("I_1010", "Duplicate");
                              $('#myModal').modal('show');
                              $("#txtStaffID").val('');
                          }
