@@ -68,5 +68,12 @@ namespace JSAT_HR.Controllers
             }
             return RedirectToAction("PositionList");
         }
+
+
+        public string PositionCheck(string id)
+        {
+            Function fun = new Function();
+            return fun.DataTableToJSONWithJSONNet(pbl.PositionCheck(id));
+        }
     }
 }

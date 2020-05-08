@@ -27,7 +27,8 @@
                                    @required = "required",
                                    @id = "txtCompanyCD",
                                    @autofocus = "autofocus",
-                                   maxlength = "2"
+                                   maxlength = "2",
+                                   @onchange = "checkExist(event)"
                                })
                                 </div>
                             </div>
@@ -181,6 +182,25 @@
                          }
                      }
                  });             
+        }
+
+        function checkExist(event) {
+            var userid = event.target.value;
+             $.ajax({
+                 url: '@Url.Action("CompanyCheck", "Company", new { @id = "ID" })'.replace("ID", userid),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") { }
+                         else
+                         {
+                             GetMessage("I_1011", "Duplicate");
+                             $('#myModal').modal('show');
+                             $("#txtCompanyCD").val('');
+                         }
+                     }
+                 });      
         }
     </script>
     }

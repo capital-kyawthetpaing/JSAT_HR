@@ -86,5 +86,16 @@ namespace Position_BL
                 msg = "";
             return msg;
         }
+
+        public DataTable PositionCheck(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dt = new DataTable();
+            SqlParameter[] prms = new SqlParameter[2];
+            prms[0] = new SqlParameter("@id", SqlDbType.VarChar) { Value = id };
+            prms[1] = new SqlParameter("@option", SqlDbType.VarChar) { Value = 4 };
+            dt = bdl.SelectData("M_Organization_Select_byID", prms);
+            return dt;
+        }
     }
 }

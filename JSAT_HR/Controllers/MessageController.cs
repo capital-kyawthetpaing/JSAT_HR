@@ -21,5 +21,6 @@ namespace JSAT_HR.Controllers
             Function fun = new Function();
             return Json(new { message = fun.GetMessage(id) });
         }
+     
     }
 }

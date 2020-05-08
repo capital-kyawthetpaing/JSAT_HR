@@ -33,7 +33,8 @@
                                    @required = "required",
                                    @id = "txtDepartmentCD",
                                    @autofocus = "autofocus",
-                                   maxlength = "100"
+                                   maxlength = "100",
+                                   @onchange = "checkExist(event)"
                                })
                                 </div>
                             </div>
@@ -214,6 +215,25 @@
                      }
                  });             
         }
+         function checkExist(event) {
+            var userid = event.target.value;
+             $.ajax({
+                 url: '@Url.Action("DepartmentCheck", "Department", new { @id = "ID" })'.replace("ID", userid),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") { }
+                         else
+                         {
+                             GetMessage("I_1014", "Duplicate");
+                             $('#myModal').modal('show');
+                             $("#txtDepartmentCD").val('');
+                         }
+                     }
+                 });      
+        }
+
     </script>
 }
 

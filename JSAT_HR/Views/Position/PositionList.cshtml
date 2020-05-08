@@ -25,7 +25,8 @@
                                    @required = "required",
                                    @id = "txtPositionCD",
                                    @autofocus = "autofocus",
-                                   maxlength = "3"
+                                   maxlength = "3",
+                                   @onchange = "checkExist(event)"
                                })
                                 </div>
                             </div>
@@ -171,6 +172,27 @@
                      }
                  });             
         }
+
+
+          function checkExist(event) {
+            var userid = event.target.value;
+             $.ajax({
+                 url: '@Url.Action("PositionCheck", "Position", new { @id = "ID" })'.replace("ID", userid),
+                     type: "GET",
+                     dataType: "JSON",
+                     dataSrc: '',
+                     success: function (json) {
+                         if (json == null || json == "") { }
+                         else
+                         {
+                             GetMessage("I_1013", "Duplicate");
+                             $('#myModal').modal('show');
+                             $("#txtPositionCD").val('');
+                         }
+                     }
+                 });      
+        }
+
     </script>
 }
 
