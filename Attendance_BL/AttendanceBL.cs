@@ -369,7 +369,7 @@ namespace Attendance_BL
             }
 
             prms[2] = new SqlParameter("@ImportType", SqlDbType.VarChar) { Value = 3 };
-            prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString() };
+            prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString().Split('_')[0] };
 
 
             dttest.TableName = "Payroll_Deduction";
