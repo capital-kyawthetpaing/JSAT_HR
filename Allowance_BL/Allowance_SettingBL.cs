@@ -40,9 +40,28 @@ namespace Allowance_BL
             tb.Local2ndInterviewer = Convert.ToDecimal(am.Local2ndInterviewer);
             tb.Overseas1stInterviewer = Convert.ToDecimal(am.Oversea1stInterviewer);
             tb.Overseas2ndInterviewer = Convert.ToDecimal(am.Oversea2ndInterviewer);
-
-            tb.Maternity = Convert.ToByte(am.Maternity.Replace("%", ""));
-            tb.Medical = Convert.ToByte(am.Medical.Replace("%", ""));
+            if(string.IsNullOrWhiteSpace(am.Maternity))
+            {
+                am.Maternity = "0";
+                tb.Maternity = Convert.ToByte(am.Maternity);
+            }
+            else
+            {
+                if (am.Maternity.ToString().Contains(("%")))
+                    am.Maternity = am.Maternity.Replace("%", "");
+                tb.Maternity = Convert.ToByte(am.Maternity);
+            }
+           if(string.IsNullOrWhiteSpace(am.Medical))
+            {
+                am.Medical = "0";
+                tb.Medical = Convert.ToByte(am.Medical);
+            }
+           else
+            {
+                if (am.Medical.ToString().Contains(("%")))
+                    am.Medical = am.Medical.Replace("%", "");
+                tb.Medical = Convert.ToByte(am.Medical);
+            }
 
             tb.InsertedDate = DateTime.Now;
             tb.InsertedBy = updatedby;
