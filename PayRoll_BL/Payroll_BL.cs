@@ -140,5 +140,16 @@ namespace PayRoll_BL
                 return dtpaydetail;
             else return dtpaydetail;
         }
+
+        public DataTable CheckImport(string yyyymm)
+        {
+            BaseDL bdl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[1];
+            prms[0] = new SqlParameter("@YYYYMM", SqlDbType.VarChar) { Value = yyyymm };
+           
+            DataTable dtImport = new DataTable();
+            dtImport = bdl.SelectData("L_Import_Select_ForPayroll", prms);
+            return dtImport;
+        }
     }
 }

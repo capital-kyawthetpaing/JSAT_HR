@@ -619,5 +619,24 @@ namespace JSAT_HR.Controllers
             }
             return AllowanceData;
         }
+
+        [HttpPost]
+        public string _CheckImport(string id)
+        {
+            Payroll_BL pbl = new Payroll_BL();
+            DataTable dt = pbl.CheckImport(id);
+            dt.Columns.Add("Total", typeof(System.Int32));
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["Total"] = dt.Rows.Count;
+                }
+                return JsonConvert.SerializeObject(dt); ;
+            }
+            else
+                return JsonConvert.SerializeObject(dt);
+
+        }
     }
 }
