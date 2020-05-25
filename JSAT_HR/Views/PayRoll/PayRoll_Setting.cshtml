@@ -60,21 +60,24 @@
                  var maindiv = $(".dynamcdiv");
                  var newdiv = document.createElement('div');
                  newdiv.className = 'form-row dynamicAtt';
-                 newdiv.style.width = '348px';
+                 newdiv.style.width = '550px';
                  newdiv.style.marginLeft = '10px';
                  $(maindiv).append(newdiv);
                  var wrapper = $(".dynamicAtt");
+                 var headerlbl = '<label style="font-size:18px;">※Please import the following files before Process button click※</label>';
 
-                 var officewarn = '<label style = "color:red;" ><span>&#9888;</span> Please Import Attendance Office Excel.</label>';
-                 var acadmeywarn = '<label style = "color:red;" ><span>&#9888;</span>Please Import Attendance Acadmey Excel.</label>';
-                 var incomewarn = '<label style = "color:red;" ><span>&#9888;</span> Please Import Income Tax Excel.</label>';
+                 var officewarn = '<label style = "color:red;" ><span>&#9888;</span>Office attendance file is not yet import for this month.Please import!</label>';
+                 var acadmeywarn = '<label style = "color:red;" ><span>&#9888;</span>Academy attendance file is not yet import for this month.Please import!</label>';
+                 var incomewarn = '<label style = "color:red;" ><span>&#9888;</span>Income tax file is not yet import for this month.Please import!</label>';
 
-                 var officecorrect = '<label style="color:gray;"><span>&#10004;</span> Import Attendance Office Excel.</label>';
-                 var acadmeycorrect = '<label style="color:gray;"><span>&#10004;</span> Import Attendance Acadmey Excel.</label>';
-                 var incomecorrect = '<label style="color:gray;"><span>&#10004;</span> Import Income Tax Excel.</label>';
+                 var officecorrect = '<label style="color:gray;"><span>&#10004;</span>Academy attendance file is already imported.</label>';
+                 var acadmeycorrect = '<label style="color:gray;"><span>&#10004;</span>Office attendance file is already imported.</label>';
+                 var incomecorrect = '<label style="color:gray;"><span>&#10004;</span> Income tax file is already imported.</label>';
 
                      if (json == null || json == "") {                                          
                          $(wrapper).append(
+                             headerlbl +
+                             '<br/>' +
                              officewarn +
                              '<br/>' +
                              acadmeywarn +
@@ -85,6 +88,8 @@
                          if (json[0].Total > 0) {
                              if (Object.keys(json).length == 3) {
                                  $(wrapper).append(
+                                     headerlbl +
+                                     '<br/>' +
                                      officecorrect +
                                      '<br/>' +
                                      acadmeycorrect +
@@ -94,6 +99,8 @@
                              else if (Object.keys(json).length == 2) {
                                  if (json[0].ImportType == 1 && json[1].ImportType == 2) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officecorrect +
                                          '<br/>' +
                                          acadmeycorrect +
@@ -102,6 +109,8 @@
                                  }
                                  else if (json[0].ImportType == 1 && json[1].ImportType == 3) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officecorrect +
                                          '<br/>' +
                                          acadmeywarn +
@@ -110,6 +119,8 @@
                                  }
                                  else if (json[0].ImportType == 2 && json[1].ImportType == 3) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officewarn +
                                          '<br/>' +
                                          acadmeycorrect +
@@ -120,6 +131,8 @@
                              else if (Object.keys(json).length == 1) {
                                  if (json[0].ImportType == 1) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officecorrect +
                                          '<br/>' +
                                          acadmeywarn +
@@ -128,6 +141,8 @@
                                  }
                                  else if (json[0].ImportType == 2) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officewarn +
                                          '<br/>' +
                                          acadmeycorrect +
@@ -136,6 +151,8 @@
                                  }
                                  else if (json[0].ImportType == 3) {
                                      $(wrapper).append(
+                                         headerlbl +
+                                         '<br/>' +
                                          officewarn +
                                          '<br/>' +
                                          acadmeywarn +
@@ -329,25 +346,28 @@
                             <label for="Process" style="color:white;">Process</label>
                             <div class="input-group">
                                 <button tabindex="3" type="button" id="btnsearch" class="btn btn-info col-xl-2" onclick="Search()" style="height:40px;"><i class="fa fa-search"></i>&nbsp; Search</button>&nbsp;&nbsp;&nbsp;
+                                <button tabindex="6" type="button" id="btnprocess" class="btn btn-success col-xl-3" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>&nbsp;&nbsp;&nbsp;
                                 <button tabindex="4" type="button" id="btnreport" class="btn btn-warning col-xl-2" onclick="Report()" style="height:40px;"><i class="fa fa-print"></i>&nbsp; Report</button>&nbsp;&nbsp;&nbsp;
                                 <button tabindex="5" type="button" id="btnTransportationReport" class="btn btn-warning col-xl-4" onclick="TransportationReport()" style="height:40px;"><i class="fa fa-print"></i>&nbsp; Transportation Report</button>
+
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
-                       
-                        <div class="form-row dynamcdiv">
-                            <div class="form-group dynamicAtt">
+                        @*<div class="form-group col-md-4">
+                         </div>*@
+                            <div class="form-row dynamcdiv">
+                                <div class="form-group dynamicAtt">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <div class="input-group">
-                                <button tabindex="6" type="button" id="btnprocess" class="btn btn-success col-xl-3" style="height:50px;margin-top:13px;" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
+                            @*<div class="form-group col-md-8">
+            <div class="input-group">
+                <button tabindex="6" type="button" id="btnprocess" class="btn btn-success col-xl-3" style="height:50px;margin-top:13px;" onclick="Process()"><i class="fa fa-calculator"></i>&nbsp; Process</button>
 
 
-                            </div>
+            </div>
+        </div>*@
                         </div>
-                    </div>
                    
                 </div>
             </div>
