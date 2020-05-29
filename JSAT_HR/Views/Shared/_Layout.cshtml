@@ -121,8 +121,8 @@
             ShowView13 = "13";
         }
 
-        bool Import_Log_Listflag = CheckUserAccess.UserAccess("Import_Log_List");
-        if (Import_Log_Listflag == true)
+        bool Import_Listflag = CheckUserAccess.UserAccess("Import_List");
+        if (Import_Listflag == true)
         {
             ShowView14 = "14";
         }
@@ -353,7 +353,7 @@
                     <div id="collapseimport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Import</h6>
-                            <a class="collapse-item" href='@Url.Action("Import_Log_List", "Attendance")'>Import List</a>
+                            <a class="collapse-item" href='@Url.Action("Import_List", "Import")'>Import List</a>
                         </div>
                     </div>
                 </li>

@@ -118,12 +118,12 @@
                                 listMonth.Add(new SelectListItem { Text = "November", Value = "11" });
                                 listMonth.Add(new SelectListItem { Text = "December", Value = "12" });
                             }@Html.DropDownList("Month", listMonth, new
-                     {
-                         @class = "form-control",
-                         @required = "required",
-                         @id = "ddkMonth",
-                         @tabindex = "2"
-                     })
+                    {
+                        @class = "form-control",
+                        @required = "required",
+                        @id = "ddkMonth",
+                        @tabindex = "2"
+                    })
                         </div>
                     </div>
                 </div>
@@ -144,40 +144,40 @@
             </div>
         </div>
     </div>
-  
-        <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tblogview" class="hrtable col-sm-12 col-md-12">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>FileName</th>
-                                    <th>ImportType</th>
-                                    <th>ImportedDate</th>
-                                    <th>ImportedBy</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblogview" class="hrtable col-sm-12 col-md-12">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>FileName</th>
+                                <th>ImportType</th>
+                                <th>ImportedDate</th>
+                                <th>ImportedBy</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
- 
+    </div>
+
     <div class="clearfix"> </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function () {
         var d = new Date();
         var month = fixDigit(d.getMonth() + 1);
         var year = d.getFullYear();
 
         $('#ddlYear').val(year);
-        $('#ddkMonth').val(month); 
+        $('#ddkMonth').val(month);
 
         var Imsg = '@ViewBag.Imsg';
         if (Imsg == "OK") {
@@ -213,7 +213,7 @@
                     "sLengthMenu": "Display _MENU_ records",
                 },
                 "ajax": {
-                    "url": "@Url.Action("Get_Import_List", "Attendance")",
+                    "url": "@Url.Action("Get_Import_List", "Import")",
                     "type": "GET",
                     "datatype": "json",
                     "dataSrc": ""
@@ -249,14 +249,14 @@
             fileData.append(files[i].name, files[i]);
         }
         $.ajax({
-            url: '@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID", 2),
+            url: '@Url.Action("AttendanceDataSave", "Import", new { @id = "ID" })'.replace("ID", 2),
             type: 'post',
             contentType: false, // Not to set any content header
             processData: false, // Not to process data
             dataType: 'json',
             data: fileData,
             success: function (result) {
-                window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                window.location.href = '@Url.Action("Import_List", "Import")'
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert("Error");
@@ -272,14 +272,14 @@
             fileData.append(files[i].name, files[i]);
         }
         $.ajax({
-            url: '@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID", 1),
+            url: '@Url.Action("AttendanceDataSave", "Import", new { @id = "ID" })'.replace("ID", 1),
             type: 'post',
             contentType: false, // Not to set any content header
             processData: false, // Not to process data
             dataType: 'json',
             data: fileData,
             success: function (result) {
-                window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                window.location.href = '@Url.Action("Import_List", "Import")'
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert("Error");
@@ -297,14 +297,14 @@
             fileData.append(files[i].name, files[i]);
         }
         $.ajax({
-            url: '@Url.Action("AttendanceDataSave", "Attendance", new { @id = "ID" })'.replace("ID", 3 + '_' + YYY + '_' + MM),
+            url: '@Url.Action("AttendanceDataSave", "Import", new { @id = "ID" })'.replace("ID", 3 + '_' + YYY + '_' + MM),
             type: 'post',
             contentType: false, // Not to set any content header
             processData: false, // Not to process data
             dataType: 'json',
             data: fileData,
             success: function (result) {
-                window.location.href = '@Url.Action("Import_Log_List", "Attendance")'
+                window.location.href = '@Url.Action("Import_List", "Import")'
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert("Error");
@@ -313,7 +313,7 @@
     });
 
      function CheckReadOnly() {
-         var ViewPageName ="Import_Log_List";
+         var ViewPageName ="Import_List";
                  $.ajax({
                      url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
                      type: "GET",
@@ -328,7 +328,7 @@
                              $('#content_zip').css('pointer-events', 'none');
                          }
                      }
-                 });             
+                 });
         }
     </script>
-    }
+}

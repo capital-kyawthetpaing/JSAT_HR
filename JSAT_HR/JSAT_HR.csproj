@@ -475,7 +475,6 @@
     <Content Include="Views\Department\DepartmentList.cshtml" />
     <Content Include="Views\Attendance\AttendanceImport.cshtml" />
     <Content Include="Views\SubDivision\SubDivisionList.cshtml" />
-    <Content Include="Views\Attendance\Import_Log_List.cshtml" />
     <Content Include="Views\Position\PositionList.cshtml" />
     <Content Include="Views\Allowance\Allowance_Setting.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -492,7 +491,7 @@
     <Content Include="Views\Attendance\QuickSetting.cshtml" />
     <Content Include="Views\User\User_List.cshtml" />
     <Content Include="Views\User\User_Entry.cshtml" />
-    <Content Include="Views\Import\Import.cshtml" />
+    <Content Include="Views\Import\Import_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
