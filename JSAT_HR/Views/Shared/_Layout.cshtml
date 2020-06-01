@@ -41,6 +41,7 @@
     string ShowView14 = string.Empty;
     string ShowView15 = string.Empty;
     string ShowView16 = string.Empty;
+    string ShowView17 = string.Empty;
     if (Session["UserID"] != null)
     {
         bool StaffEntryflag = CheckUserAccess.UserAccess("StaffEntry");
@@ -137,6 +138,12 @@
         if (User_Entryflag == true)
         {
             ShowView16 = "16";
+        }
+
+        bool Holiday_Importflag = CheckUserAccess.UserAccess("Holiday_Import");
+        if (Holiday_Importflag == true)
+        {
+            ShowView17 = "17";
         }
     }
 }
@@ -343,7 +350,7 @@
                     </div>
                 </li>
             }
-            @if (ShowView14 == "14")
+            @if (ShowView14 == "14" || ShowView17 == "17")
             {
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" tabindex="-1" data-target="#collapseimport" aria-expanded="false" aria-controls="collapsePages">
@@ -353,7 +360,14 @@
                     <div id="collapseimport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Import</h6>
-                            <a class="collapse-item" href='@Url.Action("Import_List", "Import")'>Import List</a>
+                            @if (ShowView14 == "14")
+                            {
+                                <a class="collapse-item" href='@Url.Action("Import_List", "Import")'>Import List</a>
+                            }
+                            @if (ShowView17 == "17")
+                            {
+                                <a class="collapse-item" href='@Url.Action("Holiday_Import", "Import")'>Holiday Import</a>
+                            }
                         </div>
                     </div>
                 </li>

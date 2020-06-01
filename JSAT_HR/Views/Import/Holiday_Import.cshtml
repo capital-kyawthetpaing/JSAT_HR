@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Holiday_Import";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
+}
+<style>
+    .textalign {
+        text-align: center;
+    }
+
+    .newcustom {
+        border: 1px solid #b5b5b5;
+        background-color: #f2f2f2;
+    }
+
+    span::after {
+        padding-left: 5px;
+    }
+
+    input:invalid + span::after {
+        content: '✖';
+    }
+
+    input:valid + span::after {
+        content: '✓';
+    }
+</style>
+
+<div class="container-fluid" id="content_zip">
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow">
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-2 col-sm-12">
+                        <label for="Year">Year:&nbsp;</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
+                            </div>
+                            @{
+                                var listYear = new List<SelectListItem>();
+                                listYear.Add(new SelectListItem { Text = "---Select---", Value = "0" });
+                                listYear.Add(new SelectListItem { Text = "2019", Value = "2019" });
+                                listYear.Add(new SelectListItem { Text = "2020", Value = "2020" });
+                                listYear.Add(new SelectListItem { Text = "2021", Value = "2021" });
+                                listYear.Add(new SelectListItem { Text = "2022", Value = "2022" });
+                                listYear.Add(new SelectListItem { Text = "2023", Value = "2023" });
+                                listYear.Add(new SelectListItem { Text = "2024", Value = "2024" });
+                                listYear.Add(new SelectListItem { Text = "2025", Value = "2025" });
+                                listYear.Add(new SelectListItem { Text = "2026", Value = "2026" });
+                                listYear.Add(new SelectListItem { Text = "2027", Value = "2027" });
+                                listYear.Add(new SelectListItem { Text = "2028", Value = "2028" });
+                                listYear.Add(new SelectListItem { Text = "2029", Value = "2029" });
+                                listYear.Add(new SelectListItem { Text = "2030", Value = "2030" });
+                            }
+                            @Html.DropDownList("Year", listYear, new
+                       {
+                           @class = "form-control",
+                           @required = "required",
+                           @id = "ddlYear",
+                           @tabindex = "1"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height:80px;">
+                <div class="form-inline col-md-12 col-sm-12" role="form">
+                    <div class="form-group col-md-2">
+                        <div class="text-s font-weight-bold text-info  mb-1">Holiday File Import</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="file" id="uploadFile" accept=".xlsx" style="border:1px solid #b5b5b5;" name="uploadFile" class="btn btn-default btn-sm col-md-12" />
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" id="btnimport" class="btn col-md-4 newcustom"><i class="fa fa-file-import">&nbsp;Import</i></button>&nbsp;
+                        <button type="button" id="btncancel" class="btn btn-dark col-md-4"><i class="fa fa-window-close"></i>&nbsp; Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-md-12 mb-2">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblogview" class="hrtable col-sm-12 col-md-12">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Holiday Date</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"> </div>
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        var d = new Date();
+        var year = d.getFullYear();
+        $('#ddlYear').val(year);
+
+        CheckReadOnly();
+        HolidayTable();
+    });
+
+     function HolidayTable() {
+        var table = $('#tblogview').DataTable(
+            {
+                columnDefs: [
+                    {
+                        targets: [2],
+                        className: 'textalign'
+                    }],
+                "language": {
+                    "info": "Display _START_ to _END_ of _TOTAL_ records",
+                },
+                "oLanguage": {
+                    "sLengthMenu": "Display _MENU_ records",
+                },
+                "ajax": {
+                    "url": "@Url.Action("Get_Holiday_List", "Import")",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "Year", orderable: false },
+                    { "data": "Holiday_Date", orderable: false },
+                    { "data": "Description", orderable: false }
+                ],
+            }
+        );
+    }
+
+    $("#btncancel").click(function () {
+        $('#uploadFile').val("");
+    });
+
+
+    $('#btnimport').click(function () {
+            var YYY = $("#ddlYear").val();
+            var fileUpload = $("#uploadFile").get(0);
+            var files = fileUpload.files;
+            var fileData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+            $.ajax({
+                url: '@Url.Action("HolidaySave", "Import", new { @id = "ID" })'.replace("ID", YYY),
+                type: 'post',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                dataType: 'json',
+                data: fileData,
+                success: function (result) {
+                    window.location.href =  '@Url.Action("Holiday_Import", "Import")'
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Error");
+                }
+            });
+        });
+
+        function CheckReadOnly() {
+            var ViewPageName = "Holiday_Import";
+            $.ajax({
+                url: '@Url.Action("UserRead", "User", new { @id = "ID" })'.replace("ID", ViewPageName),
+                type: "GET",
+                dataType: "JSON",
+                dataSrc: '',
+                success: function (json) {
+                    if (json == null || json == "") {
+                        Context.Response.Redirect("~/Shared/Error");
+                    }
+                    else
+                    {
+                        $('#content_zip').css('pointer-events', 'none');
+                    }
+                }
+            });
+        }
+</script>
+    }

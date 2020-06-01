@@ -17,7 +17,7 @@ namespace JSAT_HR.Controllers
     {
         string AttendanceFile = ConfigurationManager.AppSettings["AttendanceFile"].ToString();
         string IncomeTaxFile = ConfigurationManager.AppSettings["IncomeTaxFile"].ToString();
-
+        string HolidayFile = ConfigurationManager.AppSettings["HolidayFile"].ToString();
         // GET: Import
         public ActionResult Import_List()
         {
@@ -154,5 +154,84 @@ namespace JSAT_HR.Controllers
             return JsonConvert.SerializeObject("OK");
         }
 
+        public ActionResult Holiday_Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public string HolidaySave(string id)
+        {
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpFileCollectionBase files = Request.Files;
+                    HttpPostedFileBase file = null;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        file = files[i];
+                    }
+                    if (file != null)
+                    {
+                        string filename = string.Empty;
+                        string newfilename = string.Empty;
+                        filename = file.FileName;
+                        AttendanceBL abl = new AttendanceBL();
+                        System.Data.DataTable dt = new System.Data.DataTable();
+
+                        if (!Directory.Exists(HolidayFile))
+                        {
+                            Directory.CreateDirectory(HolidayFile);
+                        }
+                        if (filename.Contains(".xlsx"))
+                        {
+                            filename = filename.Replace(".xlsx", "");
+                            filename = filename + "$" + DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss") + ".xlsx";
+                        }
+                        file.SaveAs(HolidayFile + filename);
+
+                        dt = abl.Holiday_ExcelToTable(HolidayFile + filename);
+                        String[] colName = {"Holiday_Date", "Description" };
+                        if (abl.CheckColumn(colName, dt))
+                        {
+                            string YYY = string.Empty;
+                            if (id != null)
+                            {
+                                YYY = id;
+
+                            }
+                            if (dt.Rows.Count > 0)
+                            {
+                                abl.Insert_Holiday_Data(dt, YYY, file.FileName);
+                                Session["Imsg"] = "OK";
+                            }
+                        }
+                        else
+                        {
+                            Session["Emsg"] = "NotOK";
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                string error = ex.ToString();
+                Session["Emsg"] = "NotOK";
+            }
+            return JsonConvert.SerializeObject("OK");
+        }
+
+        [HttpGet]
+        public string Get_Holiday_List()
+        {
+            DataTable dt = new DataTable();
+            string jsonresult;
+            AttendanceBL atbl = new AttendanceBL();
+            Function fn = new Function();
+            dt = atbl.Get_Holiday();
+            jsonresult = fn.DataTableToJSONWithJSONNet(dt);
+            return jsonresult;
+        }
     }
 }

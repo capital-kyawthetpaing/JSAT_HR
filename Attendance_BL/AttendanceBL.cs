@@ -77,7 +77,7 @@ namespace Attendance_BL
                             for (int i = row.FirstCellNum + 1; i <= Convert.ToUInt32(dd); i++)
                             {
                                 AttendanceDataRow = table.NewRow();
-                                if(i<10)
+                                if (i < 10)
                                     AttendanceDataRow["AttandenceDate"] = newattdate + "-0" + i;
                                 else
                                     AttendanceDataRow["AttandenceDate"] = newattdate + "-" + i;
@@ -234,7 +234,7 @@ namespace Attendance_BL
             SqlParameter[] prms = new SqlParameter[3];
             prms[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = am.YYYYMM };
             prms[1] = new SqlParameter("@StaffID", SqlDbType.Int) { Value = am.StaffID };
-            prms[2]= new SqlParameter("@YYYYMMDD", SqlDbType.VarChar) { Value = am.AttandenceDate };
+            prms[2] = new SqlParameter("@YYYYMMDD", SqlDbType.VarChar) { Value = am.AttandenceDate };
 
             DataTable dtAttendance = new DataTable();
             dtAttendance = bdl.SelectData("M_Attendance_Select", prms);
@@ -506,6 +506,91 @@ namespace Attendance_BL
                 flag = "NotOK";
             }
             return flag;
+        }
+
+        public DataTable Holiday_ExcelToTable(string filename)
+        {
+            FileStream excelStream = new FileStream(filename, FileMode.Open);
+            var book = new XSSFWorkbook(excelStream);
+            excelStream.Close();
+
+            var sheet = book.GetSheetAt(0);
+            var headerRow = sheet.GetRow(0);//第一行为标题行
+            var cellCount = headerRow.LastCellNum;//LastCellNum = PhysicalNumberOfCells
+            var rowCount = sheet.LastRowNum;//LastRowNum = PhysicalNumberOfRows - 1
+
+            DataSet IncomeTaxDataSet = new DataSet();
+            IncomeTaxDataSet.Locale = CultureInfo.InvariantCulture;
+            DataTable table = IncomeTaxDataSet.Tables.Add("IncomeTaxData");
+
+            //header
+            table.Columns.Add("Holiday_Date", typeof(string));
+            table.Columns.Add("Description", typeof(string));
+
+            //body
+            for (var i = sheet.FirstRowNum + 1; i <= rowCount; i++)
+            {
+                var row = sheet.GetRow(i);
+                var dataRow = table.NewRow();
+                if (row != null)
+                {
+                    for (int j = row.FirstCellNum; j < cellCount; j++)
+                    {
+                        if (row.GetCell(j) != null)
+                            dataRow["Holiday_Date"] = GetCellValue(row.GetCell(0));
+
+                        if (row.GetCell(j) != null)
+                            dataRow["Description"] = GetCellValue(row.GetCell(1));
+
+
+                    }
+                }
+                table.Rows.Add(dataRow);
+            }
+
+            return IncomeTaxDataSet.Tables[0];
+        }
+
+        public void Insert_Holiday_Data(DataTable dttest, string YYY, string filename)
+        {
+            DataTable dt = new DataTable();
+            BaseDL bdl = new BaseDL();
+            SqlParameter[] prms = new SqlParameter[5];
+            if (!string.IsNullOrWhiteSpace(filename))
+            {
+                prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = filename };
+            }
+            else
+            {
+                prms[0] = new SqlParameter("@FileName", SqlDbType.VarChar) { Value = System.DBNull.Value };
+            }
+            if (!string.IsNullOrWhiteSpace(YYY))
+            {
+                prms[1] = new SqlParameter("@YYY", SqlDbType.VarChar) { Value = YYY };
+            }
+            else
+            {
+                prms[1] = new SqlParameter("@YYY", SqlDbType.VarChar) { Value = System.DBNull.Value };
+            }
+
+            prms[2] = new SqlParameter("@ImportType", SqlDbType.VarChar) { Value = 4 };
+            prms[3] = new SqlParameter("@ImportedBy", SqlDbType.VarChar) { Value = HttpContext.Current.Session["UserID"].ToString().Split('_')[0] };
+
+
+            dttest.TableName = "M_Holidays";
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            dttest.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+            string result = writer.ToString();
+            prms[4] = new SqlParameter("@xml", SqlDbType.Xml) { Value = result };
+            bdl.InsertUpdateDeleteData("M_Holidays_Insert", prms);
+        }
+
+        public DataTable Get_Holiday()
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dtImportList = new DataTable();
+            dtImportList = bdl.SelectData("M_Holidays_Select", null);
+            return dtImportList;
         }
     }
 }
