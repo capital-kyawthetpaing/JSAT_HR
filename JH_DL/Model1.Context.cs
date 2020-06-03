@@ -44,6 +44,7 @@ namespace JH_DL
         public virtual DbSet<Payroll_Allowance> Payroll_Allowance { get; set; }
         public virtual DbSet<M_Allowance> M_Allowance { get; set; }
         public virtual DbSet<M_User> M_User { get; set; }
+        public virtual DbSet<M_Holidays> M_Holidays { get; set; }
         public virtual DbSet<M_View> M_View { get; set; }
         public virtual DbSet<User_Authorization> User_Authorization { get; set; }
     }

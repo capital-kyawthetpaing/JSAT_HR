@@ -540,7 +540,7 @@ namespace Attendance_BL
                             dataRow["Holiday_Date"] = GetCellValue(row.GetCell(0));
 
                         if (row.GetCell(j) != null)
-                            dataRow["Description"] = GetCellValue(row.GetCell(1));
+                            dataRow["Description"] = GetCellValue(row.GetCell(1)); 
 
 
                     }
@@ -585,11 +585,14 @@ namespace Attendance_BL
             bdl.InsertUpdateDeleteData("M_Holidays_Insert", prms);
         }
 
-        public DataTable Get_Holiday()
+        public DataTable Get_Holiday(string holidayDate,int option)
         {
             BaseDL bdl = new BaseDL();
             DataTable dtImportList = new DataTable();
-            dtImportList = bdl.SelectData("M_Holidays_Select", null);
+            SqlParameter[] prms = new SqlParameter[2];
+            prms[0] = new SqlParameter("@holiday_date", SqlDbType.VarChar) { Value = holidayDate };
+            prms[1] = new SqlParameter("@option", SqlDbType.Int) { Value = option };
+            dtImportList = bdl.SelectData("M_Holidays_Select", prms);
             return dtImportList;
         }
     }

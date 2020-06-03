@@ -16,7 +16,7 @@
           <Property Name="ImportedBy" Type="varchar" MaxLength="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Jsat_HR_Test.dbo.L_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="L_Log">
           <Key>
             <PropertyRef Name="UserID" />
@@ -72,6 +72,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
           <Property Name="LateMinutes" Type="int" />
           <Property Name="EarlyOut" Type="tinyint" />
           <Property Name="PayTransportation" Type="bit" />
+          <Property Name="ImportFlag" Type="tinyint" />
         </EntityType>
         <EntityType Name="M_Company">
           <Key>
@@ -96,6 +97,15 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="ChangeDate" Type="date" />
         </EntityType>
+        <EntityType Name="M_Holidays">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Holiday_Date" Type="date" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="M_Leave">
           <Key>
             <PropertyRef Name="LeaveCD" />
@@ -104,7 +114,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.L_Log' does not have a primary key def
           <Property Name="LeaveType" Type="varchar" MaxLength="30" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Jsat_HR_Test.dbo.M_Message' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="M_Message">
           <Key>
             <PropertyRef Name="KEY" />
@@ -226,7 +236,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Key>
             <PropertyRef Name="ViewID" />
           </Key>
-          <Property Name="ViewID" Type="int" Nullable="false" />
+          <Property Name="ViewID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ViewName" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Payroll_Allowance">
@@ -308,7 +318,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
             <PropertyRef Name="ViewID" />
           </Key>
           <Property Name="UserID" Type="varchar" MaxLength="4" Nullable="false" />
-          <Property Name="ViewID" Type="int" Nullable="false" />
+          <Property Name="ViewID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ShowView" Type="bit" />
           <Property Name="IsReadOnly" Type="bit" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="4" />
@@ -320,6 +330,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="M_Attendance" EntityType="Self.M_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Company" EntityType="Self.M_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Holidays" EntityType="Self.M_Holidays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Leave" EntityType="Self.M_Leave" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Office" EntityType="Self.M_Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Payroll" EntityType="Self.M_Payroll" Schema="dbo" store:Type="Tables" />
@@ -418,6 +429,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySet Name="Payroll_Allowance" EntityType="JSAT_HRModel.Payroll_Allowance" />
           <EntitySet Name="M_Allowance" EntityType="JSAT_HRModel.M_Allowance" />
           <EntitySet Name="M_User" EntityType="JSAT_HRModel.M_User" />
+          <EntitySet Name="M_Holidays" EntityType="JSAT_HRModel.M_Holidays" />
           <EntitySet Name="M_View" EntityType="JSAT_HRModel.M_View" />
           <EntitySet Name="User_Authorization" EntityType="JSAT_HRModel.User_Authorization" />
         </EntityContainer>
@@ -572,6 +584,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="LateMinutes" Type="Int32" />
           <Property Name="EarlyOut" Type="Byte" />
           <Property Name="PayTransportation" Type="Boolean" />
+          <Property Name="ImportFlag" Type="Byte" />
         </EntityType>
         <EntityType Name="M_Staff">
           <Key>
@@ -668,11 +681,20 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="M_Holidays">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Holiday_Date" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="M_View">
           <Key>
             <PropertyRef Name="ViewID" />
           </Key>
-          <Property Name="ViewID" Type="Int32" Nullable="false" />
+          <Property Name="ViewID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ViewName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User_Authorization">
@@ -681,7 +703,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
             <PropertyRef Name="ViewID" />
           </Key>
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="ViewID" Type="Int32" Nullable="false" />
+          <Property Name="ViewID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ShowView" Type="Boolean" />
           <Property Name="IsReadOnly" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
@@ -874,6 +896,7 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
           <EntitySetMapping Name="M_Attendance">
             <EntityTypeMapping TypeName="JSAT_HRModel.M_Attendance">
               <MappingFragment StoreEntitySet="M_Attendance">
+                <ScalarProperty Name="ImportFlag" ColumnName="ImportFlag" />
                 <ScalarProperty Name="PayTransportation" ColumnName="PayTransportation" />
                 <ScalarProperty Name="EarlyOut" ColumnName="EarlyOut" />
                 <ScalarProperty Name="LateMinutes" ColumnName="LateMinutes" />
@@ -985,6 +1008,16 @@ warning 6002: The table/view 'JSAT_HR.dbo.M_Message' does not have a primary key
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Holidays">
+            <EntityTypeMapping TypeName="JSAT_HRModel.M_Holidays">
+              <MappingFragment StoreEntitySet="M_Holidays">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Holiday_Date" ColumnName="Holiday_Date" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

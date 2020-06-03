@@ -15,7 +15,7 @@ namespace JH_DL
     public partial class User_Authorization
     {
         public string UserID { get; set; }
-        public int ViewID { get; set; }
+        public string ViewID { get; set; }
         public Nullable<bool> ShowView { get; set; }
         public Nullable<bool> IsReadOnly { get; set; }
         public string CreatedBy { get; set; }

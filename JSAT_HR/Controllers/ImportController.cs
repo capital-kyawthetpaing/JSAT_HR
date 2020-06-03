@@ -156,6 +156,12 @@ namespace JSAT_HR.Controllers
 
         public ActionResult Holiday_Import()
         {
+            String HImsg = Session["HImsg"] as string;
+            String HEmsg = Session["HEmsg"] as string;
+            ViewBag.HImsg = HImsg;
+            ViewBag.HEmsg = HEmsg;
+            Session["HImsg"] = "";
+            Session["HEmsg"] = "";
             return View();
         }
 
@@ -204,12 +210,12 @@ namespace JSAT_HR.Controllers
                             if (dt.Rows.Count > 0)
                             {
                                 abl.Insert_Holiday_Data(dt, YYY, file.FileName);
-                                Session["Imsg"] = "OK";
+                                Session["HImsg"] = "OK";
                             }
                         }
                         else
                         {
-                            Session["Emsg"] = "NotOK";
+                            Session["HEmsg"] = "NotOK";
                         }
                     }
                 }
@@ -229,7 +235,7 @@ namespace JSAT_HR.Controllers
             string jsonresult;
             AttendanceBL atbl = new AttendanceBL();
             Function fn = new Function();
-            dt = atbl.Get_Holiday();
+            dt = atbl.Get_Holiday(null,1);
             jsonresult = fn.DataTableToJSONWithJSONNet(dt);
             return jsonresult;
         }

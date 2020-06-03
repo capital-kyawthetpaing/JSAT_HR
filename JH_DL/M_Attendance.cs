@@ -27,5 +27,6 @@ namespace JH_DL
         public Nullable<int> LateMinutes { get; set; }
         public Nullable<byte> EarlyOut { get; set; }
         public Nullable<bool> PayTransportation { get; set; }
+        public Nullable<byte> ImportFlag { get; set; }
     }
 }

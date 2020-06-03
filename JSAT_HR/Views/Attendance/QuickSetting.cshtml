@@ -70,10 +70,11 @@
             var todate = $('#lbltodate').val();
             var staff = $('#StaffList').val();
             var transportation = $('#chktransportation').val();
+            var holiday = $('#chkholidayfee').val();
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("QuickAttendance_Update", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate, 'transportation': transportation},
+                data: { 'fromdate': fromdate, 'todate': todate, 'transportation': transportation, 'holiday': holiday },
                 dataType: 'json',
                 success: function (data) {
                     if (data == "OK") {
@@ -94,12 +95,12 @@
             var leavetype = $('#ddlleave').val();
             var amleave = $('#chkmorningleave').val();
             var pmleave = $('#chkeveleave').val();
-
+            var holiday = $('#chkholidayfee').val();
 
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("QuickAttendance_LeaveUpdate", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate, 'leavetype': leavetype, 'morningleave': amleave, 'eveleave': pmleave },
+                data: { 'fromdate': fromdate, 'todate': todate, 'leavetype': leavetype, 'morningleave': amleave, 'eveleave': pmleave, 'holiday': holiday  },
                 dataType: 'json',
                 success: function (data) {
                    if (data == "OK") {
@@ -181,6 +182,14 @@
             }
         });
 
+        $("#chkholidayfee").change(function () {
+            if ($(this).prop("checked")) {
+                $(this).val("0");
+            } else {
+                $(this).val("1");
+            }
+        });
+
         function CheckReadOnly() {
             var ViewPageName ="QuickSetting";
                  $.ajax({
@@ -224,6 +233,17 @@
                                 <span class="input-group-text text-info" id="basic-addon1" style="height:38px;"><i class="fa fa-calendar-check"></i></span>
                             </div>
                             <input type="date" name="todate" class="form-control" id="lbltodate">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="Holiday">Holiday</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" id="chkholidayfee" value="1" />
+                                </div>
+                            </div>
+                            <label class="form-control" for="timeinout">No Pay</label>
                         </div>
                     </div>
                 </div>

@@ -12,9 +12,11 @@ namespace JH_DL
     using System;
     using System.Collections.Generic;
     
-    public partial class M_View
+    public partial class M_Holidays
     {
-        public string ViewID { get; set; }
-        public string ViewName { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> Year { get; set; }
+        public Nullable<System.DateTime> Holiday_Date { get; set; }
+        public string Description { get; set; }
     }
 }

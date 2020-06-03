@@ -109,6 +109,18 @@
         var year = d.getFullYear();
         $('#ddlYear').val(year);
 
+        var HImsg = '@ViewBag.HImsg';
+        if (HImsg == "OK") {
+            GetMessage("I_1004", "Import");
+            $('#myModal').modal('show');
+        }
+
+        var HEmsg = '@ViewBag.HEmsg';
+        if (HEmsg == "NotOK") {
+            GetMessage("I_1005", "Import");
+            $('#myModal').modal('show');
+        }
+
         CheckReadOnly();
         HolidayTable();
     });

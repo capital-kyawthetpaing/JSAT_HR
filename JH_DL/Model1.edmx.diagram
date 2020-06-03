@@ -26,8 +26,9 @@
         <EntityTypeShape EntityType="JSAT_HRModel.Payroll_Allowance" Width="1.5" PointX="10.235800975112152" PointY="19.943016985404778" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_Allowance" Width="1.5" PointX="3.6507609727097492" PointY="9.9330019848109234" />
         <EntityTypeShape EntityType="JSAT_HRModel.M_User" Width="1.5" PointX="11.496386362005204" PointY="19.491854006187921" />
-        <EntityTypeShape EntityType="JSAT_HRModel.M_View" Width="1.5" PointX="4.95061432428221" PointY="28.585803849895392" />
-        <EntityTypeShape EntityType="JSAT_HRModel.User_Authorization" Width="1.5" PointX="3.8117367363589523" PointY="7.0456933560993953" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_Holidays" Width="1.5" PointX="8.1814383325080566" PointY="30.72708310127588" />
+        <EntityTypeShape EntityType="JSAT_HRModel.M_View" Width="1.5" PointX="7.1257688864719917" PointY="11.081707721148481" />
+        <EntityTypeShape EntityType="JSAT_HRModel.User_Authorization" Width="1.5" PointX="7.1998200897126559" PointY="0.70783533188879277" />
         
         
         

@@ -340,10 +340,9 @@
 
         function Report() {
             var year = $('#ddlYear').val();
-                var month = $('#ddlMonth').val();
-                var stid = $('#staffNameID').val();
+            var month = $('#ddlMonth').val();
+            var stid = $('#staffNameID').val();
             var yearmonth = year + month + stid;
-            alert(yearmonth);
             window.open('@Url.Action("PayRoll_Detail_Report", "PayRoll")?id=' + yearmonth);
         }
 

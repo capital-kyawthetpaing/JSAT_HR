@@ -285,7 +285,7 @@ namespace JSAT_HR.Controllers
         }
 
 
-        public String QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
+        public String QuickAttendance_Update(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation,string holiday)
         {
             string flag = string.Empty; DateTime todaydate = DateTime.Now;
             AttendanceBL abl = new AttendanceBL();
@@ -296,12 +296,102 @@ namespace JSAT_HR.Controllers
             if (!String.IsNullOrWhiteSpace(id)&& !String.IsNullOrWhiteSpace(fromdate)&&!String.IsNullOrWhiteSpace(todate))
             {
                 string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+                if (holiday == "0")
                 {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
+                    foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
                     {
-                        flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
+                        string date = day.ToString("yyyyMMdd").Replace("/", "");
+                        foreach (string st in list)
+                        {
+                            flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
+                        }
+                        if (flag == "OK")
+                        {
+                            if (DateTime.Parse(todate) < todaydate)
+                            {
+                                Session["Umsg"] = flag;
+                            }
+                            else
+                                Session["Imsg"] = flag;
+                        }
+                        else
+                        {
+                            if (DateTime.Parse(todate) < todaydate)
+                            {
+                                Session["UEmsg"] = flag;
+                            }
+                            else
+                                Session["Imsg"] = flag;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+                    {
+                        string holidaydate = day.ToString("yyyy-MM-dd");
+                        DataTable dt = abl.Get_Holiday(holidaydate,2);
+                        if (dt.Rows.Count>0)
+                        {
+                        }
+                        else
+                        {
+                            string date = day.ToString("yyyyMMdd").Replace("/", "");
+                            foreach (string st in list)
+                            {
+                                flag = abl.QuickAttendance_Update(st, date, leavetype, morningleave, eveleave, transportation);
+                            }
+                            if (flag == "OK")
+                            {
+                                if (DateTime.Parse(todate) < todaydate)
+                                {
+                                    Session["Umsg"] = flag;
+                                }
+                                else
+                                    Session["Imsg"] = flag;
+                            }
+                            else
+                            {
+                                if (DateTime.Parse(todate) < todaydate)
+                                {
+                                    Session["UEmsg"] = flag;
+                                }
+                                else
+                                    Session["Imsg"] = flag;
+                            }
+                        }
+                        
+                    }
+                }
+               
+            }
+            return JsonConvert.SerializeObject(flag);
+
+        }
+
+        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation,string holiday)
+        {
+            string flag = string.Empty;DateTime todaydate = DateTime.Now;
+            AttendanceBL abl = new AttendanceBL();
+
+            if (todate == "")
+                todate = fromdate;
+            if(leavetype=="")
+            {
+                morningleave = "-1";eveleave = "-1";
+            }
+            if (!String.IsNullOrWhiteSpace(id) && !String.IsNullOrWhiteSpace(fromdate) && !String.IsNullOrWhiteSpace(todate))
+            {
+                string[] list; list = id.Split(',');
+                if (holiday == "0")
+                {
+                    foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
+                    {
+                        string date = day.ToString("yyyyMMdd").Replace("/", "");
+                        foreach (string st in list)
+                        {
+                            flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave, transportation);
+                        }
                     }
                     if (flag == "OK")
                     {
@@ -322,51 +412,45 @@ namespace JSAT_HR.Controllers
                             Session["Imsg"] = flag;
                     }
                 }
-            }
-            return JsonConvert.SerializeObject(flag);
-
-        }
-
-        public string QuickAttendance_LeaveUpdate(string id, string fromdate, string todate, string leavetype, string morningleave, string eveleave, string transportation)
-        {
-            string flag = string.Empty;DateTime todaydate = DateTime.Now;
-            AttendanceBL abl = new AttendanceBL();
-
-            if (todate == "")
-                todate = fromdate;
-            if(leavetype=="")
-            {
-                morningleave = "-1";eveleave = "-1";
-            }
-            if (!String.IsNullOrWhiteSpace(id) && !String.IsNullOrWhiteSpace(fromdate) && !String.IsNullOrWhiteSpace(todate))
-            {
-                string[] list; list = id.Split(',');
-                foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
-                {
-                    string date = day.ToString("yyyyMMdd").Replace("/", "");
-                    foreach (string st in list)
-                    {
-                        flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave, transportation);
-                    }
-                }
-                if (flag == "OK")
-                {
-                    if(DateTime.Parse(todate) < todaydate)
-                    {
-                        Session["Umsg"] = flag;
-                    }
-                    else
-                        Session["Imsg"] = flag;
-                }
                 else
                 {
-                    if (DateTime.Parse(todate) < todaydate)
+                    foreach (DateTime day in EachDay(DateTime.Parse(fromdate), DateTime.Parse(todate)))
                     {
-                        Session["UEmsg"] = flag;
+                        string holidaydate = day.ToString("yyyy-MM-dd");
+                        DataTable dt = abl.Get_Holiday(holidaydate, 2);
+                        if (dt.Rows.Count > 0)
+                        {
+                        }
+                        else
+                        {
+                            string date = day.ToString("yyyyMMdd").Replace("/", "");
+                            foreach (string st in list)
+                            {
+                                flag = abl.QuickAttendance_LeaveUpdate(st, date, leavetype, morningleave, eveleave, transportation);
+                            }
+                        }
+                        if (flag == "OK")
+                        {
+                            if (DateTime.Parse(todate) < todaydate)
+                            {
+                                Session["Umsg"] = flag;
+                            }
+                            else
+                                Session["Imsg"] = flag;
+                        }
+                        else
+                        {
+                            if (DateTime.Parse(todate) < todaydate)
+                            {
+                                Session["UEmsg"] = flag;
+                            }
+                            else
+                                Session["Imsg"] = flag;
+                        }
                     }
-                    else
-                        Session["Imsg"] = flag;
+                     
                 }
+              
             }
             return JsonConvert.SerializeObject(flag);
 
