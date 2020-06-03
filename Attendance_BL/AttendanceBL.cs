@@ -590,7 +590,14 @@ namespace Attendance_BL
             BaseDL bdl = new BaseDL();
             DataTable dtImportList = new DataTable();
             SqlParameter[] prms = new SqlParameter[2];
-            prms[0] = new SqlParameter("@holiday_date", SqlDbType.VarChar) { Value = holidayDate };
+            if (!string.IsNullOrWhiteSpace(holidayDate))
+            {
+                prms[0] = new SqlParameter("@holiday_date", SqlDbType.VarChar) { Value = holidayDate };
+            }
+           else
+            {
+                prms[0] = new SqlParameter("@holiday_date", SqlDbType.VarChar) { Value = System.DBNull.Value };
+            }
             prms[1] = new SqlParameter("@option", SqlDbType.Int) { Value = option };
             dtImportList = bdl.SelectData("M_Holidays_Select", prms);
             return dtImportList;
