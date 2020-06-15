@@ -95,22 +95,31 @@
             var leavetype = $('#ddlleave').val();
             var amleave = $('#chkmorningleave').val();
             var pmleave = $('#chkeveleave').val();
-            var holiday = $('#chkholidayfee').val();
-
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("QuickAttendance_LeaveUpdate", "Attendance", new { @id = "ID" })'.replace("ID", staff),
-                data: { 'fromdate': fromdate, 'todate': todate, 'leavetype': leavetype, 'morningleave': amleave, 'eveleave': pmleave, 'holiday': holiday  },
-                dataType: 'json',
-                success: function (data) {
-                   if (data == "OK") {
-                         window.location.href = '@Url.Action("QuickSetting", "Attendance")'
-                    }
-                    else
-                        window.location.href = '@Url.Action("QuickSetting", "Attendance")'
-                }
-
-            })
+              var holiday = $('#chkholidayfee').val();
+              if (leavetype == 0) {
+                  alert("Please select leave type");
+              }
+              else {
+                  if (amleave == 0 && pmleave == 0) {
+                      alert("Please select morning leave or evening leave");
+                  }
+                  else {
+                      $.ajax({
+                          type: 'GET',
+                          url: '@Url.Action("QuickAttendance_LeaveUpdate", "Attendance", new { @id = "ID" })'.replace("ID", staff),
+                          data: { 'fromdate': fromdate, 'todate': todate, 'leavetype': leavetype, 'morningleave': amleave, 'eveleave': pmleave, 'holiday': holiday },
+                          dataType: 'json',
+                          success: function (data) {
+                              if (data == "OK") {
+                                  window.location.href = '@Url.Action("QuickSetting", "Attendance")'
+                              }
+                              else
+                                  window.location.href = '@Url.Action("QuickSetting", "Attendance")'
+                          }
+                      })
+                  }
+                   
+              }
         }
 
        
