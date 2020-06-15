@@ -97,11 +97,11 @@
             var pmleave = $('#chkeveleave').val();
               var holiday = $('#chkholidayfee').val();
               if (leavetype == 0) {
-                  alert("Please select leave type");
+                  alert("Please select leave type!");
               }
               else {
                   if (amleave == 0 && pmleave == 0) {
-                      alert("Please select morning leave or evening leave");
+                      alert("Please select morning leave or evening leave!");
                   }
                   else {
                       $.ajax({
@@ -245,8 +245,8 @@
                         </div>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="Holiday">Holiday</label>
-                        <div class="input-group">
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">Holidays</div>
+                        <div class="input-group" style="padding-top: 7px;">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <input type="checkbox" id="chkholidayfee" value="1" />
