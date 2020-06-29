@@ -236,18 +236,18 @@
                 '</div>' +
                 '</div>');
 
-            $("#content > tbody").append(' <tr>'+
-                '<td class="tdPadding" >Finger PrintID:</td>' +
+            $("#content > tbody").append('<tr>' +
+                '<td>Name:</td>' +
+                '<td>' + json[0].Name + '</td>' +
+                '</tr>' +
+                ' <tr>' +
+                '<td>Finger PrintID:</td>' +
                 '<td>' + json[0].FingerPrintID + '</td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td>OfficeCD:</td>' +
                 '<td>' + json[0].OfficeCD + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Name:</td>' +
-                '<td>' + json[0].Name + '</td>' +
-                '</tr>' +
+                '</tr>' +             
                 '<tr>' +
                 '<td>Currency:</td>' +
                 '<td>' + json[0].Currency + '</td>' +
