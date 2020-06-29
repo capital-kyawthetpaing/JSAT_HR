@@ -151,5 +151,29 @@ namespace PayRoll_BL
             dtImport = bdl.SelectData("L_Import_Select_ForPayroll", prms);
             return dtImport;
         }
+
+        public DataTable Get_PayRoll_Detail_Search(string id)
+        {
+            BaseDL bdl = new BaseDL();
+            DataTable dtImportList = new DataTable();
+            string[] arr;
+            string YYYMM = string.Empty;
+            string StaffID = string.Empty;
+            if (id != null)
+            {
+                arr = id.Split('_');
+                YYYMM = arr[0] + arr[1];
+                StaffID = arr[2];
+
+            }
+
+            SqlParameter[] prm = new SqlParameter[2];
+            prm[0] = new SqlParameter("@YYYYMM", SqlDbType.Int) { Value = YYYMM };
+
+            prm[1] = new SqlParameter("@staffID", SqlDbType.VarChar) { Value = StaffID };
+
+            dtImportList = bdl.SelectData("PayRoll_Detail_Search", prm);
+            return dtImportList;
+        }
     }
 }

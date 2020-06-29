@@ -493,6 +493,7 @@
     <Content Include="Views\User\User_Entry.cshtml" />
     <Content Include="Views\Import\Import_List.cshtml" />
     <Content Include="Views\Import\Holiday_Import.cshtml" />
+    <Content Include="Views\PayRoll\PayRoll_Detail_New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -216,13 +216,14 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">User:</h6>
-                            @if (ShowView15 == "15")
-                            {
-                                <a class="collapse-item" href='@Url.Action("User_List", "User")'>User List</a>
-                            }
+
                             @if (ShowView16 == "16")
                             {
                                 <a class="collapse-item" href='@Url.Action("User_Entry", "User", new { id = "" })'>User Entry</a>
+                            }
+                            @if (ShowView15 == "15")
+                            {
+                                <a class="collapse-item" href='@Url.Action("User_List", "User")'>User List</a>
                             }
                         </div>
                     </div>
@@ -344,7 +345,7 @@
                             }
                             @if (ShowView13 == "13")
                             {
-                                <a class="collapse-item" href='@Url.Action("PayRoll_Detail", "PayRoll")'>PayRoll Detail</a>
+                                <a class="collapse-item" href='@Url.Action("PayRoll_Detail_New", "PayRoll", new { id = "" })'>PayRoll Detail</a>
                             }
                         </div>
                     </div>

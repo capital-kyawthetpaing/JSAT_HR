@@ -638,5 +638,38 @@ namespace JSAT_HR.Controllers
                 return JsonConvert.SerializeObject(dt);
 
         }
+
+        public ActionResult PayRoll_Detail_New(string id)
+        {
+            if (id == null)
+            {
+                ViewBag.Staffid = "";
+            }
+            else
+            {
+                ViewBag.Staffid = id;
+            }
+            return View();
+        }
+        [HttpPost]
+        public string _PayRoll_Detail_Search(string id)
+        {
+            string jsonresult;
+            DataTable dt = pbl.Get_PayRoll_Detail_Search(id);
+           // dt.Columns.Add("Total", typeof(System.Int32));
+            if (dt.Rows.Count > 0)
+            {
+            //    foreach (DataRow dr in dt.Rows)
+            //    {
+            //        dr["Total"] = dt.Rows.Count;
+            //    }
+                jsonresult = JsonConvert.SerializeObject(dt);
+                return jsonresult;
+            }
+            else
+                return JsonConvert.SerializeObject(dt);
+
+        }
+
     }
 }
