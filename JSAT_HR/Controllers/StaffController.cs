@@ -16,11 +16,18 @@ namespace JSAT_HR.Controllers
     public class StaffController : Controller
     {
         string StaffPhoto = ConfigurationManager.AppSettings["StaffPhoto"].ToString();
+       
         StaffBL sbl = new StaffBL();
         // GET: Staff
         public ActionResult StaffList()
         {
-            if(Session["UserID"]!=null)
+            String Imsg = Session["Imsg"] as string;
+            String Umsg = Session["Umsg"] as string;
+            ViewBag.Imsg = Imsg;
+            ViewBag.Umsg = Umsg;
+            Session["Imsg"] = "";
+            Session["Umsg"] = "";
+            if (Session["UserID"]!=null)
             {
                 return View();
             }
@@ -64,6 +71,7 @@ namespace JSAT_HR.Controllers
         {
             try
             {
+              
                 string msg = string.Empty;
                 if ( model.Mode == null)
                 {
@@ -89,7 +97,10 @@ namespace JSAT_HR.Controllers
                             model.Photo = "Default.png";
                         }
                         msg = sbl.Staff_Save(model);
-                        //TempData["Smsg"] = msg;
+                        if (msg == "Insert Success")
+                        {
+                            Session["Imsg"] = "Insert";
+                        }
                         return RedirectToAction("StaffList");
                     }
                     else
@@ -115,7 +126,14 @@ namespace JSAT_HR.Controllers
                         model.Photo= model.StaffID + Path.GetExtension(photoname);
                     }
                     msg = sbl.Staff_Update(model);
+                    if (msg == "OK")
+                    {
+                        Session["Umsg"] = "Update";
+                    }
+
                     return RedirectToAction("StaffList");
+                  
+                  
                 }
             }
             catch (Exception ex)

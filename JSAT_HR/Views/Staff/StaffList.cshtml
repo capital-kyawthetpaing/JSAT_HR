@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Staff List";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.RenderPartial("~/Views/Shared/MessagePartialView.cshtml");
 }
 
 <div class="container-fluid" id="content_zip">
@@ -79,6 +80,8 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+          
+           
 
             var table = $('#tblStaff').DataTable(
                 {
@@ -140,6 +143,17 @@
             });
 
             CheckReadOnly();
+
+             var Imsg = '@ViewBag.Imsg';
+            if (Imsg == "Insert") {
+                GetMessage("I_1001", "Insert");
+                $('#myModal').modal('show');
+            }
+              var Umsg = '@ViewBag.Umsg';
+            if (Umsg == "Update") {
+                GetMessage("I_1002", "Update");
+                $('#myModal').modal('show');
+            }
         });
 
         function format(d) {
